@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         accediBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToProfilo = new Intent(MainActivity.this, ProfiloActivity.class);
+                Intent goToProfilo = new Intent(MainActivity.this, HomepageCompratoreActivity.class);
                 startActivity(goToProfilo);
             }
         });

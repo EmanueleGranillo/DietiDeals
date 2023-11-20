@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class ProfiloActivity extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class ProfiloActivity extends AppCompatActivity {
 
         Button backBtn = findViewById(R.id.backButtonProfilo);
         Button logoutBtn = findViewById(R.id.logoutButton);
+        TextView modificaTxt = findViewById(R.id.modificaTextView);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,6 +31,14 @@ public class ProfiloActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent backToLogin = new Intent(ProfiloActivity.this, MainActivity.class);
                 startActivity(backToLogin);
+            }
+        });
+
+        modificaTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToModifica = new Intent(ProfiloActivity.this, ModificaProfiloActivity.class);
+                startActivity(goToModifica);
             }
         });
     }

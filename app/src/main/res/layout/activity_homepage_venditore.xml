@@ -19,6 +19,29 @@
         android:textSize="40dp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/profiloButtonHomeVenditore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="-20dp"
+        android:backgroundTint="#F2F4F8"
+        app:icon="@drawable/ic_profilo_foreground"
+        app:iconSize="70dp"
+        app:iconTint="@color/black" />
+
+    <Button
+        android:id="@+id/notificheButtonHomeVenditore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-50dp"
+        android:layout_marginTop="10dp"
+        android:layout_toStartOf="@+id/profiloButtonHomeVenditore"
+        android:backgroundTint="#F2F4F8"
+        app:icon="@drawable/ic_notifiche_foreground"
+        app:iconSize="50dp"
+        app:iconTint="@color/black" />
+
     <com.google.android.material.search.SearchBar
         android:layout_width="wrap_content"
         android:layout_height="37dp"
