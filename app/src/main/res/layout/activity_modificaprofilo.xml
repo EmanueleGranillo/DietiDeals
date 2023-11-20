@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:text="Modifica Profilo"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:textStyle="bold"/>
 
     <EditText
@@ -27,9 +27,10 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="65dp"
-        android:background="#FFFFFF"
         android:hint="Nome"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:paddingStart="10dp"/>
 
     <EditText
         android:id="@+id/cognomeEditText"
@@ -41,9 +42,10 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
-        android:background="#FFFFFF"
         android:hint="Cognome"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:paddingStart="10dp"/>
 
     <EditText
         android:id="@+id/biografiaEditText"
@@ -55,9 +57,10 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
-        android:background="#FFFFFF"
         android:hint="Bio (max.500 caratteri)"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:paddingStart="10dp"/>
 
     <EditText
         android:id="@+id/numeroTelefonoEditText"
@@ -69,9 +72,10 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
-        android:background="#FFFFFF"
         android:hint="Numero di telefono"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:paddingStart="10dp"/>
 
     <EditText
         android:id="@+id/posizioneEditText"
@@ -83,9 +87,10 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
-        android:background="#FFFFFF"
         android:hint="Posizione"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:paddingStart="10dp"/>
 
     <EditText
         android:id="@+id/linksitowebEditText"
@@ -97,9 +102,10 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
-        android:background="#FFFFFF"
         android:hint="Link sito web"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:paddingStart="10dp"/>
 
     <EditText
         android:id="@+id/linkinstagramEditText"
@@ -111,9 +117,10 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
-        android:background="#FFFFFF"
         android:hint="Link Instagram"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:paddingStart="10dp"/>
 
     <EditText
         android:id="@+id/linkxEditText"
@@ -125,9 +132,10 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
-        android:background="#FFFFFF"
         android:hint="Link X"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:paddingStart="10dp"/>
 
     <EditText
         android:id="@+id/linkfacebookEditText"
@@ -139,9 +147,10 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
-        android:background="#FFFFFF"
         android:hint="Link Facebook"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:paddingStart="10dp" />
 
     <Button
         android:id="@+id/confermaButton"
