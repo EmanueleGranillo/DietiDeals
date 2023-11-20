@@ -11,79 +11,59 @@
 
     <TextView
         android:id="@+id/bentornatoTextView"
-        android:layout_width="171dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="128dp"
         android:layout_marginTop="45dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="646dp"
         android:text="Bentornato!"
         android:textSize="30dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.455"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.129" />
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/bentornatoTextView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="114dp"
-        android:layout_marginEnd="110dp"
-        android:layout_marginBottom="483dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="112dp"
         android:background="#FFFFFF"
         android:hint="Email o Nickname"
-        android:textSize="15dp"/>
+        android:textSize="15dp" />
 
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/emailEditText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="113dp"
-        android:layout_marginEnd="111dp"
-        android:layout_marginBottom="420dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="112dp"
         android:background="#FFFFFF"
         android:hint="Password"
-        android:textSize="15dp"/>
+        android:textSize="15dp" />
 
     <TextView
+        android:id="@+id/noAccountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="146dp"
-        android:layout_marginEnd="139dp"
-        android:layout_marginBottom="283dp"
+        android:layout_below="@+id/passwordEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:text="Non hai un account?" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_height="21dp"
+        android:layout_below="@+id/noAccountTextView"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="178dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginBottom="265dp"
-        android:text="@string/underline"
-        />
-
+        android:layout_centerHorizontal="true"
+        android:text="@string/underline" />
 
 
 </RelativeLayout>
