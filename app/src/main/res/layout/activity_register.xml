@@ -17,6 +17,16 @@
         android:textSize="30dp"
         android:textStyle="bold"/>
 
+    <Button
+        android:id="@+id/backButtonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:backgroundTint="#F2F4F8"
+        app:icon="@drawable/ic_back_foreground"
+        app:iconSize="50dp"
+        app:iconTint="@color/black" />
+
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
@@ -83,7 +93,7 @@
 
 
     <Button
-        android:id="@+id/RegistratiButton"
+        android:id="@+id/registratiButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/confermapasswordEditText"
