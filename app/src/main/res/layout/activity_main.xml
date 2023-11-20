@@ -19,6 +19,7 @@
         android:textSize="30dp"
         android:textStyle="bold"/>
 
+
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
@@ -26,13 +27,15 @@
         android:layout_below="@+id/bentornatoTextView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="112dp"
+        android:layout_marginStart="114dp"
         android:layout_marginTop="125dp"
-        android:layout_marginEnd="112dp"
-        android:background="#FFFFFF"
+        android:layout_marginEnd="110dp"
+        android:background="@drawable/rounded_edittext_bg"
         android:hint="Email o Nickname"
-        android:textSize="15dp" />
-
+        android:textSize="15dp"
+        android:gravity="center_vertical"
+        android:paddingStart="5dp"
+        />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -44,9 +47,12 @@
         android:layout_marginStart="112dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="112dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/rounded_edittext_bg"
         android:hint="Password"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:gravity="center_vertical"
+        android:paddingStart="5dp"
+        />
 
     <Button
         android:id="@+id/accediButton"
@@ -59,7 +65,8 @@
         android:layout_marginStart="112dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="112dp"
-        android:background="#00CC66"/>
+        android:background="@drawable/rounded_button"
+        />
 
 
 
