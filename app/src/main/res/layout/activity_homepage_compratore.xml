@@ -19,6 +19,26 @@
         android:textSize="40dp"
         android:textStyle="bold" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/cercaAstaSearchView"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_below="@+id/esploraTextView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/rounded_edittext_bg"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Cerca prodotto/servizio...">
+
+    </androidx.appcompat.widget.SearchView>
+
     <Button
         android:id="@+id/profiloButtonHomeCompratore"
         android:layout_width="wrap_content"
@@ -41,21 +61,6 @@
         app:icon="@drawable/ic_notifiche_foreground"
         app:iconSize="50dp"
         app:iconTint="@color/black" />
-
-    <com.google.android.material.search.SearchBar
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:layout_below="@+id/esploraTextView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="25dp"
-        android:background="#ACA1A1"
-        android:hint="Cerca asta"
-        app:backgroundTint="#FFFFFF"
-        app:strokeColor="#FFFFFF"
-        app:titleTextColor="#F2F4F8" />
 
 
 </RelativeLayout>

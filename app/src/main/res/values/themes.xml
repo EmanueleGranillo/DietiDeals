@@ -1,9 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.DietiDeals24" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name = "colorPrimary">#F2F4F8</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.DietiDeals24" parent="Base.Theme.DietiDeals24" />
+
 </resources>
