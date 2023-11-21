@@ -21,6 +21,8 @@ public class NotificationsActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.customListView);
         CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getApplicationContext(), notificationsTitleList, checkOrXIcons);
         listView.setAdapter(customBaseAdapter);
+        SingleRowListNotifications.setListViewHeightBasedOnChildren(listView);
+
 
         Button backBtn = findViewById(R.id.backButtonNotifiche);
         backBtn.setOnClickListener(new View.OnClickListener() {
