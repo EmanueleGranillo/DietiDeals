@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SingleRowListNotifications">
+    tools:context=".SingleRowListNotifications"
+    android:background="#F2F4F8">
 
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageIconCheck" />
+        android:id="@+id/imageIconCheck"
+        android:layout_width="96dp"
+        android:layout_height="105dp" />
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -19,18 +20,18 @@
         android:layout_marginTop="15dp"
         android:text="My Text"
         android:textColor="#000000"
-        android:textSize="25dp"
+        android:textSize="23dp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewDescription"
-        android:layout_width="298dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="-100dp"
+        android:layout_width="283dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="-90dp"
         android:layout_marginTop="35dp"
         android:text="L’asta per “Appartamento a Pozzuoli è terminata."
         android:textColor="#000000"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
 
 </LinearLayout>
