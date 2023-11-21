@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomepageCompratoreActivity"
-    android:background="#F2F4F8">
+    android:background="#F2F4F8"
+    tools:context=".HomepageCompratoreActivity">
 
     <TextView
         android:id="@+id/esploraTextView"
@@ -39,6 +41,94 @@
 
     </androidx.appcompat.widget.SearchView>
 
+
+    <TextView
+        android:id="@+id/selezionaCategoria"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cercaAstaSearchView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="243dp"
+        android:text="Seleziona categoria"
+        android:textSize="16dp" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selezionaCategoria"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/scrollHorizontalLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonTutteLeCategorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:backgroundTint="#00CC66"
+                    android:text="Tutte"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/buttonElettronica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/buttonTutteLeCategorie"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="Elettronica"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonAuto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/buttonElettronica"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="Auto"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonAnimali"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/buttonAuto"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="Animali"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonAltro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/buttonAnimali"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="Altro"
+                    android:textColor="#000000" />
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+
     <Button
         android:id="@+id/profiloButtonHomeCompratore"
         android:layout_width="wrap_content"
@@ -54,13 +144,25 @@
         android:id="@+id/notificheButtonHomeCompratore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="-50dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="-50dp"
         android:layout_toStartOf="@+id/profiloButtonHomeCompratore"
         android:backgroundTint="#F2F4F8"
         app:icon="@drawable/ic_notifiche_foreground"
         app:iconSize="50dp"
         app:iconTint="@color/black" />
+
+
+    <ListView
+        android:id="@+id/customListView"
+        android:layout_width="389dp"
+        android:layout_height="77dp"
+        android:layout_below="@+id/selezionaCategoria"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="10dp" />
 
 
 </RelativeLayout>
