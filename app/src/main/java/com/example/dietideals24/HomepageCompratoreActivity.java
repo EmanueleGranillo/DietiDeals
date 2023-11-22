@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,8 +20,9 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     Asta astaTempoFisso;
     Asta astaInglese;
     Asta astaRibasso;
-    int productsImages [] = {R.drawable.macbookpro, R.drawable.casadiriposo, R.drawable.bottigliaacqua };
+    int productsImages[] = {R.drawable.macbookPro, R.drawable.casaDiRiposo, R.drawable.bottigliaAcqua};
 
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,5 +69,9 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 startActivity(goToNotifiche);
             }
         });
+
+        listView = (ListView) findViewById(R.id.);
+        CustomBaseAdapterNotifications customBaseAdapter = new CustomBaseAdapterNotifications(getApplicationContext(), notificationsTitleList, checkOrXIcons);
+        listView.setAdapter(customBaseAdapter);
     }
 }
