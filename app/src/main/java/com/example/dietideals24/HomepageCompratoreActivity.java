@@ -15,21 +15,55 @@ import java.util.Date;
 import java.math.BigDecimal;
 
 public class HomepageCompratoreActivity extends AppCompatActivity {
+    Asta astaInglese = new Asta("CASA DI RIPOSO", "Asta all'inglese", new BigDecimal(50), new BigDecimal(5), 40000);;
+    Asta astaRibasso = new Asta("BOTTIGLIA ACQUA", "Asta al ribasso", new BigDecimal(100), 50000, new BigDecimal(10), new BigDecimal(50));
+    ArrayList<Asta> aste = new ArrayList<Asta>();
 
-//    ArrayList<Asta> aste;
-//    Asta astaTempoFisso;
-//    Asta astaInglese;
-//    Asta astaRibasso;
-//    //int productsImages[] = {R.drawable.macbookpro, R.drawable.casaDiRiposo, R.drawable.bottigliaAcqua};
-//    int productsImages[] = {R.drawable.macbook, R.drawable.casa, R.drawable.bottiglia};
-//
-//    ListView listView;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//
-//        //CREAZIONI ASTE PER PROVARE
-//        //ASTA A TEMPO FISSO
+    int productsImages[] = {R.drawable.macbook, R.drawable.casa, R.drawable.bottiglia};
+    ListView listView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_homepage_compratore);
+
+//        aste.add(astaInglese);
+//        aste.add(astaRibasso);
+        listView = (ListView) findViewById(R.id.customListView);
+        CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste, productsImages);
+        listView.setAdapter(customBaseAdapterProducts);
+
+        Button profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
+        Button notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
+        profiloBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToProfilo = new Intent(HomepageCompratoreActivity.this, ProfiloActivity.class);
+                startActivity(goToProfilo);
+            }
+        });
+
+        notificheBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToNotifiche = new Intent(HomepageCompratoreActivity.this, NotificationsActivity.class);
+                startActivity(goToNotifiche);
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+//CREAZIONI ASTE PER PROVARE
+//ASTA A TEMPO FISSO
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        Date dataFineAstaTempoFisso;
 //        try {
@@ -39,40 +73,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 //
-//        //ASTA ALL'INGLESE
-//        astaInglese = new Asta("CASA DI RIPOSO", "Asta all'inglese", new BigDecimal(50), new BigDecimal(5), 40000);
-//
-//        //ASTA AL RIBASSO
-//        astaRibasso = new Asta("BOTTIGLIA ACQUA", "Asta al ribasso", new BigDecimal(100), 50000, new BigDecimal(10), new BigDecimal(50));
-//
 //        aste = new ArrayList<Asta>();
 //        aste.add(astaTempoFisso);
 //        aste.add(astaInglese);
 //        aste.add(astaRibasso);
-//
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_homepage_compratore);
-//
-//        Button profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
-//        Button notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
-//        profiloBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent goToProfilo = new Intent(HomepageCompratoreActivity.this, ProfiloActivity.class);
-//                startActivity(goToProfilo);
-//            }
-//        });
-//
-//        notificheBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent goToNotifiche = new Intent(HomepageCompratoreActivity.this, NotificationsActivity.class);
-//                startActivity(goToNotifiche);
-//            }
-//        });
-//
-//        listView = (ListView) findViewById(R.id.customListView);
-//        CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste, productsImages);
-//        listView.setAdapter(customBaseAdapterProducts);
-//    }
-}
