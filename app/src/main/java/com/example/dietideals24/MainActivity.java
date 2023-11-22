@@ -3,6 +3,7 @@ package com.example.dietideals24;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +12,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button compraBtn;
-    Button vendiBtn;
+    android.widget.Button compraBtn;
+    android.widget.Button vendiBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         vendiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vendiBtn.setBackgroundColor(Color.parseColor("#00CC66"));
-                compraBtn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                vendiBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                compraBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
                 vendiBtn.setTextColor(Color.parseColor("#FFFFFF"));
                 compraBtn.setTextColor(Color.parseColor("#000000"));
             }
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         compraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                compraBtn.setBackgroundColor(Color.parseColor("#00CC66"));
-                vendiBtn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                compraBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                vendiBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
                 compraBtn.setTextColor(Color.parseColor("#FFFFFF"));
                 vendiBtn.setTextColor(Color.parseColor("#000000"));
             }
