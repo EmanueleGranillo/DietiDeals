@@ -124,13 +124,13 @@
 
     <TextView
         android:id="@+id/soglisDecrementoRibasso"
-        android:layout_width="116dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
         android:layout_below="@+id/decrementoTimerRibasso"
         android:layout_marginStart="22dp"
         android:layout_marginTop="7dp"
         android:layout_toEndOf="@+id/imageProductRibasso"
-        android:text="soglia rialzo:"
+        android:text="Decremento di:"
         android:textSize="19dp" />
 
 
@@ -140,9 +140,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/decrementoTimerValueRibasso"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="27dp"
         android:layout_toEndOf="@+id/soglisDecrementoRibasso"
         android:text="50$"
         android:textSize="19dp" />
