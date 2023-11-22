@@ -41,6 +41,7 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="#00CC66"
         android:text="Compra"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:background="@drawable/rounded_left"/>
 
@@ -55,6 +56,7 @@
         android:layout_toEndOf="@+id/compraButtonLogin"
         android:backgroundTint="#FFFFFF"
         android:text="Vendi"
+        android:textAllCaps="false"
         android:textColor="#000000"
         android:background="@drawable/rounded_right"/>
 
@@ -87,6 +89,7 @@
         android:background="@drawable/rounded_edittext_bg"
         android:hint="Password"
         android:textSize="15dp"
+        android:inputType="textPassword"
         android:gravity="center_vertical"
         android:paddingStart="5dp"
         />
