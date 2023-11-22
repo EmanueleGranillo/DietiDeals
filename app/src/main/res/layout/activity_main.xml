@@ -34,7 +34,7 @@
     <android.widget.Button
         android:id="@+id/compraButtonLogin"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/martelloImage"
         android:layout_alignParentStart="true"
         android:layout_marginStart="100dp"
@@ -47,7 +47,7 @@
     <android.widget.Button
         android:id="@+id/vendiButtonLogin"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/martelloImage"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="32dp"
