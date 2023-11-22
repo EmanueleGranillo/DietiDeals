@@ -26,45 +26,48 @@
         android:layout_below="@+id/bentornatoTextView"
         android:layout_alignStart="@+id/bentornatoTextView"
         android:layout_alignEnd="@+id/bentornatoTextView"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="25dp"
         android:background="@mipmap/ic_martello_foreground" />
 
-    <Button
-        android:id="@+id/vendiButton"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/martelloImage"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="116dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="Vendi"
-        android:textColor="#000000" />
-
-    <Button
-        android:id="@+id/compraButton"
+    <android.widget.Button
+        android:id="@+id/compraButtonLogin"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/martelloImage"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="#00CC66"
         android:text="Compra"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:background="@drawable/rounded_left"/>
+
+    <android.widget.Button
+        android:id="@+id/vendiButtonLogin"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/martelloImage"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="100dp"
+        android:layout_toEndOf="@+id/compraButtonLogin"
+        android:backgroundTint="#FFFFFF"
+        android:text="Vendi"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_right"/>
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_below="@+id/compraButton"
+        android:layout_below="@+id/compraButtonLogin"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="101dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginEnd="100dp"
         android:background="@drawable/rounded_edittext_bg"
         android:gravity="center_vertical"
         android:hint="Email"
