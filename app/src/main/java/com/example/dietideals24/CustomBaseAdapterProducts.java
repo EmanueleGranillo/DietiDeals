@@ -70,7 +70,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             productImage.setImageResource(productsImages[position]);
         }
         if(aste.get(position).getTipologia().equals("Asta al ribasso")){
-            convertView = inflater.inflate(R.layout.activity_custom_list_view_product_english, null);
+            convertView = inflater.inflate(R.layout.activity_custom_list_view_product_ribasso, null);
             TextView titolo = (TextView) convertView.findViewById(R.id.titleRibasso);
             TextView tipologia = (TextView) convertView.findViewById(R.id.tipologiaAstaValueRibasso);
             TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteRibasso);
@@ -84,6 +84,8 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "$");
             productImage.setImageResource(productsImages[position]);
         }
+
+//        convertView = inflater.inflate(R.layout.activity_custom_list_view_product_english, null);
         return convertView;
     }
 }

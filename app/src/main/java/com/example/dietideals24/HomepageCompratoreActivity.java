@@ -15,7 +15,7 @@ import java.util.Date;
 import java.math.BigDecimal;
 
 public class HomepageCompratoreActivity extends AppCompatActivity {
-    Asta astaInglese = new Asta("CASA DI RIPOSO", "Asta all'inglese", new BigDecimal(50), new BigDecimal(5), 40000);;
+    Asta astaInglese = new Asta("CASA DI RIPOSO", "Asta all'inglese", new BigDecimal(50), new BigDecimal(5), 40000);
     Asta astaRibasso = new Asta("BOTTIGLIA ACQUA", "Asta al ribasso", new BigDecimal(100), 50000, new BigDecimal(10), new BigDecimal(50));
     ArrayList<Asta> aste = new ArrayList<Asta>();
 
@@ -28,11 +28,19 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_compratore);
 
-//        aste.add(astaInglese);
-//        aste.add(astaRibasso);
-        listView = (ListView) findViewById(R.id.customListView);
+        Date d = new Date();
+        d.setDate(1);
+        Asta astaTF = new Asta("ESTER", "Asta a tempo fisso", d, new BigDecimal(50), new BigDecimal(100));
+
+        aste.add(astaTF);
+        aste.add(astaInglese);
+        aste.add(astaRibasso);
+
+
+        listView = (ListView) findViewById(R.id.customListViewProducts);
         CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste, productsImages);
         listView.setAdapter(customBaseAdapterProducts);
+        CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
 
         Button profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
         Button notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);

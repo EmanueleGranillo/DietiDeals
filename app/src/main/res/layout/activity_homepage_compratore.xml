@@ -154,7 +154,7 @@
 
 
     <ListView
-        android:id="@+id/customListView"
+        android:id="@+id/customListViewProducts"
         android:layout_width="389dp"
         android:layout_height="77dp"
         android:layout_below="@+id/selezionaCategoria"
