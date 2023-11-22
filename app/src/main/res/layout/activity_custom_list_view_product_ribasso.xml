@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CustomListViewProductTF">
+
+
+    <TextView
+        android:id="@+id/titleRibasso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:text="Casa di riposo per Rincoglioniti"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageProductRibasso"
+        android:layout_below="@+id/titleRibasso"
+        android:layout_marginTop="16dp"
+        />
+
+
+    <Button
+        android:id="@+id/forwardButtonIng"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/sogliaDecrementoValueRibasso"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="174dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="21dp"
+        android:layout_toEndOf="@+id/imageProductRibasso"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        app:icon="@drawable/ic_arrow_forward_foreground"
+        app:iconSize="50dp"
+        app:iconTint="@color/black" />
+
+
+    <TextView
+        android:id="@+id/tipologiaAstaValueRibasso"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleRibasso"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@+id/tipologiaAstaRibasso"
+        android:text="Asta al ribasso"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/tipologiaAstaRibasso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleRibasso"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/imageProductRibasso"
+        android:text="Tipologia:"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/prezzoInizialeRibasso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tipologiaAstaRibasso"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/imageProductRibasso"
+        android:text="Prezzo iniziale:"
+        android:textSize="19dp" />
+
+
+    <TextView
+        android:id="@+id/decrementoTimerRibasso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/prezzoInizialeRibasso"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/imageProductRibasso"
+        android:text="Decremento tra:"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/valoreCorrenteRibasso"
+        android:layout_width="111dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tipologiaAstaRibasso"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="9dp"
+        android:layout_toEndOf="@+id/prezzoInizialeRibasso"
+        android:text="300$"
+        android:textColor="#00CC66"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/decrementoTimerValueRibasso"
+        android:layout_width="79dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/valoreCorrenteRibasso"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_toEndOf="@+id/decrementoTimerRibasso"
+        android:text="1:00:00"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/soglisDecrementoRibasso"
+        android:layout_width="116dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/decrementoTimerRibasso"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/imageProductRibasso"
+        android:text="soglia rialzo:"
+        android:textSize="19dp" />
+
+
+    <TextView
+        android:id="@+id/sogliaDecrementoValueRibasso"
+        android:layout_width="79dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/decrementoTimerValueRibasso"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="6dp"
+        android:layout_toEndOf="@+id/soglisDecrementoRibasso"
+        android:text="50$"
+        android:textSize="19dp" />
+
+
+</RelativeLayout>

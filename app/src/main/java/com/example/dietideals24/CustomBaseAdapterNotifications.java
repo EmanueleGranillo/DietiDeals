@@ -5,18 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomBaseAdapter extends BaseAdapter {
+public class CustomBaseAdapterNotifications extends BaseAdapter {
 
      Context context;
      String notificationsTitleList[];
      int checkOrXIcons[];
      LayoutInflater inflater;
 
-     public CustomBaseAdapter(Context ctx, String[] notificationsTitleList, int [] checkOrXIcons) {
+     public CustomBaseAdapterNotifications(Context ctx, String[] notificationsTitleList, int [] checkOrXIcons) {
          this.context = ctx;
          this.notificationsTitleList = notificationsTitleList;
          this.checkOrXIcons = checkOrXIcons;

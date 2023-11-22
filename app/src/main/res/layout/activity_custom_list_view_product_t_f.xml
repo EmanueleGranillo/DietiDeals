@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CustomListViewProductTF">
+
+
+    <TextView
+        android:id="@+id/titleTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:text="Stampante 3D buone condizioni"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageProduct"
+        android:layout_below="@+id/titleTF"
+        android:layout_marginTop="16dp"
+    />
+
+
+    <TextView
+        android:id="@+id/tipologiaAstaValueTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleTF"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="3dp"
+        android:text="Asta a tempo fisso"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/tipologiaAstaTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleTF"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="21dp"
+        android:layout_toEndOf="@+id/imageProduct"
+        android:text="Tipologia:"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/expirationTextView"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tipologiaAstaTF"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/imageProduct"
+        android:text="Fine asta:"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/expirationTextViewValueTF"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tipologiaAstaValueTF"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="29dp"
+        android:layout_toEndOf="@+id/expirationTextView"
+        android:text="25/12/2024"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/offertaCorrente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/expirationTextView"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="9dp"
+        android:layout_toEndOf="@+id/imageProduct"
+        android:text="Offerta attuale:"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/valoreCorrenteTF"
+        android:layout_width="87dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/expirationTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="6dp"
+        android:layout_toEndOf="@+id/offertaCorrente"
+        android:text="300$"
+        android:textColor="#00CC66"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/forwardButtonIng"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/valoreCorrenteTF"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="21dp"
+        android:layout_toEndOf="@+id/imageProduct"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        app:icon="@drawable/ic_arrow_forward_foreground"
+        app:iconSize="50dp"
+        app:iconTint="@color/black" />
+
+
+</RelativeLayout>

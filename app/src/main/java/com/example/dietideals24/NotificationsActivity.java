@@ -19,7 +19,7 @@ public class NotificationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notifications);
 
         listView = (ListView) findViewById(R.id.customListView);
-        CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getApplicationContext(), notificationsTitleList, checkOrXIcons);
+        CustomBaseAdapterNotifications customBaseAdapter = new CustomBaseAdapterNotifications(getApplicationContext(), notificationsTitleList, checkOrXIcons);
         listView.setAdapter(customBaseAdapter);
         SingleRowListNotifications.setListViewHeightBasedOnChildren(listView);
 
