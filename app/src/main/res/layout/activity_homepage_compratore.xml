@@ -193,16 +193,15 @@
         android:layout_marginEnd="10dp" />
 
     <Button
-        android:id="@+id/nuoveNotificheButton"
-        android:layout_width="5dp"
-        android:layout_height="5dp"
-        android:layout_alignBottom="@+id/notificheButtonHomeCompratore"
-        android:layout_marginEnd="300dp"
-        android:layout_marginBottom="75dp"
+        android:id="@+id/notificheButtonHomeCompratore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toStartOf="@+id/profiloButtonHomeCompratore"
-        android:background="@drawable/circular_button"
-        android:backgroundTint="#00CC66"
-        android:text="Button" />
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="-30dp"
+        app:icon="@mipmap/ic_ring_foreground"
+        app:iconSize="50dp"
+        app:iconTint="@color/black"/>
 
 
 </RelativeLayout>
