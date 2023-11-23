@@ -3,6 +3,8 @@ package com.example.dietideals24;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +24,31 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     int productsImages[] = {R.drawable.macbook, R.drawable.casa, R.drawable.bottiglia};
     ListView listView;
 
+    Button tutteBtn;
+    Button elettronicaBtn;
+    Button motoriBtn;
+    Button animaliBtn;
+    Button modaBtn;
+    Button intrattenimentoBtn;
+    Button immobiliBtn;
+    Button sportBtn;
+    Button arredamentoBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_compratore);
+
+        tutteBtn = findViewById(R.id.buttonTutteLeCategorie);
+        elettronicaBtn = findViewById(R.id.buttonElettronica);
+        motoriBtn = findViewById(R.id.buttonMotori);
+        animaliBtn = findViewById(R.id.buttonAnimali);
+        modaBtn = findViewById(R.id.buttonModa);
+        intrattenimentoBtn = findViewById(R.id.buttonIntrattenimento);
+        immobiliBtn = findViewById(R.id.buttonImmobili);
+        sportBtn = findViewById(R.id.buttonSport);
+        arredamentoBtn = findViewById(R.id.buttonArredamento);
 
         Date d = new Date();
         d.setDate(1);
@@ -59,7 +81,110 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 startActivity(goToNotifiche);
             }
         });
+
+        tutteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWhite();
+                tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                tutteBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+
+        elettronicaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWhite();
+                elettronicaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                elettronicaBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+
+        motoriBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWhite();
+                motoriBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                motoriBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+
+        animaliBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWhite();
+                animaliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                animaliBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+
+        modaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWhite();
+                modaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                modaBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+
+        intrattenimentoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWhite();
+                intrattenimentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                intrattenimentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+
+        immobiliBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWhite();
+                immobiliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                immobiliBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+
+        sportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWhite();
+                sportBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                sportBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+
+        arredamentoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWhite();
+                arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                arredamentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
     }
+
+    private void setWhite() {
+        tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        tutteBtn.setTextColor(Color.parseColor("#000000"));
+        elettronicaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        elettronicaBtn.setTextColor(Color.parseColor("#000000"));
+        motoriBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        motoriBtn.setTextColor(Color.parseColor("#000000"));
+        animaliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        animaliBtn.setTextColor(Color.parseColor("#000000"));
+        modaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        modaBtn.setTextColor(Color.parseColor("#000000"));
+        intrattenimentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        intrattenimentoBtn.setTextColor(Color.parseColor("#000000"));
+        immobiliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        immobiliBtn.setTextColor(Color.parseColor("#000000"));
+        sportBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        sportBtn.setTextColor(Color.parseColor("#000000"));
+        arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        arredamentoBtn.setTextColor(Color.parseColor("#000000"));
+    }
+
 }
 
 
