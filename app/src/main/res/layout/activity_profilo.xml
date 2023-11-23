@@ -64,13 +64,5 @@
         android:textColor="#00CC66"
         android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/profiloImage"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_below="@+id/infoPersonaliTextView"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_profilo_foreground"/>
 
 </RelativeLayout>
