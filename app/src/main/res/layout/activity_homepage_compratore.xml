@@ -94,13 +94,13 @@
                     android:textColor="#000000" />
 
                 <Button
-                    android:id="@+id/buttonAuto"
+                    android:id="@+id/buttonMotori"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/buttonElettronica"
                     android:backgroundTint="#FFFFFF"
-                    android:text="Auto"
+                    android:text="Motori"
                     android:textColor="#000000" />
 
                 <Button
@@ -108,22 +108,61 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/buttonAuto"
+                    android:layout_toEndOf="@+id/buttonMotori"
                     android:backgroundTint="#FFFFFF"
                     android:text="Animali"
                     android:textColor="#000000" />
 
                 <Button
-                    android:id="@+id/buttonAltro"
+                    android:id="@+id/buttonModa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/buttonAnimali"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="Moda e bellezza"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonIntrattenimento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/buttonModa"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="Intrattenimento"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonImmobili"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/buttonIntrattenimento"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="Immobili"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonSport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/buttonImmobili"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="Sport"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/buttonArredamento"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_toEndOf="@+id/buttonAnimali"
+                    android:layout_toEndOf="@+id/buttonSport"
                     android:backgroundTint="#FFFFFF"
-                    android:text="Altro"
+                    android:text="Arredamento"
                     android:textColor="#000000" />
-
 
             </LinearLayout>
         </HorizontalScrollView>
