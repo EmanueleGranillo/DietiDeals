@@ -14,62 +14,60 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="47dp"
-        android:text="Inserisci data scadenza asta"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="43dp"
+        android:text="Inserisci le informazioni finali"
         android:textColor="#000000"
-        android:textSize="25dp" />
+        android:textSize="24dp" />
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/editTextPrezzoDiPartenza"
+        android:layout_width="359dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewDateInsert"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="83dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner" />
-
-    <EditText
-        android:id="@+id/editTextPrice"
-        android:layout_width="359dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/datePicker"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="28dp"
         android:hint="Inserisci prezzo di partenza"
         android:inputType="numberDecimal" />
 
 
     <EditText
-        android:id="@+id/editTextSogliaMinima"
+        android:id="@+id/intervalloDiTempoDecremento"
         android:layout_width="359dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPrice"
+        android:layout_below="@id/editTextPrezzoDiPartenza"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="27dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="82dp"
         android:layout_marginEnd="24dp"
-        android:hint="Inserisci soglia minima prodotto"
-        android:inputType="numberDecimal" />
+        android:hint="Inserisci intervallo di tempo (opzionale)" />
 
+
+    <EditText
+        android:id="@+id/editTextSogliaDecremento"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/intervalloDiTempoDecremento"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="24dp"
+        android:hint="Inserisci importo di decremento (opzionale)" />
 
     <Button
         android:id="@+id/creaButtonAstaTF"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_below="@id/editTextSogliaMinima"
+        android:layout_below="@id/editTextSogliaDecremento"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="117dp"
         android:layout_marginEnd="140dp"
         android:backgroundTint="#00CC66"
         android:text="Crea" />
