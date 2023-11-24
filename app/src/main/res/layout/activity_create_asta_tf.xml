@@ -7,6 +7,21 @@
     tools:context=".CreateAstaTF">
 
 
+    <Button
+        android:id="@+id/backButtonCreateAstaTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="29dp"
+        android:backgroundTint="#F2F4F8"
+        app:icon="@drawable/ic_back_foreground"
+        app:iconSize="50dp"
+        app:iconTint="@color/black" />
+
+
     <TextView
         android:id="@+id/textViewDateInsert"
         android:layout_width="wrap_content"
@@ -14,9 +29,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="47dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="46dp"
         android:text="Inserisci data scadenza asta"
         android:textColor="#000000"
         android:textSize="25dp" />
