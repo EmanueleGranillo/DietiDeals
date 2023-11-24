@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F4F8"
+    tools:context=".CreateAstaPT1">
+
+    <!-- Schermata iniziale con la scritta "Crea la tua asta" in grassetto -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Crea la tua asta"
+        android:textColor="#000000"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        />
+
+
+    <ImageView
+        android:id="@+id/uploadImageIcon"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="137dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="123dp"
+        android:background="@drawable/circular_button"
+        android:backgroundTint="#FFFFFF"
+        android:src="@drawable/upload_image" />
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="379dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/uploadImageIcon"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:hint="Inserisci titolo dell'asta" />
+
+    <TextView
+        android:id="@+id/textViewChooseAuctionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextTitle"
+        android:layout_marginTop="14dp"
+        android:text="Scegli la tipologia di asta:"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <Spinner
+        android:id="@+id/spinnerAuctionType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewChooseAuctionType"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <!-- TextView e Spinner per la categoria di appartenenza -->
+    <TextView
+        android:id="@+id/textViewChooseCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerAuctionType"
+        android:layout_marginTop="20dp"
+        android:text="Scegli la categoria di appartenenza:"
+        android:textSize="16sp"
+        android:textColor="#000000" />
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewChooseCategory"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

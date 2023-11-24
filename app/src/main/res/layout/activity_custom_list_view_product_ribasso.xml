@@ -35,16 +35,15 @@
         android:layout_below="@+id/sogliaDecrementoValueRibasso"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="60dp"
         android:layout_toEndOf="@+id/imageProductRibasso"
         android:background="@android:color/transparent"
         android:gravity="center"
         app:icon="@drawable/ic_arrow_forward_foreground"
         app:iconSize="50dp"
         app:iconTint="@color/black" />
-
 
     <TextView
         android:id="@+id/tipologiaAstaValueRibasso"
@@ -56,7 +55,7 @@
         android:layout_marginTop="9dp"
         android:layout_marginEnd="8dp"
         android:layout_toEndOf="@+id/tipologiaAstaRibasso"
-        android:text="Asta al ribasso"
+        android:text="Al ribasso"
         android:textSize="18dp" />
 
     <TextView

@@ -35,8 +35,14 @@ public class MainActivity extends AppCompatActivity {
         accediBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToProfilo = new Intent(MainActivity.this, HomepageCompratoreActivity.class);
-                startActivity(goToProfilo);
+                if (compraBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+                    Intent goToProfiloCompratore = new Intent(MainActivity.this, HomepageCompratoreActivity.class);
+                    startActivity(goToProfiloCompratore);
+                }
+                else {
+                    Intent goToProfiloVenditore = new Intent(MainActivity.this, HomepageVenditoreActivity.class);
+                    startActivity(goToProfiloVenditore);
+                }
             }
         });
 

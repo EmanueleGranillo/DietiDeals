@@ -9,7 +9,7 @@
     tools:context=".HomepageVenditoreActivity">
 
     <TextView
-        android:id="@+id/esploraTextView"
+        android:id="@+id/esploraTextViewVenditore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -43,18 +43,84 @@
         app:iconSize="50dp"
         app:iconTint="@color/black" />
 
-    <com.google.android.material.search.SearchBar
+
+    <Button
+        android:id="@+id/sellNewProductButton"
         android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:layout_below="@+id/esploraTextView"
+        android:layout_height="105dp"
+        android:layout_below="@+id/esploraTextViewVenditore"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="Crea asta"
+        android:textColor="#000000"
+        android:textSize="22dp" />
+
+
+    <TextView
+        android:id="@+id/leTueAsteTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sellNewProductButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="14dp"
-        android:layout_marginEnd="25dp"
-        android:background="#ACA1A1"
-        android:hint="Cerca asta"
-        app:backgroundTint="#FFFFFF"
-        app:strokeColor="#FFFFFF"
-        app:titleTextColor="#F2F4F8" />
+        android:layout_marginEnd="289dp"
+        android:text="Le tue aste"
+        android:textSize="19dp" />
+
+
+    <Button
+        android:id="@+id/buttonTutteLeAste"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/leTueAsteTextView"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="0dp"
+        android:backgroundTint="#00CC66"
+        android:text="Tutte"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/buttonAsteAttive"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/leTueAsteTextView"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/buttonTutteLeAste"
+        android:backgroundTint="#FFFFFF"
+        android:text="Attive"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/buttonAsteConcluse"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/leTueAsteTextView"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/buttonAsteAttive"
+        android:backgroundTint="#FFFFFF"
+        android:text="Concluse"
+        android:textColor="#000000" />
+
+
+    <ListView
+        android:id="@+id/customListViewSellProducts"
+        android:layout_width="389dp"
+        android:layout_height="77dp"
+        android:layout_below="@+id/buttonTutteLeAste"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:scrollbars="none" />
+
+
 </RelativeLayout>

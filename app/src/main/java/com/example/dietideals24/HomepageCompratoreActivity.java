@@ -51,7 +51,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         arredamentoBtn = findViewById(R.id.buttonArredamento);
 
         Date d = new Date();
-        d.setDate(1);
         Asta astaTF = new Asta("ESTER", "Asta a tempo fisso", d, new BigDecimal(50), new BigDecimal(100));
 
         aste.add(astaTF);

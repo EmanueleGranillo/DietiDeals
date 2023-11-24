@@ -30,13 +30,15 @@
 
     <TextView
         android:id="@+id/tipologiaAstaValueTF"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleTF"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="3dp"
-        android:text="Asta a tempo fisso"
+        android:layout_toEndOf="@+id/tipologiaAstaTF"
+        android:text="Tempo fisso"
         android:textSize="18dp" />
 
     <TextView
@@ -44,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleTF"
-        android:layout_marginStart="19dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="21dp"
         android:layout_toEndOf="@+id/imageProduct"
         android:text="Tipologia:"
@@ -55,8 +57,8 @@
         android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tipologiaAstaTF"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:layout_toEndOf="@+id/imageProduct"
         android:text="Fine asta:"
         android:textSize="19dp" />
@@ -67,9 +69,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tipologiaAstaValueTF"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="43dp"
         android:layout_toEndOf="@+id/expirationTextView"
         android:text="25/12/2024"
         android:textSize="19dp" />
@@ -79,11 +81,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/expirationTextView"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/imageProduct"
         android:text="Offerta attuale:"
         android:textSize="19dp" />
+
 
     <TextView
         android:id="@+id/valoreCorrenteTF"
@@ -91,15 +94,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/expirationTextView"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:layout_toEndOf="@+id/offertaCorrente"
         android:text="300$"
         android:textColor="#00CC66"
         android:textSize="25sp"
         android:textStyle="bold" />
-
 
     <Button
         android:id="@+id/forwardButtonIng"
@@ -108,9 +110,9 @@
         android:layout_below="@+id/valoreCorrenteTF"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
-        android:layout_marginStart="180dp"
+        android:layout_marginStart="135dp"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginEnd="66dp"
         android:layout_toEndOf="@+id/imageProduct"
         android:background="@android:color/transparent"
         android:gravity="center"
