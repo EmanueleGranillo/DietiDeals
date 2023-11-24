@@ -64,5 +64,147 @@
         android:textColor="#00CC66"
         android:textSize="20sp" />
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/infoPersonaliTextView"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/fotoProfiloImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                app:shapeAppearanceOverlay="@style/circular"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp"
+                android:src="@mipmap/ic_profilo"
+                />
+
+            <TextView
+                android:id="@+id/nicknameProfiloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:text="Nickname"
+                android:layout_below="@id/fotoProfiloImage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/nomeCognomeProfiloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nicknameProfiloTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Nome Cognome"
+                android:textSize="20dp" />
+
+            <View
+                android:id="@+id/separatore1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/nomeCognomeProfiloTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+            <TextView
+                android:id="@+id/bioProfiloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore1"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Questa è una breve desrizione del compratore o venditore a cui appartiene questo profilo!"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/bioProfiloTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+            <TextView
+                android:id="@+id/emailProfiloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore2"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="email.prova@gmail.com"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/emailProfiloTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+            <TextView
+                android:id="@+id/cellulareProfiloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore3"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="+39 3330001234"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/cellulareProfiloTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+            
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
