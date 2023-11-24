@@ -21,7 +21,8 @@
         android:textStyle="bold"
         />
 
-    <com.google.android.material.imageview.ShapeableImageView
+
+    <ImageView
         android:id="@+id/uploadImageIcon"
         android:layout_width="100dp"
         android:layout_height="150dp"
@@ -31,8 +32,8 @@
         android:layout_marginStart="137dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="123dp"
-        app:shapeAppearanceOverlay="@style/circular"
-        android:background="#FFFFFF"
+        android:background="@drawable/circular_button"
+        android:backgroundTint="#FFFFFF"
         android:src="@drawable/upload_image" />
 
     <EditText
@@ -48,14 +49,27 @@
         android:background="@drawable/rounded_edittext_bg"
         android:hint="Inserisci titolo dell'asta" />
 
+    <EditText
+        android:id="@+id/editTextDescrizione"
+        android:layout_width="379dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/editTextTitle"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/rounded_edittext_bg"
+        android:hint="Inserisci descrizione del prodotto" />
+
     <TextView
         android:id="@+id/textViewChooseAuctionType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextTitle"
+        android:layout_below="@id/editTextDescrizione"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="31dp"
         android:text="Scegli la tipologia di asta:"
         android:textColor="#000000"
         android:textSize="16sp" />
@@ -95,5 +109,24 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="9dp"
         android:layout_marginEnd="16dp" />
+
+
+    <Button
+        android:id="@+id/forwardButtonCreateAsta"
+        android:layout_width="71dp"
+        android:layout_height="37dp"
+        android:layout_below="@+id/spinnerCategory"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="291dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="50dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        app:icon="@drawable/ic_arrow_forward_foreground"
+        app:iconSize="50dp"
+        app:iconTint="@color/black" />
+
 
 </RelativeLayout>
