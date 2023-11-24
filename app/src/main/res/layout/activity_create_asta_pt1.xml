@@ -54,7 +54,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextTitle"
-        android:layout_marginTop="14dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="54dp"
         android:text="Scegli la tipologia di asta:"
         android:textColor="#000000"
         android:textSize="16sp" />
@@ -71,25 +73,28 @@
         android:layout_alignParentEnd="true" />
 
     <!-- TextView e Spinner per la categoria di appartenenza -->
+
     <TextView
         android:id="@+id/textViewChooseCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/spinnerAuctionType"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="48dp"
         android:text="Scegli la categoria di appartenenza:"
-        android:textSize="16sp"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <Spinner
         android:id="@+id/spinnerCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewChooseCategory"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="16dp" />
 
 </RelativeLayout>
