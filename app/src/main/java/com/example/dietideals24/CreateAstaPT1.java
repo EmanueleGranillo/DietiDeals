@@ -33,7 +33,7 @@ public class CreateAstaPT1 extends AppCompatActivity {
 
         // Crea un ArrayAdapter usando un array di valori
         String[] categorie = {"Elettronica", "Motori", "Animali", "Moda e bellezza", "Intrattenimento", "Immobili", "Sport", "Arredamento"};
-        ArrayAdapter<String> adapterCategorie = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, valori);
+        ArrayAdapter<String> adapterCategorie = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorie);
 
         // Specifica il layout da utilizzare quando la lista degli elementi appare
         adapterCategorie.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

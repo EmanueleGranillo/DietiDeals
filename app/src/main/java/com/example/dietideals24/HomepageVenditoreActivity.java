@@ -31,12 +31,9 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         asteAttiveBtn = findViewById(R.id.buttonAsteAttive);
         asteConcluseBtn = findViewById(R.id.buttonAsteConcluse);
 
-
+        Button creaAstaBtn = findViewById(R.id.sellNewProductButton);
         Button profiloBtn = findViewById(R.id.profiloButtonHomeVenditore);
         Button notificheBtn = findViewById(R.id.notificheButtonHomeVenditore);
-
-
-
 
         profiloBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +48,14 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goToNotifiche = new Intent(HomepageVenditoreActivity.this, NotificationsActivity.class);
                 startActivity(goToNotifiche);
+            }
+        });
+
+        creaAstaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToCreaAsta = new Intent(HomepageVenditoreActivity.this, CreateAstaPT1.class);
+                startActivity(goToCreaAsta);
             }
         });
 

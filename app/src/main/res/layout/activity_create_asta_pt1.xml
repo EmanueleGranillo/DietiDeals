@@ -21,8 +21,7 @@
         android:textStyle="bold"
         />
 
-
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/uploadImageIcon"
         android:layout_width="100dp"
         android:layout_height="150dp"
@@ -32,8 +31,8 @@
         android:layout_marginStart="137dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="123dp"
-        android:background="@drawable/circular_button"
-        android:backgroundTint="#FFFFFF"
+        app:shapeAppearanceOverlay="@style/circular"
+        android:background="#FFFFFF"
         android:src="@drawable/upload_image" />
 
     <EditText
