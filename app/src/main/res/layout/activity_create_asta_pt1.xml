@@ -22,7 +22,7 @@
         />
 
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/uploadImageIcon"
         android:layout_width="100dp"
         android:layout_height="150dp"
@@ -32,8 +32,8 @@
         android:layout_marginStart="137dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="123dp"
-        android:background="@drawable/circular_button"
-        android:backgroundTint="#FFFFFF"
+        app:shapeAppearanceOverlay="@style/circular"
+        android:background="#FFFFFF"
         android:src="@drawable/upload_image" />
 
     <EditText
@@ -113,15 +113,12 @@
 
     <Button
         android:id="@+id/forwardButtonCreateAsta"
-        android:layout_width="71dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/spinnerCategory"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
-        android:layout_marginStart="291dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="50dp"
         android:background="@android:color/transparent"
         android:gravity="center"
         app:icon="@drawable/ic_arrow_forward_foreground"
