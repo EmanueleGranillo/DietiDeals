@@ -71,6 +71,7 @@
         android:layout_marginEnd="112dp"
         android:background="@drawable/rounded_edittext_bg"
         android:gravity="center_vertical"
+        android:inputType="textPassword"
         android:paddingStart="5dp"
         android:hint="Password"
         android:textSize="15dp" />
@@ -87,6 +88,7 @@
         android:layout_marginEnd="112dp"
         android:background="@drawable/rounded_edittext_bg"
         android:gravity="center_vertical"
+        android:inputType="textPassword"
         android:paddingStart="5dp"
         android:hint="Conferma Password"
         android:textSize="15dp" />
