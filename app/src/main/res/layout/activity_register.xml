@@ -91,12 +91,41 @@
         android:hint="Conferma Password"
         android:textSize="15dp" />
 
+    <android.widget.Button
+        android:id="@+id/compraButtonRegister"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/confermapasswordEditText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="Compra"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_left"/>
+
+    <android.widget.Button
+        android:id="@+id/vendiButtonRegister"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/confermapasswordEditText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="100dp"
+        android:layout_toEndOf="@+id/compraButtonRegister"
+        android:backgroundTint="#C2C2C2"
+        android:text="Vendi"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_right"/>
+
 
     <Button
         android:id="@+id/registratiButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/confermapasswordEditText"
+        android:layout_below="@id/compraButtonRegister"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="112dp"
