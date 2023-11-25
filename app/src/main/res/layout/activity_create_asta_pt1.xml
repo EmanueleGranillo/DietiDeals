@@ -38,26 +38,18 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/uploadImageIcon"
-<<<<<<< Updated upstream
-        android:layout_width="147dp"
-        android:layout_height="134dp"
-        android:layout_below="@+id/textViewTitle"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="23dp"
         android:layout_marginEnd="146dp"
         android:background="@drawable/circular_button"
         android:backgroundTint="#FFFFFF"
-=======
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_below="@+id/textViewTitle"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         app:shapeAppearanceOverlay="@style/circular"
-        android:background="#FFFFFF"
->>>>>>> Stashed changes
         android:src="@drawable/upload_image" />
 
     <EditText
@@ -65,16 +57,12 @@
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:layout_below="@id/uploadImageIcon"
-<<<<<<< Updated upstream
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="22dp"
         android:layout_marginEnd="17dp"
-=======
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
->>>>>>> Stashed changes
         android:background="@drawable/rounded_edittext_bg"
         android:hint="Inserisci titolo dell'asta" />
 
@@ -83,16 +71,12 @@
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:layout_below="@id/editTextTitle"
-<<<<<<< Updated upstream
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="13dp"
         android:layout_marginEnd="18dp"
-=======
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
->>>>>>> Stashed changes
         android:background="@drawable/rounded_edittext_bg"
         android:hint="Inserisci descrizione del prodotto" />
 
@@ -102,13 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextDescrizione"
         android:layout_alignParentStart="true"
-<<<<<<< Updated upstream
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="16dp"
-=======
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
->>>>>>> Stashed changes
         android:text="Scegli la tipologia di asta:"
         android:textColor="#000000"
         android:textSize="16sp" />
@@ -132,13 +111,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/spinnerTipologiaType"
         android:layout_alignParentStart="true"
-<<<<<<< Updated upstream
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="19dp"
-=======
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
->>>>>>> Stashed changes
         android:text="Scegli la categoria di appartenenza:"
         android:textColor="#000000"
         android:textSize="16sp" />
@@ -159,16 +133,12 @@
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:layout_below="@id/spinnerCategory"
-<<<<<<< Updated upstream
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="14dp"
         android:layout_marginEnd="17dp"
-=======
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
->>>>>>> Stashed changes
         android:background="@drawable/rounded_edittext_bg"
         android:hint="Inserisci parole chiavi" />
 
@@ -178,14 +148,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextParoleChiavi"
         android:layout_alignParentEnd="true"
-<<<<<<< Updated upstream
         android:layout_gravity="center"
         android:layout_marginStart="313dp"
-        android:layout_marginTop="40dp"
         android:layout_marginEnd="28dp"
-=======
         android:layout_marginTop="25dp"
->>>>>>> Stashed changes
         android:background="@android:color/transparent"
         app:icon="@drawable/ic_arrow_forward_foreground"
         app:iconSize="50dp"
