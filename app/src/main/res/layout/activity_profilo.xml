@@ -179,16 +179,16 @@
                 android:alpha="0.2"/>
 
             <TextView
-                android:id="@+id/cellulareProfiloTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/separatore3"
-                android:layout_marginTop="10dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="+39 3330001234"
-                android:textSize="15dp" />
+            android:id="@+id/cellulareProfiloTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/separatore3"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="+39 3330001234"
+            android:textSize="15dp" />
 
             <View
                 android:id="@+id/separatore4"
@@ -202,6 +202,51 @@
                 android:layout_marginEnd="10dp"
                 android:background="#2C2C2C"
                 android:alpha="0.2"/>
+
+            <TextView
+                android:id="@+id/posizioneProfiloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore4"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Napoli,Italia"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/posizioneProfiloTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+            <TextView
+                android:id="@+id/sitoWebProfiloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore5"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="www.mylink.com"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_instagram_foreground"
+                android:layout_below="@id/sitoWebProfiloTextView"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"/>
             
         </RelativeLayout>
 
