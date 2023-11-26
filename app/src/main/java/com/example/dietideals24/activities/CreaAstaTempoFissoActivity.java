@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class CreateAstaTF extends AppCompatActivity {
+import com.example.dietideals24.R;
+
+public class CreaAstaTempoFissoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +21,7 @@ public class CreateAstaTF extends AppCompatActivity {
         backButtonAstaTF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToCreateAstaPT1 = new Intent(CreateAstaTF.this, CreateAstaPT1.class);
+                Intent goToCreateAstaPT1 = new Intent(CreaAstaTempoFissoActivity.this, CreaAstaPT1Activity.class);
                 startActivity(goToCreateAstaPT1);
             }
         });
@@ -29,7 +31,7 @@ public class CreateAstaTF extends AppCompatActivity {
         createButtonAstaTF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToHomePageVenditore = new Intent(CreateAstaTF.this, HomepageVenditoreActivity.class);
+                Intent goToHomePageVenditore = new Intent(CreaAstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
                 startActivity(goToHomePageVenditore);
             }
         });

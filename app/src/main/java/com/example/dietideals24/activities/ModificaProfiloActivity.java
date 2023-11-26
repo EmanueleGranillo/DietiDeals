@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.dietideals24.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
 

@@ -1,10 +1,10 @@
-package com.example.dietideals24;
+package com.example.dietideals24.connection;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "https://a0a6-34-86-124-12.ngrok.io";
+    private static final String BASE_URL = "https://d3b6-35-196-135-194.ngrok.io";
 
     private static Retrofit retrofit;
 

@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.dietideals24.R;
 
 public class InformazioniAstaActivity extends AppCompatActivity {
 

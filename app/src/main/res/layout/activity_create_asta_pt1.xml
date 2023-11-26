@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2F4F8"
-    tools:context=".CreateAstaPT1">
+    tools:context=".activities.CreaAstaPT1Activity">
 
 
     <Button

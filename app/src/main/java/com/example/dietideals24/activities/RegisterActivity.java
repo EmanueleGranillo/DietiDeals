@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.R;
+import com.example.dietideals24.connection.RetrofitClient;
+import com.example.dietideals24.connection.UserRegistrationRequest;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

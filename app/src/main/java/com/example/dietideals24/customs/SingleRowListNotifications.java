@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.customs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,13 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-public class CustomListViewProductTF extends AppCompatActivity {
+import com.example.dietideals24.R;
+
+public class SingleRowListNotifications extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_list_view_product_t_f);
+        setContentView(R.layout.activity_single_row_list_notifications);
     }
+
 
     public static void setListViewHeightBasedOnChildren(ListView listView)
     {
@@ -45,4 +48,5 @@ public class CustomListViewProductTF extends AppCompatActivity {
         listView.setLayoutParams(params);
         listView.requestLayout();
     }
+
 }

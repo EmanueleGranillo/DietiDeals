@@ -17,61 +17,61 @@
         android:theme="@style/Theme.DietiDeals24"
         tools:targetApi="31">
         <activity
-            android:name=".CreateAstaRibasso"
+            android:name=".activities.CreaAstaRibassoActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateAstaInglese"
+            android:name=".activities.CreaAstaIngleseActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateAstaTF"
+            android:name=".activities.CreaAstaTempoFissoActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateAstaPT1"
+            android:name=".activities.CreaAstaPT1Activity"
             android:exported="false" />
         <activity
-            android:name=".CustomListViewProductRibasso"
+            android:name=".customs.CustomListViewProductRibasso"
             android:exported="false" />
         <activity
-            android:name=".CustomListViewProductEnglish"
+            android:name=".customs.CustomListViewProductEnglish"
             android:exported="false" />
         <activity
-            android:name=".CustomListViewProductTF"
+            android:name=".customs.CustomListViewProductTF"
             android:exported="false" />
         <activity
-            android:name=".SingleRowListNotifications"
+            android:name=".customs.SingleRowListNotifications"
             android:exported="false" />
         <activity
-            android:name=".NotificationsActivity"
+            android:name=".activities.NotificationsActivity"
             android:exported="false" />
         <activity
-            android:name=".InformazioniAstaActivity"
+            android:name=".activities.InformazioniAstaActivity"
             android:exported="false" />
         <activity
-            android:name=".HomepageVenditoreActivity"
+            android:name=".activities.HomepageVenditoreActivity"
             android:exported="false" />
         <activity
-            android:name=".HomepageCompratoreActivity"
+            android:name=".activities.HomepageCompratoreActivity"
             android:exported="false" />
         <activity
-            android:name=".AstaAlRibassoActivity"
+            android:name=".activities.AstaAlRibassoActivity"
             android:exported="false" />
         <activity
-            android:name=".AstaIngleseActivity"
+            android:name=".activities.AstaIngleseActivity"
             android:exported="false" />
         <activity
-            android:name=".AstaATempoFissoActivity"
+            android:name=".activities.AstaATempoFissoActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfiloActivity"
+            android:name=".activities.ProfiloActivity"
             android:exported="false" />
         <activity
-            android:name=".ModificaProfiloActivity"
+            android:name=".activities.ModificaProfiloActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ModificaProfiloActivity"
+    tools:context=".activities.ModificaProfiloActivity"
     android:background="#F2F4F8">
 
     <TextView

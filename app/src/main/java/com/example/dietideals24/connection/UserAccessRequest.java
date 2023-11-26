@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.connection;
 import com.google.gson.annotations.SerializedName;
 
 public class UserAccessRequest {

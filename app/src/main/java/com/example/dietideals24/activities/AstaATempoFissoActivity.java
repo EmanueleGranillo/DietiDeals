@@ -1,8 +1,10 @@
-package com.example.dietideals24;
+package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.dietideals24.R;
 
 public class AstaATempoFissoActivity extends AppCompatActivity {
 

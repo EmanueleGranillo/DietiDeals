@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.dietideals24.models.Asta;
+import com.example.dietideals24.customs.CustomBaseAdapterProducts;
+import com.example.dietideals24.customs.CustomListViewProductEnglish;
+import com.example.dietideals24.R;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -54,7 +59,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         creaAstaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToCreaAsta = new Intent(HomepageVenditoreActivity.this, CreateAstaPT1.class);
+                Intent goToCreaAsta = new Intent(HomepageVenditoreActivity.this, CreaAstaPT1Activity.class);
                 startActivity(goToCreaAsta);
             }
         });

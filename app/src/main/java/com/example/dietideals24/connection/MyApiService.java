@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.connection;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

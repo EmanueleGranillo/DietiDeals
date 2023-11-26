@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.dietideals24.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
-public class CreateAstaPT1 extends AppCompatActivity {
+public class CreaAstaPT1Activity extends AppCompatActivity {
 
     ImageView uploadImage;
     private String tipologiaSelezionata;
@@ -69,7 +70,7 @@ public class CreateAstaPT1 extends AppCompatActivity {
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImagePicker.with(CreateAstaPT1.this)
+                ImagePicker.with(CreaAstaPT1Activity.this)
                         .crop()                    //Crop image(Optional), Check Customization for more option
                         .compress(1024)            //Final image size will be less than 1 MB(Optional)
                         .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
@@ -84,17 +85,17 @@ public class CreateAstaPT1 extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (tipologiaSelezionata.equals("Asta a tempo fisso")) {
-                    Intent goToCreateAstaTF = new Intent(CreateAstaPT1.this, CreateAstaTF.class);
+                    Intent goToCreateAstaTF = new Intent(CreaAstaPT1Activity.this, CreaAstaTempoFissoActivity.class);
                     startActivity(goToCreateAstaTF);
                 }
 
                 if (tipologiaSelezionata.equals("Asta all'inglese")) {
-                    Intent goToCreateAstaInglese = new Intent(CreateAstaPT1.this, CreateAstaInglese.class);
+                    Intent goToCreateAstaInglese = new Intent(CreaAstaPT1Activity.this, CreaAstaIngleseActivity.class);
                     startActivity(goToCreateAstaInglese);
                 }
 
                 if (tipologiaSelezionata.equals("Asta al ribasso")) {
-                    Intent goToCreateAstaRibasso = new Intent(CreateAstaPT1.this, CreateAstaRibasso.class);
+                    Intent goToCreateAstaRibasso = new Intent(CreaAstaPT1Activity.this, CreaAstaRibassoActivity.class);
                     startActivity(goToCreateAstaRibasso);
                 }
 
@@ -106,7 +107,7 @@ public class CreateAstaPT1 extends AppCompatActivity {
         backButtonHPVenditore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToHPVenditore = new Intent(CreateAstaPT1.this, HomepageVenditoreActivity.class);
+                Intent goToHPVenditore = new Intent(CreaAstaPT1Activity.this, HomepageVenditoreActivity.class);
                 startActivity(goToHPVenditore);
             }
         });

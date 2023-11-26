@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.dietideals24.customs.CustomBaseAdapterNotifications;
+import com.example.dietideals24.R;
+import com.example.dietideals24.customs.SingleRowListNotifications;
 
 public class NotificationsActivity extends AppCompatActivity {
     String notificationsTitleList[] = {"Hai vinto", "Hai perso"};

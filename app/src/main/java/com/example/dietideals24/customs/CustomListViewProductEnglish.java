@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.customs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.example.dietideals24.R;
 
 public class CustomListViewProductEnglish extends AppCompatActivity {
 

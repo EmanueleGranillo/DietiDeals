@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.models;
 
 import java.io.Serializable;
 import java.util.Date;

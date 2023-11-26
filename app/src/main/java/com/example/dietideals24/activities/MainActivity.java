@@ -1,4 +1,4 @@
-package com.example.dietideals24;
+package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.connection.NumeroResponse;
+import com.example.dietideals24.R;
+import com.example.dietideals24.connection.RetrofitClient;
+import com.example.dietideals24.connection.UserAccessRequest;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -107,13 +113,13 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Credenziali non autorizzate", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    System.out.println("richiesta fallita");
+                    Toast.makeText(MainActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<NumeroResponse> call, Throwable t) {
-                System.out.println(t.getMessage());
+                Toast.makeText(MainActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
             }
         });
 
