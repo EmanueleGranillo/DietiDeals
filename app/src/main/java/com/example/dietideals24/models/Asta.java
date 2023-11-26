@@ -8,25 +8,23 @@ import java.util.TimerTask;
 
 public class Asta implements Serializable {
 
-    private String titoloAsta;
-    private String tipologia;
-    private Date dataFineAstaTempoFisso;
-    private BigDecimal offertaAttuale;
-    private BigDecimal sogliaMinimaSegreta;
-    private BigDecimal baseAsta;
-    private Timer timer;
-    private BigDecimal sogliaRialzoMinima;
-    private long intervalloTimer;
-    private BigDecimal prezzoVendita; //Per asta al ribasso
-    private BigDecimal prezzoMinimoSegreto;
-    private BigDecimal importoDecremento;
+    private String titoloAsta; //a tutte e tre
+    private String tipologia; //a tutte e tre
+    private Date dataScadenzaTF; //a tempo fisso
+    private BigDecimal offertaAttuale; //tutte e tre
+    private BigDecimal sogliaMinimaSegreta; //a tempo fisso + ribasso
+    private BigDecimal baseAsta; //tutte e tre
+    private Timer timer; //inglese+ribasso
+    private BigDecimal sogliaRialzoMinima; //inglese
+    private long intervalloTimer; //inglese + ribasso
+    private BigDecimal importoDecremento; //asta al ribasso
 
 
     //Costruttore quando tipologia asta = tempo fisso
     public Asta(String titoloAsta, String tipologia, Date dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
         this.titoloAsta = titoloAsta;
         this.tipologia = tipologia;
-        this.dataFineAstaTempoFisso = dataFineAstaTempoFisso;
+        this.dataScadenzaTF = dataFineAstaTempoFisso;
         this.offertaAttuale = offertaAttuale;
         this.sogliaMinimaSegreta = sogliaMinimaSegreta;
     }
@@ -120,9 +118,9 @@ public class Asta implements Serializable {
 
     // Metodo per decrementare il prezzo (asta al ribasso)
     private void decrementaPrezzo() {
-        this.prezzoVendita = prezzoVendita.subtract(importoDecremento);
+        this.offertaAttuale = offertaAttuale.subtract(importoDecremento);
 
-        if (this.prezzoVendita.compareTo(this.prezzoMinimoSegreto) < 0) {
+        if (this.offertaAttuale.compareTo(this.sogliaMinimaSegreta) < 0) {
             System.out.println("Asta fallita. Nessuna offerta presentata.");
         }
     }
@@ -132,11 +130,11 @@ public class Asta implements Serializable {
     public Asta(String titoloAsta, String tipologia, BigDecimal prezzoIniziale, long intervalloTimer, BigDecimal importoDecremento, BigDecimal prezzoMinimoSegreto) {
         this.titoloAsta = titoloAsta;
         this.tipologia = tipologia;
-        this.prezzoVendita = prezzoIniziale;
+        this.offertaAttuale = prezzoIniziale;
         this.intervalloTimer = intervalloTimer;
         this.sogliaMinimaSegreta = prezzoMinimoSegreto;
         this.importoDecremento = importoDecremento;
-        this.prezzoMinimoSegreto = prezzoMinimoSegreto;
+        this.sogliaMinimaSegreta = prezzoMinimoSegreto;
 
 
         // Inizializza e avvia il timer con l'intervallo specificato
@@ -155,16 +153,12 @@ public class Asta implements Serializable {
         this.tipologia = tipologia;
     }
 
-    public void setDataFineAstaTempoFisso(Date dataFineAstaTempoFisso) {
-        this.dataFineAstaTempoFisso = dataFineAstaTempoFisso;
+    public void setDataScadenzaTF(Date dataScadenzaTF) {
+        this.dataScadenzaTF = dataScadenzaTF;
     }
 
     public void setOffertaAttuale(BigDecimal offertaAttuale) {
         this.offertaAttuale = offertaAttuale;
-    }
-
-    public void setSogliaMinimaSegreta(BigDecimal sogliaMinimaSegreta) {
-        this.sogliaMinimaSegreta = sogliaMinimaSegreta;
     }
 
     public void setBaseAsta(BigDecimal baseAsta) {
@@ -183,16 +177,13 @@ public class Asta implements Serializable {
         this.intervalloTimer = intervalloTimer;
     }
 
-    public void setPrezzoVendita(BigDecimal prezzoVendita) {
-        this.prezzoVendita = prezzoVendita;
-    }
 
     public void setImportoDecremento(BigDecimal importoDecremento) {
         this.importoDecremento = importoDecremento;
     }
 
-    public void setPrezzoMinimoSegreto(BigDecimal prezzoMinimoSegreto) {
-        this.prezzoMinimoSegreto = prezzoMinimoSegreto;
+    public void setSogliaMinimaSegreta(BigDecimal sogliaMinimaSegreta) {
+        this.sogliaMinimaSegreta = sogliaMinimaSegreta;
     }
 
     public String getTitoloAsta() {
@@ -203,16 +194,8 @@ public class Asta implements Serializable {
         return tipologia;
     }
 
-    public Date getDataFineAstaTempoFisso() {
-        return dataFineAstaTempoFisso;
-    }
-
-    public BigDecimal getOffertaAttuale() {
-        return offertaAttuale;
-    }
-
-    public BigDecimal getSogliaMinimaSegreta() {
-        return sogliaMinimaSegreta;
+    public Date getDataScadenzaTF() {
+        return dataScadenzaTF;
     }
 
     public BigDecimal getBaseAsta() {
@@ -231,16 +214,16 @@ public class Asta implements Serializable {
         return intervalloTimer;
     }
 
-    public BigDecimal getPrezzoVendita() {
-        return prezzoVendita;
+    public BigDecimal getOffertaAttuale() {
+        return offertaAttuale;
     }
 
     public BigDecimal getImportoDecremento() {
         return importoDecremento;
     }
 
-    public BigDecimal getPrezzoMinimoSegreto() {
-        return prezzoMinimoSegreto;
+    public BigDecimal getSogliaMinimaSegreta() {
+        return sogliaMinimaSegreta;
     }
 
 

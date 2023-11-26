@@ -78,7 +78,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView sogliaDecremento = (TextView) convertView.findViewById(R.id.sogliaDecrementoValueRibasso);
             ImageView productImage = (ImageView) convertView.findViewById(R.id.imageProductRibasso);
             titolo.setText(aste.get(position).getTitoloAsta());
-            prezzoAttuale.setText(aste.get(position).getPrezzoVendita().toString() + "$");
+            prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "$");
             productImage.setImageResource(productsImages[position]);
