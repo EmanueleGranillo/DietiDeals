@@ -8,21 +8,21 @@ import java.util.TimerTask;
 
 public class Asta implements Serializable {
 
-    private String titoloAsta; //a tutte e tre
+    private String nomeProdotto; //a tutte e tre
     private String tipologia; //a tutte e tre
     private Date dataScadenzaTF; //a tempo fisso
     private BigDecimal offertaAttuale; //tutte e tre
     private BigDecimal sogliaMinimaSegreta; //a tempo fisso + ribasso
-    private BigDecimal baseAsta; //tutte e tre
+    private BigDecimal prezzoIniziale; //tutte e tre
     private Timer timer; //inglese+ribasso
     private BigDecimal sogliaRialzoMinima; //inglese
-    private long intervalloTimer; //inglese + ribasso
+    private long resetTimer; //inglese + ribasso
     private BigDecimal importoDecremento; //asta al ribasso
 
 
     //Costruttore quando tipologia asta = tempo fisso
     public Asta(String titoloAsta, String tipologia, Date dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
-        this.titoloAsta = titoloAsta;
+        this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
         this.dataScadenzaTF = dataFineAstaTempoFisso;
         this.offertaAttuale = offertaAttuale;
@@ -45,12 +45,12 @@ public class Asta implements Serializable {
 
     // Costruttore per asta all'inglese con intervalloTimer specificato
     public Asta(String titoloAsta, String tipologia, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima, long intervalloTimer) {
-        this.titoloAsta = titoloAsta;
+        this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
-        this.baseAsta = baseAsta;
+        this.prezzoIniziale = baseAsta;
         this.offertaAttuale = baseAsta;
         this.sogliaRialzoMinima = sogliaRialzoMinima;
-        this.intervalloTimer = intervalloTimer;
+        this.resetTimer = intervalloTimer;
 
 
         // Inizializza e avvia il timer con l'intervallo specificato
@@ -61,16 +61,16 @@ public class Asta implements Serializable {
 
     // Costruttore per asta all'inglese SENZA specificare l'intervallo del timer
     public Asta(String titoloAsta, String tipologia, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima) {
-        this.titoloAsta = titoloAsta;
+        this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
         this.offertaAttuale = baseAsta;
         this.sogliaRialzoMinima = sogliaRialzoMinima;
-        this.intervalloTimer = 3600 * 1000;
+        this.resetTimer = 3600 * 1000;
 
 
         // Inizializza e avvia il timer con l'intervallo specificato
         this.timer = new Timer();
-        this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, intervalloTimer);
+        this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, resetTimer);
     }
 
 
@@ -82,7 +82,7 @@ public class Asta implements Serializable {
 
             //Avvio di nuovo timer di un'ora
             this.timer = new Timer();
-            this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, intervalloTimer);
+            this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, resetTimer);
         }
     }
 
@@ -93,10 +93,10 @@ public class Asta implements Serializable {
 
             if (tipologia.equals("Asta all'inglese")) {
                 // Logica da eseguire quando il timer scade
-                System.out.println("Timer scaduto per l'asta: " + titoloAsta);
+                System.out.println("Timer scaduto per l'asta: " + nomeProdotto);
 
                 // Considera l'asta come fallita se nessuna offerta è stata presentata
-                if (offertaAttuale.equals(baseAsta)) {
+                if (offertaAttuale.equals(prezzoIniziale)) {
                     System.out.println("Asta fallita. Nessuna offerta presentata.");
                     //invio notifiche ecc
                 } else {
@@ -128,10 +128,10 @@ public class Asta implements Serializable {
 
     //costruttore per asta al ribasso
     public Asta(String titoloAsta, String tipologia, BigDecimal prezzoIniziale, long intervalloTimer, BigDecimal importoDecremento, BigDecimal prezzoMinimoSegreto) {
-        this.titoloAsta = titoloAsta;
+        this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
         this.offertaAttuale = prezzoIniziale;
-        this.intervalloTimer = intervalloTimer;
+        this.resetTimer = intervalloTimer;
         this.sogliaMinimaSegreta = prezzoMinimoSegreto;
         this.importoDecremento = importoDecremento;
         this.sogliaMinimaSegreta = prezzoMinimoSegreto;
@@ -145,8 +145,8 @@ public class Asta implements Serializable {
     }
 
 
-    public void setTitoloAsta(String titoloAsta) {
-        this.titoloAsta = titoloAsta;
+    public void setNomeProdotto(String nomeProdotto) {
+        this.nomeProdotto = nomeProdotto;
     }
 
     public void setTipologia(String tipologia) {
@@ -161,8 +161,8 @@ public class Asta implements Serializable {
         this.offertaAttuale = offertaAttuale;
     }
 
-    public void setBaseAsta(BigDecimal baseAsta) {
-        this.baseAsta = baseAsta;
+    public void setPrezzoIniziale(BigDecimal prezzoIniziale) {
+        this.prezzoIniziale = prezzoIniziale;
     }
 
     public void setTimer(Timer timer) {
@@ -173,8 +173,8 @@ public class Asta implements Serializable {
         this.sogliaRialzoMinima = sogliaRialzoMinima;
     }
 
-    public void setIntervalloTimer(long intervalloTimer) {
-        this.intervalloTimer = intervalloTimer;
+    public void setResetTimer(long resetTimer) {
+        this.resetTimer = resetTimer;
     }
 
 
@@ -186,8 +186,8 @@ public class Asta implements Serializable {
         this.sogliaMinimaSegreta = sogliaMinimaSegreta;
     }
 
-    public String getTitoloAsta() {
-        return titoloAsta;
+    public String getNomeProdotto() {
+        return nomeProdotto;
     }
 
     public String getTipologia() {
@@ -198,8 +198,8 @@ public class Asta implements Serializable {
         return dataScadenzaTF;
     }
 
-    public BigDecimal getBaseAsta() {
-        return baseAsta;
+    public BigDecimal getPrezzoIniziale() {
+        return prezzoIniziale;
     }
 
     public Timer getTimer() {
@@ -210,8 +210,8 @@ public class Asta implements Serializable {
         return sogliaRialzoMinima;
     }
 
-    public long getIntervalloTimer() {
-        return intervalloTimer;
+    public long getResetTimer() {
+        return resetTimer;
     }
 
     public BigDecimal getOffertaAttuale() {

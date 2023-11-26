@@ -50,7 +50,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView data = (TextView) convertView.findViewById(R.id.expirationTextViewValueTF);
             TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteTF);
             ImageView productImage = (ImageView) convertView.findViewById(R.id.imageProduct);
-            titolo.setText(aste.get(position).getTitoloAsta());
+            titolo.setText(aste.get(position).getNomeProdotto());
             // data.setText(aste.get(position).getDataFineAstaTempoFisso()); problemi con il parse, poi si vede
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             productImage.setImageResource(productsImages[position]);
@@ -63,7 +63,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView tempoRimanente = (TextView) convertView.findViewById(R.id.timeLeftValueIng);
             TextView sogliaRialzo = (TextView) convertView.findViewById(R.id.sogliaRialzoValueIng);
             ImageView productImage = (ImageView) convertView.findViewById(R.id.imageProductIng);
-            titolo.setText(aste.get(position).getTitoloAsta());
+            titolo.setText(aste.get(position).getNomeProdotto());
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaRialzo.setText(aste.get(position).getSogliaRialzoMinima().toString() + "$");
@@ -77,7 +77,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView tempoRimanente = (TextView) convertView.findViewById(R.id.decrementoTimerValueRibasso);
             TextView sogliaDecremento = (TextView) convertView.findViewById(R.id.sogliaDecrementoValueRibasso);
             ImageView productImage = (ImageView) convertView.findViewById(R.id.imageProductRibasso);
-            titolo.setText(aste.get(position).getTitoloAsta());
+            titolo.setText(aste.get(position).getNomeProdotto());
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "$");
