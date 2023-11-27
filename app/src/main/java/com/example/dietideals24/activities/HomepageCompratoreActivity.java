@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.connection.NumeroResponse;
+import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.customs.CustomBaseAdapterProducts;
 import com.example.dietideals24.customs.CustomListViewProductEnglish;
@@ -19,9 +23,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.math.BigDecimal;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class HomepageCompratoreActivity extends AppCompatActivity {
-    Asta astaInglese = new Asta("CASA DI RIPOSO", "Asta all'inglese", new BigDecimal(50), new BigDecimal(5), 40000);
-    Asta astaRibasso = new Asta("BOTTIGLIA ACQUA", "Asta al ribasso", new BigDecimal(100), 50000, new BigDecimal(10), new BigDecimal(50));
+
+    private MyApiService apiService;
+    //Asta astaInglese = new Asta(5,"CASA DI RIPOSO", "Asta all'inglese", new BigDecimal(50), new BigDecimal(5), 40000);
+    //Asta astaRibasso = new Asta(6,"BOTTIGLIA ACQUA", "Asta al ribasso", new BigDecimal(100), 50000, new BigDecimal(10), new BigDecimal(50));
     ArrayList<Asta> aste = new ArrayList<Asta>();
 
     int productsImages[] = {R.drawable.macbook, R.drawable.casa, R.drawable.bottiglia};
@@ -43,6 +54,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_compratore);
 
+        apiService = RetrofitClient.getInstance().create(MyApiService.class);
+
         tutteBtn = findViewById(R.id.buttonTutteLeCategorie);
         elettronicaBtn = findViewById(R.id.buttonElettronica);
         motoriBtn = findViewById(R.id.buttonMotori);
@@ -54,17 +67,20 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         arredamentoBtn = findViewById(R.id.buttonArredamento);
 
         Date d = new Date();
-        Asta astaTF = new Asta("ESTER", "Asta a tempo fisso", d, new BigDecimal(50), new BigDecimal(100));
+        //Asta astaTF = new Asta(0, "ESTER", "Asta a tempo fisso", d, new BigDecimal(50), new BigDecimal(100));
 
-        aste.add(astaTF);
-        aste.add(astaInglese);
-        aste.add(astaRibasso);
+        //aste.add(astaTF);
+        //aste.add(astaInglese);
+        //aste.add(astaRibasso);
+
+        riempiLista();
 
 
         listView = (ListView) findViewById(R.id.customListViewProducts);
         CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste, productsImages);
         listView.setAdapter(customBaseAdapterProducts);
         CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
+
 
         Button profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
         Button notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
@@ -162,6 +178,31 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 setWhite();
                 arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 arredamentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+    }
+
+    private void riempiLista() {
+        Call<ArrayList<Asta>> call = apiService.getAste();
+        call.enqueue(new Callback<ArrayList<Asta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
+                // Gestisci la risposta del server
+                if (response.isSuccessful()) {
+                    aste = response.body();
+                    for (int i=0; i<3; i++){
+                        Toast.makeText(HomepageCompratoreActivity.this, aste.get(i).getId()+" "+aste.get(i).getNomeProdotto()+" "+aste.get(i).getTipologia(), Toast.LENGTH_LONG).show();
+                    }
+
+                    Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
+                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
             }
         });
     }

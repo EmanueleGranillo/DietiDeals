@@ -1,5 +1,9 @@
 package com.example.dietideals24.connection;
 
+import com.example.dietideals24.models.Asta;
+
+import java.util.ArrayList;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -12,5 +16,8 @@ public interface MyApiService {
 
     @POST("/check_user_credentials/")
     Call<NumeroResponse> checkCredentials(@Body UserAccessRequest request);
+
+    @GET("/get_aste/")
+    Call<ArrayList<Asta>> getAste();
 }
 

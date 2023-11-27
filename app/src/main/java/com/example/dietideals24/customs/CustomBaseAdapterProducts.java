@@ -44,7 +44,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if(aste.get(position).getTipologia().equals("Asta a tempo fisso")){
+        if(aste.get(position).getTipologia().equals("asta a tempo fisso")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_t_f, null);
             TextView titolo = (TextView) convertView.findViewById(R.id.titleTF);
             TextView data = (TextView) convertView.findViewById(R.id.expirationTextViewValueTF);
@@ -56,7 +56,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             productImage.setImageResource(productsImages[position]);
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
         }
-        if(aste.get(position).getTipologia().equals("Asta all'inglese")){
+        if(aste.get(position).getTipologia().equals("asta inglese")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_english, null);
             TextView titolo = (TextView) convertView.findViewById(R.id.titleIng);
             TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteIng);
@@ -70,7 +70,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             productImage.setImageResource(productsImages[position]);
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
         }
-        if(aste.get(position).getTipologia().equals("Asta al ribasso")){
+        if(aste.get(position).getTipologia().equals("asta al ribasso")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_ribasso, null);
             TextView titolo = (TextView) convertView.findViewById(R.id.titleRibasso);
             TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteRibasso);

@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 public class Asta implements Serializable {
 
+    private int id;
     private String nomeProdotto; //a tutte e tre
     private String tipologia; //a tutte e tre
     private Date dataScadenzaTF; //a tempo fisso
@@ -21,7 +22,8 @@ public class Asta implements Serializable {
 
 
     //Costruttore quando tipologia asta = tempo fisso
-    public Asta(String titoloAsta, String tipologia, Date dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
+    public Asta(int id, String titoloAsta, String tipologia, Date dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
+        this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
         this.dataScadenzaTF = dataFineAstaTempoFisso;
@@ -43,8 +45,9 @@ public class Asta implements Serializable {
     }
 
 
-    // Costruttore per asta all'inglese con intervalloTimer specificato
-    public Asta(String titoloAsta, String tipologia, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima, long intervalloTimer) {
+    // Costruttore per asta all'inglese CON intervalloTimer specificato
+    public Asta(int id, String titoloAsta, String tipologia, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima, long intervalloTimer) {
+        this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
         this.prezzoIniziale = baseAsta;
@@ -60,7 +63,8 @@ public class Asta implements Serializable {
 
 
     // Costruttore per asta all'inglese SENZA specificare l'intervallo del timer
-    public Asta(String titoloAsta, String tipologia, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima) {
+    public Asta(int id, String titoloAsta, String tipologia, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima) {
+        this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
         this.offertaAttuale = baseAsta;
@@ -127,12 +131,12 @@ public class Asta implements Serializable {
 
 
     //costruttore per asta al ribasso
-    public Asta(String titoloAsta, String tipologia, BigDecimal prezzoIniziale, long intervalloTimer, BigDecimal importoDecremento, BigDecimal prezzoMinimoSegreto) {
+    public Asta(int id, String titoloAsta, String tipologia, BigDecimal prezzoIniziale, long intervalloTimer, BigDecimal importoDecremento, BigDecimal prezzoMinimoSegreto) {
+        this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
         this.offertaAttuale = prezzoIniziale;
         this.resetTimer = intervalloTimer;
-        this.sogliaMinimaSegreta = prezzoMinimoSegreto;
         this.importoDecremento = importoDecremento;
         this.sogliaMinimaSegreta = prezzoMinimoSegreto;
 
@@ -186,6 +190,9 @@ public class Asta implements Serializable {
         this.sogliaMinimaSegreta = sogliaMinimaSegreta;
     }
 
+    public int getId() {
+        return id;
+    }
     public String getNomeProdotto() {
         return nomeProdotto;
     }
