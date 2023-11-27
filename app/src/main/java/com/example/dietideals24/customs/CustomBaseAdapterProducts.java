@@ -16,13 +16,12 @@ import java.util.ArrayList;
 public class CustomBaseAdapterProducts extends BaseAdapter {
     Context context;
     ArrayList<Asta> aste;
-    int productsImages[];
+    //int productsImages[];
     LayoutInflater inflater;
 
-    public CustomBaseAdapterProducts (Context ctx, ArrayList<Asta> aste, int [] productsImages){
+    public CustomBaseAdapterProducts (Context ctx, ArrayList<Asta> aste){
         this.context = ctx;
         this.aste = aste;
-        this.productsImages = productsImages;
         inflater = LayoutInflater.from(ctx);
     }
 
@@ -53,7 +52,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             titolo.setText(aste.get(position).getNomeProdotto());
             // data.setText(aste.get(position).getDataFineAstaTempoFisso()); problemi con il parse, poi si vede
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
-            productImage.setImageResource(productsImages[position]);
+            //productImage.setImageResource(productsImages[position]);
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
         }
         if(aste.get(position).getTipologia().equals("asta inglese")){
@@ -67,7 +66,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaRialzo.setText(aste.get(position).getSogliaRialzoMinima().toString() + "$");
-            productImage.setImageResource(productsImages[position]);
+            //productImage.setImageResource(productsImages[position]);
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
         }
         if(aste.get(position).getTipologia().equals("asta al ribasso")){
@@ -81,7 +80,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "$");
-            productImage.setImageResource(productsImages[position]);
+            //productImage.setImageResource(productsImages[position]);
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
 
         }

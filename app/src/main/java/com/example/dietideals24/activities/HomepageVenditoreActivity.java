@@ -106,7 +106,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         aste.add(astaRibasso);
 
         listView = (ListView) findViewById(R.id.customListViewSellProducts);
-        CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste, productsImages);
+        CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
         listView.setAdapter(customBaseAdapterProducts);
         CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
 

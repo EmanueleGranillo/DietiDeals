@@ -37,6 +37,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
     int productsImages[] = {R.drawable.macbook, R.drawable.casa, R.drawable.bottiglia};
     ListView listView;
+    CustomBaseAdapterProducts customBaseAdapterProducts;
 
     Button tutteBtn;
     Button elettronicaBtn;
@@ -77,9 +78,10 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
 
         listView = (ListView) findViewById(R.id.customListViewProducts);
-        CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste, productsImages);
+        customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
         listView.setAdapter(customBaseAdapterProducts);
         CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
+
 
 
         Button profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
@@ -190,11 +192,14 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 // Gestisci la risposta del server
                 if (response.isSuccessful()) {
                     aste = response.body();
-                    for (int i=0; i<3; i++){
-                        Toast.makeText(HomepageCompratoreActivity.this, aste.get(i).getId()+" "+aste.get(i).getNomeProdotto()+" "+aste.get(i).getTipologia(), Toast.LENGTH_LONG).show();
-                    }
 
-                    Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
+                    // Aggiorna la ListView con i nuovi dati
+                    CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
+                    listView.setAdapter(customBaseAdapterProducts);
+                    CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
+
+
+                    //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
