@@ -78,7 +78,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
                 ImagePicker.with(CreaAstaPT1Activity.this)
                         .crop()                    //Crop image(Optional), Check Customization for more option
                         .compress(1024)            //Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
+                        .maxResultSize(240, 240)    //Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
             }
         });

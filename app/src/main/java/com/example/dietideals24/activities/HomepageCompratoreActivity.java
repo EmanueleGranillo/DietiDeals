@@ -32,8 +32,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
     private MyApiService apiService;
     ArrayList<Asta> aste = new ArrayList<Asta>();
-
-    int productsImages[] = {R.drawable.macbook, R.drawable.casa, R.drawable.bottiglia};
     ListView listView;
     CustomBaseAdapterProducts customBaseAdapterProducts;
 
@@ -65,14 +63,14 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         sportBtn = findViewById(R.id.buttonSport);
         arredamentoBtn = findViewById(R.id.buttonArredamento);
 
-
+        listView = (ListView) findViewById(R.id.customListViewProducts);
         riempiLista();
 
 
-        listView = (ListView) findViewById(R.id.customListViewProducts);
-        customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
-        listView.setAdapter(customBaseAdapterProducts);
-        CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
+
+        //customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
+        //listView.setAdapter(customBaseAdapterProducts);
+        //CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
 
 
 
@@ -97,9 +95,15 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         tutteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhite();
-                tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
-                tutteBtn.setTextColor(Color.parseColor("#FFFFFF"));
+
+                if(tutteBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+
+                } else {
+                    setWhite();
+                    tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                    tutteBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                    riempiLista();
+                }
             }
         });
 
@@ -109,6 +113,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 setWhite();
                 elettronicaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 elettronicaBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                riempiListaPerCategoria("elettronica");
             }
         });
 
@@ -186,7 +191,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     aste = response.body();
 
                     // Aggiorna la ListView con i nuovi dati
-                    CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
+                    customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
                     listView.setAdapter(customBaseAdapterProducts);
                     CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
 
@@ -203,6 +208,33 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void riempiListaPerCategoria(String categoria) {
+        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(categoria);
+        call.enqueue(new Callback<ArrayList<Asta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
+                // Gestisci la risposta del server
+                if (response.isSuccessful()) {
+                    aste = response.body();
+
+                    // Aggiorna la ListView con i nuovi dati
+                    customBaseAdapterProducts.notifyDataSetChanged();
+
+                    //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
+                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
     private void setWhite() {
         tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
