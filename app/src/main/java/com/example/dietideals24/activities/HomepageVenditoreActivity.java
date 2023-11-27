@@ -92,18 +92,18 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         });
 
 
-        Asta astaInglese = new Asta(1, "CASA DI RIPOSO", "Asta all'inglese", new BigDecimal(50), new BigDecimal(5), 40000);
-        Asta astaRibasso = new Asta(2, "BOTTIGLIA ACQUA", "Asta al ribasso", new BigDecimal(100), 50000, new BigDecimal(10), new BigDecimal(50));
+        //Asta astaInglese = new Asta(1, "CASA DI RIPOSO", "Asta all'inglese", new BigDecimal(50), new BigDecimal(5), 40000);
+        //Asta astaRibasso = new Asta(2, "BOTTIGLIA ACQUA", "Asta al ribasso", new BigDecimal(100), 50000, new BigDecimal(10), new BigDecimal(50));
         ArrayList<Asta> aste = new ArrayList<Asta>();
 
-        int productsImages[] = {R.drawable.macbook, R.drawable.casa, R.drawable.bottiglia};
+        //int productsImages[] = {R.drawable.macbook, R.drawable.casa, R.drawable.bottiglia};
 
         Date d = new Date();
-        Asta astaTF = new Asta(3, "ESTER", "Asta a tempo fisso", d, new BigDecimal(50), new BigDecimal(100));
+        //Asta astaTF = new Asta(3, "ESTER", "Asta a tempo fisso", d, new BigDecimal(50), new BigDecimal(100));
 
-        aste.add(astaTF);
-        aste.add(astaInglese);
-        aste.add(astaRibasso);
+        //aste.add(astaTF);
+        //aste.add(astaInglese);
+        //aste.add(astaRibasso);
 
         listView = (ListView) findViewById(R.id.customListViewSellProducts);
         CustomBaseAdapterProducts customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);

@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.dietideals24.R;
+import com.example.dietideals24.customs.ImageUtils;
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import android.util.Base64;
+import android.graphics.Bitmap;
 
 public class CreaAstaPT1Activity extends AppCompatActivity {
 
@@ -118,6 +123,17 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri = data.getData();
         uploadImage.setImageURI(uri);
+        // Ottieni un'immagine Bitmap da qualche fonte (ad esempio, dalla fotocamera o dalla galleria)
+        Bitmap imageBitmap = BitmapFactory.decodeFile(uri.getPath());
+        System.out.println(uri.getPath());
+        // Converti l'immagine Bitmap in una stringa Base64
+        String base64String = ImageUtils.bitmapToBase64(imageBitmap);
+
+        System.out.println(base64String);
+        System.out.println(base64String.length());
+
+        // Ora puoi utilizzare la stringa Base64 come necessario (ad esempio, per inviarla al server)
+
     }
 
 }
