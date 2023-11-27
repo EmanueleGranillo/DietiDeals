@@ -5,6 +5,7 @@ import com.example.dietideals24.models.Asta;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -21,6 +22,6 @@ public interface MyApiService {
     Call<ArrayList<Asta>> getAste();
 
     @POST("/get_aste_per_categoria/")
-    Call<ArrayList<Asta>> getAstePerCategoria(@Body String request);
+    Call<ArrayList<Asta>> getAstePerCategoria(@Body RequestBody categoria);
 }
 

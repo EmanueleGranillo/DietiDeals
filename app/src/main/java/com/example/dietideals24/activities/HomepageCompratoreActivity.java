@@ -24,6 +24,8 @@ import java.util.Date;
 import java.math.BigDecimal;
 
 import okhttp3.ResponseBody;
+import okhttp3.RequestBody;
+import okhttp3.MediaType;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,7 +66,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         arredamentoBtn = findViewById(R.id.buttonArredamento);
 
         listView = (ListView) findViewById(R.id.customListViewProducts);
-        riempiLista();
 
 
 
@@ -210,7 +211,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     }
 
     private void riempiListaPerCategoria(String categoria) {
-        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(categoria);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), categoria);
+        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(requestBody);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
