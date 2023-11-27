@@ -31,8 +31,6 @@ import retrofit2.Response;
 public class HomepageCompratoreActivity extends AppCompatActivity {
 
     private MyApiService apiService;
-    //Asta astaInglese = new Asta(5,"CASA DI RIPOSO", "Asta all'inglese", new BigDecimal(50), new BigDecimal(5), 40000);
-    //Asta astaRibasso = new Asta(6,"BOTTIGLIA ACQUA", "Asta al ribasso", new BigDecimal(100), 50000, new BigDecimal(10), new BigDecimal(50));
     ArrayList<Asta> aste = new ArrayList<Asta>();
 
     int productsImages[] = {R.drawable.macbook, R.drawable.casa, R.drawable.bottiglia};
@@ -67,12 +65,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         sportBtn = findViewById(R.id.buttonSport);
         arredamentoBtn = findViewById(R.id.buttonArredamento);
 
-        Date d = new Date();
-        //Asta astaTF = new Asta(0, "ESTER", "Asta a tempo fisso", d, new BigDecimal(50), new BigDecimal(100));
-
-        //aste.add(astaTF);
-        //aste.add(astaInglese);
-        //aste.add(astaRibasso);
 
         riempiLista();
 
