@@ -28,18 +28,27 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         numberPickerMinutes = findViewById(R.id.numberPickerMinutes);
         textViewTimerInsertedRibasso = findViewById(R.id.textViewTimerInsertedRibasso);
 
-        // Aggiungi un listener ai NumberPicker per rilevare i cambiamenti
+        numberPickerHours.setMinValue(0);
+        numberPickerHours.setMaxValue(24);
+        numberPickerMinutes.setMinValue(0);
+        numberPickerMinutes.setMaxValue(60);
+        textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:%s", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+
+
+
         numberPickerHours.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                updateTimerText();
+                textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:%s", newVal, numberPickerMinutes.getValue()));
+
             }
         });
 
         numberPickerMinutes.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                updateTimerText();
+                textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:%s", numberPickerHours.getValue(), newVal));
+
             }
         });
 
@@ -67,7 +76,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     }
 
     // Funzione per aggiornare la TextView con le ore e i minuti selezionati
-    private void updateTimerText() {
+/*    private void updateTimerText() {
         int hours = numberPickerHours.getValue();
         int minutes = numberPickerMinutes.getValue();
 
@@ -76,6 +85,6 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
         // Aggiorna il testo della TextView
         textViewTimerInsertedRibasso.setText(timerText);
-    }
+    }*/
 
 }

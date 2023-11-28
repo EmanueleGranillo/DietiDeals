@@ -7,6 +7,8 @@
     tools:context=".activities.AstaAlRibassoActivity"
     android:background="#F2F4F8">
 
+
+    <!--
     <TextView
         android:id="@+id/astaAlRibassoTextView"
         android:layout_width="wrap_content"
@@ -164,6 +166,35 @@
         android:backgroundTint="#9A9898"
         android:text="Annulla" />
 
+    !-->
 
 
-</RelativeLayout>
+
+        <NumberPicker
+            android:id="@+id/numberPickerHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="114dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="24dp"
+            android:max="23"
+            android:min="0" />
+
+        <NumberPicker
+            android:id="@+id/numberPickerMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/numberPickerHours"
+            android:layout_marginTop="16dp"
+            android:layout_alignStart="@id/numberPickerHours"
+            android:max="59"
+            android:min="0" />
+
+
+    </RelativeLayout>
+
+
+
+
+
