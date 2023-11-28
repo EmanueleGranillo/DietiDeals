@@ -19,6 +19,7 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
 
     private DatePicker datePicker;
     private TextView textViewSelectedDate;
+    private String nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,8 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         datePicker.setMinDate(calendar.getTimeInMillis());
 
         textViewSelectedDate = findViewById(R.id.textViewSelectedDate);
+
+        nickname = getIntent().getStringExtra("nickname");
 
         // Aggiungi un listener per gestire la selezione della data
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -48,6 +51,7 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaTempoFissoActivity.this, CreaAstaPT1Activity.class);
+                goToCreateAstaPT1.putExtra("nickname", nickname);
                 startActivity(goToCreateAstaPT1);
             }
         });
@@ -58,6 +62,7 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToHomePageVenditore = new Intent(CreaAstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
+                goToHomePageVenditore.putExtra("nickname", nickname);
                 startActivity(goToHomePageVenditore);
             }
         });

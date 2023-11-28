@@ -16,6 +16,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
     NumberPicker numberPickerHoursIng;
     NumberPicker numberPickerMinutesIng;
     TextView textViewTimerInsertedIng;
+    private String nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         numberPickerMinutesIng = findViewById(R.id.numberPickerMinutesIng);
         textViewTimerInsertedIng = findViewById(R.id.textViewTimerInsertedIng);
 
+        nickname = getIntent().getStringExtra("nickname");
         // Aggiungi un listener ai NumberPicker per rilevare i cambiamenti
         numberPickerHoursIng.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
@@ -48,6 +50,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaIngleseActivity.this, CreaAstaPT1Activity.class);
+                goToCreateAstaPT1.putExtra("nickname", nickname);
                 startActivity(goToCreateAstaPT1);
             }
         });
@@ -58,6 +61,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToHomePageVenditore = new Intent(CreaAstaIngleseActivity.this, HomepageVenditoreActivity.class);
+                goToHomePageVenditore.putExtra("nickname", nickname);
                 startActivity(goToHomePageVenditore);
             }
         });
