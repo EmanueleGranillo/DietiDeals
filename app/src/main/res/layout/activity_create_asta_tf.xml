@@ -49,15 +49,29 @@
         android:calendarViewShown="false"
         android:datePickerMode="spinner" />
 
+
+    <TextView
+        android:id="@+id/textViewSelectedDate"
+        android:layout_width="253dp"
+        android:layout_height="43dp"
+        android:layout_below="@id/datePicker"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="10dp"
+        android:text="data selezionata:"
+        android:textColor="#000000"
+        android:textSize="19dp" />
+
+
     <EditText
         android:id="@+id/editTextPrice"
         android:layout_width="359dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/datePicker"
+        android:layout_below="@id/textViewSelectedDate"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="26dp"
         android:hint="Inserisci prezzo di partenza"
         android:inputType="numberDecimal" />
@@ -70,12 +84,11 @@
         android:layout_below="@id/editTextPrice"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="26dp"
         android:hint="Inserisci soglia minima prodotto"
         android:inputType="numberDecimal" />
-
 
     <Button
         android:id="@+id/creaButtonAstaTF"
