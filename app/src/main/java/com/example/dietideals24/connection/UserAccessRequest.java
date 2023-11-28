@@ -3,8 +3,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserAccessRequest {
 
-    @SerializedName("email")
-    private String email;
+    @SerializedName("nickname")
+    private String nickname;
 
     @SerializedName("password")
     private String password;
@@ -12,8 +12,8 @@ public class UserAccessRequest {
     @SerializedName("tipo_account")
     private String tipo_account;
 
-    public UserAccessRequest(String email, String password, String tipo_account) {
-        this.email = email;
+    public UserAccessRequest(String nickname, String password, String tipo_account) {
+        this.nickname = nickname;
         this.password = password;
         this.tipo_account = tipo_account;
     }

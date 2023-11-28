@@ -19,6 +19,7 @@ public class Asta implements Serializable {
     private BigDecimal sogliaRialzoMinima; //inglese
     private long resetTimer; //inglese + ribasso
     private BigDecimal importoDecremento; //asta al ribasso
+    private boolean statoAsta;
 
 
     //Costruttore quando tipologia asta = tempo fisso
@@ -188,6 +189,13 @@ public class Asta implements Serializable {
 
     public void setSogliaMinimaSegreta(BigDecimal sogliaMinimaSegreta) {
         this.sogliaMinimaSegreta = sogliaMinimaSegreta;
+    }
+    public boolean getStatoAsta() {
+        return statoAsta;
+    }
+
+    public void setStatoAsta(boolean statoAsta) {
+        this.statoAsta = statoAsta;
     }
 
     public int getId() {

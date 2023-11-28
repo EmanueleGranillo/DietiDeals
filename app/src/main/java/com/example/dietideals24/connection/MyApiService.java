@@ -1,5 +1,7 @@
 package com.example.dietideals24.connection;
 
+import android.provider.ContactsContract;
+
 import com.example.dietideals24.models.Asta;
 
 import java.util.ArrayList;
@@ -23,5 +25,8 @@ public interface MyApiService {
 
     @POST("/get_aste_per_categoria/")
     Call<ArrayList<Asta>> getAstePerCategoria(@Body CategoriaRequest request);
+
+    @POST("/get_aste_per_venditore/")
+    Call<ArrayList<Asta>> getAstePerVenditore(@Body NicknameRequest request);
 }
 

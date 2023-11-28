@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.dietideals24.connection.CategoriaRequest;
 import com.example.dietideals24.connection.MyApiService;
-import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.customs.CustomBaseAdapterProducts;
@@ -65,19 +64,15 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         immobiliBtn = findViewById(R.id.buttonImmobili);
         sportBtn = findViewById(R.id.buttonSport);
         arredamentoBtn = findViewById(R.id.buttonArredamento);
+        Button profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
+        Button notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
 
         listView = (ListView) findViewById(R.id.customListViewProducts);
 
-
         riempiLista();
-        //customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
-        //listView.setAdapter(customBaseAdapterProducts);
-        //CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
 
 
 
-        Button profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
-        Button notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
         profiloBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,80 +107,112 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         elettronicaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhite();
-                elettronicaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
-                elettronicaBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaPerCategoria("elettronica");
+                if(elettronicaBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+
+                } else {
+                    setWhite();
+                    elettronicaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                    elettronicaBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                    riempiListaPerCategoria("elettronica");
+                }
             }
         });
 
         motoriBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhite();
-                motoriBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
-                motoriBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaPerCategoria("motori");
+                if(motoriBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+
+                } else {
+                    setWhite();
+                    motoriBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                    motoriBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                    riempiListaPerCategoria("motori");
+                }
             }
         });
 
         animaliBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhite();
-                animaliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
-                animaliBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaPerCategoria("animali");
+                if(animaliBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+
+                } else {
+                    setWhite();
+                    animaliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                    animaliBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                    riempiListaPerCategoria("animali");
+                }
             }
         });
 
         modaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhite();
-                modaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
-                modaBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaPerCategoria("moda");
+                if(modaBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+
+                } else {
+                    setWhite();
+                    modaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                    modaBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                    riempiListaPerCategoria("moda");
+                }
             }
         });
 
         intrattenimentoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhite();
-                intrattenimentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
-                intrattenimentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaPerCategoria("intrattenimento");
+                if(intrattenimentoBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+
+                } else {
+                    setWhite();
+                    intrattenimentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                    intrattenimentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                    riempiListaPerCategoria("intrattenimento");
+                }
             }
         });
 
         immobiliBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhite();
-                immobiliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
-                immobiliBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaPerCategoria("immobili");
+                if(immobiliBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+
+                } else {
+                    setWhite();
+                    immobiliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                    immobiliBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                    riempiListaPerCategoria("immobili");
+                }
             }
         });
 
         sportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhite();
-                sportBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
-                sportBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaPerCategoria("sport");
+                if(sportBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+
+                } else {
+                    setWhite();
+                    sportBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                    sportBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                    riempiListaPerCategoria("sport");
+                }
             }
         });
 
         arredamentoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhite();
-                arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
-                arredamentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaPerCategoria("arredamento");
+                if(arredamentoBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
+
+                } else {
+                    setWhite();
+                    arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                    arredamentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                    riempiListaPerCategoria("arredamento");
+                }
             }
         });
     }

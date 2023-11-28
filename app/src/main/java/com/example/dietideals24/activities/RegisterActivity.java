@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         Button registratiBtn = findViewById(R.id.registratiButton);
         Button compraBtn = findViewById(R.id.compraButtonRegister);
         Button vendiBtn = findViewById(R.id.vendiButtonRegister);
-        emailEditText = findViewById(R.id.emailEditText);
+        emailEditText = findViewById(R.id.nicknameEditText);
         nicknameEditText = findViewById(R.id.nicknameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         backBtn.setOnClickListener(new View.OnClickListener() {

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private MyApiService apiService;
     android.widget.Button compraBtn;
     android.widget.Button vendiBtn;
-    EditText emailEditText;
+    EditText nicknameEditText;
     EditText passwordEditText;
 
     @Override
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         Button accediBtn = findViewById(R.id.accediButton);
         compraBtn = findViewById(R.id.compraButtonLogin);
         vendiBtn = findViewById(R.id.vendiButtonLogin);
-        emailEditText = findViewById(R.id.emailEditText);
+        nicknameEditText = findViewById(R.id.nicknameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         registratiTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
                 String tipo;
                 if (compraBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
                     tipo = "compratore";
-                    controlloCredenziali(emailEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
+                    controlloCredenziali(nicknameEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
                 }
                 else {
                     tipo = "venditore";
-                    controlloCredenziali(emailEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
+                    controlloCredenziali(nicknameEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
                 }
             }
         });
@@ -89,9 +89,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void controlloCredenziali(String email, String password, String tipo) {
+    private void controlloCredenziali(String nickname, String password, String tipo) {
         // Crea un oggetto di richiesta con i dati dell'utente
-        UserAccessRequest accessRequest = new UserAccessRequest(email, password, tipo);
+        UserAccessRequest accessRequest = new UserAccessRequest(nickname, password, tipo);
 
         // Esegui la chiamata Retrofit
         Call<NumeroResponse> call = apiService.checkCredentials(accessRequest);
@@ -107,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(goToProfiloCompratore);
                         } else {
                             Intent goToProfiloVenditore = new Intent(MainActivity.this, HomepageVenditoreActivity.class);
+                            goToProfiloVenditore.putExtra("nickname", nicknameEditText.getText().toString());
                             startActivity(goToProfiloVenditore);
+
                         }
                     } else {
                         Toast.makeText(MainActivity.this, "Credenziali non autorizzate", Toast.LENGTH_SHORT).show();

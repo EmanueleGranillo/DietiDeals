@@ -61,7 +61,7 @@
         android:background="@drawable/rounded_right"/>
 
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/nicknameEditText"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_below="@+id/compraButtonLogin"
@@ -72,7 +72,7 @@
         android:layout_marginEnd="100dp"
         android:background="@drawable/rounded_edittext_bg"
         android:gravity="center_vertical"
-        android:hint="Email"
+        android:hint="Nickname"
         android:paddingStart="5dp"
         android:textSize="15dp" />
 
@@ -80,7 +80,7 @@
         android:id="@+id/passwordEditText"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_below="@+id/emailEditText"
+        android:layout_below="@+id/nicknameEditText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="100dp"
