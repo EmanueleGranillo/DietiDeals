@@ -228,7 +228,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
                 // Gestisci la risposta del server
                 if (response.isSuccessful()) {
-                    aste = response.body();
+                    aste.clear();
+                    aste.addAll(response.body());
 
                     // Aggiorna la ListView con i nuovi dati
                     customBaseAdapterProducts.notifyDataSetChanged();
