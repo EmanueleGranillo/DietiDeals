@@ -17,22 +17,26 @@ public class NotificationsActivity extends AppCompatActivity {
     int checkOrXIcons[] = {R.drawable.ic_check_foreground, R.drawable.ic_x_foreground};
     ListView listView;
 
+    private String nickname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+        nickname = getIntent().getStringExtra("nickname");
 
         listView = (ListView) findViewById(R.id.customListView);
         CustomBaseAdapterNotifications customBaseAdapter = new CustomBaseAdapterNotifications(getApplicationContext(), notificationsTitleList, checkOrXIcons);
         listView.setAdapter(customBaseAdapter);
         SingleRowListNotifications.setListViewHeightBasedOnChildren(listView);
-
-
         Button backBtn = findViewById(R.id.backButtonNotifiche);
+
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent backToHome = new Intent(NotificationsActivity.this, HomepageCompratoreActivity.class);
+                backToHome.putExtra("nickname", nickname);
                 startActivity(backToHome);
             }
         });

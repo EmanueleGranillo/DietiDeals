@@ -13,9 +13,9 @@ import com.example.dietideals24.R;
 
 public class CreaAstaIngleseActivity extends AppCompatActivity {
 
-//    NumberPicker numberPickerHoursIng;
-//    NumberPicker numberPickerMinutesIng;
-//    TextView textViewTimerInsertedIng;
+    NumberPicker numberPickerHoursIng;
+    NumberPicker numberPickerMinutesIng;
+    TextView textViewTimerInsertedIng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_asta_inglese);
 
 
-/*        numberPickerHoursIng = findViewById(R.id.numberPickerHoursIng);
+        numberPickerHoursIng = findViewById(R.id.numberPickerHoursIng);
         numberPickerMinutesIng = findViewById(R.id.numberPickerMinutesIng);
         textViewTimerInsertedIng = findViewById(R.id.textViewTimerInsertedIng);
 
@@ -41,7 +41,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
                 updateTimerText();
             }
         });
-*/
+
 
         Button backButtonAstaIng = findViewById(R.id.backButtonCreateAstaInglese);
         backButtonAstaIng.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +67,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
 
 
     // Funzione per aggiornare la TextView con le ore e i minuti selezionati
-/*    private void updateTimerText() {
+    private void updateTimerText() {
         int hours = numberPickerHoursIng.getValue();
         int minutes = numberPickerMinutesIng.getValue();
 
@@ -76,6 +76,6 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
 
         // Aggiorna il testo della TextView
         textViewTimerInsertedIng.setText(timerText);
-    }*/
+    }
 
 }

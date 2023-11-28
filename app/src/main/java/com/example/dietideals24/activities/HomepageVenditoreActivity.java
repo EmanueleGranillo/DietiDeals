@@ -66,6 +66,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToProfilo = new Intent(HomepageVenditoreActivity.this, ProfiloActivity.class);
+                goToProfilo.putExtra("nickname", nickname);
                 startActivity(goToProfilo);
             }
         });
@@ -74,6 +75,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToNotifiche = new Intent(HomepageVenditoreActivity.this, NotificationsActivity.class);
+                goToNotifiche.putExtra("nickname", nickname);
                 startActivity(goToNotifiche);
             }
         });
@@ -82,6 +84,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToCreaAsta = new Intent(HomepageVenditoreActivity.this, CreaAstaPT1Activity.class);
+                goToCreaAsta.putExtra("nickname", nickname);
                 startActivity(goToCreaAsta);
             }
         });

@@ -12,6 +12,7 @@ import com.example.dietideals24.R;
 
 public class ProfiloActivity extends AppCompatActivity {
 
+    private String nickname;
 
 
     @Override
@@ -22,11 +23,14 @@ public class ProfiloActivity extends AppCompatActivity {
         Button backBtn = findViewById(R.id.backButtonProfilo);
         Button logoutBtn = findViewById(R.id.logoutButton);
         TextView modificaTxt = findViewById(R.id.modificaTextView);
+        nickname = getIntent().getStringExtra("nickname");
+
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent backToHome = new Intent(ProfiloActivity.this, HomepageCompratoreActivity.class);
+                backToHome.putExtra("nickname", nickname);
                 startActivity(backToHome);
             }
         });
@@ -43,6 +47,7 @@ public class ProfiloActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToModifica = new Intent(ProfiloActivity.this, ModificaProfiloActivity.class);
+                goToModifica.putExtra("nickname", nickname);
                 startActivity(goToModifica);
             }
         });

@@ -18,6 +18,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 public class ModificaProfiloActivity extends AppCompatActivity {
 
     ImageView profiloImage;
+    private String nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
         Button confermaBtn = findViewById(R.id.confermaButtonModificaProfilo);
         profiloImage = findViewById(R.id.modificaProfiloImage);
 
+        nickname = getIntent().getStringExtra("nickname");
         profiloImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +45,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
+                backToProfilo.putExtra("nickname", nickname);
                 startActivity(backToProfilo);
             }
         });
@@ -51,6 +54,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
+                backToProfilo.putExtra("nickname", nickname);
                 startActivity(backToProfilo);
             }
         });

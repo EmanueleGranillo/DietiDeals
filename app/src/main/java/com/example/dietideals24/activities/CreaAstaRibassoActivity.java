@@ -18,6 +18,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     NumberPicker numberPickerHours;
     NumberPicker numberPickerMinutes;
     TextView textViewTimerInsertedRibasso;
+    private String nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         numberPickerMinutes = findViewById(R.id.numberPickerMinutes);
         textViewTimerInsertedRibasso = findViewById(R.id.textViewTimerInsertedRibasso);
 
+<<<<<<< HEAD
         numberPickerHours.setMinValue(0);
         numberPickerHours.setMaxValue(24);
         numberPickerMinutes.setMinValue(0);
@@ -36,6 +38,11 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
 
 
+=======
+        nickname = getIntent().getStringExtra("nickname");
+
+        // Aggiungi un listener ai NumberPicker per rilevare i cambiamenti
+>>>>>>> 7eab2847a0a9c9cf00517be51355e14b9facfe6a
         numberPickerHours.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -58,6 +65,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaRibassoActivity.this, CreaAstaPT1Activity.class);
+                goToCreateAstaPT1.putExtra("nickname", nickname);
                 startActivity(goToCreateAstaPT1);
             }
         });
@@ -68,6 +76,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToHomePageVenditore = new Intent(CreaAstaRibassoActivity.this, HomepageVenditoreActivity.class);
+                goToHomePageVenditore.putExtra("nickname", nickname);
                 startActivity(goToHomePageVenditore);
             }
         });

@@ -25,12 +25,16 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
 
     ImageView uploadImage;
     private String tipologiaSelezionata;
+    private String nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_asta_pt1);
+        nickname = getIntent().getStringExtra("nickname");
 
+        Button createAstaPT1 = findViewById(R.id.forwardButtonCreateAsta);
+        Button backButtonHPVenditore = findViewById(R.id.backButtonHomePageVenditore);
         uploadImage = findViewById(R.id.uploadImageIcon);
 
         // Recupera il riferimento allo Spinner dal layout
@@ -84,23 +88,26 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         });
 
 
-        Button createAstaPT1 = findViewById(R.id.forwardButtonCreateAsta);
+
         createAstaPT1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (tipologiaSelezionata.equals("Asta a tempo fisso")) {
                     Intent goToCreateAstaTF = new Intent(CreaAstaPT1Activity.this, CreaAstaTempoFissoActivity.class);
+                    goToCreateAstaTF.putExtra("nickname", nickname);
                     startActivity(goToCreateAstaTF);
                 }
 
                 if (tipologiaSelezionata.equals("Asta all'inglese")) {
                     Intent goToCreateAstaInglese = new Intent(CreaAstaPT1Activity.this, CreaAstaIngleseActivity.class);
+                    goToCreateAstaInglese.putExtra("nickname", nickname);
                     startActivity(goToCreateAstaInglese);
                 }
 
                 if (tipologiaSelezionata.equals("Asta al ribasso")) {
                     Intent goToCreateAstaRibasso = new Intent(CreaAstaPT1Activity.this, CreaAstaRibassoActivity.class);
+                    goToCreateAstaRibasso.putExtra("nickname", nickname);
                     startActivity(goToCreateAstaRibasso);
                 }
 
@@ -108,11 +115,12 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         });
 
 
-        Button backButtonHPVenditore = findViewById(R.id.backButtonHomePageVenditore);
+
         backButtonHPVenditore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToHPVenditore = new Intent(CreaAstaPT1Activity.this, HomepageVenditoreActivity.class);
+                goToHPVenditore.putExtra("nickname", nickname);
                 startActivity(goToHPVenditore);
             }
         });
