@@ -1,8 +1,10 @@
 package com.example.dietideals24.connection;
 
+import android.app.Notification;
 import android.provider.ContactsContract;
 
 import com.example.dietideals24.models.Asta;
+import com.example.dietideals24.models.Notifica;
 
 import java.util.ArrayList;
 
@@ -28,5 +30,8 @@ public interface MyApiService {
 
     @POST("/get_aste_per_venditore/")
     Call<ArrayList<Asta>> getAstePerVenditore(@Body NicknameRequest request);
+
+    @POST("/get_notifiche/")
+    Call<ArrayList<Notifica>> getNotifiche(@Body NicknameRequest request);
 }
 

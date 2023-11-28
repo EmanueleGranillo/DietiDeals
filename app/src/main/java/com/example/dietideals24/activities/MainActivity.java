@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     if (num.getNumero() == 1) {
                         if (tipo == "compratore") {
                             Intent goToProfiloCompratore = new Intent(MainActivity.this, HomepageCompratoreActivity.class);
+                            goToProfiloCompratore.putExtra("nickname", nicknameEditText.getText().toString());
                             startActivity(goToProfiloCompratore);
                         } else {
                             Intent goToProfiloVenditore = new Intent(MainActivity.this, HomepageVenditoreActivity.class);
