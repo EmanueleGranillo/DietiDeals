@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.dietideals24.connection.CategoriaRequest;
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
@@ -68,7 +69,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.customListViewProducts);
 
 
-
+        riempiLista();
         //customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
         //listView.setAdapter(customBaseAdapterProducts);
         //CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
@@ -124,6 +125,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 setWhite();
                 motoriBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 motoriBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                riempiListaPerCategoria("motori");
             }
         });
 
@@ -133,6 +135,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 setWhite();
                 animaliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 animaliBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                riempiListaPerCategoria("animali");
             }
         });
 
@@ -142,6 +145,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 setWhite();
                 modaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 modaBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                riempiListaPerCategoria("moda");
             }
         });
 
@@ -151,6 +155,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 setWhite();
                 intrattenimentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 intrattenimentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                riempiListaPerCategoria("intrattenimento");
             }
         });
 
@@ -160,6 +165,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 setWhite();
                 immobiliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 immobiliBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                riempiListaPerCategoria("immobili");
             }
         });
 
@@ -169,6 +175,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 setWhite();
                 sportBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 sportBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                riempiListaPerCategoria("sport");
             }
         });
 
@@ -178,6 +185,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 setWhite();
                 arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 arredamentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                riempiListaPerCategoria("arredamento");
             }
         });
     }
@@ -189,7 +197,9 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
                 // Gestisci la risposta del server
                 if (response.isSuccessful()) {
-                    aste = response.body();
+                    aste.clear();
+                    aste.addAll(response.body());
+
 
                     // Aggiorna la ListView con i nuovi dati
                     customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
@@ -211,8 +221,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     }
 
     private void riempiListaPerCategoria(String categoria) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), categoria);
-        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(requestBody);
+        CategoriaRequest categoriaRequest = new CategoriaRequest(categoria);
+        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(categoriaRequest);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {

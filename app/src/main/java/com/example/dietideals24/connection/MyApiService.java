@@ -22,6 +22,6 @@ public interface MyApiService {
     Call<ArrayList<Asta>> getAste();
 
     @POST("/get_aste_per_categoria/")
-    Call<ArrayList<Asta>> getAstePerCategoria(@Body RequestBody categoria);
+    Call<ArrayList<Asta>> getAstePerCategoria(@Body CategoriaRequest request);
 }
 
