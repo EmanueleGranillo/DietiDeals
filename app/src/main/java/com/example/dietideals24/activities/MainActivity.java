@@ -23,6 +23,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//Da aggiungere controlli sui textfield
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         vendiBtn = findViewById(R.id.vendiButtonLogin);
         nicknameEditText = findViewById(R.id.nicknameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+
+
+
+
+
+
         registratiTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,10 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void controlloCredenziali(String nickname, String password, String tipo) {
-        // Crea un oggetto di richiesta con i dati dell'utente
         UserAccessRequest accessRequest = new UserAccessRequest(nickname, password, tipo);
-
-        // Esegui la chiamata Retrofit
         Call<NumeroResponse> call = apiService.checkCredentials(accessRequest);
         call.enqueue(new Callback<NumeroResponse>() {
             @Override

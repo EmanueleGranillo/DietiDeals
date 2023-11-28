@@ -53,7 +53,8 @@ public class NotificationsActivity extends AppCompatActivity {
         listView.setAdapter(customBaseAdapter);
         SingleRowListNotifications.setListViewHeightBasedOnChildren(listView);
 
-        recuperaNotifiche(nickname);
+        setNotificheALette();
+        recuperaNotifiche();
 
 
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,29 @@ public class NotificationsActivity extends AppCompatActivity {
         });
     }
 
-    public void recuperaNotifiche(String nickname){
+    public void setNotificheALette(){
+        NicknameRequest nicknameRequest = new NicknameRequest(nickname);
+        Call<Void> call = apiService.setNotificheALette(nicknameRequest);
+        call.enqueue(new Callback<Void>(){
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                // Implementa la logica per la risposta di successo qui
+                if (response.isSuccessful()) {
+                    // Successo
+                } else {
+                    // La chiamata è andata a buon fine, ma la risorsa non è stata modificata con successo
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Implementa la logica per la gestione degli errori qui
+                // Questo metodo viene chiamato quando la chiamata ha fallito
+            }
+        });
+    }
+
+    public void recuperaNotifiche(){
         NicknameRequest nicknameRequest = new NicknameRequest(nickname);
         Call<ArrayList<Notifica>> call = apiService.getNotifiche(nicknameRequest);
         call.enqueue(new Callback<ArrayList<Notifica>>() {

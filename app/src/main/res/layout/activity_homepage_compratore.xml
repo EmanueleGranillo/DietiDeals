@@ -211,8 +211,7 @@
         android:layout_width="24dp"
         android:layout_height="21dp"
         android:layout_alignStart="@+id/notificheButtonHomeCompratore"
-
-
+        android:id="@+id/pallinoButton"
         android:layout_alignTop="@+id/notificheButtonHomeCompratore"
         android:layout_alignEnd="@+id/notificheButtonHomeCompratore"
         android:layout_alignBottom="@+id/notificheButtonHomeCompratore"

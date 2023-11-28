@@ -8,11 +8,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.dietideals24.connection.CategoriaRequest;
 import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.connection.NicknameRequest;
+import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.customs.CustomBaseAdapterProducts;
@@ -36,7 +39,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     ArrayList<Asta> aste = new ArrayList<Asta>();
     ListView listView;
     CustomBaseAdapterProducts customBaseAdapterProducts;
-
+    ImageView pallinoImg;
     Button tutteBtn;
     Button elettronicaBtn;
     Button motoriBtn;
@@ -56,6 +59,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
+        pallinoImg = findViewById(R.id.pallinoButton);
         tutteBtn = findViewById(R.id.buttonTutteLeCategorie);
         elettronicaBtn = findViewById(R.id.buttonElettronica);
         motoriBtn = findViewById(R.id.buttonMotori);
@@ -71,8 +75,10 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.customListViewProducts);
         nickname = getIntent().getStringExtra("nickname");
 
-        riempiLista();
+        pallinoImg.setVisibility(View.INVISIBLE);
+        controllaNotifiche(nickname);
 
+        riempiLista();
 
 
         profiloBtn.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +227,28 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         });
     }
 
+    private void controllaNotifiche(String nickname) {
+        NicknameRequest nicknameRequest = new NicknameRequest(nickname);
+        Call<NumeroResponse> call = apiService.checkNotifications(nicknameRequest);
+        call.enqueue(new Callback<NumeroResponse>() {
+            @Override
+            public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
+                if (response.isSuccessful()) {
+                    NumeroResponse num = response.body();
+                    if (num.getNumero() == 0) {
+                        pallinoImg.setVisibility(View.INVISIBLE);
+                    } else {
+                        pallinoImg.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<NumeroResponse> call, Throwable t) {
+                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita per check notifiche", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void riempiLista() {
         Call<ArrayList<Asta>> call = apiService.getAste();
         call.enqueue(new Callback<ArrayList<Asta>>() {
@@ -278,8 +306,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void setWhite() {
         tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
         tutteBtn.setTextColor(Color.parseColor("#000000"));
@@ -300,29 +326,4 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
         arredamentoBtn.setTextColor(Color.parseColor("#000000"));
     }
-
 }
-
-
-
-
-
-
-
-
-
-//CREAZIONI ASTE PER PROVARE
-//ASTA A TEMPO FISSO
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Date dataFineAstaTempoFisso;
-//        try {
-//            dataFineAstaTempoFisso = dateFormat.parse("2024-01-12");
-//            astaTempoFisso = new Asta("MACBOOK PRO", "Asta a tempo fisso", dataFineAstaTempoFisso, new BigDecimal(30), new BigDecimal(100));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        aste = new ArrayList<Asta>();
-//        aste.add(astaTempoFisso);
-//        aste.add(astaInglese);
-//        aste.add(astaRibasso);

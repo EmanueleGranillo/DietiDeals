@@ -31,7 +31,14 @@ public interface MyApiService {
     @POST("/get_aste_per_venditore/")
     Call<ArrayList<Asta>> getAstePerVenditore(@Body NicknameRequest request);
 
+    @POST("/check_notifiche/")
+    Call<NumeroResponse> checkNotifications(@Body NicknameRequest request);
+
+    @POST("/set_notifiche_a_lette/")
+    Call<Void> setNotificheALette(@Body NicknameRequest nickname);
+
     @POST("/get_notifiche/")
     Call<ArrayList<Notifica>> getNotifiche(@Body NicknameRequest request);
+
 }
 
