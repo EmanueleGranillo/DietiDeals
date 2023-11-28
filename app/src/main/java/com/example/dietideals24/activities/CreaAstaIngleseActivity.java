@@ -27,20 +27,44 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         numberPickerMinutesIng = findViewById(R.id.numberPickerMinutesIng);
         textViewTimerInsertedIng = findViewById(R.id.textViewTimerInsertedIng);
 
-        // Aggiungi un listener ai NumberPicker per rilevare i cambiamenti
+
+        numberPickerHoursIng.setMinValue(0);
+        numberPickerHoursIng.setMaxValue(24);
+        numberPickerMinutesIng.setMinValue(0);
+        numberPickerMinutesIng.setMaxValue(60);
+        textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+
         numberPickerHoursIng.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                updateTimerText();
+                if((numberPickerHoursIng.getValue() < 10) && (numberPickerMinutesIng.getValue() < 10)) {
+                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                } else if ((numberPickerHoursIng.getValue() > 10) && (numberPickerMinutesIng.getValue() > 10)) {
+                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                } else if ((numberPickerHoursIng.getValue() < 10) && (numberPickerMinutesIng.getValue() > 10)) {
+                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                } else if ((numberPickerHoursIng.getValue() > 10) && (numberPickerMinutesIng.getValue() < 10)) {
+                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                }
             }
         });
 
         numberPickerMinutesIng.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                updateTimerText();
+                if((numberPickerHoursIng.getValue() < 10) && (numberPickerMinutesIng.getValue() < 10)) {
+                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                } else if ((numberPickerHoursIng.getValue() > 10) && (numberPickerMinutesIng.getValue() > 10)) {
+                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                } else if ((numberPickerHoursIng.getValue() < 10) && (numberPickerMinutesIng.getValue() > 10)) {
+                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                } else if ((numberPickerHoursIng.getValue() > 10) && (numberPickerMinutesIng.getValue() < 10)) {
+                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                }
             }
         });
+
+
 
 
         Button backButtonAstaIng = findViewById(R.id.backButtonCreateAstaInglese);
@@ -65,17 +89,5 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
     }
 
 
-
-    // Funzione per aggiornare la TextView con le ore e i minuti selezionati
-    private void updateTimerText() {
-        int hours = numberPickerHoursIng.getValue();
-        int minutes = numberPickerMinutesIng.getValue();
-
-        // Crea la stringa nel formato desiderato (puoi personalizzarla a tuo piacimento)
-        String timerText = "Timer inserito: " + hours + " ore " + minutes + " minuti";
-
-        // Aggiorna il testo della TextView
-        textViewTimerInsertedIng.setText(timerText);
-    }
 
 }

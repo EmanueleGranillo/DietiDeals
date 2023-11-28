@@ -58,7 +58,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="80dp"
         android:layout_marginTop="10dp"
-        android:text="data selezionata:"
+        android:text="Data selezionata:"
         android:textColor="#000000"
         android:textSize="19dp" />
 

@@ -59,7 +59,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="186dp"
+        android:layout_marginTop="168dp"
         android:layout_marginEnd="51dp"
         android:text="Inserisci timer per decremento prezzo"
         android:textColor="#000000"
@@ -78,18 +78,48 @@
         android:layout_marginEnd="55dp"
         android:text="Timer inserito "
         android:textColor="#000000"
+        android:textSize="23dp" />
+
+
+    <TextView
+        android:id="@+id/textViewOreRibasso"
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewInsertTimerRibasso"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="217dp"
+        android:layout_marginEnd="254dp"
+        android:text="Ore"
+        android:textColor="#000000"
         android:textSize="15dp" />
 
+
+    <TextView
+        android:id="@+id/textViewMinutiRibasso"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewInsertTimerRibasso"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="267dp"
+        android:layout_marginTop="219dp"
+        android:layout_marginEnd="99dp"
+        android:text="Minuti"
+        android:textColor="#000000"
+        android:textSize="15dp" />
 
     <NumberPicker
         android:id="@+id/numberPickerHours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewInsertTimerRibasso"
+        android:layout_below="@id/textViewOreRibasso"
         android:gravity="center"
         android:layout_alignParentStart="true"
         android:layout_marginStart="114dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"
         />
 
@@ -98,9 +128,8 @@
         android:id="@+id/numberPickerMinutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewInsertTimerRibasso"
+        android:layout_below="@id/textViewMinutiRibasso"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"
         android:layout_toEndOf="@+id/numberPickerHours"
         android:gravity="center" />
