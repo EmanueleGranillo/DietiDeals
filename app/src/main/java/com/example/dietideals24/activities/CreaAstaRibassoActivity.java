@@ -28,21 +28,15 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         numberPickerHours = findViewById(R.id.numberPickerHours);
         numberPickerMinutes = findViewById(R.id.numberPickerMinutes);
         textViewTimerInsertedRibasso = findViewById(R.id.textViewTimerInsertedRibasso);
-
-<<<<<<< HEAD
         numberPickerHours.setMinValue(0);
         numberPickerHours.setMaxValue(24);
         numberPickerMinutes.setMinValue(0);
         numberPickerMinutes.setMaxValue(60);
         textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:%s", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
 
-
-
-=======
         nickname = getIntent().getStringExtra("nickname");
 
         // Aggiungi un listener ai NumberPicker per rilevare i cambiamenti
->>>>>>> 7eab2847a0a9c9cf00517be51355e14b9facfe6a
         numberPickerHours.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
