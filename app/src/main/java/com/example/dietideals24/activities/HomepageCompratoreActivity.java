@@ -46,6 +46,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     Button immobiliBtn;
     Button sportBtn;
     Button arredamentoBtn;
+    String nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         Button notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
 
         listView = (ListView) findViewById(R.id.customListViewProducts);
+        nickname = getIntent().getStringExtra("nickname");
 
         riempiLista();
 
@@ -77,6 +79,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToProfilo = new Intent(HomepageCompratoreActivity.this, ProfiloActivity.class);
+                goToProfilo.putExtra("nickname", nickname);
                 startActivity(goToProfilo);
             }
         });
@@ -85,6 +88,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToNotifiche = new Intent(HomepageCompratoreActivity.this, NotificationsActivity.class);
+                goToNotifiche.putExtra("nickname", nickname);
                 startActivity(goToNotifiche);
             }
         });
