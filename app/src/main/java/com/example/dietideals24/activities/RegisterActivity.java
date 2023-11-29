@@ -35,7 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
         // Inizializza Retrofit
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
-
         Button backBtn = findViewById(R.id.backButtonRegister);
         Button registratiBtn = findViewById(R.id.registratiButton);
         Button compraBtn = findViewById(R.id.compraButtonRegister);
@@ -83,10 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void performHttpPostRequest(String nickname, String email, String password, String tipo) {
-        // Crea un oggetto di richiesta con i dati dell'utente
         UserRegistrationRequest registrationRequest = new UserRegistrationRequest(nickname, email, password, tipo);
-
-        // Esegui la chiamata Retrofit
         Call<ResponseBody> call = apiService.saveUser(registrationRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

@@ -73,18 +73,14 @@ public class NotificationsActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>(){
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                // Implementa la logica per la risposta di successo qui
                 if (response.isSuccessful()) {
-                    // Successo
+                    Toast.makeText(NotificationsActivity.this, "appoooo", Toast.LENGTH_SHORT).show();
                 } else {
-                    // La chiamata è andata a buon fine, ma la risorsa non è stata modificata con successo
+                    Toast.makeText(NotificationsActivity.this, "male male", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Implementa la logica per la gestione degli errori qui
-                // Questo metodo viene chiamato quando la chiamata ha fallito
             }
         });
     }
