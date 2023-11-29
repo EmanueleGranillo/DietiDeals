@@ -29,9 +29,9 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
 
 
         numberPickerHoursIng.setMinValue(0);
-        numberPickerHoursIng.setMaxValue(24);
+        numberPickerHoursIng.setMaxValue(23);
         numberPickerMinutesIng.setMinValue(0);
-        numberPickerMinutesIng.setMaxValue(60);
+        numberPickerMinutesIng.setMaxValue(59);
         textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
 
         numberPickerHoursIng.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {

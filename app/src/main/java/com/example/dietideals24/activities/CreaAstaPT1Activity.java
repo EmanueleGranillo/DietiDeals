@@ -136,12 +136,6 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         System.out.println(uri.getPath());
         // Converti l'immagine Bitmap in una stringa Base64
         String base64String = ImageUtils.bitmapToBase64(imageBitmap);
-
-        System.out.println(base64String);
-        System.out.println(base64String.length());
-
-        // Ora puoi utilizzare la stringa Base64 come necessario (ad esempio, per inviarla al server)
-
     }
 
 }
