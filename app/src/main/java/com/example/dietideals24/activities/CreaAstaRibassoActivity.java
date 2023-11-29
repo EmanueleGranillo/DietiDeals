@@ -32,9 +32,9 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         numberPickerMinutes = findViewById(R.id.numberPickerMinutes);
         textViewTimerInsertedRibasso = findViewById(R.id.textViewTimerInsertedRibasso);
         numberPickerHours.setMinValue(0);
-        numberPickerHours.setMaxValue(24);
+        numberPickerHours.setMaxValue(23);
         numberPickerMinutes.setMinValue(0);
-        numberPickerMinutes.setMaxValue(60);
+        numberPickerMinutes.setMaxValue(59);
         textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
 
         nickname = getIntent().getStringExtra("nickname");

@@ -11,6 +11,7 @@ public class Asta implements Serializable {
     private int id;
     private String nomeProdotto; //a tutte e tre
     private String tipologia; //a tutte e tre
+    private String descrizione; //a tutte e tre
     private Date dataScadenzaTF; //a tempo fisso
     private BigDecimal offertaAttuale; //tutte e tre
     private BigDecimal sogliaMinimaSegreta; //a tempo fisso + ribasso
@@ -20,13 +21,18 @@ public class Asta implements Serializable {
     private long resetTimer; //inglese + ribasso
     private BigDecimal importoDecremento; //asta al ribasso
     private boolean statoAsta;
+    private String image;
+    private String categoria;
+    private String paroleChiave;
+    private int creatore;
 
 
     //Costruttore quando tipologia asta = tempo fisso
-    public Asta(int id, String titoloAsta, String tipologia, Date dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
+    public Asta(int id, String titoloAsta, String tipologia, String descrizione, Date dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
         this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
+        this.descrizione = descrizione;
         this.dataScadenzaTF = dataFineAstaTempoFisso;
         this.offertaAttuale = offertaAttuale;
         this.sogliaMinimaSegreta = sogliaMinimaSegreta;
@@ -47,10 +53,11 @@ public class Asta implements Serializable {
 
 
     // Costruttore per asta all'inglese CON intervalloTimer specificato
-    public Asta(int id, String titoloAsta, String tipologia, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima, long intervalloTimer) {
+    public Asta(int id, String titoloAsta, String tipologia, String descrizione, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima, long intervalloTimer) {
         this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
+        this.descrizione = descrizione;
         this.prezzoIniziale = baseAsta;
         this.offertaAttuale = baseAsta;
         this.sogliaRialzoMinima = sogliaRialzoMinima;
@@ -64,10 +71,11 @@ public class Asta implements Serializable {
 
 
     // Costruttore per asta all'inglese SENZA specificare l'intervallo del timer
-    public Asta(int id, String titoloAsta, String tipologia, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima) {
+    public Asta(int id, String titoloAsta, String tipologia, String descrizione, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima) {
         this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
+        this.descrizione = descrizione;
         this.offertaAttuale = baseAsta;
         this.sogliaRialzoMinima = sogliaRialzoMinima;
         this.resetTimer = 3600 * 1000;
@@ -132,10 +140,11 @@ public class Asta implements Serializable {
 
 
     //costruttore per asta al ribasso
-    public Asta(int id, String titoloAsta, String tipologia, BigDecimal prezzoIniziale, long intervalloTimer, BigDecimal importoDecremento, BigDecimal prezzoMinimoSegreto) {
+    public Asta(int id, String titoloAsta, String tipologia, String descrizione, BigDecimal prezzoIniziale, long intervalloTimer, BigDecimal importoDecremento, BigDecimal prezzoMinimoSegreto) {
         this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
+        this.descrizione = descrizione;
         this.offertaAttuale = prezzoIniziale;
         this.resetTimer = intervalloTimer;
         this.importoDecremento = importoDecremento;
@@ -149,6 +158,50 @@ public class Asta implements Serializable {
 
     }
 
+
+
+
+
+    public int getCreatore() {
+        return creatore;
+    }
+
+    public void setCreatore(int creatore) {
+        this.creatore = creatore;
+    }
+    public String getParoleChiave() {
+        return paroleChiave;
+    }
+
+    public void setParoleChiave(String paroleChiave) {
+        this.paroleChiave = paroleChiave;
+    }
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public boolean isStatoAsta() {
+        return statoAsta;
+    }
 
     public void setNomeProdotto(String nomeProdotto) {
         this.nomeProdotto = nomeProdotto;

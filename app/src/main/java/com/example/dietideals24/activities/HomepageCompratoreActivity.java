@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.dietideals24.connection.CategoriaRequest;
@@ -17,6 +18,7 @@ import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.NicknameRequest;
 import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
+import com.example.dietideals24.connection.SearchRequest;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.customs.CustomBaseAdapterProducts;
 import com.example.dietideals24.customs.CustomListViewProductEnglish;
@@ -51,6 +53,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     Button arredamentoBtn;
     String nickname;
     String tipo;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         arredamentoBtn = findViewById(R.id.buttonArredamento);
         Button profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
         Button notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
+        searchView = findViewById(R.id.cercaAstaSearchView);
 
         listView = (ListView) findViewById(R.id.customListViewProducts);
         nickname = getIntent().getStringExtra("nickname");
@@ -229,6 +233,20 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 }
             }
         });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                performSearch(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
     }
 
     private void controllaNotifiche(String nickname) {
@@ -286,6 +304,33 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     private void riempiListaPerCategoria(String categoria) {
         CategoriaRequest categoriaRequest = new CategoriaRequest(categoria);
         Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(categoriaRequest);
+        call.enqueue(new Callback<ArrayList<Asta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
+                // Gestisci la risposta del server
+                if (response.isSuccessful()) {
+                    aste.clear();
+                    aste.addAll(response.body());
+
+                    // Aggiorna la ListView con i nuovi dati
+                    customBaseAdapterProducts.notifyDataSetChanged();
+
+                    //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
+                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void performSearch(String query) {
+        SearchRequest searchRequest = new SearchRequest(query);
+        Call<ArrayList<Asta>> call = apiService.getAstePerRicerca(searchRequest);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
