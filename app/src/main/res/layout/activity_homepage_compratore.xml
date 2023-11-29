@@ -37,10 +37,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="Cerca prodotto/servizio...">
-
-    </androidx.appcompat.widget.SearchView>
-
+        app:queryHint="Cerca prodotto/servizio..."/>
 
     <TextView
         android:id="@+id/selezionaCategoria"
