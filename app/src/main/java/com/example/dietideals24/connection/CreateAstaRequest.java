@@ -43,15 +43,15 @@ public class CreateAstaRequest {
     private String creatore;
 
 
-    public CreateAstaRequest(String nomeProdotto, String tipologia, String descrizione, String categoria, String paroleChiave, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta, String creatore) {
+    public CreateAstaRequest(String nomeProdotto, String tipologia, String descrizione, String image, String categoria, String paroleChiave, int statoAsta, String dataScadenzaTF, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta, String creatore) {
         this.nomeProdotto = nomeProdotto;
         this.tipologia = tipologia;
         this.descrizione = descrizione;
-        this.image = "foto base64";
+        this.image = image;
         this.categoria = categoria;
         this.paroleChiave = paroleChiave;
-        this.statoAsta = 1;
-        this.dataScadenzaTF = "2024-12-12";
+        this.statoAsta = statoAsta;
+        this.dataScadenzaTF = dataScadenzaTF;
         this.prezzoIniziale = prezzoIniziale;
         this.offertaAttuale = offertaAttuale;
         this.sogliaMinimaSegreta = sogliaMinimaSegreta;
