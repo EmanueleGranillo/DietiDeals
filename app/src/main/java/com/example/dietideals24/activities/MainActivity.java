@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<NumeroResponse>() {
             @Override
             public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
-                // Gestisci la risposta del server
                 if (response.isSuccessful()) {
                     NumeroResponse num = response.body();
                     if (num.getNumero() == 1) {

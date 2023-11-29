@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dietideals24.connection.CheckAccountRequest;
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.R;
 import com.example.dietideals24.connection.NicknameRequest;
@@ -86,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         registratiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tipo;
+
                 emailErrorTextView.setText("");
                 nicknameErrorTextView.setText("");
                 passwordErrorTextView.setText("");
@@ -96,10 +97,15 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     tipo = "venditore";
                 }
-                if(check()){
-                    performHttpPostRequest(nicknameEditText.getText().toString(), emailEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
+                String nickname = nicknameEditText.getText().toString();
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                String confermaPassword = confermaPasswordEditText.getText().toString();
+
+                if( check(nickname, email, password, confermaPassword) && checkNickname(nickname) && checkAccount(email, tipo) ){
+                    performHttpPostRequest(nickname, email, password, tipo);
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Errore nella registrazione!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(RegisterActivity.this, "Errore nella registrazione!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -129,26 +135,43 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private boolean check() {
+    private boolean check(String nickname, String email, String password, String confermaPassword) {
         // Controllo campi vuoti
         int check = 0;
-        if(emailEditText.getText().toString().isEmpty()){
+        if(email.isEmpty()){
             emailErrorTextView.setText("Non hai inserito l'email!");
             check++;
         }
-        if(nicknameEditText.getText().toString().isEmpty()){
+        if(nickname.isEmpty()){
             nicknameErrorTextView.setText("Non hai inserito il nickname!");
             check++;
         }
-        if(passwordEditText.getText().toString().isEmpty()){
+        if(password.isEmpty()){
             passwordErrorTextView.setText("Non hai inserito la password!");
             check++;
         }
-        if(confermaPasswordEditText.getText().toString().isEmpty() && !(passwordEditText.getText().toString().isEmpty())){
+        if(confermaPassword.isEmpty() && !(password.isEmpty())){
             confermaPasswordErrorTextView.setText("Non hai confermato la password!");
             check++;
         }
         if(check>0){
+            return false;
+        }
+        // Controllo lunghezza campi
+        int check2 = 0;
+        if(email.length() > 50){
+            emailErrorTextView.setText("Email troppo lunga!");
+            check2++;
+        }
+        if(nickname.length() > 30){
+            nicknameErrorTextView.setText("Nickname troppo lungo!");
+            check2++;
+        }
+        if(password.length() > 50){
+            passwordErrorTextView.setText("Password troppo lunga!");
+            check2++;
+        }
+        if(check2>0){
             return false;
         }
         // Controllo password
@@ -156,41 +179,6 @@ public class RegisterActivity extends AppCompatActivity {
             passwordErrorTextView.setText("Le password non coincidono!");
             return false;
         }
-        // Controllo lunghezza campi
-        int check3 = 0;
-        if(emailEditText.getText().toString().length() > 50){
-            emailErrorTextView.setText("Email troppo lunga!");
-            check3++;
-        }
-        if(nicknameEditText.getText().toString().length() > 30){
-            nicknameErrorTextView.setText("Nickname troppo lungo!");
-            check3++;
-        }
-        if(passwordEditText.getText().toString().length() > 50){
-            passwordErrorTextView.setText("Password troppo lunga!");
-            check3++;
-        }
-        if(check3>0){
-            return false;
-        }
-        // Controllo disponibilità nickname
-        int check4 = 0;
-        if(checkNickname(nicknameEditText.getText().toString())){
-
-        } else {
-            nicknameErrorTextView.setText("Nickname già esistente!");
-            check3++;
-        }
-        // Controllo disponibilità account
-        /*if(checkAccount(emailEditText.getText().toString(), tipo)){
-
-        } else {
-            emailErrorTextView.setText("Account "+tipo+" già associato a questa email!");
-            check3++;
-        }
-        if (check4>0){
-            return false;
-        }*/
         return true;
     }
 
@@ -204,16 +192,46 @@ public class RegisterActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     NumeroResponse num = response.body();
                     if(num.getNumero() == 1) {
+                        nicknameErrorTextView.setText("Nickname già esistente!");
                         check = false;
                     } else {
                         check = true;
                     }
                 } else {
-
+                    Toast.makeText(RegisterActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
             }
             public void onFailure(Call<NumeroResponse> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return check;
+    }
+
+    public boolean checkAccount(String email, String tipo_account) {
+        check = false;
+        CheckAccountRequest checkAccountRequest = new CheckAccountRequest(email, tipo_account);
+        Call<NumeroResponse> call = apiService.checkAccount(checkAccountRequest);
+        call.enqueue(new Callback<NumeroResponse>() {
+            @Override
+            public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
+                if(response.isSuccessful()){
+                    NumeroResponse num = response.body();
+                    if(num.getNumero() == 1){
+                        check = false;
+                        emailErrorTextView.setText("Account "+tipo_account+" già associato a questa email!");
+                    } else {
+                        check = true;
+                        Toast.makeText(RegisterActivity.this, "Errore account", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Richiesta fallita!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NumeroResponse> call, Throwable t) {
+                Toast.makeText(RegisterActivity.this, "Connessione fallita!", Toast.LENGTH_SHORT).show();
             }
         });
         return check;
