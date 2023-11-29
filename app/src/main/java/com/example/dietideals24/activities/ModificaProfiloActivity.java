@@ -32,6 +32,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
     private MyApiService apiService;
     ImageView profiloImage;
     private String nickname;
+    private String tipo;
     EditText nomeEditText;
     EditText cognomeEditText;
     EditText biografiaEditText;
@@ -50,6 +51,8 @@ public class ModificaProfiloActivity extends AppCompatActivity {
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
         nickname = getIntent().getStringExtra("nickname");
+        tipo = getIntent().getStringExtra("tipo");
+
         profiloImage = findViewById(R.id.modificaProfiloImage);
         nomeEditText = findViewById(R.id.nomeEditText);
         cognomeEditText = findViewById(R.id.cognomeEditText);
@@ -69,6 +72,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
                 backToProfilo.putExtra("nickname", nickname);
+                backToProfilo.putExtra("tipo", tipo);
                 startActivity(backToProfilo);
             }
         });
@@ -90,6 +94,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
 
                 Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
                 backToProfilo.putExtra("nickname", nickname);
+                backToProfilo.putExtra("tipo", tipo);
                 startActivity(backToProfilo);
             }
         });

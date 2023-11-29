@@ -20,21 +20,24 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private TextView textViewSelectedDate;
     private String nickname;
+    private String tipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_asta_tf);
 
+        nickname = getIntent().getStringExtra("nickname");
+        tipo = getIntent().getStringExtra("tipo");
+
+        Button createButtonAstaTF = findViewById(R.id.creaButtonAstaTF);
+        Button backButtonAstaTF = findViewById(R.id.backButtonCreateAstaTF);
         DatePicker datePicker = findViewById(R.id.datePicker);
-
-        // Imposta il limite inferiore del DatePicker alla data corrente
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();     // Imposta il limite inferiore del DatePicker alla data corrente
         datePicker.setMinDate(calendar.getTimeInMillis());
-
         textViewSelectedDate = findViewById(R.id.textViewSelectedDate);
 
-        nickname = getIntent().getStringExtra("nickname");
+
 
         // Aggiungi un listener per gestire la selezione della data
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -46,23 +49,24 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         }
 
 
-        Button backButtonAstaTF = findViewById(R.id.backButtonCreateAstaTF);
+
         backButtonAstaTF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaTempoFissoActivity.this, CreaAstaPT1Activity.class);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
+                goToCreateAstaPT1.putExtra("tipo", tipo);
                 startActivity(goToCreateAstaPT1);
             }
         });
 
 
-        Button createButtonAstaTF = findViewById(R.id.creaButtonAstaTF);
         createButtonAstaTF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToHomePageVenditore = new Intent(CreaAstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
                 goToHomePageVenditore.putExtra("nickname", nickname);
+                goToHomePageVenditore.putExtra("tipo", tipo);
                 startActivity(goToHomePageVenditore);
             }
         });

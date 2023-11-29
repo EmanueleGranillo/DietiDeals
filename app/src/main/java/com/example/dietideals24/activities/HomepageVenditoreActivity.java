@@ -41,7 +41,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
     Button asteAttiveBtn;
     Button asteConcluseBtn;
     String nickname;
-
+    String tipo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +56,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         Button notificheBtn = findViewById(R.id.notificheButtonHomeVenditore);
 
         listView = (ListView) findViewById(R.id.customListViewSellProducts);
-
+        tipo = getIntent().getStringExtra("tipo");
         nickname = getIntent().getStringExtra("nickname");
         aste = new ArrayList<Asta>();
         riempiListaPerVenditore(nickname);
@@ -67,6 +67,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goToProfilo = new Intent(HomepageVenditoreActivity.this, ProfiloActivity.class);
                 goToProfilo.putExtra("nickname", nickname);
+                goToProfilo.putExtra("tipo", tipo);
                 startActivity(goToProfilo);
             }
         });
@@ -76,6 +77,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goToNotifiche = new Intent(HomepageVenditoreActivity.this, NotificationsActivity.class);
                 goToNotifiche.putExtra("nickname", nickname);
+                goToNotifiche.putExtra("tipo", tipo);
                 startActivity(goToNotifiche);
             }
         });
@@ -85,6 +87,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goToCreaAsta = new Intent(HomepageVenditoreActivity.this, CreaAstaPT1Activity.class);
                 goToCreaAsta.putExtra("nickname", nickname);
+                goToCreaAsta.putExtra("tipo", tipo);
                 startActivity(goToCreaAsta);
             }
         });

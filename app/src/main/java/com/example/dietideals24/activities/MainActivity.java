@@ -110,12 +110,13 @@ public class MainActivity extends AppCompatActivity {
                         if (tipo == "compratore") {
                             Intent goToProfiloCompratore = new Intent(MainActivity.this, HomepageCompratoreActivity.class);
                             goToProfiloCompratore.putExtra("nickname", nicknameEditText.getText().toString());
+                            goToProfiloCompratore.putExtra("tipo", "compratore");
                             startActivity(goToProfiloCompratore);
                         } else {
                             Intent goToProfiloVenditore = new Intent(MainActivity.this, HomepageVenditoreActivity.class);
                             goToProfiloVenditore.putExtra("nickname", nicknameEditText.getText().toString());
+                            goToProfiloVenditore.putExtra("tipo", "venditore");
                             startActivity(goToProfiloVenditore);
-
                         }
                     } else {
                         Toast.makeText(MainActivity.this, "Credenziali non autorizzate", Toast.LENGTH_SHORT).show();

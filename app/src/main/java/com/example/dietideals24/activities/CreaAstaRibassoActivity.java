@@ -19,12 +19,15 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     NumberPicker numberPickerMinutes;
     TextView textViewTimerInsertedRibasso;
     private String nickname;
+    private String tipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_asta_ribasso);
 
+        Button backButtonAstaRibasso = findViewById(R.id.backButtonCreateAstaRibasso);
+        Button createButtonAstaRibasso = findViewById(R.id.creaButtonAstaRibasso);
         numberPickerHours = findViewById(R.id.numberPickerHours);
         numberPickerMinutes = findViewById(R.id.numberPickerMinutes);
         textViewTimerInsertedRibasso = findViewById(R.id.textViewTimerInsertedRibasso);
@@ -33,7 +36,9 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         numberPickerMinutes.setMinValue(0);
         numberPickerMinutes.setMaxValue(60);
         textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+
         nickname = getIntent().getStringExtra("nickname");
+        tipo = getIntent().getStringExtra("tipo");
 
         // Aggiungi un listener ai NumberPicker per rilevare i cambiamenti
         numberPickerHours.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -67,23 +72,25 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         });
 
 
-        Button backButtonAstaRibasso = findViewById(R.id.backButtonCreateAstaRibasso);
+
         backButtonAstaRibasso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaRibassoActivity.this, CreaAstaPT1Activity.class);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
+                goToCreateAstaPT1.putExtra("tipo", tipo);
                 startActivity(goToCreateAstaPT1);
             }
         });
 
 
-        Button createButtonAstaRibasso = findViewById(R.id.creaButtonAstaRibasso);
+
         createButtonAstaRibasso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToHomePageVenditore = new Intent(CreaAstaRibassoActivity.this, HomepageVenditoreActivity.class);
                 goToHomePageVenditore.putExtra("nickname", nickname);
+                goToHomePageVenditore.putExtra("tipo", tipo);
                 startActivity(goToHomePageVenditore);
             }
         });

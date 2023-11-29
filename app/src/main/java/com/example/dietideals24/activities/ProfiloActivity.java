@@ -31,6 +31,7 @@ import retrofit2.Response;
 public class ProfiloActivity extends AppCompatActivity {
 
     private String nickname;
+    private String tipo;
     private MyApiService apiService;
     private Profilo profilo = new Profilo();
     private TextView nicknameProfiloTextView;
@@ -52,6 +53,9 @@ public class ProfiloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profilo);
 
+        nickname = getIntent().getStringExtra("nickname");
+        tipo = getIntent().getStringExtra("tipo");
+
         nicknameProfiloTextView = findViewById(R.id.nicknameProfiloTextView);
         nomeCognomeProfiloTextView = findViewById(R.id.nomeCognomeProfiloTextView);
         bioProfiloTextView = findViewById(R.id.bioProfiloTextView);
@@ -63,7 +67,7 @@ public class ProfiloActivity extends AppCompatActivity {
         Button backBtn = findViewById(R.id.backButtonProfilo);
         Button logoutBtn = findViewById(R.id.logoutButton);
         TextView modificaTxt = findViewById(R.id.modificaTextView);
-        nickname = getIntent().getStringExtra("nickname");
+
 
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
@@ -72,9 +76,17 @@ public class ProfiloActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent backToHome = new Intent(ProfiloActivity.this, HomepageCompratoreActivity.class);
-                backToHome.putExtra("nickname", nickname);
-                startActivity(backToHome);
+                if(tipo.equals("compratore")){
+                    Intent backToHomeCompratore = new Intent(ProfiloActivity.this, HomepageCompratoreActivity.class);
+                    backToHomeCompratore.putExtra("nickname", nickname);
+                    backToHomeCompratore.putExtra("tipo", tipo);
+                    startActivity(backToHomeCompratore);
+                } else if (tipo.equals("venditore")) {
+                    Intent backToHomeVenditore = new Intent(ProfiloActivity.this, HomepageVenditoreActivity.class);
+                    backToHomeVenditore.putExtra("nickname", nickname);
+                    backToHomeVenditore.putExtra("tipo", tipo);
+                    startActivity(backToHomeVenditore);
+                }
             }
         });
 
@@ -91,6 +103,7 @@ public class ProfiloActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goToModifica = new Intent(ProfiloActivity.this, ModificaProfiloActivity.class);
                 goToModifica.putExtra("nickname", nickname);
+                goToModifica.putExtra("tipo", tipo);
                 startActivity(goToModifica);
             }
         });

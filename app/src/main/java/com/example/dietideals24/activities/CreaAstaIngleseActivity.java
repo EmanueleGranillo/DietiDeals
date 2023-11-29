@@ -16,16 +16,21 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
     NumberPicker numberPickerHoursIng;
     NumberPicker numberPickerMinutesIng;
     TextView textViewTimerInsertedIng;
+    private String nickname;
+    private String tipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_asta_inglese);
 
-
+        Button backButtonAstaIng = findViewById(R.id.backButtonCreateAstaInglese);
         numberPickerHoursIng = findViewById(R.id.numberPickerHoursIng);
         numberPickerMinutesIng = findViewById(R.id.numberPickerMinutesIng);
         textViewTimerInsertedIng = findViewById(R.id.textViewTimerInsertedIng);
+
+        nickname = getIntent().getStringExtra("nickname");
+        tipo = getIntent().getStringExtra("tipo");
 
 
         numberPickerHoursIng.setMinValue(0);
@@ -67,11 +72,13 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
 
 
 
-        Button backButtonAstaIng = findViewById(R.id.backButtonCreateAstaInglese);
+
         backButtonAstaIng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaIngleseActivity.this, CreaAstaPT1Activity.class);
+                goToCreateAstaPT1.putExtra("tipo", tipo);
+                goToCreateAstaPT1.putExtra("nickname", nickname);
                 startActivity(goToCreateAstaPT1);
             }
         });
@@ -82,6 +89,8 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToHomePageVenditore = new Intent(CreaAstaIngleseActivity.this, HomepageVenditoreActivity.class);
+                goToHomePageVenditore.putExtra("nickname", nickname);
+                goToHomePageVenditore.putExtra("tipo", tipo);
                 startActivity(goToHomePageVenditore);
             }
         });

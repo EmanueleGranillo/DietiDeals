@@ -30,6 +30,9 @@ public interface MyApiService {
     @POST("/check_user_credentials/")
     Call<NumeroResponse> checkCredentials(@Body UserAccessRequest request);
 
+    @POST("/check_nickname/")
+    Call<NumeroResponse> checkNickname(@Body NicknameRequest nickname);
+
     @GET("/get_aste/")
     Call<ArrayList<Asta>> getAste();
 

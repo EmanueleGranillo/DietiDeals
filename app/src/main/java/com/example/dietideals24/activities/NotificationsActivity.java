@@ -38,6 +38,7 @@ public class NotificationsActivity extends AppCompatActivity {
     ArrayList<Notifica> notifiche = new ArrayList<Notifica>();
 
     private String nickname;
+    private String tipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class NotificationsActivity extends AppCompatActivity {
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
         nickname = getIntent().getStringExtra("nickname");
+        tipo = getIntent().getStringExtra("tipo");
 
         Button backBtn = findViewById(R.id.backButtonNotifiche);
         listView = (ListView) findViewById(R.id.customListView);
@@ -60,9 +62,19 @@ public class NotificationsActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent backToHome = new Intent(NotificationsActivity.this, HomepageCompratoreActivity.class);
-                backToHome.putExtra("nickname", nickname);
-                startActivity(backToHome);
+                if(tipo.equals("compratore")){
+                    Intent backToHomeCompratore = new Intent(NotificationsActivity.this, HomepageCompratoreActivity.class);
+                    backToHomeCompratore.putExtra("nickname", nickname);
+                    backToHomeCompratore.putExtra("tipo", tipo);
+                    startActivity(backToHomeCompratore);
+                } else if (tipo.equals("venditore")) {
+                    Intent backToHomeVenditore = new Intent(NotificationsActivity.this, HomepageVenditoreActivity.class);
+                    backToHomeVenditore.putExtra("nickname", nickname);
+                    backToHomeVenditore.putExtra("tipo", tipo);
+                    startActivity(backToHomeVenditore);
+                }
+
+
             }
         });
     }
