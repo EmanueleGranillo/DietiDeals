@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,9 +25,17 @@ import android.graphics.Bitmap;
 public class CreaAstaPT1Activity extends AppCompatActivity {
 
     ImageView uploadImage;
+    private String titoloProdotto;
     private String tipologiaSelezionata;
+    private String categoriaSelezionata;
+    private String paroleChiave;
     private String nickname;
     private String tipo;
+    private String base64String;
+    private String descrizione;
+    private EditText editTextTitle;
+    private EditText editTextDescrizione;
+    private EditText editTextParoleChiavi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,9 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
 
+        editTextTitle = findViewById(R.id.editTextTitle);
+        editTextDescrizione = findViewById(R.id.editTextDescrizione);
+        editTextParoleChiavi = findViewById(R.id.editTextParoleChiavi);
         Button createAstaPT1 = findViewById(R.id.forwardButtonCreateAsta);
         Button backButtonHPVenditore = findViewById(R.id.backButtonHomePageVenditore);
         uploadImage = findViewById(R.id.uploadImageIcon);
@@ -84,6 +96,19 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         // Applica l'adapter allo Spinner
         spinnerCategoria.setAdapter(adapterCategorie);
 
+        spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                categoriaSelezionata = (String) adapterView.getItemAtPosition(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //caso da gestire se permettiamo di non inserire nessuna tipologia asta
+            }
+        });
+
+
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,9 +127,19 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (tipologiaSelezionata.equals("Asta a tempo fisso")) {
+                    titoloProdotto = editTextTitle.getText().toString().trim();
+                    descrizione = editTextDescrizione.getText().toString().trim();
+                    paroleChiave = editTextParoleChiavi.getText().toString().trim();
+
                     Intent goToCreateAstaTF = new Intent(CreaAstaPT1Activity.this, CreaAstaTempoFissoActivity.class);
                     goToCreateAstaTF.putExtra("nickname", nickname);
                     goToCreateAstaTF.putExtra("tipo", tipo);
+                    goToCreateAstaTF.putExtra("titoloProdotto", titoloProdotto);
+                    goToCreateAstaTF.putExtra("imageBase64", base64String);
+                    goToCreateAstaTF.putExtra("categoriaSelezionata", categoriaSelezionata);
+                    goToCreateAstaTF.putExtra("paroleChiave", paroleChiave);
+                    goToCreateAstaTF.putExtra("descrizione", descrizione);
+                    goToCreateAstaTF.putExtra("tipologiaSelezionata", tipologiaSelezionata);
                     startActivity(goToCreateAstaTF);
                 }
 
@@ -147,7 +182,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         Bitmap imageBitmap = BitmapFactory.decodeFile(uri.getPath());
         System.out.println(uri.getPath());
         // Converti l'immagine Bitmap in una stringa Base64
-        String base64String = ImageUtils.bitmapToBase64(imageBitmap);
+        base64String = ImageUtils.bitmapToBase64(imageBitmap);
     }
 
 }

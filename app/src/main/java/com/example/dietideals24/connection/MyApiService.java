@@ -52,7 +52,7 @@ public interface MyApiService {
     Call<ArrayList<Notifica>> getNotifiche(@Body NicknameRequest request);
 
     @POST("/create_asta_tf/")
-    Call<ResponseBody> saveUser(@Body UserRegistrationRequest request);
+    Call<ResponseBody> createAstatf(@Body CreateAstaRequest request);
 
     @POST("/get_aste_per_ricerca/")
     Call<ArrayList<Asta>> getAstePerRicerca(@Body SearchRequest request);

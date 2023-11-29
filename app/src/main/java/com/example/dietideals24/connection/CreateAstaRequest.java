@@ -1,10 +1,13 @@
 package com.example.dietideals24.connection;
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 public class CreateAstaRequest {
 
     @SerializedName("nomeProdotto")
-    private String nome_prodotto;
+    private String nomeProdotto;
 
     @SerializedName("tipologia")
     private String tipologia;
@@ -18,29 +21,40 @@ public class CreateAstaRequest {
     @SerializedName("categoria")
     private String categoria;
 
-    @SerializedName("paroleChiave")
-    private String keywords;
+    @SerializedName("keywords")
+    private String paroleChiave;
 
-    @SerializedName("dataScadenzaTF")
-    private String data_scadenza;
+    @SerializedName("statoAsta")
+    private int statoAsta;
 
-    @SerializedName("prezzoIniziale")
-    private String prezzo_iniziale;
+    @SerializedName("data_scadenza")
+    private String dataScadenzaTF;
 
-    @SerializedName("offertaAttuale")
-    private String offerta_attuale;
+    @SerializedName("prezzo_iniziale")
+    private BigDecimal prezzoIniziale;
 
-    @SerializedName("sogliaMinimaSegreta")
-    private String soglia_segreta;
+    @SerializedName("offerta_attuale")
+    private BigDecimal offertaAttuale;
+
+    @SerializedName("soglia_segreta")
+    private BigDecimal sogliaMinimaSegreta;
 
     @SerializedName("creatore")
     private String creatore;
 
 
-    public CreateAstaRequest(String nome_prodotto, String tipologia, String descrizione, String tipo_account) {
-        this.nickname = nickname;
-        this.email = email;
-        this.password = password;
-        this.tipo_account = tipo_account;
+    public CreateAstaRequest(String nomeProdotto, String tipologia, String descrizione, String categoria, String paroleChiave, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta, String creatore) {
+        this.nomeProdotto = nomeProdotto;
+        this.tipologia = tipologia;
+        this.descrizione = descrizione;
+        this.image = "foto base64";
+        this.categoria = categoria;
+        this.paroleChiave = paroleChiave;
+        this.statoAsta = 1;
+        this.dataScadenzaTF = "2024-12-12";
+        this.prezzoIniziale = prezzoIniziale;
+        this.offertaAttuale = offertaAttuale;
+        this.sogliaMinimaSegreta = sogliaMinimaSegreta;
+        this.creatore = creatore;
     }
 }
