@@ -61,7 +61,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         Spinner spinnerTipologia = findViewById(R.id.spinnerTipologiaType);
 
         // Crea un ArrayAdapter usando un array di valori
-        String[] valori = {"Asta a tempo fisso", "Asta all'inglese", "Asta al ribasso"};
+        String[] valori = {"asta a tempo fisso", "asta all'inglese", "asta al ribasso"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, valori);
 
         // Specifica il layout da utilizzare quando la lista degli elementi appare
@@ -87,7 +87,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         Spinner spinnerCategoria = findViewById(R.id.spinnerCategory);
 
         // Crea un ArrayAdapter usando un array di valori
-        String[] categorie = {"Elettronica", "Motori", "Animali", "Moda e bellezza", "Intrattenimento", "Immobili", "Sport", "Arredamento"};
+        String[] categorie = {"elettronica", "motori", "animali", "moda e bellezza", "intrattenimento", "immobili", "sport", "arredamento"};
         ArrayAdapter<String> adapterCategorie = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorie);
 
         // Specifica il layout da utilizzare quando la lista degli elementi appare
@@ -126,7 +126,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (tipologiaSelezionata.equals("Asta a tempo fisso")) {
+                if (tipologiaSelezionata.equals("asta a tempo fisso")) {
                     titoloProdotto = editTextTitle.getText().toString().trim();
                     descrizione = editTextDescrizione.getText().toString().trim();
                     paroleChiave = editTextParoleChiavi.getText().toString().trim();
@@ -143,14 +143,14 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
                     startActivity(goToCreateAstaTF);
                 }
 
-                if (tipologiaSelezionata.equals("Asta all'inglese")) {
+                if (tipologiaSelezionata.equals("asta all'inglese")) {
                     Intent goToCreateAstaInglese = new Intent(CreaAstaPT1Activity.this, CreaAstaIngleseActivity.class);
                     goToCreateAstaInglese.putExtra("nickname", nickname);
                     goToCreateAstaInglese.putExtra("tipo", tipo);
                     startActivity(goToCreateAstaInglese);
                 }
 
-                if (tipologiaSelezionata.equals("Asta al ribasso")) {
+                if (tipologiaSelezionata.equals("asta al ribasso")) {
                     Intent goToCreateAstaRibasso = new Intent(CreaAstaPT1Activity.this, CreaAstaRibassoActivity.class);
                     goToCreateAstaRibasso.putExtra("nickname", nickname);
                     goToCreateAstaRibasso.putExtra("tipo", tipo);

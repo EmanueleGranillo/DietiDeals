@@ -14,17 +14,17 @@ public class Asta implements Serializable {
     private String descrizione; //a tutte e tre
     private Date dataScadenzaTF; //a tempo fisso
     private BigDecimal offertaAttuale; //tutte e tre
-    private BigDecimal sogliaMinimaSegreta; //a tempo fisso + ribasso
+    private BigDecimal sogliaSegreta; //a tempo fisso + ribasso
     private BigDecimal prezzoIniziale; //tutte e tre
-    private Timer timer; //inglese+ribasso
     private BigDecimal sogliaRialzoMinima; //inglese
     private long resetTimer; //inglese + ribasso
     private BigDecimal importoDecremento; //asta al ribasso
     private boolean statoAsta;
-    private String image;
+    private String fotoProdotto;
     private String categoria;
     private String paroleChiave;
-    private int creatore;
+    private String creatore;
+    private String vincente;
 
 
     //Costruttore quando tipologia asta = tempo fisso
@@ -35,15 +35,48 @@ public class Asta implements Serializable {
         this.descrizione = descrizione;
         this.dataScadenzaTF = dataFineAstaTempoFisso;
         this.offertaAttuale = offertaAttuale;
-        this.sogliaMinimaSegreta = sogliaMinimaSegreta;
+        this.sogliaSegreta = sogliaMinimaSegreta;
+    }
+
+
+    //Costruttore quando tipologia asta = tempo fisso e image presente
+    public Asta(int id, String titoloAsta, String tipologia, String descrizione, String image, Date dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
+        this.id = id;
+        this.nomeProdotto = titoloAsta;
+        this.tipologia = tipologia;
+        this.descrizione = descrizione;
+        this.fotoProdotto = image;
+        this.dataScadenzaTF = dataFineAstaTempoFisso;
+        this.offertaAttuale = offertaAttuale;
+        this.sogliaSegreta = sogliaMinimaSegreta;
+    }
+
+    public Asta(int id, String nomeProdotto, String tipologia, String descrizione, Date dataScadenzaTF, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, BigDecimal prezzoIniziale, BigDecimal sogliaRialzoMinima, long resetTimer, BigDecimal importoDecremento, boolean statoAsta, String fotoProdotto, String categoria, String paroleChiave, String creatore, String vincente) {
+        this.id = id;
+        this.nomeProdotto = nomeProdotto;
+        this.tipologia = tipologia;
+        this.descrizione = descrizione;
+        this.dataScadenzaTF = dataScadenzaTF;
+        this.offertaAttuale = offertaAttuale;
+        this.sogliaSegreta = sogliaSegreta;
+        this.prezzoIniziale = prezzoIniziale;
+        this.sogliaRialzoMinima = sogliaRialzoMinima;
+        this.resetTimer = resetTimer;
+        this.importoDecremento = importoDecremento;
+        this.statoAsta = statoAsta;
+        this.fotoProdotto = fotoProdotto;
+        this.categoria = categoria;
+        this.paroleChiave = paroleChiave;
+        this.creatore = creatore;
+        this.vincente = vincente;
     }
 
 
     public void presentaOffertaTempoFisso(BigDecimal importo) {
-        if (importo.compareTo(sogliaMinimaSegreta) > 0) {
+        if (importo.compareTo(sogliaSegreta) > 0) {
             System.out.println("Oggetto venduto con successo ad acquirente x");
         }
-        if ((importo.compareTo(offertaAttuale)) > 0 && (importo.compareTo(sogliaMinimaSegreta) < 0)) {
+        if ((importo.compareTo(offertaAttuale)) > 0 && (importo.compareTo(sogliaSegreta) < 0)) {
             System.out.println("Offerta presentata con successo da x");
             this.offertaAttuale = importo;
         } else {
@@ -65,8 +98,8 @@ public class Asta implements Serializable {
 
 
         // Inizializza e avvia il timer con l'intervallo specificato
-        this.timer = new Timer();
-        this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, intervalloTimer);
+        //this.timer = new Timer();
+        //this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, intervalloTimer);
     }
 
 
@@ -82,8 +115,8 @@ public class Asta implements Serializable {
 
 
         // Inizializza e avvia il timer con l'intervallo specificato
-        this.timer = new Timer();
-        this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, resetTimer);
+        //this.timer = new Timer();
+        //this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, resetTimer);
     }
 
 
@@ -91,11 +124,11 @@ public class Asta implements Serializable {
     public void effettuaOffertaIng(BigDecimal importo) {
         if (importo.subtract(offertaAttuale).compareTo(sogliaRialzoMinima) > 0) {
             this.offertaAttuale = importo;
-            this.timer.cancel(); // Annulla il timer corrente
+            //this.timer.cancel(); // Annulla il timer corrente
 
             //Avvio di nuovo timer di un'ora
-            this.timer = new Timer();
-            this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, resetTimer);
+            //this.timer = new Timer();
+            //this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, resetTimer);
         }
     }
 
@@ -117,7 +150,7 @@ public class Asta implements Serializable {
                     //invio notifiche ecc
                 }
                 // Annulla il timer quando arriva a zero
-                timer.cancel();
+                //timer.cancel();
             }
 
 
@@ -133,7 +166,7 @@ public class Asta implements Serializable {
     private void decrementaPrezzo() {
         this.offertaAttuale = offertaAttuale.subtract(importoDecremento);
 
-        if (this.offertaAttuale.compareTo(this.sogliaMinimaSegreta) < 0) {
+        if (this.offertaAttuale.compareTo(this.sogliaSegreta) < 0) {
             System.out.println("Asta fallita. Nessuna offerta presentata.");
         }
     }
@@ -148,25 +181,31 @@ public class Asta implements Serializable {
         this.offertaAttuale = prezzoIniziale;
         this.resetTimer = intervalloTimer;
         this.importoDecremento = importoDecremento;
-        this.sogliaMinimaSegreta = prezzoMinimoSegreto;
+        this.sogliaSegreta = prezzoMinimoSegreto;
 
 
         // Inizializza e avvia il timer con l'intervallo specificato
-        this.timer = new Timer();
-        AstaTimerTask astaTimerTask = new AstaTimerTask();
-        this.timer.scheduleAtFixedRate(astaTimerTask, 0, intervalloTimer);
+        //this.timer = new Timer();
+        //AstaTimerTask astaTimerTask = new AstaTimerTask();
+        //this.timer.scheduleAtFixedRate(astaTimerTask, 0, intervalloTimer);
 
     }
 
 
 
 
+    public String getVincente() {
+        return vincente;
+    }
 
-    public int getCreatore() {
+    public void setVincente(String vincente) {
+        this.vincente = vincente;
+    }
+    public String getCreatore() {
         return creatore;
     }
 
-    public void setCreatore(int creatore) {
+    public void setCreatore(String creatore) {
         this.creatore = creatore;
     }
     public String getParoleChiave() {
@@ -183,12 +222,12 @@ public class Asta implements Serializable {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    public String getImage() {
-        return image;
+    public String getFotoProdotto() {
+        return fotoProdotto;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setFotoProdotto(String fotoProdotto) {
+        this.fotoProdotto = fotoProdotto;
     }
 
     public String getDescrizione() {
@@ -223,9 +262,9 @@ public class Asta implements Serializable {
         this.prezzoIniziale = prezzoIniziale;
     }
 
-    public void setTimer(Timer timer) {
-        this.timer = timer;
-    }
+   // public void setTimer(Timer timer) {
+    //    this.timer = timer;
+    //}
 
     public void setSogliaRialzoMinima(BigDecimal sogliaRialzoMinima) {
         this.sogliaRialzoMinima = sogliaRialzoMinima;
@@ -240,8 +279,8 @@ public class Asta implements Serializable {
         this.importoDecremento = importoDecremento;
     }
 
-    public void setSogliaMinimaSegreta(BigDecimal sogliaMinimaSegreta) {
-        this.sogliaMinimaSegreta = sogliaMinimaSegreta;
+    public void setSogliaSegreta(BigDecimal sogliaSegreta) {
+        this.sogliaSegreta = sogliaSegreta;
     }
     public boolean getStatoAsta() {
         return statoAsta;
@@ -270,9 +309,9 @@ public class Asta implements Serializable {
         return prezzoIniziale;
     }
 
-    public Timer getTimer() {
-        return timer;
-    }
+  //  public Timer getTimer() {
+       // return timer;
+    //}
 
     public BigDecimal getSogliaRialzoMinima() {
         return sogliaRialzoMinima;
@@ -290,8 +329,8 @@ public class Asta implements Serializable {
         return importoDecremento;
     }
 
-    public BigDecimal getSogliaMinimaSegreta() {
-        return sogliaMinimaSegreta;
+    public BigDecimal getSogliaSegreta() {
+        return sogliaSegreta;
     }
 
 

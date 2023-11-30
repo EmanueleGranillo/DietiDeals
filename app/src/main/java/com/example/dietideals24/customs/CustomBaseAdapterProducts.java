@@ -1,6 +1,9 @@
 package com.example.dietideals24.customs;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +19,11 @@ import java.util.ArrayList;
 public class CustomBaseAdapterProducts extends BaseAdapter {
     Context context;
     ArrayList<Asta> aste;
-    //int productsImages[];
     LayoutInflater inflater;
+
+    ImageView productImage;
+
+    String imageBase64;
 
     public CustomBaseAdapterProducts (Context ctx, ArrayList<Asta> aste){
         this.context = ctx;
@@ -52,7 +58,18 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             titolo.setText(aste.get(position).getNomeProdotto());
             // data.setText(aste.get(position).getDataFineAstaTempoFisso()); problemi con il parse, poi si vede
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
-            //productImage.setImageResource(productsImages[position]);
+
+            // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
+            if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
+                imageBase64 = aste.get(position).getFotoProdotto();
+                byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                productImage.setImageBitmap(decodedByte);
+            } else {
+                // Immagine di fallback o gestisci la situazione come desideri
+                productImage.setImageResource(R.drawable.shopping_bag);
+            }
+
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
         }
         if(aste.get(position).getTipologia().equals("asta inglese")){
@@ -64,7 +81,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             ImageView productImage = (ImageView) convertView.findViewById(R.id.imageProductIng);
             titolo.setText(aste.get(position).getNomeProdotto());
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
-            tempoRimanente.setText(aste.get(position).getTimer().toString());
+            //tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaRialzo.setText(aste.get(position).getSogliaRialzoMinima().toString() + "$");
             //productImage.setImageResource(productsImages[position]);
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -78,7 +95,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             ImageView productImage = (ImageView) convertView.findViewById(R.id.imageProductRibasso);
             titolo.setText(aste.get(position).getNomeProdotto());
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
-            tempoRimanente.setText(aste.get(position).getTimer().toString());
+            //tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "$");
             //productImage.setImageResource(productsImages[position]);
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
