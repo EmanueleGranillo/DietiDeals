@@ -180,6 +180,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         uploadImage.setImageURI(uri);
         // Ottieni un'immagine Bitmap da qualche fonte (ad esempio, dalla fotocamera o dalla galleria)
         Bitmap imageBitmap = BitmapFactory.decodeFile(uri.getPath());
+        System.out.println(uri.getPath());
         // Converti l'immagine Bitmap in una stringa Base64
         base64String = ImageUtils.bitmapToBase64(imageBitmap);
     }

@@ -43,7 +43,6 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
     private String base64Image;
     private String descrizione;
     private String selectedDate;    //anno-mese-giorno (2024-05-24)
-    SimpleDateFormat sdf;
     private EditText editTextInitialPrice;
     private EditText editTextSogliaMinima;
     private int statoAsta;
