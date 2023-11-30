@@ -3,7 +3,10 @@ package com.example.dietideals24.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +33,8 @@ import retrofit2.Response;
 
 public class ProfiloActivity extends AppCompatActivity {
 
+    private String fotoProfilo;
+    private ImageView profiloImage;
     private String nickname;
     private String tipo;
     private MyApiService apiService;
@@ -67,7 +72,7 @@ public class ProfiloActivity extends AppCompatActivity {
         Button backBtn = findViewById(R.id.backButtonProfilo);
         Button logoutBtn = findViewById(R.id.logoutButton);
         TextView modificaTxt = findViewById(R.id.modificaTextView);
-
+        profiloImage = findViewById(R.id.fotoProfiloImage);
 
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
@@ -159,6 +164,12 @@ public class ProfiloActivity extends AppCompatActivity {
 
                         if (profilo.getLinkInsta() != null) {
                             linkInstagram = profilo.getLinkInsta();
+                        }
+
+                        if(profilo.getFotoProfilo() != null) {
+                            byte[] decodedString = Base64.decode(profilo.getFotoProfilo(), Base64.DEFAULT);
+                            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                            profiloImage.setImageBitmap(decodedByte);
                         }
                     }
                 } else {

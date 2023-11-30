@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,9 @@ import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.UserModifiedRequest;
 import com.example.dietideals24.models.Profilo;
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import android.util.Base64;
+import com.example.dietideals24.customs.ImageUtils;
+import android.graphics.Bitmap;
 
 import okhttp3.ResponseBody;
 import okhttp3.RequestBody;
@@ -30,7 +35,8 @@ import retrofit2.Response;
 public class ModificaProfiloActivity extends AppCompatActivity {
 
     private MyApiService apiService;
-    ImageView profiloImage;
+    ImageView uploadImage;
+    private String base64String;
     private String nickname;
     private String tipo;
     EditText nomeEditText;
@@ -53,7 +59,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
 
-        profiloImage = findViewById(R.id.modificaProfiloImage);
+        uploadImage = findViewById(R.id.modificaProfiloImage);
         nomeEditText = findViewById(R.id.nomeEditText);
         cognomeEditText = findViewById(R.id.cognomeEditText);
         biografiaEditText = findViewById(R.id.biografiaEditText);
@@ -90,7 +96,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
 
                 //effettuare controlli e poi
 
-                aggiornaProfilo(nome, cognome, biografia, link_web, link_insta, posizione, numero_telefono);
+                aggiornaProfilo(nome, cognome, biografia, link_web, link_insta, posizione, numero_telefono, base64String);
 
                 Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
                 backToProfilo.putExtra("nickname", nickname);
@@ -99,13 +105,13 @@ public class ModificaProfiloActivity extends AppCompatActivity {
             }
         });
 
-        profiloImage.setOnClickListener(new View.OnClickListener() {
+        uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ImagePicker.with(ModificaProfiloActivity.this)
                         .crop()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .maxResultSize(240, 240)	//Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
             }
         });
@@ -114,15 +120,17 @@ public class ModificaProfiloActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri = data.getData();
-        profiloImage.setImageURI(uri);
+        uploadImage.setImageURI(uri);
+        Bitmap imageBitmap = BitmapFactory.decodeFile(uri.getPath());
+        base64String = ImageUtils.bitmapToBase64(imageBitmap);
     }
 
     //public void getProfiloDaModificare() {
         //NicknameRequest nicknameRequest = new NicknameRequest(nickname);
         //Call<> call = apiService.getProfilo(nicknameRequest);
     //}
-    public void aggiornaProfilo(String nome, String cognome, String biografia, String link_web, String link_insta, String posizione, String numero_telefono){
-        UserModifiedRequest userModifiedRequest = new UserModifiedRequest(nickname, nome, cognome, biografia, link_web, link_insta, posizione, numero_telefono);
+    public void aggiornaProfilo(String nome, String cognome, String biografia, String link_web, String link_insta, String posizione, String numero_telefono, String foto_profilo){
+        UserModifiedRequest userModifiedRequest = new UserModifiedRequest(nickname, nome, cognome, biografia, link_web, link_insta, posizione, numero_telefono, foto_profilo);
         Call<Void> call = apiService.editUser(userModifiedRequest);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -173,6 +181,11 @@ public class ModificaProfiloActivity extends AppCompatActivity {
 
                         if (profilo.getLinkInsta() != null) {
                             linkInstaEditText.setText(profilo.getLinkInsta());
+                        }
+                        if (profilo.getFotoProfilo() != null) {
+                            byte[] decodedString = Base64.decode(profilo.getFotoProfilo(), Base64.DEFAULT);
+                            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                            uploadImage.setImageBitmap(decodedByte);
                         }
                     }
                 } else {

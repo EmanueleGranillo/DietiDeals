@@ -25,9 +25,11 @@ public class UserModifiedRequest {
 
     @SerializedName("numero_telefono")
     private String numero_telefono;
+    @SerializedName("foto_profilo")
+    private String foto_profilo;
 
 
-    public UserModifiedRequest(String nickname, String nome, String cognome, String biografia, String link_web, String link_insta, String posizione, String numero_telefono) {
+    public UserModifiedRequest(String nickname, String nome, String cognome, String biografia, String link_web, String link_insta, String posizione, String numero_telefono, String foto_profilo) {
         this.nickname = nickname;
         this.nome = nome;
         this.cognome = cognome;
@@ -36,5 +38,6 @@ public class UserModifiedRequest {
         this.link_insta = link_insta;
         this.posizione = posizione;
         this.numero_telefono = numero_telefono;
+        this.foto_profilo = foto_profilo;
     }
 }

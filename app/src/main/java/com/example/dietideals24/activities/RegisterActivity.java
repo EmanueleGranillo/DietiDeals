@@ -20,6 +20,8 @@ import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.UserRegistrationRequest;
 
+import java.io.IOException;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -87,7 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
         registratiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 emailErrorTextView.setText("");
                 nicknameErrorTextView.setText("");
                 passwordErrorTextView.setText("");
@@ -97,19 +98,39 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     tipo = "venditore";
                 }
-                String nickname = nicknameEditText.getText().toString();
-                String email = emailEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                String confermaPassword = confermaPasswordEditText.getText().toString();
-
-                if( check(nickname, email, password, confermaPassword) && checkNickname(nickname) && checkAccount(email, tipo) ){
-                    performHttpPostRequest(nickname, email, password, tipo);
-                } else {
-                    //Toast.makeText(RegisterActivity.this, "Errore nella registrazione!", Toast.LENGTH_SHORT).show();
+                if(checkCampiVuoti()){
+                    performHttpPostRequest(nicknameEditText.getText().toString(), emailEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
                 }
+/*
+                if( check(nickname, email, password, confermaPassword) && checkNickname(nickname) && checkAccount(email, tipo) ){
+                   */
+                /*} else {
+                    //Toast.makeText(RegisterActivity.this, "Errore nella registrazione!", Toast.LENGTH_SHORT).show();
+                }*/
             }
         });
 
+    }
+
+    private boolean checkCampiVuoti() {
+        boolean check = true;
+        if(nicknameEditText.getText().toString().isEmpty()){
+            nicknameErrorTextView.setText("Non hai inserito il nickname!");
+            check = false;
+        }
+        if(emailEditText.getText().toString().isEmpty()){
+            emailErrorTextView.setText("Non hai inserito l'email!");
+            check = false;
+        }
+        if(passwordEditText.getText().toString().isEmpty()){
+            passwordErrorTextView.setText("Non hai inserito la password!");
+            check = false;
+        }
+        if(!(passwordEditText.getText().toString().isEmpty()) && confermaPasswordEditText.getText().toString().isEmpty()){
+            confermaPasswordErrorTextView.setText("Non hai confermato la password!");
+            check = false;
+        }
+        return check;
     }
 
     private void performHttpPostRequest(String nickname, String email, String password, String tipo) {
@@ -137,7 +158,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean check(String nickname, String email, String password, String confermaPassword) {
         // Controllo campi vuoti
-        int check = 0;
+        /*int check = 0;
         if(email.isEmpty()){
             emailErrorTextView.setText("Non hai inserito l'email!");
             check++;
@@ -178,15 +199,30 @@ public class RegisterActivity extends AppCompatActivity {
         if(!(passwordEditText.getText().toString().equals(confermaPasswordEditText.getText().toString()))){
             passwordErrorTextView.setText("Le password non coincidono!");
             return false;
-        }
+        }*/
         return true;
     }
 
-    public boolean checkNickname(String nickname){
+    public boolean checkNickname(String nickname) {
         check = false;
-        NicknameRequest nicknameRequest = new NicknameRequest(nickname);
-        Call<NumeroResponse> call = apiService.checkNickname(nicknameRequest);
-        call.enqueue(new Callback<NumeroResponse>() {
+        try {
+            NicknameRequest nicknameRequest = new NicknameRequest(nickname);
+            Call<NumeroResponse> call = apiService.checkNickname(nicknameRequest);
+            Response<NumeroResponse> response = call.execute();
+            if (response.isSuccessful()) {
+                if (response.body().getNumero() == 1) {
+                    nicknameErrorTextView.setText("Nickname già esistente!");
+                    check = false;
+                } else {
+                    check = true;
+                }
+            } else {
+            }
+        }catch(Exception e) {
+
+        }
+
+        /*call.enqueue(new Callback<NumeroResponse>() {
             @Override
             public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
                 if(response.isSuccessful()) {
@@ -205,6 +241,8 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
             }
         });
+        */
+
         return check;
     }
 

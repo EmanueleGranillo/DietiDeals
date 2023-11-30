@@ -10,6 +10,7 @@ public class Profilo {
     private String link_insta;
     private String posizione;
     private String numero_telefono;
+    private String foto_profilo;
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -41,6 +42,14 @@ public class Profilo {
     public void setNumeroTelefono(String numero_telefono) {
         this.numero_telefono = numero_telefono;
     }
+    public String getFotoProfilo() {
+        return foto_profilo;
+    }
+
+    public void setFoto_profilo(String foto_profilo) {
+        this.foto_profilo = foto_profilo;
+    }
+
 
     public String getNome() {
         return nome;
