@@ -243,6 +243,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                performSearch(newText);
                 return false;
             }
         });
