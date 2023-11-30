@@ -6,6 +6,7 @@ import android.provider.ContactsContract;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.models.Notifica;
 import com.example.dietideals24.models.Profilo;
+import com.example.dietideals24.models.RegisterCheck;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ import retrofit2.http.Path;
 
 public interface MyApiService {
     @POST("/create_user/")
-    Call<ResponseBody> saveUser(@Body UserRegistrationRequest request);
+    Call<RegisterCheck> saveUser(@Body UserRegistrationRequest request);
 
     @GET("/get_user/{nickname}")
     Call<Profilo> getUser(@Path("nickname") String nickname);
@@ -29,12 +30,6 @@ public interface MyApiService {
 
     @POST("/check_user_credentials/")
     Call<NumeroResponse> checkCredentials(@Body UserAccessRequest request);
-
-    @POST("/check_nickname/")
-    Call<NumeroResponse> checkNickname(@Body NicknameRequest nickname);
-
-    @POST("/check_account/")
-    Call<NumeroResponse> checkAccount(@Body CheckAccountRequest checkAccountRequest);
 
     @GET("/get_aste/")
     Call<ArrayList<Asta>> getAste();
