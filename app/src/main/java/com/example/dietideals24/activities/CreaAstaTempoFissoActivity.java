@@ -31,6 +31,7 @@ import retrofit2.Response;
 
 public class CreaAstaTempoFissoActivity extends AppCompatActivity {
 
+    private String activity = "creatempofisso";
     private MyApiService apiService;
     private DatePicker datePicker;
     private TextView textViewSelectedDate;
@@ -46,6 +47,8 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
     private EditText editTextInitialPrice;
     private EditText editTextSogliaMinima;
     private int statoAsta;
+    private int tipologiaPosition;
+    private int categoriaPosition;
 
     // private Date date;
     String prezzoIniziale;
@@ -83,6 +86,8 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         paroleChiave = getIntent().getStringExtra("paroleChiave");
         descrizione = getIntent().getStringExtra("descrizione");
         tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
+        tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", tipologiaPosition);
+        categoriaPosition = getIntent().getIntExtra("categoriaPosition", categoriaPosition);
 
         // Aggiungi un listener per gestire la selezione della data
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -100,8 +105,17 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaTempoFissoActivity.this, CreaAstaPT1Activity.class);
+                goToCreateAstaPT1.putExtra("activity", activity);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
                 goToCreateAstaPT1.putExtra("tipo", tipo);
+                goToCreateAstaPT1.putExtra("base64Image", base64Image);
+                goToCreateAstaPT1.putExtra("titoloProdotto", titoloProdotto);
+                goToCreateAstaPT1.putExtra("descrizione", descrizione);
+                goToCreateAstaPT1.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+                goToCreateAstaPT1.putExtra("tipologiaPosition", tipologiaPosition);
+                goToCreateAstaPT1.putExtra("categoriaSelezionata", categoriaSelezionata);
+                goToCreateAstaPT1.putExtra("categoriaPosition", categoriaPosition);
+                goToCreateAstaPT1.putExtra("paroleChiave", paroleChiave);
                 startActivity(goToCreateAstaPT1);
             }
         });

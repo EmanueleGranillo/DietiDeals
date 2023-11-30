@@ -82,6 +82,12 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         descrizione = getIntent().getStringExtra("descrizione");
         tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
 
+
+
+
+
+
+
         // Aggiungi un listener ai NumberPicker per rilevare i cambiamenti
         numberPickerHours.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override

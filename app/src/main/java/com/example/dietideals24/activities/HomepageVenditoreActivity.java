@@ -29,6 +29,7 @@ import retrofit2.Response;
 
 public class HomepageVenditoreActivity extends AppCompatActivity {
 
+    private String activity = "homepage";
     private MyApiService apiService;
     ListView listView;
     ArrayList<Asta> aste;
@@ -85,6 +86,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
                 Intent goToCreaAsta = new Intent(HomepageVenditoreActivity.this, CreaAstaPT1Activity.class);
                 goToCreaAsta.putExtra("nickname", nickname);
                 goToCreaAsta.putExtra("tipo", tipo);
+                goToCreaAsta.putExtra("activity", activity);
                 startActivity(goToCreaAsta);
             }
         });

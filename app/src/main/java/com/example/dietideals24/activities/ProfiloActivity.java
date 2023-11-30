@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -113,12 +114,41 @@ public class ProfiloActivity extends AppCompatActivity {
             }
         });
 
+        sitoWebProfiloTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(sitoWebProfiloTextView.getText().toString().isEmpty()){
+
+                } else {
+                    Uri uri;
+                    if ((sitoWebProfiloTextView.getText().toString().startsWith("http://")) || (sitoWebProfiloTextView.getText().toString().startsWith("https://"))){
+                        uri = Uri.parse(sitoWebProfiloTextView.getText().toString());
+                    } else {
+                        uri = Uri.parse("http://"+sitoWebProfiloTextView.getText().toString());
+                    }
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+
+                }
+            }
+        });
+
         linkInstagramImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(linkInstagram.isEmpty()){
 
                 } else {
+                    if ((linkInstagram.startsWith("http://")) || (linkInstagram.startsWith("https://"))){
+                        Uri uri = Uri.parse(linkInstagram);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    } else {
+                        Uri uri = Uri.parse("http://"+linkInstagram);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+
                     Toast.makeText(ProfiloActivity.this, linkInstagram, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -132,40 +162,31 @@ public class ProfiloActivity extends AppCompatActivity {
         call.enqueue(new Callback<Profilo>() {
             @Override
             public void onResponse(Call<Profilo> call, Response<Profilo> response) {
-                // Gestisci la risposta del server
                 if (response.isSuccessful()) {
                     profilo = response.body();
                     if (profilo != null) {
                         nicknameProfiloTextView.setText(nickname);
-
                         if (profilo.getNome() != null && profilo.getCognome() != null) {
                             nomeCognomeProfiloTextView.setText(profilo.getNome() + " " + profilo.getCognome());
                         }
-
                         if (profilo.getBiografia() != null) {
                             bioProfiloTextView.setText(profilo.getBiografia());
                         }
-
                         if (profilo.getEmail() != null) {
                             emailProfiloTextView.setText(profilo.getEmail());
                         }
-
                         if (profilo.getNumeroTelefono() != null) {
                             cellulareProfiloTextView.setText(profilo.getNumeroTelefono());
                         }
-
                         if (profilo.getPosizione() != null) {
                             posizioneProfiloTextView.setText(profilo.getPosizione());
                         }
-
                         if (profilo.getLinkWeb() != null) {
                             sitoWebProfiloTextView.setText(profilo.getLinkWeb());
                         }
-
                         if (profilo.getLinkInsta() != null) {
                             linkInstagram = profilo.getLinkInsta();
                         }
-
                         if(profilo.getFotoProfilo() != null) {
                             byte[] decodedString = Base64.decode(profilo.getFotoProfilo(), Base64.DEFAULT);
                             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

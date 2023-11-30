@@ -24,10 +24,14 @@ import android.graphics.Bitmap;
 
 public class CreaAstaPT1Activity extends AppCompatActivity {
 
+    String activity;
     ImageView uploadImage;
+    String base64Image;
     private String titoloProdotto;
     private String tipologiaSelezionata;
+    private int tipologiaPosition = 0;
     private String categoriaSelezionata;
+    private int categoriaPosition = 0;
     private String paroleChiave;
     private String nickname;
     private String tipo;
@@ -41,15 +45,57 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_asta_pt1);
-        nickname = getIntent().getStringExtra("nickname");
-        tipo = getIntent().getStringExtra("tipo");
-
         editTextTitle = findViewById(R.id.editTextTitle);
         editTextDescrizione = findViewById(R.id.editTextDescrizione);
         editTextParoleChiavi = findViewById(R.id.editTextParoleChiavi);
         Button createAstaPT1 = findViewById(R.id.forwardButtonCreateAsta);
         Button backButtonHPVenditore = findViewById(R.id.backButtonHomePageVenditore);
         uploadImage = findViewById(R.id.uploadImageIcon);
+
+
+        activity = getIntent().getStringExtra("activity");
+        Toast.makeText(CreaAstaPT1Activity.this, activity, Toast.LENGTH_SHORT).show();
+
+        if(activity.equals("homepage")){
+            nickname = getIntent().getStringExtra("nickname");
+            tipo = getIntent().getStringExtra("tipo");
+        } else if (activity.equals("creainglese")){
+            nickname = getIntent().getStringExtra("nickname");
+            tipo = getIntent().getStringExtra("tipo");
+        } else if (activity.equals("creatempofisso")){
+            nickname = getIntent().getStringExtra("nickname");
+            tipo = getIntent().getStringExtra("tipo");
+            titoloProdotto = getIntent().getStringExtra("titoloProdotto");
+            base64Image = getIntent().getStringExtra("imageBase64");
+            categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
+            paroleChiave = getIntent().getStringExtra("paroleChiave");
+            descrizione = getIntent().getStringExtra("descrizione");
+            tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
+            tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", 0);
+            categoriaPosition = getIntent().getIntExtra("categoriaPosition", 0);
+            editTextTitle.setText(titoloProdotto);
+            editTextDescrizione.setText(descrizione);
+            editTextParoleChiavi.setText(paroleChiave);
+        } else if (activity.equals("crearibasso")){
+            nickname = getIntent().getStringExtra("nickname");
+            tipo = getIntent().getStringExtra("tipo");
+        }
+
+
+
+        /*
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        uploadImage.setImageBitmap(decodedByte);
+
+         */
+
+
+
+
+
+
+
 
 
 
@@ -70,18 +116,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         // Applica l'adapter allo Spinner
         spinnerTipologia.setAdapter(adapter);
 
-        spinnerTipologia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                tipologiaSelezionata = (String) adapterView.getItemAtPosition(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                //caso da gestire se permettiamo di non inserire nessuna tipologia asta
-            }
-        });
-
+        spinnerTipologia.setSelection(tipologiaPosition);
 
         // Recupera il riferimento allo Spinner dal layout
         Spinner spinnerCategoria = findViewById(R.id.spinnerCategory);
@@ -96,10 +131,33 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         // Applica l'adapter allo Spinner
         spinnerCategoria.setAdapter(adapterCategorie);
 
+        spinnerCategoria.setSelection(categoriaPosition);
+
+
+
+
+
+        spinnerTipologia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tipologiaSelezionata = (String) adapterView.getItemAtPosition(i);
+                tipologiaPosition = spinnerTipologia.getSelectedItemPosition();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //caso da gestire se permettiamo di non inserire nessuna tipologia asta
+            }
+        });
+
+
+
+
         spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 categoriaSelezionata = (String) adapterView.getItemAtPosition(i);
+                categoriaPosition = spinnerCategoria.getSelectedItemPosition();
             }
 
             @Override
@@ -140,6 +198,8 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
                     goToCreateAstaTF.putExtra("paroleChiave", paroleChiave);
                     goToCreateAstaTF.putExtra("descrizione", descrizione);
                     goToCreateAstaTF.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+                    goToCreateAstaTF.putExtra("tipologiaPosition", tipologiaPosition);
+                    goToCreateAstaTF.putExtra("categoriaPosition", categoriaPosition);
                     startActivity(goToCreateAstaTF);
                 }
 
