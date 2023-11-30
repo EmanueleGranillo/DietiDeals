@@ -46,7 +46,7 @@ public class Profilo {
         return foto_profilo;
     }
 
-    public void setFoto_profilo(String foto_profilo) {
+    public void setFotoProfilo(String foto_profilo) {
         this.foto_profilo = foto_profilo;
     }
 

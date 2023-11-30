@@ -161,7 +161,7 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
     }
 
     private void performCreaAstaHttpRequest(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, String creatore) {
-        if(base64Image == null){
+        if(base64Image.isEmpty()){
             base64Image = "";
         }
         CreateAstaRequest createAstaRequest = new CreateAstaRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, offertaAttuale, sogliaSegreta, creatore);
