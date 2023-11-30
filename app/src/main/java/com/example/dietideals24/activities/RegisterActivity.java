@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         Button registratiBtn = findViewById(R.id.registratiButton);
         Button compraBtn = findViewById(R.id.compraButtonRegister);
         Button vendiBtn = findViewById(R.id.vendiButtonRegister);
-        emailEditText = findViewById(R.id.nicknameEditText);
+        emailEditText = findViewById(R.id.emailEditText);
         nicknameEditText = findViewById(R.id.nicknameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         confermaPasswordEditText = findViewById(R.id.confermapasswordEditText);
@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     tipo = "venditore";
                 }
-                if(checkCampiVuoti()){
+                if(check()){
                     performHttpPostRequest(nicknameEditText.getText().toString(), emailEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
                 }
 /*
@@ -112,25 +112,48 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private boolean checkCampiVuoti() {
-        boolean check = true;
+    private boolean check() {
+        int chk=0;
         if(nicknameEditText.getText().toString().isEmpty()){
             nicknameErrorTextView.setText("Non hai inserito il nickname!");
-            check = false;
+            chk++;
         }
         if(emailEditText.getText().toString().isEmpty()){
             emailErrorTextView.setText("Non hai inserito l'email!");
-            check = false;
+            chk++;
         }
         if(passwordEditText.getText().toString().isEmpty()){
             passwordErrorTextView.setText("Non hai inserito la password!");
-            check = false;
+            chk++;
         }
         if(!(passwordEditText.getText().toString().isEmpty()) && confermaPasswordEditText.getText().toString().isEmpty()){
             confermaPasswordErrorTextView.setText("Non hai confermato la password!");
-            check = false;
+            chk++;
         }
-        return check;
+        if(chk>0){
+            return false;
+        }
+        if(!(passwordEditText.getText().toString().equals(confermaPasswordEditText.getText().toString()))) {
+            passwordErrorTextView.setText("Le password non coincidono!");
+            return false;
+        }
+        int chk2=0;
+        if(emailEditText.getText().toString().length() > 50){
+            emailErrorTextView.setText("Email troppo lunga!");
+            chk2++;
+        }
+        if(nicknameEditText.getText().toString().length() > 30){
+            nicknameErrorTextView.setText("Nickname troppo lungo!");
+            chk2++;
+        }
+        if(passwordEditText.getText().toString().length() > 50){
+            passwordErrorTextView.setText("Password troppo lunga!");
+            chk2++;
+        }
+        if(chk2>0){
+            return false;
+        }
+        return true;
     }
 
     private void performHttpPostRequest(String nickname, String email, String password, String tipo) {
