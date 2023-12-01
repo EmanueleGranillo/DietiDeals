@@ -2,6 +2,7 @@ package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -23,7 +24,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-//Da aggiungere controlli sui textfield
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
     android.widget.Button vendiBtn;
     EditText nicknameEditText;
     EditText passwordEditText;
+
+    TextView nicknameErrorTextView;
+    TextView passwordErrorTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         vendiBtn = findViewById(R.id.vendiButtonLogin);
         nicknameEditText = findViewById(R.id.nicknameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+        nicknameErrorTextView = findViewById(R.id.nicknameErrorTextView);
+        passwordErrorTextView = findViewById(R.id.passwordErrorTextView);
 
 
 
@@ -64,13 +70,16 @@ public class MainActivity extends AppCompatActivity {
         accediBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                nicknameErrorTextView.setText("");
+                passwordErrorTextView.setText("");
                 String tipo;
                 if (compraBtn.getBackgroundTintList().getDefaultColor() == Color.parseColor("#00CC66")) {
                     tipo = "compratore";
-                    controlloCredenziali(nicknameEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
                 }
                 else {
                     tipo = "venditore";
+                }
+                if (check()){
                     controlloCredenziali(nicknameEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
                 }
             }
@@ -118,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(goToProfiloVenditore);
                         }
                     } else {
-                        Toast.makeText(MainActivity.this, "Credenziali non autorizzate", Toast.LENGTH_SHORT).show();
+                        passwordErrorTextView.setText("Credenziali non autorizzate!");
                     }
                 } else {
                     Toast.makeText(MainActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
@@ -130,8 +139,26 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+    private boolean check() {
+        //Controllo campi vuoti
+        if(nicknameEditText.getText().toString().isEmpty()){
+            nicknameErrorTextView.setText("Non hai inserito il nickname!");
+            return false;
+        } else if (nicknameEditText.getText().toString().length() > 30){
+            nicknameErrorTextView.setText("Nickname non trovato!");
+            return false;
+        }
 
+        if(passwordEditText.getText().toString().isEmpty()){
+            passwordErrorTextView.setText("Non hai inserito la password");
+            return false;
+        } else if(passwordEditText.getText().toString().length() > 50){
+            passwordErrorTextView.setText("Password errata!");
+            return false;
+        }
+        return true;
     }
 
 }

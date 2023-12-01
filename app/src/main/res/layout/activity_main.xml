@@ -126,4 +126,28 @@
         android:textStyle="bold"
         android:textSize="15dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nicknameErrorTextView"
+        android:layout_below="@+id/nicknameEditText"
+        android:layout_alignStart="@+id/nicknameEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordErrorTextView"
+        android:layout_below="@+id/passwordEditText"
+        android:layout_alignStart="@+id/passwordEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
 </RelativeLayout>

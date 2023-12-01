@@ -182,5 +182,101 @@
         android:backgroundTint="#00CC66"
         android:src="@mipmap/ic_edit_profile_foreground" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nomeErrorTextView"
+        android:layout_below="@+id/nomeEditText"
+        android:layout_alignStart="@+id/nomeEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cognomeErrorTextView"
+        android:layout_below="@+id/cognomeEditText"
+        android:layout_alignStart="@+id/cognomeEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/biografiaErrorTextView"
+        android:layout_below="@+id/biografiaEditText"
+        android:layout_alignStart="@+id/biografiaEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numeroTelefonoErrorTextView"
+        android:layout_below="@+id/numeroTelefonoEditText"
+        android:layout_alignStart="@+id/numeroTelefonoEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/posizioneErrorTextView"
+        android:layout_below="@+id/posizioneEditText"
+        android:layout_alignStart="@+id/posizioneEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linksitowebErrorTextView"
+        android:layout_below="@+id/linksitowebEditText"
+        android:layout_alignStart="@+id/linksitowebEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linkinstagramErrorTextView"
+        android:layout_below="@+id/linkinstagramEditText"
+        android:layout_alignStart="@+id/linkinstagramEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/immagineErrorTextView"
+        android:layout_below="@+id/modificaProfiloImage"
+        android:layout_alignStart="@+id/modificaProfiloImage"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
 
 </RelativeLayout>

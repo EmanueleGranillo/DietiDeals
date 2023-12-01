@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dietideals24.R;
@@ -47,6 +48,15 @@ public class ModificaProfiloActivity extends AppCompatActivity {
     EditText posizioneEditText;
     EditText numeroTelefonoEditText;
     Profilo profilo = new Profilo();
+    TextView nomeErrorTextView;
+    TextView cognomeErrorTextView;
+    TextView biografiaErrorTextView;
+    TextView linkWebErrorTextView;
+    TextView linkInstaErrorTextView;
+    TextView posizioneErrorTextView;
+    TextView numeroTelefonoErrorTextView;
+    TextView immagineErrorTextView;
+
 
 
     @Override
@@ -61,12 +71,20 @@ public class ModificaProfiloActivity extends AppCompatActivity {
 
         uploadImage = findViewById(R.id.modificaProfiloImage);
         nomeEditText = findViewById(R.id.nomeEditText);
+        nomeErrorTextView = findViewById(R.id.nomeErrorTextView);
         cognomeEditText = findViewById(R.id.cognomeEditText);
+        cognomeErrorTextView = findViewById(R.id.cognomeErrorTextView);
         biografiaEditText = findViewById(R.id.biografiaEditText);
+        biografiaErrorTextView = findViewById(R.id.biografiaErrorTextView);
         linkWebEditText = findViewById(R.id.linksitowebEditText);
+        linkWebErrorTextView = findViewById(R.id.linksitowebErrorTextView);
         linkInstaEditText = findViewById(R.id.linkinstagramEditText);
+        linkInstaErrorTextView = findViewById(R.id.linkinstagramErrorTextView);
         posizioneEditText = findViewById(R.id.posizioneEditText);
+        posizioneErrorTextView = findViewById(R.id.posizioneErrorTextView);
         numeroTelefonoEditText = findViewById(R.id.numeroTelefonoEditText);
+        numeroTelefonoErrorTextView = findViewById(R.id.numeroTelefonoErrorTextView);
+        immagineErrorTextView = findViewById(R.id.immagineErrorTextView);
 
         Button annullaBtn = findViewById(R.id.annullaButtonModificaProfilo);
         Button confermaBtn = findViewById(R.id.confermaButtonModificaProfilo);
@@ -86,22 +104,24 @@ public class ModificaProfiloActivity extends AppCompatActivity {
         confermaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nome = nomeEditText.getText().toString().trim();
-                String cognome = cognomeEditText.getText().toString().trim();
-                String biografia = biografiaEditText.getText().toString().trim();
-                String link_web = linkWebEditText.getText().toString().trim();
-                String link_insta = linkInstaEditText.getText().toString().trim();
-                String posizione = posizioneEditText.getText().toString().trim();
-                String numero_telefono = numeroTelefonoEditText.getText().toString().trim();
 
-                //effettuare controlli e poi
+                nomeErrorTextView.setText("");
+                cognomeErrorTextView.setText("");
+                biografiaErrorTextView.setText("");
+                linkWebErrorTextView.setText("");
+                linkInstaErrorTextView.setText("");
+                posizioneErrorTextView.setText("");
+                numeroTelefonoErrorTextView.setText("");
 
-                aggiornaProfilo(nome, cognome, biografia, link_web, link_insta, posizione, numero_telefono, base64String);
+                if(check()){
+                    aggiornaProfilo(nomeEditText.getText().toString().trim(), cognomeEditText.getText().toString().trim(), biografiaEditText.getText().toString().trim(), linkWebEditText.getText().toString().trim(), linkInstaEditText.getText().toString().trim(), posizioneEditText.getText().toString().trim(), numeroTelefonoEditText.getText().toString().trim(), base64String);
+                    Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
+                    backToProfilo.putExtra("nickname", nickname);
+                    backToProfilo.putExtra("tipo", tipo);
+                    startActivity(backToProfilo);
+                } else {
 
-                Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
-                backToProfilo.putExtra("nickname", nickname);
-                backToProfilo.putExtra("tipo", tipo);
-                startActivity(backToProfilo);
+                }
             }
         });
 
@@ -125,10 +145,6 @@ public class ModificaProfiloActivity extends AppCompatActivity {
         base64String = ImageUtils.bitmapToBase64(imageBitmap);
     }
 
-    //public void getProfiloDaModificare() {
-        //NicknameRequest nicknameRequest = new NicknameRequest(nickname);
-        //Call<> call = apiService.getProfilo(nicknameRequest);
-    //}
     public void aggiornaProfilo(String nome, String cognome, String biografia, String link_web, String link_insta, String posizione, String numero_telefono, String foto_profilo){
         UserModifiedRequest userModifiedRequest = new UserModifiedRequest(nickname, nome, cognome, biografia, link_web, link_insta, posizione, numero_telefono, foto_profilo);
         Call<Void> call = apiService.editUser(userModifiedRequest);
@@ -186,6 +202,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
                             byte[] decodedString = Base64.decode(profilo.getFotoProfilo(), Base64.DEFAULT);
                             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                             uploadImage.setImageBitmap(decodedByte);
+                            base64String = profilo.getFotoProfilo();
                         }
                     }
                 } else {
@@ -197,5 +214,41 @@ public class ModificaProfiloActivity extends AppCompatActivity {
                 Toast.makeText(ModificaProfiloActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public boolean check(){
+        if(nomeEditText.getText().toString().length() > 30){
+            nomeErrorTextView.setText("Nome troppo lungo!");
+            return false;
+        }
+        if(cognomeEditText.getText().toString().length() > 30){
+            cognomeErrorTextView.setText("Cognome troppo lungo!");
+            return false;
+        }
+        if(biografiaEditText.getText().toString().length() > 500){
+            biografiaErrorTextView.setText("Biografia troppo lunga! "+biografiaEditText.getText().toString().length()+"/500");
+            return false;
+        }
+        if(linkWebEditText.getText().toString().length() > 255){
+            linkWebErrorTextView.setText("Link troppo lungo! "+linkWebEditText.getText().toString().length()+"/255" );
+            return false;
+        }
+        if(linkInstaEditText.getText().toString().length() > 255){
+            linkInstaErrorTextView.setText("Link troppo lungo! "+linkInstaEditText.getText().toString().length()+"/255");
+            return false;
+        }
+        if(posizioneEditText.getText().toString().length() > 255){
+            posizioneErrorTextView.setText("Posizione troppo lunga!");
+            return false;
+        }
+        if(numeroTelefonoEditText.getText().toString().length() > 20){
+            numeroTelefonoErrorTextView.setText("Numero di telefono troppo lungo!");
+            return false;
+        }
+        if(base64String.length() > 8000){
+            immagineErrorTextView.setText("Dimensione dell'immagine troppo grande!");
+            return false;
+        }
+        return true;
     }
 }
