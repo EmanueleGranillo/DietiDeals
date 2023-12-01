@@ -25,11 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bentornatoTextView"
-        android:layout_alignStart="@+id/bentornatoTextView"
-        android:layout_alignEnd="@+id/bentornatoTextView"
-        android:layout_marginStart="25dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="25dp"
         android:background="@mipmap/ic_martello_foreground" />
 
     <android.widget.Button
@@ -108,19 +105,6 @@
         android:backgroundTint="#00CC66"
         android:text="Accedi" />
 
-
-
-    <TextView
-        android:id="@+id/registratiTextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:layout_below="@+id/nonSeiRegistratoTextView"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/underline"
-        android:textStyle="bold"
-        android:textSize="15dp"/>
-
     <TextView
         android:id="@+id/nonSeiRegistratoTextView"
         android:layout_width="wrap_content"
@@ -132,5 +116,14 @@
         android:textSize="15dp"
         android:textStyle="bold"/>
 
+    <TextView
+        android:id="@+id/registratiTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nonSeiRegistratoTextView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/underline"
+        android:textStyle="bold"
+        android:textSize="15dp"/>
 
 </RelativeLayout>
