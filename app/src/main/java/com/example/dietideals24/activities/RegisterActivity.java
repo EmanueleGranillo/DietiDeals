@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.R;
-import com.example.dietideals24.connection.NicknameRequest;
-import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.UserRegistrationRequest;
 import com.example.dietideals24.models.RegisterCheck;

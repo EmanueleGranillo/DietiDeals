@@ -7,7 +7,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.dietideals24.connection.CategoriaRequest;
 import com.example.dietideals24.connection.MyApiService;
-import com.example.dietideals24.connection.NicknameRequest;
 import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.SearchRequest;
@@ -26,12 +24,7 @@ import com.example.dietideals24.customs.CustomListViewProductEnglish;
 import com.example.dietideals24.R;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.math.BigDecimal;
 
-import okhttp3.ResponseBody;
-import okhttp3.RequestBody;
-import okhttp3.MediaType;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

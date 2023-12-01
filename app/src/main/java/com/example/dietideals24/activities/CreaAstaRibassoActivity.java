@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dietideals24.R;
 import com.example.dietideals24.connection.CreateAstaRibassoRequest;
@@ -77,6 +78,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         nickname = getIntent().getStringExtra("nickname");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
         base64Image = getIntent().getStringExtra("imageBase64");
+        Toast.makeText(CreaAstaRibassoActivity.this, base64Image, Toast.LENGTH_SHORT).show();
         categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
         paroleChiave = getIntent().getStringExtra("paroleChiave");
         descrizione = getIntent().getStringExtra("descrizione");

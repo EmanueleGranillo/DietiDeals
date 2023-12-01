@@ -80,15 +80,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             nickname = getIntent().getStringExtra("nickname");
             tipo = getIntent().getStringExtra("tipo");
         }
-
-
-
-        /*
-        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        uploadImage.setImageBitmap(decodedByte);
-
-         */
+        
 
 
 

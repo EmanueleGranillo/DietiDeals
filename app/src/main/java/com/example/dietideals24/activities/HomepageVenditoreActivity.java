@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.dietideals24.connection.NicknameRequest;
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;

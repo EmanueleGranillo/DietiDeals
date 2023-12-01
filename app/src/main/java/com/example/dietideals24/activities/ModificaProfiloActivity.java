@@ -17,18 +17,13 @@ import android.widget.Toast;
 
 import com.example.dietideals24.R;
 import com.example.dietideals24.connection.MyApiService;
-import com.example.dietideals24.connection.NicknameRequest;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.UserModifiedRequest;
 import com.example.dietideals24.models.Profilo;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import android.util.Base64;
 import com.example.dietideals24.customs.ImageUtils;
-import android.graphics.Bitmap;
 
-import okhttp3.ResponseBody;
-import okhttp3.RequestBody;
-import okhttp3.MediaType;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
