@@ -144,7 +144,8 @@
         android:layout_marginStart="26dp"
         android:layout_marginTop="26dp"
         android:layout_marginEnd="25dp"
-        android:hint="Inserisci soglia di rialzo (opzionale)" />
+        android:hint="Inserisci soglia di rialzo (opzionale)"
+        android:inputType="numberDecimal" />
 
     <Button
         android:id="@+id/creaButtonAstaIng"

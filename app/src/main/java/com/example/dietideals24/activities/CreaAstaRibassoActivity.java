@@ -48,6 +48,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     String prezzoBaseAsta;
     String importoDecremento;
     String prezzoIniziale;
+    int tipologiaPosition, categoriaPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +75,14 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
 
         nickname = getIntent().getStringExtra("nickname");
-        tipo = getIntent().getStringExtra("tipo");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
         base64Image = getIntent().getStringExtra("imageBase64");
         categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
         paroleChiave = getIntent().getStringExtra("paroleChiave");
         descrizione = getIntent().getStringExtra("descrizione");
         tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
+        tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", tipologiaPosition);
+        categoriaPosition = getIntent().getIntExtra("categoriaPosition", categoriaPosition);
 
 
 
@@ -98,19 +100,19 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
                     aggiornaDataScadenza((int) timerInSecondi);
 
-                } else if ((numberPickerHours.getValue() > 10) && (numberPickerMinutes.getValue() > 10)) {
+                } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() >= 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
                     aggiornaDataScadenza((int) timerInSecondi);
 
-                } else if ((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() > 10)) {
+                } else if ((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() >= 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
                     aggiornaDataScadenza((int) timerInSecondi);
 
-                } else if ((numberPickerHours.getValue() > 10) && (numberPickerMinutes.getValue() < 10)) {
+                } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() < 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
@@ -129,19 +131,19 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
                     aggiornaDataScadenza((int) timerInSecondi);
 
-                } else if ((numberPickerHours.getValue() > 10) && (numberPickerMinutes.getValue() > 10)) {
+                } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() >= 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
                     aggiornaDataScadenza((int) timerInSecondi);
 
-                } else if ((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() > 10)) {
+                } else if ((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() >= 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
                     aggiornaDataScadenza((int) timerInSecondi);
 
-                } else if ((numberPickerHours.getValue() > 10) && (numberPickerMinutes.getValue() < 10)) {
+                } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() < 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
@@ -200,6 +202,19 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 } else {
                     // Il campo prezzo di partenza è vuoto... Gestire
                 }
+                System.out.println("titoloProdotto: " + titoloProdotto);
+                System.out.println("tipologiaSelezionata: " + tipologiaSelezionata);
+                System.out.println("descrizione: " + descrizione);
+                System.out.println("base64Image: " + base64Image.length());
+                System.out.println("categoriaSelezionata: " + categoriaSelezionata);
+                System.out.println("paroleChiave: " + paroleChiave);
+                System.out.println("statoAsta: " + statoAsta);
+                System.out.println("dataScadenzaString: " + dataScadenzaString);
+                System.out.println("prezzoInizialeBD: " + prezzoInizialeBD);
+                System.out.println("prezzoBaseAstaBD: " + prezzoBaseAstaBD);
+                System.out.println("importoDecrementoBD: " + importoDecrementoBD);
+                System.out.println("nickname: " + nickname);
+                System.out.println("timerInSecondi: " + timerInSecondi);
                 performCreaAstaHttpRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaString, prezzoInizialeBD, prezzoBaseAstaBD, importoDecrementoBD, nickname, timerInSecondi);
             }
         });
