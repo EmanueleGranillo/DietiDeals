@@ -58,7 +58,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteTF);
             productImage = (ImageView) convertView.findViewById(R.id.imageProduct);
             titolo.setText(aste.get(position).getNomeProdotto());
-            // data.setText(aste.get(position).getDataFineAstaTempoFisso()); problemi con il parse, poi si vede
+//            data.setText(aste.get(position).getDataScadenzaTF();
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
