@@ -1,6 +1,7 @@
 package com.example.dietideals24.customs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dietideals24.activities.InformazioniAstaActivity;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.R;
 
@@ -54,7 +56,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView titolo = (TextView) convertView.findViewById(R.id.titleTF);
             TextView data = (TextView) convertView.findViewById(R.id.expirationTextViewValueTF);
             TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteTF);
-            ImageView productImage = (ImageView) convertView.findViewById(R.id.imageProduct);
+            productImage = (ImageView) convertView.findViewById(R.id.imageProduct);
             titolo.setText(aste.get(position).getNomeProdotto());
             // data.setText(aste.get(position).getDataFineAstaTempoFisso()); problemi con il parse, poi si vede
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
@@ -78,7 +80,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteIng);
             TextView tempoRimanente = (TextView) convertView.findViewById(R.id.timeLeftValueIng);
             TextView sogliaRialzo = (TextView) convertView.findViewById(R.id.sogliaRialzoValueIng);
-            ImageView productImage = (ImageView) convertView.findViewById(R.id.imageProductIng);
+            productImage = (ImageView) convertView.findViewById(R.id.imageProductIng);
             titolo.setText(aste.get(position).getNomeProdotto());
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             //tempoRimanente.setText(aste.get(position).getTimer().toString());
@@ -92,7 +94,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteRibasso);
             TextView tempoRimanente = (TextView) convertView.findViewById(R.id.decrementoTimerValueRibasso);
             TextView sogliaDecremento = (TextView) convertView.findViewById(R.id.sogliaDecrementoValueRibasso);
-            ImageView productImage = (ImageView) convertView.findViewById(R.id.imageProductRibasso);
+            productImage = (ImageView) convertView.findViewById(R.id.imageProductRibasso);
             titolo.setText(aste.get(position).getNomeProdotto());
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             //tempoRimanente.setText(aste.get(position).getTimer().toString());
@@ -101,6 +103,15 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
 
         }
+
+        productImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToInformazioniAsta = new Intent(context, InformazioniAstaActivity.class);
+                goToInformazioniAsta.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Add this line
+                context.startActivity(goToInformazioniAsta);
+            }
+        });
 
         return convertView;
     }
