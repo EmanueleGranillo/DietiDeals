@@ -11,7 +11,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.dietideals24.R;
-import com.example.dietideals24.connection.CreateAstaRequest;
+import com.example.dietideals24.connection.CreateAstaIngRequest;
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.RetrofitClient;
 
@@ -154,6 +154,15 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaIngleseActivity.this, CreaAstaPT1Activity.class);
                 goToCreateAstaPT1.putExtra("tipo", tipo);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
+                goToCreateAstaPT1.putExtra("tipo", tipo);
+                goToCreateAstaPT1.putExtra("base64Image", base64Image);
+                goToCreateAstaPT1.putExtra("titoloProdotto", titoloProdotto);
+                goToCreateAstaPT1.putExtra("descrizione", descrizione);
+                goToCreateAstaPT1.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+                //goToCreateAstaPT1.putExtra("tipologiaPosition", tipologiaPosition);
+                goToCreateAstaPT1.putExtra("categoriaSelezionata", categoriaSelezionata);
+                //goToCreateAstaPT1.putExtra("categoriaPosition", categoriaPosition);
+                goToCreateAstaPT1.putExtra("paroleChiave", paroleChiave);
                 startActivity(goToCreateAstaPT1);
             }
         });
@@ -208,8 +217,8 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         if(base64Image == null){
             base64Image = "";
         }
-        CreateAstaRequest createAstaRequest = new CreateAstaRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, offertaAttuale, sogliaSegreta, creatore, timerInSecondi);
-        Call<ResponseBody> call = apiService.createAstatf(createAstaRequest);
+        CreateAstaIngRequest createAstaRequest = new CreateAstaIngRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, offertaAttuale, sogliaSegreta, creatore, timerInSecondi);
+        Call<ResponseBody> call = apiService.createAstaIng(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

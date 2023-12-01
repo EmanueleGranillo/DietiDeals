@@ -12,16 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.dietideals24.R;
-import com.example.dietideals24.connection.CreateAstaRequest;
+import com.example.dietideals24.connection.CreateAstaTFRequest;
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.RetrofitClient;
 
 
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import okhttp3.ResponseBody;
@@ -160,11 +157,12 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         });
     }
 
-    private void performCreaAstaHttpRequest(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, String creatore) {
+    private void performCreaAstaHttpRequest(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata,
+                                            String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, String creatore) {
         if(base64Image.isEmpty()){
             base64Image = "";
         }
-        CreateAstaRequest createAstaRequest = new CreateAstaRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, offertaAttuale, sogliaSegreta, creatore);
+        CreateAstaTFRequest createAstaRequest = new CreateAstaTFRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, offertaAttuale, sogliaSegreta, creatore);
         Call<ResponseBody> call = apiService.createAstatf(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -187,4 +185,45 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
     }
 
 
+
+    /*
+    public void formattedDate() {
+        // Modello di formato della data senza ora, minuto, secondo e millisecondi
+        String inputPattern = "yyyy-MM-dd";
+
+        try {
+            // Creazione di un oggetto SimpleDateFormat con il modello di formato
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat(inputPattern);
+
+            // Eseguire il parsing della stringa in un oggetto Date senza ora, minuto, secondo e millisecondi
+            Date parsedDate = inputDateFormat.parse(selectedDateString);
+
+            // Creare un nuovo modello di formato con ora, minuto, secondo e millisecondi
+            String outputPattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS";
+
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat(outputPattern);
+
+            // Formattare la data nel nuovo modello di formato
+            String dataFormatoSQL = outputDateFormat.format(parsedDate);
+
+            // Modello di formato della data
+            String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS";
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+
+            // Eseguire il parsing della stringa in un oggetto Date
+            selectedDate = dateFormat.parse(dataFormatoSQL);
+
+            // Output della data parsata
+            System.out.println("Data parsata: " + parsedDate);
+
+        } catch (ParseException e) {
+            // Gestione delle eccezioni nel caso in cui il parsing fallisca
+            e.printStackTrace();
+        }
+    }*/
+
+
 }
+
+

@@ -85,7 +85,18 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             //tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaRialzo.setText(aste.get(position).getSogliaRialzoMinima().toString() + "$");
-            //productImage.setImageResource(productsImages[position]);
+
+            // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
+            if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
+                imageBase64 = aste.get(position).getFotoProdotto();
+                byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                productImage.setImageBitmap(decodedByte);
+            } else {
+                // Immagine di fallback o gestisci la situazione come desideri
+                productImage.setImageResource(R.drawable.shopping_bag);
+            }
+
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
         }
         if(aste.get(position).getTipologia().equals("asta al ribasso")){
@@ -99,7 +110,18 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "$");
             //tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "$");
-            //productImage.setImageResource(productsImages[position]);
+
+            // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
+            if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
+                imageBase64 = aste.get(position).getFotoProdotto();
+                byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                productImage.setImageBitmap(decodedByte);
+            } else {
+                // Immagine di fallback o gestisci la situazione come desideri
+                productImage.setImageResource(R.drawable.shopping_bag);
+            }
+
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
 
         }

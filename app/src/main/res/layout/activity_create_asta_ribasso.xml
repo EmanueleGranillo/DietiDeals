@@ -156,7 +156,8 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="140dp"
         android:backgroundTint="#00CC66"
-        android:text="Crea" />
+        android:text="Crea"
+        android:inputType="numberDecimal" />
 
 
 </RelativeLayout>

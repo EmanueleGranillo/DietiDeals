@@ -11,7 +11,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.dietideals24.R;
-import com.example.dietideals24.connection.CreateAstaRequest;
+import com.example.dietideals24.connection.CreateAstaRibassoRequest;
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.RetrofitClient;
 
@@ -206,12 +206,13 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     }
 
 
+
     private void performCreaAstaHttpRequest(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal prezzoBaseAsta, BigDecimal importoDecremento, String creatore, long timerInSecondi) {
         if(base64Image == null){
             base64Image = "";
         }
-        CreateAstaRequest createAstaRequest = new CreateAstaRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, prezzoBaseAsta, importoDecremento, creatore, timerInSecondi);
-        Call<ResponseBody> call = apiService.createAstatf(createAstaRequest);
+        CreateAstaRibassoRequest createAstaRequest = new CreateAstaRibassoRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, prezzoBaseAsta, importoDecremento, creatore, timerInSecondi);
+        Call<ResponseBody> call = apiService.createAstaRibasso(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -231,8 +232,6 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
 

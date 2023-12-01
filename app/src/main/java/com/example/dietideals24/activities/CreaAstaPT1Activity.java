@@ -107,7 +107,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         Spinner spinnerTipologia = findViewById(R.id.spinnerTipologiaType);
 
         // Crea un ArrayAdapter usando un array di valori
-        String[] valori = {"asta a tempo fisso", "asta all'inglese", "asta al ribasso"};
+        String[] valori = {"asta a tempo fisso", "asta inglese", "asta al ribasso"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, valori);
 
         // Specifica il layout da utilizzare quando la lista degli elementi appare
@@ -198,12 +198,12 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
                     goToCreateAstaTF.putExtra("paroleChiave", paroleChiave);
                     goToCreateAstaTF.putExtra("descrizione", descrizione);
                     goToCreateAstaTF.putExtra("tipologiaSelezionata", tipologiaSelezionata);
-                    goToCreateAstaTF.putExtra("tipologiaPosition", tipologiaPosition);
-                    goToCreateAstaTF.putExtra("categoriaPosition", categoriaPosition);
+                    //goToCreateAstaTF.putExtra("tipologiaPosition", tipologiaPosition);
+                    //goToCreateAstaTF.putExtra("categoriaPosition", categoriaPosition);
                     startActivity(goToCreateAstaTF);
                 }
 
-                if (tipologiaSelezionata.equals("asta all'inglese")) {
+                if (tipologiaSelezionata.equals("asta inglese")) {
                     Intent goToCreateAstaInglese = new Intent(CreaAstaPT1Activity.this, CreaAstaIngleseActivity.class);
                     goToCreateAstaInglese.putExtra("nickname", nickname);
                     goToCreateAstaInglese.putExtra("tipo", tipo);

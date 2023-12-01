@@ -1,8 +1,5 @@
 package com.example.dietideals24.connection;
 
-import android.app.Notification;
-import android.provider.ContactsContract;
-
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.models.Notifica;
 import com.example.dietideals24.models.Profilo;
@@ -11,7 +8,6 @@ import com.example.dietideals24.models.RegisterCheck;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -50,13 +46,13 @@ public interface MyApiService {
     Call<ArrayList<Notifica>> getNotifiche(@Body NicknameRequest request);
 
     @POST("/create_asta_tf/")
-    Call<ResponseBody> createAstatf(@Body CreateAstaRequest request);
+    Call<ResponseBody> createAstatf(@Body CreateAstaTFRequest request);
 
     @POST("/create_asta_ing/")
-    Call<ResponseBody> createAstaIng(@Body CreateAstaRequest request);
+    Call<ResponseBody> createAstaIng(@Body CreateAstaIngRequest request);
 
     @POST("/create_asta_ribasso/")
-    Call<ResponseBody> createAstaRibasso(@Body CreateAstaRequest request);
+    Call<ResponseBody> createAstaRibasso(@Body CreateAstaRibassoRequest request);
 
     @POST("/get_aste_per_ricerca/")
     Call<ArrayList<Asta>> getAstePerRicerca(@Body SearchRequest request);
