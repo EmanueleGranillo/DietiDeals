@@ -80,13 +80,13 @@ public class NotificationsActivity extends AppCompatActivity {
     }
 
     public void setNotificheALette(){
-        NicknameRequest nicknameRequest = new NicknameRequest(nickname);
-        Call<Void> call = apiService.setNotificheALette(nicknameRequest);
+        Call<Void> call = apiService.setNotificheALette(nickname);
         call.enqueue(new Callback<Void>(){
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(NotificationsActivity.this, "appoooo", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(NotificationsActivity.this, nickname+" appoooo", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(NotificationsActivity.this, "male male", Toast.LENGTH_SHORT).show();
                 }
@@ -98,8 +98,7 @@ public class NotificationsActivity extends AppCompatActivity {
     }
 
     public void recuperaNotifiche(){
-        NicknameRequest nicknameRequest = new NicknameRequest(nickname);
-        Call<ArrayList<Notifica>> call = apiService.getNotifiche(nicknameRequest);
+        Call<ArrayList<Notifica>> call = apiService.getNotifiche(nickname);
         call.enqueue(new Callback<ArrayList<Notifica>>() {
             @Override
             public void onResponse(Call<ArrayList<Notifica>> call, Response<ArrayList<Notifica>> response) {

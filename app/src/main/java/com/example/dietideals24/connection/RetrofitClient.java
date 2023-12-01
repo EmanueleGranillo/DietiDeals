@@ -4,15 +4,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    private static final String BASE_URL = "https://b72a-35-237-62-173.ngrok.io";
-=======
-    private static final String BASE_URL = "https://0468-35-237-62-173.ngrok.io";
->>>>>>> Stashed changes
-=======
-    private static final String BASE_URL = "https://234e-35-245-207-150.ngrok.io";
->>>>>>> Stashed changes
+    private static final String BASE_URL = "https://37f9-34-135-66-244.ngrok.io";
 
     private static Retrofit retrofit;
 

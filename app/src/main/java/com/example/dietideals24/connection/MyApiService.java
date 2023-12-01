@@ -33,17 +33,17 @@ public interface MyApiService {
     @POST("/get_aste_per_categoria/")
     Call<ArrayList<Asta>> getAstePerCategoria(@Body CategoriaRequest request);
 
-    @POST("/get_aste_per_venditore/")
-    Call<ArrayList<Asta>> getAstePerVenditore(@Body NicknameRequest request);
+    @POST("/get_aste_per_venditore/{nickname}")
+    Call<ArrayList<Asta>> getAstePerVenditore(@Path("nickname") String nickname);
 
-    @POST("/check_notifiche/")
-    Call<NumeroResponse> checkNotifications(@Body NicknameRequest request);
+    @POST("/check_notifiche/{nickname}")
+    Call<NumeroResponse> checkNotifications(@Path("nickname") String nickname);
 
-    @POST("/set_notifiche_a_lette/")
-    Call<Void> setNotificheALette(@Body NicknameRequest nickname);
+    @POST("/set_notifiche_a_lette/{nickname}")
+    Call<Void> setNotificheALette(@Path("nickname") String nickname);
 
-    @POST("/get_notifiche/")
-    Call<ArrayList<Notifica>> getNotifiche(@Body NicknameRequest request);
+    @POST("/get_notifiche/{nickname}")
+    Call<ArrayList<Notifica>> getNotifiche(@Path("nickname") String nickname);
 
     @POST("/create_asta_tf/")
     Call<ResponseBody> createAstatf(@Body CreateAstaTFRequest request);

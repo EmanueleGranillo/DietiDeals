@@ -21,6 +21,19 @@
         android:textSize="40dp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/profiloButtonHomeCompratore"
+        android:layout_width="88dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/notificheButtonHomeCompratore"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#F2F4F8"
+        android:gravity="center"
+        app:icon="@drawable/ic_profilo_foreground"
+        app:iconSize="70dp"
+        app:iconTint="@color/black" />
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/cercaAstaSearchView"
         android:layout_width="wrap_content"
@@ -166,18 +179,7 @@
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/profiloButtonHomeCompratore"
-        android:layout_width="88dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/notificheButtonHomeCompratore"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#F2F4F8"
-        android:gravity="center"
-        app:icon="@drawable/ic_profilo_foreground"
-        app:iconSize="70dp"
-        app:iconTint="@color/black" />
+
 
     <ListView
         android:id="@+id/customListViewProducts"

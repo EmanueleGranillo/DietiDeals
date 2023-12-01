@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.dietideals24.connection.NicknameRequest;
 import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.customs.CustomBaseAdapterProducts;
@@ -31,6 +33,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
 
     private String activity = "homepage";
     private MyApiService apiService;
+    ImageView pallinoImg;
     ListView listView;
     ArrayList<Asta> aste;
     CustomBaseAdapterProducts customBaseAdapterProducts;
@@ -46,6 +49,8 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_homepage_venditore);
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
+
+        pallinoImg = findViewById(R.id.pallinoButton);
         tutteLeAsteBtn = findViewById(R.id.buttonTutteLeAste);
         asteAttiveBtn = findViewById(R.id.buttonAsteAttive);
         asteConcluseBtn = findViewById(R.id.buttonAsteConcluse);
@@ -57,7 +62,48 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         tipo = getIntent().getStringExtra("tipo");
         nickname = getIntent().getStringExtra("nickname");
         aste = new ArrayList<Asta>();
-        riempiListaPerVenditore(nickname);
+        pallinoImg.setVisibility(View.INVISIBLE);
+
+        controllaNotifiche();
+
+        riempiListaPerVenditore();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         profiloBtn.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +143,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
                 setWhite();
                 tutteLeAsteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 tutteLeAsteBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaPerVenditore(nickname);
+                riempiListaPerVenditore();
             }
         });
 
@@ -107,7 +153,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
                 setWhite();
                 asteAttiveBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 asteAttiveBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaAttive(nickname);
+                riempiListaAttive();
             }
         });
 
@@ -117,7 +163,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
                 setWhite();
                 asteConcluseBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                 asteConcluseBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                riempiListaConcluse(nickname);
+                riempiListaConcluse();
             }
         });
 
@@ -125,9 +171,31 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
 
     }
 
-    public void riempiListaPerVenditore(String nickname){
-        NicknameRequest nicknameRequest = new NicknameRequest(nickname);
-        Call<ArrayList<Asta>> call = apiService.getAstePerVenditore(nicknameRequest);
+
+    private void controllaNotifiche() {
+        Call<NumeroResponse> call = apiService.checkNotifications(nickname);
+        call.enqueue(new Callback<NumeroResponse>() {
+            @Override
+            public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
+                if (response.isSuccessful()) {
+                    NumeroResponse num = response.body();
+                    if (num.getNumero() == 0) {
+                        pallinoImg.setVisibility(View.INVISIBLE);
+                    } else {
+                        pallinoImg.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<NumeroResponse> call, Throwable t) {
+                Toast.makeText(HomepageVenditoreActivity.this, "Connessione fallita per check notifiche", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public void riempiListaPerVenditore(){
+        Call<ArrayList<Asta>> call = apiService.getAstePerVenditore(nickname);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
@@ -156,9 +224,8 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         });
     }
 
-    public void riempiListaAttive(String nickname){
-        NicknameRequest nicknameRequest = new NicknameRequest(nickname);
-        Call<ArrayList<Asta>> call = apiService.getAstePerVenditore(nicknameRequest);
+    public void riempiListaAttive(){
+        Call<ArrayList<Asta>> call = apiService.getAstePerVenditore(nickname);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
@@ -188,9 +255,8 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         });
     }
 
-    public void riempiListaConcluse(String nickname){
-        NicknameRequest nicknameRequest = new NicknameRequest(nickname);
-        Call<ArrayList<Asta>> call = apiService.getAstePerVenditore(nicknameRequest);
+    public void riempiListaConcluse(){
+        Call<ArrayList<Asta>> call = apiService.getAstePerVenditore(nickname);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {

@@ -81,11 +81,36 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.customListViewProducts);
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
-
         pallinoImg.setVisibility(View.INVISIBLE);
-        controllaNotifiche(nickname);
+
+
+        controllaNotifiche();
 
         riempiLista();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         profiloBtn.setOnClickListener(new View.OnClickListener() {
@@ -251,9 +276,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
     }
 
-    private void controllaNotifiche(String nickname) {
-        NicknameRequest nicknameRequest = new NicknameRequest(nickname);
-        Call<NumeroResponse> call = apiService.checkNotifications(nicknameRequest);
+    private void controllaNotifiche() {
+        Call<NumeroResponse> call = apiService.checkNotifications(nickname);
         call.enqueue(new Callback<NumeroResponse>() {
             @Override
             public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
