@@ -69,16 +69,20 @@ public class RegisterActivity extends AppCompatActivity {
         compraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vendiBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#C2C2C2")));
-                compraBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                compraBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                vendiBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                compraBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                vendiBtn.setTextColor(Color.parseColor("#000000"));
             }
         });
 
         vendiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                compraBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#C2C2C2")));
-                vendiBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                vendiBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
+                compraBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                vendiBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                compraBtn.setTextColor(Color.parseColor("#000000"));
             }
         });
 
