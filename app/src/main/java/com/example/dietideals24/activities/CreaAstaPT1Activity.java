@@ -14,12 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dietideals24.R;
 import com.example.dietideals24.customs.ImageUtils;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import android.util.Base64;
+
 import android.graphics.Bitmap;
 
 public class CreaAstaPT1Activity extends AppCompatActivity {
@@ -37,20 +38,26 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
     private String tipo;
     private String base64String = "/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAP//////////////////////////////////////////////////////////////////////////////////////2wBDAf//////////////////////////////////////////////////////////////////////////////////////wAARCAB4APADASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAECA//EACcQAQACAAQGAgMBAQAAAAAAAAABESExUfASQWFxgZECobHR4cHx/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAGREBAQEAAwAAAAAAAAAAAAAAAAERIVFh/9oADAMBAAIRAxEAPwDAAAAAAAAAAAAKgIACgACgACKgigAhSgCCgKIIAoAAAAAAKgACggttREyDA6x8YhQcq6T9lTpPqXSywc6nSfSOtlg5Dd3yPAMDVR1j7K0xBAopBBZRQWqQsAaqCo6gyNYaL4gGCp0bxlanUGKnQqW66yTERMAxXWCurVTovDrPoGagpvhjWd+Co3h+AIit4R2VK6/gqdfFAqGPQx0AQ8SkyBMoi48hfDETFRM6EyxawMxZGsJzTh0lkFwqYLWJmZUZZZnNuo0KBBQA7jWUx9AR6Dv+JLjcSKol6HeQW0tOLSL+i+vr9z+hFx3/AEZn5Mixu4W3MsXI3xHExahwtylyYFgFSWloKWgBmqAEymKwuapafFpj4tiCSoCAARnjLblJEzGQOqUxxzzXjBZ0i5nvkmHPGU4kFW0AXIAiAuCL4x3/ABWSYSGt+GeYRUUpGkFoAEA0AVNWF3419ekhfuf8EX4wqWWCgAgAFXO8Y5nDpgicUgn/AAWZtKkAAUARQVIVKsLPTNMbyW5mZmO2/rMQj+X31Z5tZRv32jkwClhQulhSiIUqgzRTQCUKAKigAAAAJSgMUNoDI1RQMo1RQIjVKCRNLekb+igEzxkU3vUEUoAkAAUBBQBFAAAAAVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/9k=";
     private String descrizione;
-    private EditText editTextTitle;
-    private EditText editTextDescrizione;
-    private EditText editTextParoleChiavi;
+    private EditText titoloProdottoEditText;
+    private EditText descrizioneEditText;
+    private EditText keywordsEditText;
+    private TextView titoloErrorTextView;
+    private TextView descrizioneErrorTextView;
+    private TextView keywordsErrorTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_asta_pt1);
-        editTextTitle = findViewById(R.id.editTextTitle);
-        editTextDescrizione = findViewById(R.id.editTextDescrizione);
-        editTextParoleChiavi = findViewById(R.id.editTextParoleChiavi);
+        titoloProdottoEditText = findViewById(R.id.editTextTitle);
+        descrizioneEditText = findViewById(R.id.editTextDescrizione);
+        keywordsEditText = findViewById(R.id.editTextParoleChiavi);
         Button createAstaPT1 = findViewById(R.id.forwardButtonCreateAsta);
         Button backButtonHPVenditore = findViewById(R.id.backButtonHomePageVenditore);
         uploadImage = findViewById(R.id.uploadImageIcon);
+        titoloErrorTextView = findViewById(R.id.titoloAstaErrorTextView);
+        descrizioneErrorTextView = findViewById(R.id.descrizioneErrorTextView);
+        keywordsErrorTextView = findViewById(R.id.keywordsErrorEditText);
 
 
         activity = getIntent().getStringExtra("activity");
@@ -62,6 +69,17 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         } else if (activity.equals("creainglese")){
             nickname = getIntent().getStringExtra("nickname");
             tipo = getIntent().getStringExtra("tipo");
+            titoloProdotto = getIntent().getStringExtra("titoloProdotto");
+            base64Image = getIntent().getStringExtra("imageBase64");
+            categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
+            paroleChiave = getIntent().getStringExtra("paroleChiave");
+            descrizione = getIntent().getStringExtra("descrizione");
+            tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
+            tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", 0);
+            categoriaPosition = getIntent().getIntExtra("categoriaPosition", 0);
+            titoloProdottoEditText.setText(titoloProdotto);
+            descrizioneEditText.setText(descrizione);
+            keywordsEditText.setText(paroleChiave);
         } else if (activity.equals("creatempofisso")){
             nickname = getIntent().getStringExtra("nickname");
             tipo = getIntent().getStringExtra("tipo");
@@ -73,14 +91,25 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
             tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", 0);
             categoriaPosition = getIntent().getIntExtra("categoriaPosition", 0);
-            editTextTitle.setText(titoloProdotto);
-            editTextDescrizione.setText(descrizione);
-            editTextParoleChiavi.setText(paroleChiave);
+            titoloProdottoEditText.setText(titoloProdotto);
+            descrizioneEditText.setText(descrizione);
+            keywordsEditText.setText(paroleChiave);
         } else if (activity.equals("crearibasso")){
             nickname = getIntent().getStringExtra("nickname");
             tipo = getIntent().getStringExtra("tipo");
+            titoloProdotto = getIntent().getStringExtra("titoloProdotto");
+            base64Image = getIntent().getStringExtra("imageBase64");
+            categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
+            paroleChiave = getIntent().getStringExtra("paroleChiave");
+            descrizione = getIntent().getStringExtra("descrizione");
+            tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
+            tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", 0);
+            categoriaPosition = getIntent().getIntExtra("categoriaPosition", 0);
+            titoloProdottoEditText.setText(titoloProdotto);
+            descrizioneEditText.setText(descrizione);
+            keywordsEditText.setText(paroleChiave);
         }
-        
+
 
 
 
@@ -175,64 +204,67 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         createAstaPT1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                descrizioneErrorTextView.setText("");
+                titoloErrorTextView.setText("");
+                keywordsErrorTextView.setText("");
+                if(check()){
+                    if (tipologiaSelezionata.equals("asta a tempo fisso")) {
+                        titoloProdotto = titoloProdottoEditText.getText().toString().trim();
+                        descrizione = descrizioneEditText.getText().toString().trim();
+                        paroleChiave = keywordsEditText.getText().toString().trim();
 
-                if (tipologiaSelezionata.equals("asta a tempo fisso")) {
-                    titoloProdotto = editTextTitle.getText().toString().trim();
-                    descrizione = editTextDescrizione.getText().toString().trim();
-                    paroleChiave = editTextParoleChiavi.getText().toString().trim();
+                        Intent goToCreateAstaTF = new Intent(CreaAstaPT1Activity.this, CreaAstaTempoFissoActivity.class);
+                        goToCreateAstaTF.putExtra("nickname", nickname);
+                        goToCreateAstaTF.putExtra("tipo", tipo);
+                        goToCreateAstaTF.putExtra("titoloProdotto", titoloProdotto);
+                        goToCreateAstaTF.putExtra("imageBase64", base64String);
+                        goToCreateAstaTF.putExtra("categoriaSelezionata", categoriaSelezionata);
+                        goToCreateAstaTF.putExtra("paroleChiave", paroleChiave);
+                        goToCreateAstaTF.putExtra("descrizione", descrizione);
+                        goToCreateAstaTF.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+                        goToCreateAstaTF.putExtra("tipologiaPosition", tipologiaPosition);
+                        goToCreateAstaTF.putExtra("categoriaPosition", categoriaPosition);
+                        startActivity(goToCreateAstaTF);
+                    }
 
-                    Intent goToCreateAstaTF = new Intent(CreaAstaPT1Activity.this, CreaAstaTempoFissoActivity.class);
-                    goToCreateAstaTF.putExtra("nickname", nickname);
-                    goToCreateAstaTF.putExtra("tipo", tipo);
-                    goToCreateAstaTF.putExtra("titoloProdotto", titoloProdotto);
-                    goToCreateAstaTF.putExtra("imageBase64", base64String);
-                    goToCreateAstaTF.putExtra("categoriaSelezionata", categoriaSelezionata);
-                    goToCreateAstaTF.putExtra("paroleChiave", paroleChiave);
-                    goToCreateAstaTF.putExtra("descrizione", descrizione);
-                    goToCreateAstaTF.putExtra("tipologiaSelezionata", tipologiaSelezionata);
-                    goToCreateAstaTF.putExtra("tipologiaPosition", tipologiaPosition);
-                    goToCreateAstaTF.putExtra("categoriaPosition", categoriaPosition);
-                    startActivity(goToCreateAstaTF);
+                    if (tipologiaSelezionata.equals("asta inglese")) {
+                        titoloProdotto = titoloProdottoEditText.getText().toString().trim();
+                        descrizione = descrizioneEditText.getText().toString().trim();
+                        paroleChiave = keywordsEditText.getText().toString().trim();
+
+                        Intent goToCreateAstaInglese = new Intent(CreaAstaPT1Activity.this, CreaAstaIngleseActivity.class);
+                        goToCreateAstaInglese.putExtra("nickname", nickname);
+                        goToCreateAstaInglese.putExtra("tipo", tipo);
+                        goToCreateAstaInglese.putExtra("titoloProdotto", titoloProdotto);
+                        goToCreateAstaInglese.putExtra("imageBase64", base64String);
+                        goToCreateAstaInglese.putExtra("categoriaSelezionata", categoriaSelezionata);
+                        goToCreateAstaInglese.putExtra("paroleChiave", paroleChiave);
+                        goToCreateAstaInglese.putExtra("descrizione", descrizione);
+                        goToCreateAstaInglese.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+                        goToCreateAstaInglese.putExtra("tipologiaPosition", tipologiaPosition);
+                        goToCreateAstaInglese.putExtra("categoriaPosition", categoriaPosition);
+                        startActivity(goToCreateAstaInglese);
+                    }
+
+                    if (tipologiaSelezionata.equals("asta al ribasso")) {
+                        titoloProdotto = titoloProdottoEditText.getText().toString().trim();
+                        descrizione = descrizioneEditText.getText().toString().trim();
+                        paroleChiave = keywordsEditText.getText().toString().trim();
+
+                        Intent goToCreateAstaRibasso = new Intent(CreaAstaPT1Activity.this, CreaAstaRibassoActivity.class);
+                        goToCreateAstaRibasso.putExtra("nickname", nickname);
+                        goToCreateAstaRibasso.putExtra("tipo", tipo);
+                        goToCreateAstaRibasso.putExtra("titoloProdotto", titoloProdotto);
+                        goToCreateAstaRibasso.putExtra("imageBase64", base64String);
+                        goToCreateAstaRibasso.putExtra("categoriaSelezionata", categoriaSelezionata);
+                        goToCreateAstaRibasso.putExtra("paroleChiave", paroleChiave);
+                        goToCreateAstaRibasso.putExtra("descrizione", descrizione);
+                        goToCreateAstaRibasso.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+                        goToCreateAstaRibasso.putExtra("tipologiaPosition", tipologiaPosition);
+                        goToCreateAstaRibasso.putExtra("categoriaPosition", categoriaPosition);
+                        startActivity(goToCreateAstaRibasso);
+                    }
                 }
-
-                if (tipologiaSelezionata.equals("asta inglese")) {
-                    titoloProdotto = editTextTitle.getText().toString().trim();
-                    descrizione = editTextDescrizione.getText().toString().trim();
-                    paroleChiave = editTextParoleChiavi.getText().toString().trim();
-
-                    Intent goToCreateAstaInglese = new Intent(CreaAstaPT1Activity.this, CreaAstaIngleseActivity.class);
-                    goToCreateAstaInglese.putExtra("nickname", nickname);
-                    goToCreateAstaInglese.putExtra("tipo", tipo);
-                    goToCreateAstaInglese.putExtra("titoloProdotto", titoloProdotto);
-                    goToCreateAstaInglese.putExtra("imageBase64", base64String);
-                    goToCreateAstaInglese.putExtra("categoriaSelezionata", categoriaSelezionata);
-                    goToCreateAstaInglese.putExtra("paroleChiave", paroleChiave);
-                    goToCreateAstaInglese.putExtra("descrizione", descrizione);
-                    goToCreateAstaInglese.putExtra("tipologiaSelezionata", tipologiaSelezionata);
-                    goToCreateAstaInglese.putExtra("tipologiaPosition", tipologiaPosition);
-                    goToCreateAstaInglese.putExtra("categoriaPosition", categoriaPosition);
-                    startActivity(goToCreateAstaInglese);
-                }
-
-                if (tipologiaSelezionata.equals("asta al ribasso")) {
-                    titoloProdotto = editTextTitle.getText().toString().trim();
-                    descrizione = editTextDescrizione.getText().toString().trim();
-                    paroleChiave = editTextParoleChiavi.getText().toString().trim();
-
-                    Intent goToCreateAstaRibasso = new Intent(CreaAstaPT1Activity.this, CreaAstaRibassoActivity.class);
-                    goToCreateAstaRibasso.putExtra("nickname", nickname);
-                    goToCreateAstaRibasso.putExtra("tipo", tipo);
-                    goToCreateAstaRibasso.putExtra("titoloProdotto", titoloProdotto);
-                    goToCreateAstaRibasso.putExtra("imageBase64", base64String);
-                    goToCreateAstaRibasso.putExtra("categoriaSelezionata", categoriaSelezionata);
-                    goToCreateAstaRibasso.putExtra("paroleChiave", paroleChiave);
-                    goToCreateAstaRibasso.putExtra("descrizione", descrizione);
-                    goToCreateAstaRibasso.putExtra("tipologiaSelezionata", tipologiaSelezionata);
-                    goToCreateAstaRibasso.putExtra("tipologiaPosition", tipologiaPosition);
-                    goToCreateAstaRibasso.putExtra("categoriaPosition", categoriaPosition);
-                    startActivity(goToCreateAstaRibasso);
-                }
-
             }
         });
 
@@ -261,4 +293,24 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         base64String = ImageUtils.bitmapToBase64(imageBitmap);
     }
 
+    public boolean check(){
+        if(titoloProdottoEditText.getText().toString().isEmpty()){
+            titoloErrorTextView.setText("Inserisci il nome del prodotto/servizio");
+            return false;
+        }
+        // Controllo lunghezza campi
+        if(titoloProdottoEditText.getText().toString().length() > 50) {
+            titoloErrorTextView.setText("Nome troppo lungo");
+            return false;
+        }
+        if(descrizioneEditText.getText().toString().length() > 500){
+            descrizioneErrorTextView.setText("Descrizione troppo lunga! "+descrizioneEditText.getText().toString().length()+"/500");
+            return false;
+        }
+        if(keywordsEditText.getText().toString().length() > 100) {
+            keywordsErrorTextView.setText("Numero massimo di caratteri raggiunto! "+keywordsEditText.getText().toString().length()+"/500");
+            return false;
+        }
+        return true;
+    }
 }
