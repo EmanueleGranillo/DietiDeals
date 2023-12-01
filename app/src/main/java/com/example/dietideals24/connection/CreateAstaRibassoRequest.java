@@ -35,6 +35,9 @@ public class CreateAstaRibassoRequest {
     @SerializedName("offerta_attuale")
     private BigDecimal offertaAttuale;
 
+    @SerializedName("sogliaSegreta")
+    private BigDecimal sogliaMinimaSegreta;
+
     @SerializedName("importoDecremento")
     private BigDecimal importoDecremento;
 
@@ -56,8 +59,8 @@ public class CreateAstaRibassoRequest {
         this.dataScadenzaTF = dataScadenzaTF;
         this.prezzoIniziale = prezzoIniziale;
         this.offertaAttuale = offertaAttuale;
+        this.sogliaMinimaSegreta = new BigDecimal(1000);
         this.importoDecremento = importoDecremento;
-        //this.sogliaMinimaSegreta = sogliaMinimaSegreta;       da inserire successivamente nell xml e aggiornare qui
         this.creatore = creatore;
         this.resetTimer = resetTimer;
     }

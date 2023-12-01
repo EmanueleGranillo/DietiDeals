@@ -198,22 +198,46 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
                     goToCreateAstaTF.putExtra("paroleChiave", paroleChiave);
                     goToCreateAstaTF.putExtra("descrizione", descrizione);
                     goToCreateAstaTF.putExtra("tipologiaSelezionata", tipologiaSelezionata);
-                    //goToCreateAstaTF.putExtra("tipologiaPosition", tipologiaPosition);
-                    //goToCreateAstaTF.putExtra("categoriaPosition", categoriaPosition);
+                    goToCreateAstaTF.putExtra("tipologiaPosition", tipologiaPosition);
+                    goToCreateAstaTF.putExtra("categoriaPosition", categoriaPosition);
                     startActivity(goToCreateAstaTF);
                 }
 
                 if (tipologiaSelezionata.equals("asta inglese")) {
+                    titoloProdotto = editTextTitle.getText().toString().trim();
+                    descrizione = editTextDescrizione.getText().toString().trim();
+                    paroleChiave = editTextParoleChiavi.getText().toString().trim();
+
                     Intent goToCreateAstaInglese = new Intent(CreaAstaPT1Activity.this, CreaAstaIngleseActivity.class);
                     goToCreateAstaInglese.putExtra("nickname", nickname);
                     goToCreateAstaInglese.putExtra("tipo", tipo);
+                    goToCreateAstaInglese.putExtra("titoloProdotto", titoloProdotto);
+                    goToCreateAstaInglese.putExtra("imageBase64", base64String);
+                    goToCreateAstaInglese.putExtra("categoriaSelezionata", categoriaSelezionata);
+                    goToCreateAstaInglese.putExtra("paroleChiave", paroleChiave);
+                    goToCreateAstaInglese.putExtra("descrizione", descrizione);
+                    goToCreateAstaInglese.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+                    goToCreateAstaInglese.putExtra("tipologiaPosition", tipologiaPosition);
+                    goToCreateAstaInglese.putExtra("categoriaPosition", categoriaPosition);
                     startActivity(goToCreateAstaInglese);
                 }
 
                 if (tipologiaSelezionata.equals("asta al ribasso")) {
+                    titoloProdotto = editTextTitle.getText().toString().trim();
+                    descrizione = editTextDescrizione.getText().toString().trim();
+                    paroleChiave = editTextParoleChiavi.getText().toString().trim();
+
                     Intent goToCreateAstaRibasso = new Intent(CreaAstaPT1Activity.this, CreaAstaRibassoActivity.class);
                     goToCreateAstaRibasso.putExtra("nickname", nickname);
                     goToCreateAstaRibasso.putExtra("tipo", tipo);
+                    goToCreateAstaRibasso.putExtra("titoloProdotto", titoloProdotto);
+                    goToCreateAstaRibasso.putExtra("imageBase64", base64String);
+                    goToCreateAstaRibasso.putExtra("categoriaSelezionata", categoriaSelezionata);
+                    goToCreateAstaRibasso.putExtra("paroleChiave", paroleChiave);
+                    goToCreateAstaRibasso.putExtra("descrizione", descrizione);
+                    goToCreateAstaRibasso.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+                    goToCreateAstaRibasso.putExtra("tipologiaPosition", tipologiaPosition);
+                    goToCreateAstaRibasso.putExtra("categoriaPosition", categoriaPosition);
                     startActivity(goToCreateAstaRibasso);
                 }
 
