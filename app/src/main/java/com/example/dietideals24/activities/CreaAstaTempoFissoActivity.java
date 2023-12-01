@@ -28,63 +28,47 @@ import retrofit2.Response;
 
 public class CreaAstaTempoFissoActivity extends AppCompatActivity {
 
-    private String activity = "creatempofisso";
     private MyApiService apiService;
     private DatePicker datePicker;
-    private TextView textViewSelectedDate;
-    private String titoloProdotto;
-    private String tipologiaSelezionata;
-    private String categoriaSelezionata;
-    private String paroleChiave;
-    private String nickname;
-    private String tipo;
-    private String base64Image;
-    private String descrizione;
-    private String selectedDate;    //anno-mese-giorno (2024-05-24)
-    private EditText editTextInitialPrice;
-    private EditText editTextSogliaMinima;
-    private int statoAsta;
-    private int tipologiaPosition;
-    private int categoriaPosition;
+    private String activity = "creatempofisso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, selectedDate = "";
+    private TextView textViewSelectedDate, selezionaDataErrorTextView, prezzoErrorTextView, sogliaMinimaErrorTextView;
+    private EditText prezzoInizialeEditText, sogliaMinimaEditText;
+    private int statoAsta, tipologiaPosition, categoriaPosition;
+    private Button creaAstaTFButton, backButton;
+    private BigDecimal prezzoInizialeBD, offertaAttualeBD, sogliaMinimaSegretaBD;
 
-    // private Date date;
-    String prezzoIniziale;
-    String offertaAttuale;
-    String sogliaMinimaSegreta;
-    BigDecimal prezzoInizialeBD;
-    BigDecimal offertaAttualeBD;
-    BigDecimal sogliaMinimaSegretaBD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_asta_tf);
-
-        nickname = getIntent().getStringExtra("nickname");
-        tipo = getIntent().getStringExtra("tipo");
-
-        Button createButtonAstaTF = findViewById(R.id.creaButtonAstaTF);
-        Button backButtonAstaTF = findViewById(R.id.backButtonCreateAstaTF);
-        // Inizializza Retrofit
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
+        creaAstaTFButton = findViewById(R.id.creaAstaTFButton);
+        backButton = findViewById(R.id.backButtonCreateAstaTF);
         DatePicker datePicker = findViewById(R.id.datePicker);
         Calendar calendar = Calendar.getInstance();     // Imposta il limite inferiore del DatePicker alla data corrente
         datePicker.setMinDate(calendar.getTimeInMillis());
-        textViewSelectedDate = findViewById(R.id.textViewSelectedDate);
-        editTextInitialPrice = findViewById(R.id.editTextPrice);
-        editTextSogliaMinima = findViewById(R.id.editTextSogliaMinima);
+        textViewSelectedDate = findViewById(R.id.selezionaDataTextView);
+        prezzoInizialeEditText = findViewById(R.id.prezzoEditText);
+        sogliaMinimaEditText = findViewById(R.id.sogliaMinimaEditText);
+        selezionaDataErrorTextView = findViewById(R.id.selectedDateErrorTextView);
+        prezzoErrorTextView = findViewById(R.id.prezzoErrorTextView);
+        sogliaMinimaErrorTextView = findViewById(R.id.sogliaMinimaErrorTextView);
 
 
+        // GET EXTRAS
         nickname = getIntent().getStringExtra("nickname");
+        tipo = getIntent().getStringExtra("tipo");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
         base64Image = getIntent().getStringExtra("imageBase64");
-        categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
         paroleChiave = getIntent().getStringExtra("paroleChiave");
         descrizione = getIntent().getStringExtra("descrizione");
         tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
         tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", tipologiaPosition);
+        categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
         categoriaPosition = getIntent().getIntExtra("categoriaPosition", categoriaPosition);
+
 
         // Aggiungi un listener per gestire la selezione della data
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -97,8 +81,8 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         }
 
 
-
-        backButtonAstaTF.setOnClickListener(new View.OnClickListener() {
+        // LISTENERS
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaTempoFissoActivity.this, CreaAstaPT1Activity.class);
@@ -118,48 +102,68 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         });
 
 
-        createButtonAstaTF.setOnClickListener(new View.OnClickListener() {
+        creaAstaTFButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToHomePageVenditore = new Intent(CreaAstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
-                goToHomePageVenditore.putExtra("nickname", nickname);
-                goToHomePageVenditore.putExtra("tipo", tipo);
-                startActivity(goToHomePageVenditore);
-                prezzoIniziale = editTextInitialPrice.getText().toString().trim();
-                offertaAttuale = prezzoIniziale;
-                sogliaMinimaSegreta = editTextSogliaMinima.getText().toString().trim();
-                // Verifica se il testo è valido come numero decimale
-                if (!prezzoIniziale.isEmpty()) {
-                    try {
-                        prezzoInizialeBD = new BigDecimal(prezzoIniziale);
-                    } catch (NumberFormatException e) {
-                        // Il testo non è un numero decimale valido
-                        e.printStackTrace(); // Tratta l'errore di conversione come necessario
-                    }
-                } else {
-                    // Il campo prezzo di partenza è vuoto... Gestire
+                prezzoErrorTextView.setText("");
+                sogliaMinimaErrorTextView.setText("");
+                selezionaDataErrorTextView.setText("");
+                if (check()) {
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoInizialeBD, offertaAttualeBD, sogliaMinimaSegretaBD, nickname);
+                    Intent goToHomePageVenditore = new Intent(CreaAstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
+                    goToHomePageVenditore.putExtra("nickname", nickname);
+                    goToHomePageVenditore.putExtra("tipo", tipo);
+                    startActivity(goToHomePageVenditore);
                 }
-
-                offertaAttualeBD = prezzoInizialeBD;
-
-                if (!sogliaMinimaSegreta.isEmpty()) {
-                    try {
-                        sogliaMinimaSegretaBD = new BigDecimal(sogliaMinimaSegreta);
-                    } catch (NumberFormatException e) {
-                        // Il testo non è un numero decimale valido
-                        e.printStackTrace(); // Tratta l'errore di conversione come necessario
-                    }
-                } else {
-                    // Il campo prezzo di partenza è vuoto... Gestire
-                }
-                performCreaAstaHttpRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoInizialeBD, offertaAttualeBD, sogliaMinimaSegretaBD, nickname);
             }
         });
     }
 
-    private void performCreaAstaHttpRequest(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata,
-                                            String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, String creatore) {
-        if(base64Image.isEmpty()){
+    public boolean check() {
+        //Controllo campi vuoti
+        if (selectedDate.isEmpty()) {
+            selezionaDataErrorTextView.setText("Devi selezionare una data!");
+            return false;
+        }
+        if (prezzoInizialeEditText.getText().toString().isEmpty()) {
+            prezzoErrorTextView.setText("Devi inserire il prezzo iniziale!");
+            return false;
+        } else {
+            try {
+                prezzoInizialeBD = new BigDecimal(prezzoInizialeEditText.getText().toString());
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        if (sogliaMinimaEditText.getText().toString().isEmpty()) {
+            sogliaMinimaErrorTextView.setText("Devi inserire una soglia minima!");
+            return false;
+        } else {
+            try {
+                sogliaMinimaSegretaBD = new BigDecimal(sogliaMinimaEditText.getText().toString());
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        offertaAttualeBD = prezzoInizialeBD;
+        //Controllo lunghezza campi
+        if (prezzoInizialeEditText.getText().toString().length() > 15) {
+            prezzoErrorTextView.setText("Inserisci un prezzo più piccolo!");
+            return false;
+        }
+        if (sogliaMinimaEditText.getText().toString().length() > 15) {
+            sogliaMinimaErrorTextView.setText("Inserisci una soglia più bassa!");
+            return false;
+        }
+        if (sogliaMinimaSegretaBD.compareTo(prezzoInizialeBD) < 0) {
+            sogliaMinimaErrorTextView.setText("La soglia minima deve essere maggiore del prezzo iniziale!");
+            return false;
+        }
+        return true;
+    }
+
+    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, String creatore) {
+        if (base64Image.isEmpty()) {
             base64Image = "";
         }
         CreateAstaTFRequest createAstaRequest = new CreateAstaTFRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, offertaAttuale, sogliaSegreta, creatore);
@@ -183,47 +187,4 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-    /*
-    public void formattedDate() {
-        // Modello di formato della data senza ora, minuto, secondo e millisecondi
-        String inputPattern = "yyyy-MM-dd";
-
-        try {
-            // Creazione di un oggetto SimpleDateFormat con il modello di formato
-            SimpleDateFormat inputDateFormat = new SimpleDateFormat(inputPattern);
-
-            // Eseguire il parsing della stringa in un oggetto Date senza ora, minuto, secondo e millisecondi
-            Date parsedDate = inputDateFormat.parse(selectedDateString);
-
-            // Creare un nuovo modello di formato con ora, minuto, secondo e millisecondi
-            String outputPattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS";
-
-            SimpleDateFormat outputDateFormat = new SimpleDateFormat(outputPattern);
-
-            // Formattare la data nel nuovo modello di formato
-            String dataFormatoSQL = outputDateFormat.format(parsedDate);
-
-            // Modello di formato della data
-            String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS";
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-
-            // Eseguire il parsing della stringa in un oggetto Date
-            selectedDate = dateFormat.parse(dataFormatoSQL);
-
-            // Output della data parsata
-            System.out.println("Data parsata: " + parsedDate);
-
-        } catch (ParseException e) {
-            // Gestione delle eccezioni nel caso in cui il parsing fallisca
-            e.printStackTrace();
-        }
-    }*/
-
-
 }
-
-

@@ -37,10 +37,10 @@
         android:textSize="24dp" />
 
     <EditText
-        android:id="@+id/editTextPrezzoDiPartenza"
+        android:id="@+id/prezzoInizialeEditText"
         android:layout_width="359dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewTimerInsertedRibasso"
+        android:layout_below="@id/timerInsertedTextView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="25dp"
@@ -66,7 +66,7 @@
         android:textSize="18dp" />
 
     <TextView
-        android:id="@+id/textViewTimerInsertedRibasso"
+        android:id="@+id/timerInsertedTextView"
         android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/numberPickerHours"
@@ -135,10 +135,10 @@
         android:gravity="center" />
 
     <EditText
-        android:id="@+id/editTextSogliaDecremento"
+        android:id="@+id/decrementoEditText"
         android:layout_width="359dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPrezzoDiPartenza"
+        android:layout_below="@id/prezzoInizialeEditText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="26dp"
@@ -151,7 +151,7 @@
         android:id="@+id/creaButtonAstaRibasso"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_below="@id/editTextSogliaDecremento"
+        android:layout_below="@id/decrementoEditText"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="33dp"
         android:layout_marginTop="30dp"
@@ -159,6 +159,42 @@
         android:backgroundTint="#00CC66"
         android:text="Crea"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timerInsertedErrorTextView"
+        android:layout_below="@+id/timerInsertedTextView"
+        android:layout_alignStart="@+id/timerInsertedTextView"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/prezzoInizialeErrorTextView"
+        android:layout_below="@+id/prezzoInizialeEditText"
+        android:layout_alignStart="@+id/prezzoInizialeEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/decrementoErrorTextView"
+        android:layout_below="@+id/decrementoEditText"
+        android:layout_alignStart="@+id/decrementoEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
 
 
 </RelativeLayout>

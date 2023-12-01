@@ -30,6 +30,8 @@ import retrofit2.Response;
 
 public class CreaAstaRibassoActivity extends AppCompatActivity {
     private MyApiService apiService;
+    private String activity = "crearibasso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione;
+    private TextView timerInsertedErrorTextView, prezzoInizialeErrorTextView, decrementoErrorTextView;
     NumberPicker numberPickerHours;
     NumberPicker numberPickerMinutes;
     TextView textViewTimerInsertedRibasso;
@@ -39,6 +41,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     long timerInSecondi;
     Date dataScadenza;
     String dataScadenzaString;
+    private Button backButton, createAstaRibassoButton;
     private int statoAsta;
     private String titoloProdotto, base64Image, categoriaSelezionata, paroleChiave, descrizione, tipologiaSelezionata;
     private EditText editTextBaseAsta;
@@ -55,16 +58,18 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_asta_ribasso);
-
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
-        Button backButtonAstaRibasso = findViewById(R.id.backButtonCreateAstaRibasso);
-        Button createButtonAstaRibasso = findViewById(R.id.creaButtonAstaRibasso);
+        backButton = findViewById(R.id.backButtonCreateAstaRibasso);
+        createAstaRibassoButton = findViewById(R.id.creaButtonAstaRibasso);
         numberPickerHours = findViewById(R.id.numberPickerHours);
         numberPickerMinutes = findViewById(R.id.numberPickerMinutes);
-        textViewTimerInsertedRibasso = findViewById(R.id.textViewTimerInsertedRibasso);
-        editTextBaseAsta = findViewById(R.id.editTextPrezzoDiPartenza);
-        editTextimportoDecremento = findViewById(R.id.editTextSogliaDecremento);
+        textViewTimerInsertedRibasso = findViewById(R.id.timerInsertedTextView);
+        editTextBaseAsta = findViewById(R.id.prezzoInizialeEditText);
+        editTextimportoDecremento = findViewById(R.id.decrementoEditText);
+        timerInsertedErrorTextView = findViewById(R.id.timerInsertedErrorTextView);
+        prezzoInizialeErrorTextView = findViewById(R.id.prezzoInizialeErrorTextView);
+        decrementoErrorTextView = findViewById(R.id.decrementoErrorTextView);
 
         numberPickerHours.setMinValue(0);
         numberPickerHours.setMaxValue(23);
@@ -74,7 +79,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         timerInsertedString = (String.format("0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
 
 
-
+        // GET EXTRAS
         nickname = getIntent().getStringExtra("nickname");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
         base64Image = getIntent().getStringExtra("imageBase64");
@@ -85,11 +90,6 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
         tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", tipologiaPosition);
         categoriaPosition = getIntent().getIntExtra("categoriaPosition", categoriaPosition);
-
-
-
-
-
 
 
         // Aggiungi un listener ai NumberPicker per rilevare i cambiamenti
@@ -157,25 +157,40 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
 
 
-        backButtonAstaRibasso.setOnClickListener(new View.OnClickListener() {
+        // LISTENERS
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaRibassoActivity.this, CreaAstaPT1Activity.class);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
                 goToCreateAstaPT1.putExtra("tipo", tipo);
+                goToCreateAstaPT1.putExtra("activity", activity);
+                goToCreateAstaPT1.putExtra("base64Image", base64Image);
+                goToCreateAstaPT1.putExtra("titoloProdotto", titoloProdotto);
+                goToCreateAstaPT1.putExtra("descrizione", descrizione);
+                goToCreateAstaPT1.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+                goToCreateAstaPT1.putExtra("tipologiaPosition", tipologiaPosition);
+                goToCreateAstaPT1.putExtra("categoriaSelezionata", categoriaSelezionata);
+                goToCreateAstaPT1.putExtra("categoriaPosition", categoriaPosition);
+                goToCreateAstaPT1.putExtra("paroleChiave", paroleChiave);
                 startActivity(goToCreateAstaPT1);
             }
         });
 
-
-
-        createButtonAstaRibasso.setOnClickListener(new View.OnClickListener() {
+        createAstaRibassoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToHomePageVenditore = new Intent(CreaAstaRibassoActivity.this, HomepageVenditoreActivity.class);
-                goToHomePageVenditore.putExtra("nickname", nickname);
-                goToHomePageVenditore.putExtra("tipo", tipo);
-                startActivity(goToHomePageVenditore);
+                timerInsertedErrorTextView.setText("");
+                prezzoInizialeErrorTextView.setText("");
+                decrementoErrorTextView.setText("");
+                if(check()){
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaString, prezzoInizialeBD, prezzoBaseAstaBD, importoDecrementoBD, nickname, timerInSecondi);
+                    Intent goToHomePageVenditore = new Intent(CreaAstaRibassoActivity.this, HomepageVenditoreActivity.class);
+                    goToHomePageVenditore.putExtra("nickname", nickname);
+                    goToHomePageVenditore.putExtra("tipo", tipo);
+                    startActivity(goToHomePageVenditore);
+                }
+
 
                 prezzoBaseAsta = editTextBaseAsta.getText().toString().trim();
                 prezzoIniziale = prezzoBaseAsta;
@@ -204,27 +219,13 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 } else {
                     // Il campo prezzo di partenza è vuoto... Gestire
                 }
-                System.out.println("titoloProdotto: " + titoloProdotto);
-                System.out.println("tipologiaSelezionata: " + tipologiaSelezionata);
-                System.out.println("descrizione: " + descrizione);
-                System.out.println("base64Image: " + base64Image.length());
-                System.out.println("categoriaSelezionata: " + categoriaSelezionata);
-                System.out.println("paroleChiave: " + paroleChiave);
-                System.out.println("statoAsta: " + statoAsta);
-                System.out.println("dataScadenzaString: " + dataScadenzaString);
-                System.out.println("prezzoInizialeBD: " + prezzoInizialeBD);
-                System.out.println("prezzoBaseAstaBD: " + prezzoBaseAstaBD);
-                System.out.println("importoDecrementoBD: " + importoDecrementoBD);
-                System.out.println("nickname: " + nickname);
-                System.out.println("timerInSecondi: " + timerInSecondi);
-                performCreaAstaHttpRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaString, prezzoInizialeBD, prezzoBaseAstaBD, importoDecrementoBD, nickname, timerInSecondi);
             }
         });
     }
 
 
 
-    private void performCreaAstaHttpRequest(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal prezzoBaseAsta, BigDecimal importoDecremento, String creatore, long timerInSecondi) {
+    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal prezzoBaseAsta, BigDecimal importoDecremento, String creatore, long timerInSecondi) {
         if(base64Image == null){
             base64Image = "";
         }
@@ -250,8 +251,6 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         });
     }
 
-
-
     public long convertiStringaInSecondi(String tempoStringa) {
         SimpleDateFormat formatoTimer = new SimpleDateFormat("HH:mm:ss");
 
@@ -262,7 +261,6 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
     }
-
 
     public void aggiornaDataScadenza(int timerSeconds){
         Calendar calendar = Calendar.getInstance();
@@ -278,5 +276,8 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         dataScadenzaString = formatoData.format(dataScadenza);
     }
 
+    public boolean check(){
 
+        return false;
+    }
 }

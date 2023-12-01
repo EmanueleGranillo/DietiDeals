@@ -51,7 +51,7 @@
 
 
     <TextView
-        android:id="@+id/textViewSelectedDate"
+        android:id="@+id/selezionaDataTextView"
         android:layout_width="253dp"
         android:layout_height="43dp"
         android:layout_below="@id/datePicker"
@@ -64,10 +64,10 @@
 
 
     <EditText
-        android:id="@+id/editTextPrice"
+        android:id="@+id/prezzoEditText"
         android:layout_width="359dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewSelectedDate"
+        android:layout_below="@id/selezionaDataTextView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="25dp"
@@ -78,10 +78,10 @@
 
 
     <EditText
-        android:id="@+id/editTextSogliaMinima"
+        android:id="@+id/sogliaMinimaEditText"
         android:layout_width="359dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPrice"
+        android:layout_below="@id/prezzoEditText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="25dp"
@@ -91,16 +91,52 @@
         android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/creaButtonAstaTF"
+        android:id="@+id/creaAstaTFButton"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_below="@id/editTextSogliaMinima"
+        android:layout_below="@id/sogliaMinimaEditText"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="33dp"
         android:layout_marginTop="65dp"
         android:layout_marginEnd="140dp"
         android:backgroundTint="#00CC66"
         android:text="Crea" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/selectedDateErrorTextView"
+        android:layout_below="@+id/selezionaDataTextView"
+        android:layout_alignStart="@+id/selezionaDataTextView"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/prezzoErrorTextView"
+        android:layout_below="@+id/prezzoEditText"
+        android:layout_alignStart="@+id/prezzoEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sogliaMinimaErrorTextView"
+        android:layout_below="@+id/sogliaMinimaEditText"
+        android:layout_alignStart="@+id/sogliaMinimaEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
 
 
 </RelativeLayout>

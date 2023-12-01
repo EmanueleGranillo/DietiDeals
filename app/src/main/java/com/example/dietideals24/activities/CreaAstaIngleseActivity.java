@@ -27,90 +27,86 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CreaAstaIngleseActivity extends AppCompatActivity {
+
     private MyApiService apiService;
-    NumberPicker numberPickerHoursIng;
-    NumberPicker numberPickerMinutesIng;
-    TextView textViewTimerInsertedIng;
-    private String nickname;
-    private String tipo;
-    String timerInsertedString;
+    private String activity = "creainglese", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, dataScadenza, timerInserted;
+    private TextView timerInsertedTextView, timerInsertedErrorTextView, baseAstaErrorTextView, sogliaRialzoErrorTextView;
+    private EditText baseAstaEditText, sogliaRialzoMinimaEditText;
+    NumberPicker numberPickerHoursIng, numberPickerMinutesIng;
     long timerInSecondi;
-    Date dataScadenza;
-    String dataScadenzaString;
-    private int statoAsta;
-    private String titoloProdotto, base64Image, categoriaSelezionata, paroleChiave, descrizione, tipologiaSelezionata;
-    private EditText editTextInitialPrice;
-    private EditText editTextSogliaRialzoMinima;
-    BigDecimal prezzoBaseAstaBigD;
-    BigDecimal sogliaRialzoMinimaBigD;
-    BigDecimal prezzoInizialeBigD;
+    private Date dataScadenzaS;
+    private int statoAsta, tipologiaPosition, categoriaPosition;
+    private Button creaAstaIngleseButton, backButton;
+    private BigDecimal prezzoBaseAstaBigD, sogliaRialzoMinimaBigD, prezzoInizialeBigD;
     String prezzoBaseAsta;
     String sogliaRialzoMinima;
     String prezzoIniziale;
-    int tipologiaPosition, categoriaPosition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_asta_inglese);
-
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
 
-        Button backButtonAstaIng = findViewById(R.id.backButtonCreateAstaInglese);
+        backButton = findViewById(R.id.backButtonCreateAstaInglese);
+        creaAstaIngleseButton = findViewById(R.id.creaButtonAstaIng);
         numberPickerHoursIng = findViewById(R.id.numberPickerHoursIng);
         numberPickerMinutesIng = findViewById(R.id.numberPickerMinutesIng);
-        textViewTimerInsertedIng = findViewById(R.id.textViewTimerInsertedIng);
-        editTextInitialPrice = findViewById(R.id.editTextBaseAstaIng);
-        editTextSogliaRialzoMinima = findViewById(R.id.editTextSogliaRialzoIng);
+        timerInsertedTextView = findViewById(R.id.timerInsertedTextView);
+        baseAstaEditText = findViewById(R.id.baseAstaEditText);
+        sogliaRialzoMinimaEditText = findViewById(R.id.sogliaRialzoEditText);
+        timerInsertedErrorTextView = findViewById(R.id.timerErrorTextView);
+        baseAstaErrorTextView = findViewById(R.id.baseAstaErrorTextView);
+        sogliaRialzoErrorTextView = findViewById(R.id.sogliaRialzoErrorTextView);
 
 
-
+        // GET EXTRAS
         nickname = getIntent().getStringExtra("nickname");
+        tipo = getIntent().getStringExtra("tipo");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
         base64Image = getIntent().getStringExtra("imageBase64");
-        categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
         paroleChiave = getIntent().getStringExtra("paroleChiave");
         descrizione = getIntent().getStringExtra("descrizione");
         tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
         tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", tipologiaPosition);
+        categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
         categoriaPosition = getIntent().getIntExtra("categoriaPosition", categoriaPosition);
 
-
+        // Gestione timer
         numberPickerHoursIng.setMinValue(0);
         numberPickerHoursIng.setMaxValue(23);
         numberPickerMinutesIng.setMinValue(0);
         numberPickerMinutesIng.setMaxValue(59);
-        textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-        timerInsertedString = (String.format("0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-
-
+        timerInsertedTextView.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+        timerInserted = (String.format("0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
 
         numberPickerHoursIng.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 if((numberPickerHoursIng.getValue() < 10) && (numberPickerMinutesIng.getValue() < 10)) {
-                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInsertedString = (String.format("0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInSecondi = convertiStringaInSecondi(timerInsertedString);
+                    timerInsertedTextView.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInserted = (String.format("0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(timerInserted);
                     aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHoursIng.getValue() >= 10) && (numberPickerMinutesIng.getValue() >= 10)) {
-                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInsertedString = (String.format("%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInSecondi = convertiStringaInSecondi(timerInsertedString);
+                    timerInsertedTextView.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInserted = (String.format("%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(timerInserted);
                     aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHoursIng.getValue() < 10) && (numberPickerMinutesIng.getValue() >= 10)) {
-                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInsertedString = (String.format("0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInSecondi = convertiStringaInSecondi(timerInsertedString);
+                    timerInsertedTextView.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInserted = (String.format("0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(timerInserted);
                     aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHoursIng.getValue() >= 10) && (numberPickerMinutesIng.getValue() < 10)) {
-                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInsertedString = (String.format("%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInSecondi = convertiStringaInSecondi(timerInsertedString);
+                    timerInsertedTextView.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInserted = (String.format("%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(timerInserted);
                     aggiornaDataScadenza((int) timerInSecondi);
                 }
             }
@@ -120,106 +116,66 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 if((numberPickerHoursIng.getValue() < 10) && (numberPickerMinutesIng.getValue() < 10)) {
-                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInsertedString = (String.format("0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInSecondi = convertiStringaInSecondi(timerInsertedString);
+                    timerInsertedTextView.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInserted = (String.format("0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(timerInserted);
                     aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHoursIng.getValue() >= 10) && (numberPickerMinutesIng.getValue() >= 10)) {
-                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInsertedString = (String.format("%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInSecondi = convertiStringaInSecondi(timerInsertedString);
+                    timerInsertedTextView.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInserted = (String.format("%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(timerInserted);
                     aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHoursIng.getValue() < 10) && (numberPickerMinutesIng.getValue() >= 10)) {
-                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInsertedString = (String.format("0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInSecondi = convertiStringaInSecondi(timerInsertedString);
+                    timerInsertedTextView.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInserted = (String.format("0%s:%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(timerInserted);
                     aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHoursIng.getValue() >= 10) && (numberPickerMinutesIng.getValue() < 10)) {
-                    textViewTimerInsertedIng.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInsertedString = (String.format("%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
-                    timerInSecondi = convertiStringaInSecondi(timerInsertedString);
+                    timerInsertedTextView.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInserted = (String.format("%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(timerInserted);
                     aggiornaDataScadenza((int) timerInSecondi);
                 }
             }
         });
 
 
+        // LISTENERS
 
-
-
-        backButtonAstaIng.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaIngleseActivity.this, CreaAstaPT1Activity.class);
-                goToCreateAstaPT1.putExtra("tipo", tipo);
+                goToCreateAstaPT1.putExtra("activity", activity);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
                 goToCreateAstaPT1.putExtra("tipo", tipo);
                 goToCreateAstaPT1.putExtra("base64Image", base64Image);
                 goToCreateAstaPT1.putExtra("titoloProdotto", titoloProdotto);
                 goToCreateAstaPT1.putExtra("descrizione", descrizione);
                 goToCreateAstaPT1.putExtra("tipologiaSelezionata", tipologiaSelezionata);
-                //goToCreateAstaPT1.putExtra("tipologiaPosition", tipologiaPosition);
+                goToCreateAstaPT1.putExtra("tipologiaPosition", tipologiaPosition);
                 goToCreateAstaPT1.putExtra("categoriaSelezionata", categoriaSelezionata);
-                //goToCreateAstaPT1.putExtra("categoriaPosition", categoriaPosition);
+                goToCreateAstaPT1.putExtra("categoriaPosition", categoriaPosition);
                 goToCreateAstaPT1.putExtra("paroleChiave", paroleChiave);
                 startActivity(goToCreateAstaPT1);
             }
         });
 
-
-        Button createButtonAstaInglese = findViewById(R.id.creaButtonAstaIng);
-        createButtonAstaInglese.setOnClickListener(new View.OnClickListener() {
+        creaAstaIngleseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToHomePageVenditore = new Intent(CreaAstaIngleseActivity.this, HomepageVenditoreActivity.class);
-                goToHomePageVenditore.putExtra("nickname", nickname);
-                goToHomePageVenditore.putExtra("tipo", tipo);
-                startActivity(goToHomePageVenditore);
-
-                prezzoBaseAsta = editTextInitialPrice.getText().toString().trim();
-                prezzoIniziale = prezzoBaseAsta;
-                sogliaRialzoMinima = editTextSogliaRialzoMinima.getText().toString().trim();
-                // Verifica se il testo è valido come numero decimale
-                if (!prezzoBaseAsta.isEmpty()) {
-                    try {
-                        prezzoBaseAstaBigD = new BigDecimal(prezzoBaseAsta);
-                    } catch (NumberFormatException e) {
-                        // Il testo non è un numero decimale valido
-                        e.printStackTrace(); // Tratta l'errore di conversione come necessario
-                    }
-                } else {
-                    // Il campo prezzo di partenza è vuoto... Gestire
+                baseAstaErrorTextView.setText("");
+                sogliaRialzoErrorTextView.setText("");
+                if(check()){
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaS, prezzoInizialeBigD, prezzoBaseAstaBigD, sogliaRialzoMinimaBigD, nickname, timerInSecondi);
+                    Intent goToHomePageVenditore = new Intent(CreaAstaIngleseActivity.this, HomepageVenditoreActivity.class);
+                    goToHomePageVenditore.putExtra("nickname", nickname);
+                    goToHomePageVenditore.putExtra("tipo", tipo);
+                    startActivity(goToHomePageVenditore);
                 }
-
-                prezzoInizialeBigD = prezzoBaseAstaBigD;
-
-                if (!sogliaRialzoMinima.isEmpty()) {
-                    try {
-                        sogliaRialzoMinimaBigD = new BigDecimal(sogliaRialzoMinima);
-                    } catch (NumberFormatException e) {
-                        // Il testo non è un numero decimale valido
-                        e.printStackTrace(); // Tratta l'errore di conversione come necessario
-                    }
-                } else {
-                    // Il campo prezzo di partenza è vuoto... Gestire
-                }
-                System.out.println("titoloProdotto: " + titoloProdotto);
-                System.out.println("tipologiaSelezionata: " + tipologiaSelezionata);
-                System.out.println("descrizione: " + descrizione);
-                System.out.println("base64Image: " + base64Image.length());
-                System.out.println("categoriaSelezionata: " + categoriaSelezionata);
-                System.out.println("paroleChiave: " + paroleChiave);
-                System.out.println("statoAsta: " + statoAsta);
-                System.out.println("dataScadenzaString: " + dataScadenzaString);
-                System.out.println("prezzoInizialeBigD: " + prezzoInizialeBigD);
-                System.out.println("prezzoBaseAstaBigD: " + prezzoBaseAstaBigD);
-                System.out.println("sogliaRialzoMinimaBigD: " + sogliaRialzoMinimaBigD);
-                System.out.println("nickname: " + nickname);
-                System.out.println("timerInSecondi: " + timerInSecondi);
-                performCreaAstaHttpRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaString, prezzoInizialeBigD, prezzoBaseAstaBigD, sogliaRialzoMinimaBigD, nickname, timerInSecondi);
             }
         });
 
@@ -228,7 +184,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
 
 
 
-    private void performCreaAstaHttpRequest(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, String creatore, long timerInSecondi) {
+    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, String creatore, long timerInSecondi) {
         if(base64Image == null){
             base64Image = "";
         }
@@ -254,7 +210,38 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         });
     }
 
-
+    public boolean check() {
+        //INSERIRE UN if SUL TIMER
+        if(baseAstaEditText.getText().toString().isEmpty()){
+            baseAstaErrorTextView.setText("Inserire la base d'asta!");
+            return false;
+        } else {
+            try {
+                prezzoInizialeBigD = new BigDecimal(baseAstaEditText.getText().toString().trim());
+            } catch (NumberFormatException e) {
+                // Il testo non è un numero decimale valido
+                e.printStackTrace(); // Tratta l'errore di conversione come necessario
+            }
+        }
+        if(baseAstaEditText.getText().toString().length() > 15){
+            baseAstaErrorTextView.setText("Inserire una base d'asta più piccola!");
+            return false;
+        }
+        //INSERIRE CONTROLLO SU OFFERTA ATTUALE IN FUTURO
+        //INSERIRE UN POPUP INFO DI OGNI ASTA
+        if(!(sogliaRialzoMinimaEditText.getText().toString().isEmpty()) && (sogliaRialzoMinimaEditText.getText().toString().length() > 15)){
+            sogliaRialzoErrorTextView.setText("Inserire una soglia di rialzo più bassa");
+            return false;
+        } else {
+            try {
+                sogliaRialzoMinimaBigD = new BigDecimal(sogliaRialzoMinimaEditText.getText().toString().trim());
+            } catch (NumberFormatException e) {
+                // Il testo non è un numero decimale valido
+                e.printStackTrace(); // Tratta l'errore di conversione come necessario
+            }
+        }
+        return true;
+    }
 
 
 
@@ -280,10 +267,11 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         calendar.add(Calendar.SECOND, (int) timerSeconds);
 
         // Ottenere la nuova data (cioè la data di scadenza del timer)
-        dataScadenza = calendar.getTime();
+        dataScadenzaS = calendar.getTime();
 
+        // DA AGGIUSTARE
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        dataScadenzaString = formatoData.format(dataScadenza);
+        dataScadenzaS = formatoData.format(dataScadenzaS);
     }
 
 

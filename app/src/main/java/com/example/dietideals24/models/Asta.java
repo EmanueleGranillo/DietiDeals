@@ -1,7 +1,6 @@
 package com.example.dietideals24.models;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.math.BigDecimal;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,7 +11,7 @@ public class Asta implements Serializable {
     private String nomeProdotto; //a tutte e tre
     private String tipologia; //a tutte e tre
     private String descrizione; //a tutte e tre
-    private Date dataScadenzaTF; //a tempo fisso
+    private String dataScadenzaTF; //a tempo fisso
     private BigDecimal offertaAttuale; //tutte e tre
     private BigDecimal sogliaSegreta; //a tempo fisso + ribasso
     private BigDecimal prezzoIniziale; //tutte e tre
@@ -28,7 +27,7 @@ public class Asta implements Serializable {
 
 
     //Costruttore quando tipologia asta = tempo fisso
-    public Asta(int id, String titoloAsta, String tipologia, String descrizione, Date dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
+    public Asta(int id, String titoloAsta, String tipologia, String descrizione, String dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
         this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
@@ -40,7 +39,7 @@ public class Asta implements Serializable {
 
 
     //Costruttore quando tipologia asta = tempo fisso e image presente
-    public Asta(int id, String titoloAsta, String tipologia, String descrizione, String image, Date dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
+    public Asta(int id, String titoloAsta, String tipologia, String descrizione, String image, String dataFineAstaTempoFisso, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta) {
         this.id = id;
         this.nomeProdotto = titoloAsta;
         this.tipologia = tipologia;
@@ -51,7 +50,7 @@ public class Asta implements Serializable {
         this.sogliaSegreta = sogliaMinimaSegreta;
     }
 
-    public Asta(int id, String nomeProdotto, String tipologia, String descrizione, Date dataScadenzaTF, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, BigDecimal prezzoIniziale, BigDecimal sogliaRialzoMinima, long resetTimer, BigDecimal importoDecremento, boolean statoAsta, String fotoProdotto, String categoria, String paroleChiave, String creatore, String vincente) {
+    public Asta(int id, String nomeProdotto, String tipologia, String descrizione, String dataScadenzaTF, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, BigDecimal prezzoIniziale, BigDecimal sogliaRialzoMinima, long resetTimer, BigDecimal importoDecremento, boolean statoAsta, String fotoProdotto, String categoria, String paroleChiave, String creatore, String vincente) {
         this.id = id;
         this.nomeProdotto = nomeProdotto;
         this.tipologia = tipologia;
@@ -250,7 +249,7 @@ public class Asta implements Serializable {
         this.tipologia = tipologia;
     }
 
-    public void setDataScadenzaTF(Date dataScadenzaTF) {
+    public void setDataScadenzaTF(String dataScadenzaTF) {
         this.dataScadenzaTF = dataScadenzaTF;
     }
 
@@ -301,7 +300,7 @@ public class Asta implements Serializable {
         return tipologia;
     }
 
-    public Date getDataScadenzaTF() {
+    public String getDataScadenzaTF() {
         return dataScadenzaTF;
     }
 
