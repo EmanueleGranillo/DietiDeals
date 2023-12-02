@@ -102,6 +102,8 @@
         android:id="@+id/customListViewSellProducts"
         android:layout_width="389dp"
         android:layout_height="77dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
         android:layout_below="@+id/buttonTutteLeAste"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"

@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".customs.CustomListViewProductTF">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+
     <TextView
         android:id="@+id/titleIng"
         android:layout_width="wrap_content"
@@ -17,23 +24,6 @@
         android:textSize="25dp"
         android:textStyle="bold" />
 
-
-    <Button
-        android:id="@+id/forwardButtonIng"
-        android:layout_width="60dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/sogliaRialzoValueIng"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="134dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="61dp"
-        android:layout_toEndOf="@+id/imageProductIng"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        app:icon="@drawable/ic_arrow_forward_foreground"
-        app:iconSize="50dp"
-        app:iconTint="@color/black" />
 
     <ImageView
         android:id="@+id/imageProductIng"
@@ -144,6 +134,8 @@
         android:layout_toEndOf="@+id/sogliaRialzoIng"
         android:text="20$"
         android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>

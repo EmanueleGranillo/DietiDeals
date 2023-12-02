@@ -58,7 +58,7 @@ public class ProfiloActivity extends AppCompatActivity {
         bioProfiloTextView = findViewById(R.id.bioProfiloTextView);
         emailProfiloTextView = findViewById(R.id.emailProfiloTextView);
         cellulareProfiloTextView = findViewById(R.id.cellulareProfiloTextView);
-        posizioneProfiloTextView = findViewById(R.id.posizioneProfiloTextView);
+        posizioneProfiloTextView = findViewById(R.id.vincenteTextView);
         sitoWebProfiloTextView = findViewById(R.id.sitoWebProfiloTextView);
         linkInstagramImageView = findViewById(R.id.linkInstagramImageView);
         Button backBtn = findViewById(R.id.backButtonProfilo);

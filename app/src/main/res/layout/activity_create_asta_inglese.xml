@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreaAstaTempoFissoActivity">
+    tools:context=".activities.CreaAstaTempoFissoActivity"
+    android:background="#F2F4F8">
 
 
     <Button

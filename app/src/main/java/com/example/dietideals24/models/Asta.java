@@ -18,7 +18,6 @@ public class Asta implements Serializable {
     private BigDecimal sogliaRialzoMinima; //inglese
     private long resetTimer; //inglese + ribasso
     private BigDecimal importoDecremento; //asta al ribasso
-    private boolean statoAsta;
     private String fotoProdotto;
     private String categoria;
     private String paroleChiave;
@@ -62,7 +61,6 @@ public class Asta implements Serializable {
         this.sogliaRialzoMinima = sogliaRialzoMinima;
         this.resetTimer = resetTimer;
         this.importoDecremento = importoDecremento;
-        this.statoAsta = statoAsta;
         this.fotoProdotto = fotoProdotto;
         this.categoria = categoria;
         this.paroleChiave = paroleChiave;
@@ -237,10 +235,6 @@ public class Asta implements Serializable {
         this.descrizione = descrizione;
     }
 
-    public boolean isStatoAsta() {
-        return statoAsta;
-    }
-
     public void setNomeProdotto(String nomeProdotto) {
         this.nomeProdotto = nomeProdotto;
     }
@@ -280,13 +274,6 @@ public class Asta implements Serializable {
 
     public void setSogliaSegreta(BigDecimal sogliaSegreta) {
         this.sogliaSegreta = sogliaSegreta;
-    }
-    public boolean getStatoAsta() {
-        return statoAsta;
-    }
-
-    public void setStatoAsta(boolean statoAsta) {
-        this.statoAsta = statoAsta;
     }
 
     public int getId() {

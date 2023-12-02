@@ -12,25 +12,25 @@ import android.widget.Chronometer;
 
 import com.example.dietideals24.R;
 
-import java.util.concurrent.TimeUnit;
+public class AstaIngleseActivity extends AppCompatActivity {
 
-public class InformazioniAstaActivity extends AppCompatActivity {
-
-    private String nickname;
-    private String tipo;
+    private String nickname, tipo;
     Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_informazioni_asta);
+        setContentView(R.layout.activity_asta_inglese);
 
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
 
         Button backBtn = findViewById(R.id.backButtonInfoAsta);
 
-        chronometer = findViewById(R.id.t1);
+
+
+        // GESTIONE TIMER
+        chronometer = findViewById(R.id.scadenzaChronometer);
         long elapsedTime = SystemClock.elapsedRealtime() + 30000;
         chronometer.setBase(elapsedTime);
         chronometer.start();
@@ -50,7 +50,7 @@ public class InformazioniAstaActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent backToHome = new Intent(InformazioniAstaActivity.this, HomepageCompratoreActivity.class);
+                Intent backToHome = new Intent(AstaIngleseActivity.this, HomepageCompratoreActivity.class);
                 backToHome.putExtra("nickname", nickname);
                 backToHome.putExtra("tipo", tipo);
                 startActivity(backToHome);

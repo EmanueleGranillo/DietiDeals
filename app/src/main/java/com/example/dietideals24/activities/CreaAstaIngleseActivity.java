@@ -29,12 +29,12 @@ import retrofit2.Response;
 public class CreaAstaIngleseActivity extends AppCompatActivity {
 
     private MyApiService apiService;
-    private String activity = "creainglese", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, dataScadenza, timerInserted;
+    private String activity = "creainglese", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, dataScadenzaString = "", timerInserted;
     private TextView timerInsertedTextView, timerInsertedErrorTextView, baseAstaErrorTextView, sogliaRialzoErrorTextView;
     private EditText baseAstaEditText, sogliaRialzoMinimaEditText;
     NumberPicker numberPickerHoursIng, numberPickerMinutesIng;
     long timerInSecondi;
-    private Date dataScadenzaS;
+    private Date dataScadenza;
     private int statoAsta, tipologiaPosition, categoriaPosition;
     private Button creaAstaIngleseButton, backButton;
     private BigDecimal prezzoBaseAstaBigD, sogliaRialzoMinimaBigD, prezzoInizialeBigD;
@@ -169,8 +169,9 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 baseAstaErrorTextView.setText("");
                 sogliaRialzoErrorTextView.setText("");
+                timerInsertedErrorTextView.setText("");
                 if(check()){
-                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaS, prezzoInizialeBigD, prezzoBaseAstaBigD, sogliaRialzoMinimaBigD, nickname, timerInSecondi);
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaString, prezzoInizialeBigD, prezzoBaseAstaBigD, sogliaRialzoMinimaBigD, nickname, timerInSecondi);
                     Intent goToHomePageVenditore = new Intent(CreaAstaIngleseActivity.this, HomepageVenditoreActivity.class);
                     goToHomePageVenditore.putExtra("nickname", nickname);
                     goToHomePageVenditore.putExtra("tipo", tipo);
@@ -212,6 +213,10 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
 
     public boolean check() {
         //INSERIRE UN if SUL TIMER
+        if(dataScadenzaString.isEmpty()){
+            timerInsertedErrorTextView.setText("Inserire la data di scadenza!");
+            return false;
+        }
         if(baseAstaEditText.getText().toString().isEmpty()){
             baseAstaErrorTextView.setText("Inserire la base d'asta!");
             return false;
@@ -267,11 +272,11 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         calendar.add(Calendar.SECOND, (int) timerSeconds);
 
         // Ottenere la nuova data (cioè la data di scadenza del timer)
-        dataScadenzaS = calendar.getTime();
+        dataScadenza = calendar.getTime();
 
         // DA AGGIUSTARE
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        dataScadenzaS = formatoData.format(dataScadenzaS);
+        dataScadenzaString = formatoData.format(dataScadenza);
     }
 
 

@@ -30,29 +30,15 @@ import retrofit2.Response;
 
 public class CreaAstaRibassoActivity extends AppCompatActivity {
     private MyApiService apiService;
-    private String activity = "crearibasso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione;
-    private TextView timerInsertedErrorTextView, prezzoInizialeErrorTextView, decrementoErrorTextView;
-    NumberPicker numberPickerHours;
-    NumberPicker numberPickerMinutes;
-    TextView textViewTimerInsertedRibasso;
-    private String nickname;
-    private String tipo;
-    String timerInsertedString;
-    long timerInSecondi;
-    Date dataScadenza;
-    String dataScadenzaString;
+    private TextView timerInsertedErrorTextView, prezzoInizialeErrorTextView, decrementoErrorTextView, textViewTimerInsertedRibasso;
+    private EditText baseAstaEditText, decrementoEditText;
     private Button backButton, createAstaRibassoButton;
-    private int statoAsta;
-    private String titoloProdotto, base64Image, categoriaSelezionata, paroleChiave, descrizione, tipologiaSelezionata;
-    private EditText editTextBaseAsta;
-    private EditText editTextimportoDecremento;
-    BigDecimal prezzoBaseAstaBD;
-    BigDecimal importoDecrementoBD;
-    BigDecimal prezzoInizialeBD;
-    String prezzoBaseAsta;
-    String importoDecremento;
-    String prezzoIniziale;
-    int tipologiaPosition, categoriaPosition;
+    private NumberPicker numberPickerHours, numberPickerMinutes;
+    private String activity = "crearibasso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, timerInsertedString, dataScadenzaString, prezzoBaseAsta, importoDecremento, prezzoIniziale;
+    private long timerInSecondi;
+    private Date dataScadenza;
+    private BigDecimal prezzoBaseAstaBD, importoDecrementoBD, prezzoInizialeBD;
+    private int tipologiaPosition, categoriaPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +51,8 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         numberPickerHours = findViewById(R.id.numberPickerHours);
         numberPickerMinutes = findViewById(R.id.numberPickerMinutes);
         textViewTimerInsertedRibasso = findViewById(R.id.timerInsertedTextView);
-        editTextBaseAsta = findViewById(R.id.prezzoInizialeEditText);
-        editTextimportoDecremento = findViewById(R.id.decrementoEditText);
+        baseAstaEditText = findViewById(R.id.prezzoInizialeEditText);
+        decrementoEditText = findViewById(R.id.decrementoEditText);
         timerInsertedErrorTextView = findViewById(R.id.timerInsertedErrorTextView);
         prezzoInizialeErrorTextView = findViewById(R.id.prezzoInizialeErrorTextView);
         decrementoErrorTextView = findViewById(R.id.decrementoErrorTextView);
@@ -123,7 +109,6 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 }
             }
         });
-
         numberPickerMinutes.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -162,9 +147,9 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToCreateAstaPT1 = new Intent(CreaAstaRibassoActivity.this, CreaAstaPT1Activity.class);
+                goToCreateAstaPT1.putExtra("activity", activity);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
                 goToCreateAstaPT1.putExtra("tipo", tipo);
-                goToCreateAstaPT1.putExtra("activity", activity);
                 goToCreateAstaPT1.putExtra("base64Image", base64Image);
                 goToCreateAstaPT1.putExtra("titoloProdotto", titoloProdotto);
                 goToCreateAstaPT1.putExtra("descrizione", descrizione);
@@ -184,7 +169,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 prezzoInizialeErrorTextView.setText("");
                 decrementoErrorTextView.setText("");
                 if(check()){
-                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaString, prezzoInizialeBD, prezzoBaseAstaBD, importoDecrementoBD, nickname, timerInSecondi);
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, prezzoBaseAstaBD, importoDecrementoBD, nickname, timerInSecondi);
                     Intent goToHomePageVenditore = new Intent(CreaAstaRibassoActivity.this, HomepageVenditoreActivity.class);
                     goToHomePageVenditore.putExtra("nickname", nickname);
                     goToHomePageVenditore.putExtra("tipo", tipo);
@@ -192,9 +177,9 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 }
 
 
-                prezzoBaseAsta = editTextBaseAsta.getText().toString().trim();
+                prezzoBaseAsta = baseAstaEditText.getText().toString().trim();
                 prezzoIniziale = prezzoBaseAsta;
-                importoDecremento = editTextimportoDecremento.getText().toString().trim();
+                importoDecremento = decrementoEditText.getText().toString().trim();
                 // Verifica se il testo è valido come numero decimale
                 if (!prezzoBaseAsta.isEmpty()) {
                     try {
@@ -225,11 +210,11 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
 
 
-    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal prezzoBaseAsta, BigDecimal importoDecremento, String creatore, long timerInSecondi) {
+    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, String selectedDate, BigDecimal prezzoIniziale, BigDecimal prezzoBaseAsta, BigDecimal importoDecremento, String creatore, long timerInSecondi) {
         if(base64Image == null){
             base64Image = "";
         }
-        CreateAstaRibassoRequest createAstaRequest = new CreateAstaRibassoRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, prezzoBaseAsta, importoDecremento, creatore, timerInSecondi);
+        CreateAstaRibassoRequest createAstaRequest = new CreateAstaRibassoRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, selectedDate, prezzoIniziale, prezzoBaseAsta, importoDecremento, creatore, timerInSecondi);
         Call<ResponseBody> call = apiService.createAstaRibasso(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -277,7 +262,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     }
 
     public boolean check(){
-
+        if(decrementoErrorTextView.
         return false;
     }
 }

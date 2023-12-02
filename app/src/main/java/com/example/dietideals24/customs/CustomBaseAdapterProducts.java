@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dietideals24.activities.InformazioniAstaActivity;
+import com.example.dietideals24.activities.AstaIngleseActivity;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.R;
 
@@ -129,7 +129,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
         productImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToInformazioniAsta = new Intent(context, InformazioniAstaActivity.class);
+                Intent goToInformazioniAsta = new Intent(context, AstaIngleseActivity.class);
                 goToInformazioniAsta.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Add this line
                 context.startActivity(goToInformazioniAsta);
             }

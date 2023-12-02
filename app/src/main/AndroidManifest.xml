@@ -44,7 +44,7 @@
             android:name=".activities.NotificationsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.InformazioniAstaActivity"
+            android:name=".activities.AstaIngleseActivity"
             android:exported="false" />
         <activity
             android:name=".activities.HomepageVenditoreActivity"
