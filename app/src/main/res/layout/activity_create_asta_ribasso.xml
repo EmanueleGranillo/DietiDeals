@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreaAstaTempoFissoActivity">
+    tools:context=".activities.CreaAstaTempoFissoActivity"
+    android:background="#F2F4F8">
 
 
     <Button
@@ -30,7 +31,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="93dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="48dp"
         android:text="Inserisci le informazioni finali"
         android:textColor="#000000"
@@ -44,23 +45,24 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="26dp"
         android:hint="Inserisci prezzo di partenza"
         android:inputType="numberDecimal" />
 
 
     <TextView
-        android:id="@+id/textViewInsertTimerRibasso"
+        android:id="@+id/inserisciTimerRibassoTextView"
         android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewDateInsert"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="168dp"
-        android:layout_marginEnd="51dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="130dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="55dp"
         android:text="Inserisci timer per decremento prezzo"
         android:textColor="#000000"
         android:textSize="18dp" />
@@ -69,14 +71,13 @@
         android:id="@+id/timerInsertedTextView"
         android:layout_width="304dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/numberPickerHours"
+        android:layout_below="@+id/numberPickerHours"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="55dp"
-        android:text="Timer inserito "
+        android:text="Timer inserito: "
         android:textColor="#000000"
         android:textSize="23dp" />
 
@@ -85,13 +86,10 @@
         android:id="@+id/textViewOreRibasso"
         android:layout_width="24dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewInsertTimerRibasso"
+        android:layout_below="@+id/inserisciTimerRibassoTextView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="217dp"
-        android:layout_marginEnd="254dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="30dp"
         android:text="Ore"
         android:textColor="#000000"
         android:textSize="15dp" />
@@ -101,13 +99,10 @@
         android:id="@+id/textViewMinutiRibasso"
         android:layout_width="44dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewInsertTimerRibasso"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/inserisciTimerRibassoTextView"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="267dp"
-        android:layout_marginTop="219dp"
-        android:layout_marginEnd="99dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="131dp"
         android:text="Minuti"
         android:textColor="#000000"
         android:textSize="15dp" />
@@ -116,22 +111,19 @@
         android:id="@+id/numberPickerHours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewOreRibasso"
-        android:gravity="center"
+        android:layout_below="@+id/textViewOreRibasso"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="114dp"
+        android:layout_marginStart="118dp"
         android:layout_marginEnd="24dp"
-        />
-
+        android:gravity="center" />
 
     <NumberPicker
         android:id="@+id/numberPickerMinutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewMinutiRibasso"
-        android:layout_marginStart="54dp"
-        android:layout_marginEnd="24dp"
-        android:layout_toEndOf="@+id/numberPickerHours"
+        android:layout_below="@+id/textViewMinutiRibasso"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="118dp"
         android:gravity="center" />
 
     <EditText
@@ -142,23 +134,36 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="25dp"
-        android:hint="Inserisci importo di decremento (opzionale)"
+        android:hint="Inserisci importo di decremento"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/sogliaMinimaEditText"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/decrementoEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        android:hint="Inserire una soglia minima"
         android:inputType="numberDecimal" />
 
     <Button
         android:id="@+id/creaButtonAstaRibasso"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_below="@id/decrementoEditText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="33dp"
+        android:layout_below="@id/sogliaMinimaEditText"
+        android:layout_alignStart="@+id/sogliaMinimaEditText"
+        android:layout_alignEnd="@+id/sogliaMinimaEditText"
+        android:layout_marginStart="115dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginEnd="115dp"
         android:backgroundTint="#00CC66"
-        android:text="Crea"
-        />
+        android:text="Crea" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -190,6 +195,18 @@
         android:id="@+id/decrementoErrorTextView"
         android:layout_below="@+id/decrementoEditText"
         android:layout_alignStart="@+id/decrementoEditText"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text=""
+        android:textColor="#F44336"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sogliaMinimaErrorTextView"
+        android:layout_below="@+id/sogliaMinimaEditText"
+        android:layout_alignStart="@+id/sogliaMinimaEditText"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:text=""

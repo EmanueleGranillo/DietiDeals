@@ -23,17 +23,11 @@ public class CreateAstaRibassoRequest {
     @SerializedName("keywords")
     private String paroleChiave;
 
-    @SerializedName("statoAsta")
-    private int statoAsta;
-
     @SerializedName("data_scadenza")
     private String dataScadenzaTF;
 
     @SerializedName("prezzo_iniziale")
     private BigDecimal prezzoIniziale;
-
-    @SerializedName("offerta_attuale")
-    private BigDecimal offertaAttuale;
 
     @SerializedName("sogliaSegreta")
     private BigDecimal sogliaMinimaSegreta;
@@ -48,22 +42,19 @@ public class CreateAstaRibassoRequest {
     private long resetTimer;
 
 
-    public CreateAstaRibassoRequest(String nomeProdotto, String tipologia, String descrizione, String image, String categoria, String paroleChiave, int statoAsta, String dataScadenzaTF, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal importoDecremento, String creatore, long resetTimer) {
+    public CreateAstaRibassoRequest(String nomeProdotto, String tipologia, String descrizione, String image, String categoria, String paroleChiave, String dataScadenzaTF, BigDecimal prezzoIniziale, BigDecimal importoDecremento, String creatore, long resetTimer) {
         this.nomeProdotto = nomeProdotto;
         this.tipologia = tipologia;
         this.descrizione = descrizione;
         this.image = image;
         this.categoria = categoria;
         this.paroleChiave = paroleChiave;
-        this.statoAsta = statoAsta;
         this.dataScadenzaTF = dataScadenzaTF;
         this.prezzoIniziale = prezzoIniziale;
-        this.offertaAttuale = offertaAttuale;
         this.sogliaMinimaSegreta = new BigDecimal(1000);
         this.importoDecremento = importoDecremento;
         this.creatore = creatore;
         this.resetTimer = resetTimer;
     }
-
 
 }

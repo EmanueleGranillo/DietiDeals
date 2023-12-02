@@ -235,9 +235,6 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
                     Iterator<Asta> iterator = aste.iterator();
                     while(iterator.hasNext()){
                         Asta a = iterator.next();
-                        if (a.getStatoAsta() == false) {
-                            iterator.remove();
-                        }
                     }
                     // Aggiorna la ListView con i nuovi dati custom
                     customBaseAdapterProducts.notifyDataSetChanged();
@@ -263,13 +260,6 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     aste.clear();
                     aste.addAll(response.body());
-                    Iterator<Asta> iterator = aste.iterator();
-                    while(iterator.hasNext()){
-                        Asta a = iterator.next();
-                        if (a.getStatoAsta()) {
-                            iterator.remove();
-                        }
-                    }
                     // Aggiorna la ListView con i nuovi dati custom
                     customBaseAdapterProducts.notifyDataSetChanged();
 

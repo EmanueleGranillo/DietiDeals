@@ -30,14 +30,14 @@ import retrofit2.Response;
 
 public class CreaAstaRibassoActivity extends AppCompatActivity {
     private MyApiService apiService;
-    private TextView timerInsertedErrorTextView, prezzoInizialeErrorTextView, decrementoErrorTextView, textViewTimerInsertedRibasso;
-    private EditText baseAstaEditText, decrementoEditText;
+    private TextView timerInsertedErrorTextView, prezzoInizialeErrorTextView, decrementoErrorTextView, sogliaMinimaErrorTextView, textViewTimerInsertedRibasso;
+    private EditText baseAstaEditText, decrementoEditText, sogliaMinimaEditText;
     private Button backButton, createAstaRibassoButton;
     private NumberPicker numberPickerHours, numberPickerMinutes;
-    private String activity = "crearibasso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, timerInsertedString, dataScadenzaString, prezzoBaseAsta, importoDecremento, prezzoIniziale;
+    private String activity = "crearibasso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, timerInsertedString, dataScadenzaString;
     private long timerInSecondi;
     private Date dataScadenza;
-    private BigDecimal prezzoBaseAstaBD, importoDecrementoBD, prezzoInizialeBD;
+    private BigDecimal prezzoInizialeBD, importoDecrementoBD, sogliaMinimaBD;
     private int tipologiaPosition, categoriaPosition;
 
     @Override
@@ -53,9 +53,12 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         textViewTimerInsertedRibasso = findViewById(R.id.timerInsertedTextView);
         baseAstaEditText = findViewById(R.id.prezzoInizialeEditText);
         decrementoEditText = findViewById(R.id.decrementoEditText);
+        sogliaMinimaEditText = findViewById(R.id.sogliaMinimaEditText);
         timerInsertedErrorTextView = findViewById(R.id.timerInsertedErrorTextView);
         prezzoInizialeErrorTextView = findViewById(R.id.prezzoInizialeErrorTextView);
         decrementoErrorTextView = findViewById(R.id.decrementoErrorTextView);
+        sogliaMinimaErrorTextView = findViewById(R.id.sogliaMinimaErrorTextView);
+
 
         numberPickerHours.setMinValue(0);
         numberPickerHours.setMaxValue(23);
@@ -69,7 +72,6 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         nickname = getIntent().getStringExtra("nickname");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
         base64Image = getIntent().getStringExtra("imageBase64");
-        Toast.makeText(CreaAstaRibassoActivity.this, base64Image, Toast.LENGTH_SHORT).show();
         categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
         paroleChiave = getIntent().getStringExtra("paroleChiave");
         descrizione = getIntent().getStringExtra("descrizione");
@@ -168,41 +170,9 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 timerInsertedErrorTextView.setText("");
                 prezzoInizialeErrorTextView.setText("");
                 decrementoErrorTextView.setText("");
+                sogliaMinimaErrorTextView.setText("");
                 if(check()){
-                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, prezzoBaseAstaBD, importoDecrementoBD, nickname, timerInSecondi);
-                    Intent goToHomePageVenditore = new Intent(CreaAstaRibassoActivity.this, HomepageVenditoreActivity.class);
-                    goToHomePageVenditore.putExtra("nickname", nickname);
-                    goToHomePageVenditore.putExtra("tipo", tipo);
-                    startActivity(goToHomePageVenditore);
-                }
-
-
-                prezzoBaseAsta = baseAstaEditText.getText().toString().trim();
-                prezzoIniziale = prezzoBaseAsta;
-                importoDecremento = decrementoEditText.getText().toString().trim();
-                // Verifica se il testo è valido come numero decimale
-                if (!prezzoBaseAsta.isEmpty()) {
-                    try {
-                        prezzoBaseAstaBD = new BigDecimal(prezzoBaseAsta);
-                    } catch (NumberFormatException e) {
-                        // Il testo non è un numero decimale valido
-                        e.printStackTrace(); // Tratta l'errore di conversione come necessario
-                    }
-                } else {
-                    // Il campo prezzo di partenza è vuoto... Gestire
-                }
-
-                prezzoInizialeBD = prezzoBaseAstaBD;
-
-                if (!importoDecremento.isEmpty()) {
-                    try {
-                        importoDecrementoBD = new BigDecimal(importoDecremento);
-                    } catch (NumberFormatException e) {
-                        // Il testo non è un numero decimale valido
-                        e.printStackTrace(); // Tratta l'errore di conversione come necessario
-                    }
-                } else {
-                    // Il campo prezzo di partenza è vuoto... Gestire
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, importoDecrementoBD, nickname, timerInSecondi);
                 }
             }
         });
@@ -210,11 +180,11 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
 
 
-    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, String selectedDate, BigDecimal prezzoIniziale, BigDecimal prezzoBaseAsta, BigDecimal importoDecremento, String creatore, long timerInSecondi) {
+    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, String selectedDate, BigDecimal prezzoIniziale, BigDecimal importoDecremento, String creatore, long timerInSecondi) {
         if(base64Image == null){
             base64Image = "";
         }
-        CreateAstaRibassoRequest createAstaRequest = new CreateAstaRibassoRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, selectedDate, prezzoIniziale, prezzoBaseAsta, importoDecremento, creatore, timerInSecondi);
+        CreateAstaRibassoRequest createAstaRequest = new CreateAstaRibassoRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, selectedDate, prezzoIniziale, importoDecremento, creatore, timerInSecondi);
         Call<ResponseBody> call = apiService.createAstaRibasso(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -223,15 +193,16 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Intent goToHomePageVenditore = new Intent(CreaAstaRibassoActivity.this, HomepageVenditoreActivity.class);
                     goToHomePageVenditore.putExtra("nickname", nickname);
+                    goToHomePageVenditore.putExtra("tipo", tipo);
                     startActivity(goToHomePageVenditore);
                 } else {
-                    System.out.println("Richiesta fallita");
+                    Toast.makeText(CreaAstaRibassoActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println(t.getMessage());
+                Toast.makeText(CreaAstaRibassoActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -262,7 +233,62 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     }
 
     public boolean check(){
-        if(decrementoErrorTextView.
-        return false;
+        // Controllo campi vuoti
+        /*if(timerInsertedString.isEmpty()){
+            // timerInsertedString =       da impostare di default 1 ora
+        }*/
+        if(baseAstaEditText.getText().toString().isEmpty()){
+            prezzoInizialeErrorTextView.setText("Inserire il prezzo iniziale");
+            return false;
+        } else {
+            try {
+                prezzoInizialeBD = new BigDecimal(baseAstaEditText.getText().toString());
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        if(decrementoEditText.getText().toString().isEmpty()){
+            decrementoErrorTextView.setText("Inserisci l'importo di decremento");
+            return false;
+        } else {
+            try {
+                importoDecrementoBD = new BigDecimal(decrementoEditText.getText().toString());
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        if(sogliaMinimaEditText.getText().toString().isEmpty()){
+            sogliaMinimaErrorTextView.setText("Inserire una soglia minima");
+            return false;
+        } else {
+            try {
+                sogliaMinimaBD = new BigDecimal(sogliaMinimaEditText.getText().toString());
+            } catch (NumberFormatException e){
+                e.printStackTrace();
+            }
+        }
+        // Controllo lunghezza
+        if(baseAstaEditText.getText().toString().length() > 15) {
+            prezzoInizialeErrorTextView.setText("Inserisci un prezzo minore");
+            return false;
+        }
+        if(decrementoEditText.getText().toString().length() > 15) {
+            decrementoErrorTextView.setText("Inserisci un importo minore");
+            return false;
+        }
+        if(sogliaMinimaEditText.getText().toString().length() > 15) {
+            sogliaMinimaErrorTextView.setText("Inserisci una soglia minima più bassa");
+            return false;
+        }
+        // Controllo correttezza
+        if(prezzoInizialeBD.compareTo(importoDecrementoBD) < 0) {
+            decrementoErrorTextView.setText("L'importo deve essere minore del prezzo iniziale");
+            return false;
+        }
+        if(prezzoInizialeBD.compareTo(sogliaMinimaBD) < 0){
+            sogliaMinimaErrorTextView.setText("La soglia minima non può essere maggiore del prezzo iniziale");
+            return false;
+        }
+        return true;
     }
 }
