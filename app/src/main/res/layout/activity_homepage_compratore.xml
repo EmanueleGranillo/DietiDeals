@@ -21,18 +21,15 @@
         android:textSize="40dp"
         android:textStyle="bold" />
 
-    <Button
+    <ImageButton
         android:id="@+id/profiloButtonHomeCompratore"
-        android:layout_width="88dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignTop="@+id/notificheButtonHomeCompratore"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="#F2F4F8"
-        android:gravity="center"
-        app:icon="@drawable/ic_profilo_foreground"
-        app:iconSize="70dp"
-        app:iconTint="@color/black" />
+        android:src="@drawable/ic_profilo_foreground" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/cercaAstaSearchView"
@@ -54,14 +51,12 @@
 
     <TextView
         android:id="@+id/selezionaCategoria"
-        android:layout_width="145dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cercaAstaSearchView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginStart="22dp"
         android:layout_marginTop="17dp"
-        android:layout_marginEnd="243dp"
         android:text="Seleziona categoria"
         android:textSize="16dp" />
 
@@ -183,30 +178,26 @@
 
     <ListView
         android:id="@+id/customListViewProducts"
-        android:layout_width="389dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:layout_below="@+id/selezionaCategoria"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="11dp"
         android:layout_marginTop="84dp"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:scrollbars="none" />
 
-    <Button
+    <ImageButton
         android:id="@+id/notificheButtonHomeCompratore"
-        android:layout_width="51dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignTop="@+id/esploraTextView"
-        android:layout_marginStart="126dp"
-        android:layout_toEndOf="@+id/esploraTextView"
-        android:gravity="center"
-        app:icon="@mipmap/ic_ring_foreground"
-        app:iconGravity="textEnd"
-        app:iconSize="50dp"
-        app:iconTint="@color/black" />
+        android:layout_toStartOf="@+id/profiloButtonHomeCompratore"
+        android:layout_marginEnd="20dp"
+        android:src="@mipmap/ic_ring_foreground"/>
 
     <ImageView
         android:layout_width="24dp"

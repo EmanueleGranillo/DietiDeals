@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreaAstaTempoFissoActivity">
-
+    tools:context=".activities.CreaAstaTempoFissoActivity"
+    android:background="#F2F4F8">
 
     <Button
         android:id="@+id/backButtonCreateAstaTF"
@@ -21,17 +21,13 @@
         app:iconSize="50dp"
         app:iconTint="@color/black" />
 
-
     <TextView
         android:id="@+id/textViewDateInsert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="46dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
         android:text="Inserisci data scadenza asta"
         android:textColor="#000000"
         android:textSize="25dp" />
@@ -41,19 +37,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewDateInsert"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="80dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="83dp"
         android:calendarViewShown="false"
         android:datePickerMode="spinner" />
 
 
     <TextView
         android:id="@+id/selezionaDataTextView"
-        android:layout_width="253dp"
-        android:layout_height="43dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/datePicker"
         android:layout_alignParentStart="true"
         android:layout_marginStart="80dp"
@@ -65,29 +58,22 @@
 
     <EditText
         android:id="@+id/prezzoEditText"
-        android:layout_width="359dp"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/selezionaDataTextView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="26dp"
         android:hint="Inserisci prezzo di partenza"
         android:inputType="numberDecimal" />
 
-
     <EditText
         android:id="@+id/sogliaMinimaEditText"
-        android:layout_width="359dp"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/prezzoEditText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="26dp"
-        android:hint="Inserisci soglia minima prodotto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:hint="Inserisci soglia minima"
         android:inputType="numberDecimal" />
 
     <Button
@@ -95,10 +81,8 @@
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_below="@id/sogliaMinimaEditText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
         android:backgroundTint="#00CC66"
         android:text="Crea" />
 

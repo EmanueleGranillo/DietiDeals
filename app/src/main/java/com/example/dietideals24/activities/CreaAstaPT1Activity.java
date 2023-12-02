@@ -51,7 +51,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_create_asta_pt1);
         titoloProdottoEditText = findViewById(R.id.editTextTitle);
         descrizioneEditText = findViewById(R.id.editTextDescrizione);
-        keywordsEditText = findViewById(R.id.editTextParoleChiavi);
+        keywordsEditText = findViewById(R.id.editTextParoleChiave);
         Button createAstaPT1 = findViewById(R.id.forwardButtonCreateAsta);
         Button backButtonHPVenditore = findViewById(R.id.backButtonHomePageVenditore);
         uploadImage = findViewById(R.id.uploadImageIcon);

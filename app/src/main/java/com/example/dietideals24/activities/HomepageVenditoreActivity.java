@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -54,8 +55,8 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         asteAttiveBtn = findViewById(R.id.buttonAsteAttive);
         asteConcluseBtn = findViewById(R.id.buttonAsteConcluse);
         Button creaAstaBtn = findViewById(R.id.sellNewProductButton);
-        Button profiloBtn = findViewById(R.id.profiloButtonHomeVenditore);
-        Button notificheBtn = findViewById(R.id.notificheButtonHomeVenditore);
+        ImageButton profiloBtn = findViewById(R.id.profiloButtonHomeVenditore);
+        ImageButton notificheBtn = findViewById(R.id.notificheButtonHomeVenditore);
 
         listView = (ListView) findViewById(R.id.customListViewSellProducts);
         tipo = getIntent().getStringExtra("tipo");

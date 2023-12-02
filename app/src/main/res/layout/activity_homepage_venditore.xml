@@ -20,17 +20,15 @@
         android:textSize="40dp"
         android:textStyle="bold" />
 
-    <Button
+    <ImageButton
         android:id="@+id/profiloButtonHomeVenditore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/notificheButtonHomeVenditore"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="-20dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="#F2F4F8"
-        app:icon="@drawable/ic_profilo_foreground"
-        app:iconSize="70dp"
-        app:iconTint="@color/black" />
-
+        android:src="@drawable/ic_profilo_foreground" />
 
     <Button
         android:id="@+id/sellNewProductButton"
@@ -48,7 +46,6 @@
         android:textSize="24dp"
         android:textStyle="bold"/>
 
-
     <TextView
         android:id="@+id/leTueAsteTextView"
         android:layout_width="wrap_content"
@@ -60,7 +57,6 @@
         android:text="Le tue aste"
         android:textSize="20dp"
         android:textStyle="bold"/>
-
 
     <Button
         android:id="@+id/buttonTutteLeAste"
@@ -112,18 +108,14 @@
         android:layout_marginEnd="10dp"
         android:scrollbars="none" />
 
-    <Button
+    <ImageButton
         android:id="@+id/notificheButtonHomeVenditore"
-        android:layout_width="51dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignTop="@+id/esploraTextViewVenditore"
-        android:layout_marginStart="126dp"
-        android:layout_toEndOf="@+id/esploraTextViewVenditore"
-        android:gravity="center"
-        app:icon="@drawable/ic_notifiche_foreground"
-        app:iconGravity="textEnd"
-        app:iconSize="50dp"
-        app:iconTint="@color/black" />
+        android:layout_toStartOf="@+id/profiloButtonHomeVenditore"
+        android:layout_marginEnd="20dp"
+        android:src="@mipmap/ic_ring_foreground"/>
 
     <ImageView
         android:layout_width="24dp"

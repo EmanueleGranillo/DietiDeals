@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.widget.SearchView;
@@ -67,8 +68,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         immobiliBtn = findViewById(R.id.buttonImmobili);
         sportBtn = findViewById(R.id.buttonSport);
         arredamentoBtn = findViewById(R.id.buttonArredamento);
-        Button profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
-        Button notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
+        ImageButton profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
+        ImageButton notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
         searchView = findViewById(R.id.cercaAstaSearchView);
 
         listView = (ListView) findViewById(R.id.customListViewProducts);
@@ -80,30 +81,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         controllaNotifiche();
 
         riempiLista();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         profiloBtn.setOnClickListener(new View.OnClickListener() {

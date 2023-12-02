@@ -11,108 +11,110 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="8dp"
+        app:cardElevation="3dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/titleTF"
-            android:layout_width="249dp"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/titleTF"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@+id/imageProduct"
+                android:text="Stampante 3D buone condizioni"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <ImageView
+            android:id="@+id/imageProduct"
+            android:layout_width="150dp"
+            android:layout_height="167dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="5dp"
-            android:layout_toEndOf="@+id/imageProduct"
-            android:text="Stampante 3D buone condizioni"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:layout_marginTop="0dp" />
 
-        <ImageView
-        android:id="@+id/imageProduct"
-        android:layout_width="150dp"
-        android:layout_height="167dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp" />
+            <TextView
+                android:id="@+id/tipologiaAstaValueTF"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleTF"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="3dp"
+                android:layout_toEndOf="@+id/tipologiaAstaTF"
+                android:text="Tempo fisso"
+                android:textSize="16dp" />
 
-    <TextView
-        android:id="@+id/tipologiaAstaValueTF"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleTF"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="3dp"
-        android:layout_toEndOf="@+id/tipologiaAstaTF"
-        android:text="Tempo fisso"
-        android:textSize="16dp" />
+            <TextView
+                android:id="@+id/tipologiaAstaTF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleTF"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="21dp"
+                android:layout_toEndOf="@+id/imageProduct"
+                android:text="Tipologia:"
+                android:textSize="16dp" />
 
-    <TextView
-        android:id="@+id/tipologiaAstaTF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleTF"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="21dp"
-        android:layout_toEndOf="@+id/imageProduct"
-        android:text="Tipologia:"
-        android:textSize="16dp" />
+            <TextView
+                android:id="@+id/expirationTextView"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tipologiaAstaTF"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_toEndOf="@+id/imageProduct"
+                android:text="Fine asta:"
+                android:textSize="16dp" />
 
-    <TextView
-        android:id="@+id/expirationTextView"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tipologiaAstaTF"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_toEndOf="@+id/imageProduct"
-        android:text="Fine asta:"
-        android:textSize="16dp" />
+            <TextView
+                android:id="@+id/expirationTextViewValueTF"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tipologiaAstaValueTF"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="43dp"
+                android:layout_toEndOf="@+id/expirationTextView"
+                android:text="25/12/2024"
+                android:textSize="16dp" />
 
-    <TextView
-        android:id="@+id/expirationTextViewValueTF"
-        android:layout_width="105dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tipologiaAstaValueTF"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="43dp"
-        android:layout_toEndOf="@+id/expirationTextView"
-        android:text="25/12/2024"
-        android:textSize="16dp" />
+            <TextView
+                android:id="@+id/offertaCorrente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/expirationTextView"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/imageProduct"
+                android:text="Offerta attuale:"
+                android:textSize="16dp" />
 
-    <TextView
-        android:id="@+id/offertaCorrente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/expirationTextView"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/imageProduct"
-        android:text="Offerta attuale:"
-        android:textSize="16dp" />
+            <TextView
+                android:id="@+id/valoreCorrenteTF"
+                android:layout_width="87dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/expirationTextView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="3dp"
+                android:layout_toEndOf="@+id/offertaCorrente"
+                android:text="300$"
+                android:textColor="#00CC66"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-
-    <TextView
-        android:id="@+id/valoreCorrenteTF"
-        android:layout_width="87dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/expirationTextView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="3dp"
-        android:layout_toEndOf="@+id/offertaCorrente"
-        android:text="300$"
-        android:textColor="#00CC66"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-
-
-
 
 </RelativeLayout>
