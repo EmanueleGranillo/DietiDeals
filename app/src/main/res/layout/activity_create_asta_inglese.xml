@@ -129,7 +129,7 @@
         android:layout_below="@id/baseAstaEditText"
         android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true"
-        android:hint="Inserisci soglia di rialzo (opzionale)"
+        android:hint="Inserisci soglia di rialzo (default €10)"
         android:inputType="numberDecimal" />
 
     <Button

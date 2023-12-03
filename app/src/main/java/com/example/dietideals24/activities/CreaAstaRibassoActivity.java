@@ -64,8 +64,11 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         numberPickerHours.setMaxValue(23);
         numberPickerMinutes.setMinValue(0);
         numberPickerMinutes.setMaxValue(59);
+        numberPickerHours.setValue(1);
         textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
         timerInsertedString = (String.format("0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+        timerInSecondi = convertiStringaInSecondi(timerInsertedString);
+        aggiornaDataScadenza((int) timerInSecondi);
 
 
         // GET EXTRAS

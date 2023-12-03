@@ -176,11 +176,10 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
         if(aste.get(position).getTipologia().equals("asta al ribasso")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_ribasso, null);
             TextView titoloTextView = (TextView) convertView.findViewById(R.id.titoloRibassoTextView);
-            TextView prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.valoreCorrenteRibasso);
             TextView conclusaRibassoTextView = (TextView) convertView.findViewById(R.id.conclusaRibassoTextView);
-            TextView sogliaDecremento = (TextView) convertView.findViewById(R.id.sogliaDecrementoValueRibasso);
             productImage = (ImageView) convertView.findViewById(R.id.productRibassoImageView);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
+            conclusaRibassoTextView.setVisibility(View.INVISIBLE);
 
             Calendar calendar = Calendar.getInstance();
             Date dataOraAttuale = calendar.getTime();

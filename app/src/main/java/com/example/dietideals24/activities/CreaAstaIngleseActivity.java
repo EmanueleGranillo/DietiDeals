@@ -73,14 +73,18 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         tipologiaPosition = getIntent().getIntExtra("tipologiaPosition", tipologiaPosition);
         categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
         categoriaPosition = getIntent().getIntExtra("categoriaPosition", categoriaPosition);
+        sogliaRialzoMinimaBigD = new BigDecimal(10);
 
         // Gestione timer
         numberPickerHoursIng.setMinValue(0);
         numberPickerHoursIng.setMaxValue(23);
         numberPickerMinutesIng.setMinValue(0);
         numberPickerMinutesIng.setMaxValue(59);
+        numberPickerHoursIng.setValue(1);
         timerInsertedTextView.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
         timerInserted = (String.format("0%s:0%s:00", numberPickerHoursIng.getValue(), numberPickerMinutesIng.getValue()));
+        timerInSecondi = convertiStringaInSecondi(timerInserted);
+        aggiornaDataScadenza((int) timerInSecondi);
 
         numberPickerHoursIng.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
@@ -237,7 +241,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         if(!(sogliaRialzoMinimaEditText.getText().toString().isEmpty()) && (sogliaRialzoMinimaEditText.getText().toString().length() > 15)){
             sogliaRialzoErrorTextView.setText("Inserire una soglia di rialzo più bassa");
             return false;
-        } else {
+        } else if(!(sogliaRialzoMinimaEditText.getText().toString().isEmpty())){
             try {
                 sogliaRialzoMinimaBigD = new BigDecimal(sogliaRialzoMinimaEditText.getText().toString().trim());
             } catch (NumberFormatException e) {
@@ -245,6 +249,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
                 e.printStackTrace(); // Tratta l'errore di conversione come necessario
             }
         }
+
         return true;
     }
 
