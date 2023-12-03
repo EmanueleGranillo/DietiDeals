@@ -17,15 +17,7 @@ import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class CustomBaseAdapterProducts extends BaseAdapter {
     Context context;
@@ -36,6 +28,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
     String imageBase64, dateString;
     Date date;
+    private TextView titoloTextView, scadenzaDataTextView, prezzoAttualeTextView;
 
     // timeAttuale, timeScadenza,
 
@@ -66,28 +59,13 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
         if(aste.get(position).getTipologia().equals("asta a tempo fisso")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_t_f, null);
-            TextView titoloTextView = (TextView) convertView.findViewById(R.id.titleTF);
-            TextView scadenzaDataTextView = (TextView) convertView.findViewById(R.id.expirationTextViewValueTF);
-            TextView prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.valoreCorrenteTF);
-            productImage = (ImageView) convertView.findViewById(R.id.imageProduct);
+            titoloTextView = (TextView) convertView.findViewById(R.id.titoloTFTextView);
+            scadenzaDataTextView = (TextView) convertView.findViewById(R.id.dataScadenzaValueTextView);
+            prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.valoreCorrenteTFTextView);
+            productImage = (ImageView) convertView.findViewById(R.id.productTFImageView);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
-
-
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-            try {
-                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
-                dateString = outputFormat.format(date);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            scadenzaDataTextView.setText(dateString);
-            prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€");
-
-            titolo.setText(aste.get(position).getNomeProdotto());
-            data.setText(aste.get(position).getDataScadenzaTF());
-            //prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+            scadenzaDataTextView.setText(aste.get(position).getDataScadenzaTF());
+            // prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€"); nuovo
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
@@ -109,13 +87,13 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
         if(aste.get(position).getTipologia().equals("asta inglese")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_english, null);
-            TextView titolo = (TextView) convertView.findViewById(R.id.titleIng);
-            TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteIng);
-            TextView tempoRimanente = (TextView) convertView.findViewById(R.id.timeLeftValueIng);
-            TextView sogliaRialzo = (TextView) convertView.findViewById(R.id.sogliaRialzoValueIng);
-            productImage = (ImageView) convertView.findViewById(R.id.imageProductIng);
-            titolo.setText(aste.get(position).getNomeProdotto());
-            prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+            TextView titoloTextView = (TextView) convertView.findViewById(R.id.titoloIngleseTextView);
+            TextView prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.baseAstaIngleseValueTextView);
+            TextView tempoRimanente = (TextView) convertView.findViewById(R.id.scadenzaIngleseValueTextView);
+            TextView sogliaRialzo = (TextView) convertView.findViewById(R.id.sogliaRialzoValueTextView);
+            productImage = (ImageView) convertView.findViewById(R.id.productIngleseImageView);
+            titoloTextView.setText(aste.get(position).getNomeProdotto());
+            //prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€");
             //tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaRialzo.setText(aste.get(position).getSogliaRialzoMinima().toString() + "€");
 
@@ -130,51 +108,17 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 productImage.setImageResource(R.mipmap.ic_no_icon_foreground);
             }
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
-
-/*
-            try {
-                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
-                dateString = outputFormat.format(date);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            Date currentDate1 = new Date();
-            SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-            String formattedDate2 = dateFormat2.format(currentDate1);
-
-            String dateString2 = aste.get(position).getDataScadenzaTF();
-            String dateString1 = "2023-12-03T13:30:00";
-
-            // Parsa le date
-            LocalDateTime dateTime1 = LocalDateTime.parse(dateString1, DateTimeFormatter.ISO_DATE_TIME);
-            LocalDateTime dateTime2 = LocalDateTime.parse(dateString2, DateTimeFormatter.ISO_DATE_TIME);
-
-            // Calcola la differenza in secondi usando Duration
-            Duration duration = Duration.between(dateTime1, dateTime2);
-            long secondsUsingDuration = duration.getSeconds();
         }
-
-*/
-
-
-
-
-
-
-
-
-
 
         if(aste.get(position).getTipologia().equals("asta al ribasso")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_ribasso, null);
-            TextView titolo = (TextView) convertView.findViewById(R.id.titleRibasso);
-            TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteRibasso);
-            TextView tempoRimanente = (TextView) convertView.findViewById(R.id.decrementoTimerValueRibasso);
+            TextView titoloTextView = (TextView) convertView.findViewById(R.id.titoloRibassoTextView);
+            TextView prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.valoreCorrenteRibasso);
+            //TextView tempoRimanente = (TextView) convertView.findViewById(R.id.decrementoTimerValueRibasso);
             TextView sogliaDecremento = (TextView) convertView.findViewById(R.id.sogliaDecrementoValueRibasso);
-            productImage = (ImageView) convertView.findViewById(R.id.imageProductRibasso);
-            titolo.setText(aste.get(position).getNomeProdotto());
-//            if(!aste.get(position).getOffertaAttuale().toString().isEmpty()){
+            productImage = (ImageView) convertView.findViewById(R.id.productRibassoImageView);
+            titoloTextView.setText(aste.get(position).getNomeProdotto());
+            /*if(!aste.get(position).getOffertaAttuale().toString().isEmpty()){
             //              prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
             //}
             //else {
@@ -183,6 +127,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             //tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "€");
 
+             */
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
                 imageBase64 = aste.get(position).getFotoProdotto();

@@ -19,99 +19,96 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/titleTF"
-                android:layout_width="249dp"
+                android:id="@+id/titoloTFTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="5dp"
-                android:layout_toEndOf="@+id/imageProduct"
-                android:text="Stampante 3D buone condizioni"
-                android:textSize="20dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/productTFImageView"
+                android:text="Fac-Simile Tempo fisso"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <ImageView
-            android:id="@+id/imageProduct"
+            android:id="@+id/productTFImageView"
             android:layout_width="150dp"
             android:layout_height="167dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp" />
 
             <TextView
-                android:id="@+id/tipologiaAstaValueTF"
-                android:layout_width="160dp"
+                android:id="@+id/tipologiaAstaTFValueTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/titleTF"
+                android:layout_below="@+id/titoloTFTextView"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="3dp"
-                android:layout_toEndOf="@+id/tipologiaAstaTF"
+                android:layout_toEndOf="@+id/tipologiaAstaTFTextView"
                 android:text="Tempo fisso"
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/tipologiaAstaTF"
+                android:id="@+id/tipologiaAstaTFTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/titleTF"
+                android:layout_below="@+id/titoloTFTextView"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="21dp"
-                android:layout_toEndOf="@+id/imageProduct"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/productTFImageView"
                 android:text="Tipologia:"
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/expirationTextView"
+                android:id="@+id/dataScadenzaTextView"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tipologiaAstaTF"
+                android:layout_below="@id/tipologiaAstaTFTextView"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
-                android:layout_toEndOf="@+id/imageProduct"
+                android:layout_toEndOf="@+id/productTFImageView"
                 android:text="Fine asta:"
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/expirationTextViewValueTF"
+                android:id="@+id/dataScadenzaValueTextView"
                 android:layout_width="105dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tipologiaAstaValueTF"
+                android:layout_below="@id/tipologiaAstaTFValueTextView"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="43dp"
-                android:layout_toEndOf="@+id/expirationTextView"
+                android:layout_toEndOf="@+id/dataScadenzaTextView"
                 android:text="25/12/2024"
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/offertaCorrente"
+                android:id="@+id/offertaCorrenteTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/expirationTextView"
+                android:layout_below="@id/dataScadenzaTextView"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/imageProduct"
+                android:layout_toEndOf="@+id/productTFImageView"
                 android:text="Offerta attuale:"
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/valoreCorrenteTF"
+                android:id="@+id/valoreCorrenteTFTextView"
                 android:layout_width="87dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/expirationTextView"
+                android:layout_below="@id/dataScadenzaTextView"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="11dp"
                 android:layout_marginEnd="3dp"
-                android:layout_toEndOf="@+id/offertaCorrente"
-                android:text="300$"
-                android:textColor="#00CC66"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:layout_toEndOf="@+id/offertaCorrenteTextView"
+                android:text="€tot"
+                android:textSize="16dp" />
 
         </RelativeLayout>
 

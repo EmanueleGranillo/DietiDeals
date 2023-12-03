@@ -19,120 +19,121 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/titleIng"
-                android:layout_width="wrap_content"
+                android:id="@+id/titoloIngleseTextView"
+                android:layout_width="249dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="7dp"
-                android:text="Macbook Pro 14 COME NUOVO!!!"
-                android:textSize="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@+id/productIngleseImageView"
+                android:text="Fac-Simile Inglese"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imageProductIng"
-                android:layout_width="156dp"
-                android:layout_height="156dp"
-                android:layout_below="@+id/titleIng"
-                android:layout_marginTop="16dp" />
+                android:id="@+id/productIngleseImageView"
+                android:layout_width="150dp"
+                android:layout_height="167dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp" />
 
             <TextView
-                android:id="@+id/tipologiaAstaValueIng"
-                android:layout_width="136dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/titleIng"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="5dp"
-                android:layout_toEndOf="@+id/tipologiaAstaIng"
-                android:text="All'inglese"
-                android:textSize="19dp" />
-
-            <TextView
-                android:id="@+id/tipologiaAstaIng"
-                android:layout_width="88dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/titleIng"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/imageProductIng"
-                android:text="Tipologia:"
-                android:textSize="19dp" />
-
-            <TextView
-                android:id="@+id/baseAstaIng"
+                android:id="@+id/tipologiaAstaIngleseValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tipologiaAstaIng"
-                android:layout_marginStart="22dp"
+                android:layout_below="@+id/titoloIngleseTextView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
                 android:layout_marginTop="8dp"
-                android:layout_toEndOf="@+id/imageProductIng"
-                android:text="Base asta:"
-                android:textSize="19sp" />
+                android:layout_marginEnd="3dp"
+                android:layout_toEndOf="@+id/tipologiaAstaIngleseTextView"
+                android:text="All'inglese"
+                android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/timeLeftIng"
+                android:id="@+id/tipologiaAstaIngleseTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/baseAstaIng"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/imageProductIng"
-                android:text="Termina in:"
-                android:textSize="19dp" />
+                android:layout_below="@+id/titoloIngleseTextView"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/productIngleseImageView"
+                android:text="Tipologia:"
+                android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/valoreCorrenteIng"
-                android:layout_width="111dp"
+                android:id="@+id/baseAstaTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tipologiaAstaIng"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="9dp"
-                android:layout_toEndOf="@+id/baseAstaIng"
-                android:text="300$"
-                android:textColor="#00CC66"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/timeLeftValueIng"
-                android:layout_width="116dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/baseAstaIng"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="12dp"
-                android:layout_toEndOf="@+id/timeLeftIng"
-                android:text="1:00:00"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/sogliaRialzoIng"
-                android:layout_width="116dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/timeLeftIng"
-                android:layout_marginStart="22dp"
+                android:layout_below="@id/tipologiaAstaIngleseTextView"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="7dp"
-                android:layout_toEndOf="@+id/imageProductIng"
-                android:text="soglia rialzo:"
-                android:textSize="19dp" />
+                android:layout_toEndOf="@+id/productIngleseImageView"
+                android:text="Base asta:"
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/sogliaRialzoValueIng"
-                android:layout_width="116dp"
+                android:id="@+id/scadenzaIngleseTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/timeLeftValueIng"
+                android:layout_below="@+id/baseAstaTextView"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/productIngleseImageView"
+                android:text="Termina in:"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/baseAstaIngleseValueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tipologiaAstaIngleseTextView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="3dp"
+                android:layout_toEndOf="@+id/baseAstaTextView"
+                android:text="€tot"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/scadenzaIngleseValueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/baseAstaTextView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="3dp"
+                android:layout_toEndOf="@+id/scadenzaIngleseTextView"
+                android:text="HH:MM:0SS"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/sogliaRialzoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scadenzaIngleseTextView"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/productIngleseImageView"
+                android:text="Soglia rialzo:"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/sogliaRialzoValueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scadenzaIngleseValueTextView"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="1dp"
-                android:layout_toEndOf="@+id/sogliaRialzoIng"
-                android:text="20$"
-                android:textSize="20sp" />
+                android:layout_toEndOf="@+id/sogliaRialzoTextView"
+                android:text="€soglia"
+                android:textSize="16dp" />
 
         </RelativeLayout>
 
