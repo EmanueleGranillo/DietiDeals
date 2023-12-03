@@ -17,6 +17,15 @@ import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CustomBaseAdapterProducts extends BaseAdapter {
     Context context;
@@ -25,7 +34,10 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
     ImageView productImage;
 
-    String imageBase64;
+    String imageBase64, dateString;
+    Date date;
+
+    // timeAttuale, timeScadenza,
 
     public CustomBaseAdapterProducts (Context ctx, ArrayList<Asta> aste){
         this.context = ctx;
@@ -51,15 +63,28 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+
         if(aste.get(position).getTipologia().equals("asta a tempo fisso")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_t_f, null);
-            TextView titolo = (TextView) convertView.findViewById(R.id.titleTF);
-            TextView data = (TextView) convertView.findViewById(R.id.expirationTextViewValueTF);
-            TextView prezzoAttuale = (TextView) convertView.findViewById(R.id.valoreCorrenteTF);
+            TextView titoloTextView = (TextView) convertView.findViewById(R.id.titleTF);
+            TextView scadenzaDataTextView = (TextView) convertView.findViewById(R.id.expirationTextViewValueTF);
+            TextView prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.valoreCorrenteTF);
             productImage = (ImageView) convertView.findViewById(R.id.imageProduct);
-            titolo.setText(aste.get(position).getNomeProdotto());
-            data.setText(aste.get(position).getDataScadenzaTF());
-            prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+            titoloTextView.setText(aste.get(position).getNomeProdotto());
+
+
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            try {
+                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
+                dateString = outputFormat.format(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            scadenzaDataTextView.setText(dateString);
+            prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
@@ -71,9 +96,14 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 // Immagine di fallback o gestisci la situazione come desideri
                 productImage.setImageResource(R.drawable.shopping_bag);
             }
-
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
         }
+
+
+
+
+
+
         if(aste.get(position).getTipologia().equals("asta inglese")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_english, null);
             TextView titolo = (TextView) convertView.findViewById(R.id.titleIng);
@@ -94,11 +124,45 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 productImage.setImageBitmap(decodedByte);
             } else {
                 // Immagine di fallback o gestisci la situazione come desideri
-                productImage.setImageResource(R.drawable.shopping_bag);
+                productImage.setImageResource(R.mipmap.ic_no_icon_foreground);
+            }
+            productImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
+            try {
+                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
+                dateString = outputFormat.format(date);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            productImage.setScaleType(ImageView.ScaleType.FIT_XY);
+            Date currentDate1 = new Date();
+            SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            String formattedDate2 = dateFormat2.format(currentDate1);
+
+            String dateString2 = aste.get(position).getDataScadenzaTF();
+            String dateString1 = "2023-12-03T13:30:00";
+
+            // Parsa le date
+            LocalDateTime dateTime1 = LocalDateTime.parse(dateString1, DateTimeFormatter.ISO_DATE_TIME);
+            LocalDateTime dateTime2 = LocalDateTime.parse(dateString2, DateTimeFormatter.ISO_DATE_TIME);
+
+            // Calcola la differenza in secondi usando Duration
+            Duration duration = Duration.between(dateTime1, dateTime2);
+            long secondsUsingDuration = duration.getSeconds();
         }
+
+
+
+
+
+
+
+
+
+
+
+
         if(aste.get(position).getTipologia().equals("asta al ribasso")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_ribasso, null);
             TextView titolo = (TextView) convertView.findViewById(R.id.titleRibasso);

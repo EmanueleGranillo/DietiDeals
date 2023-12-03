@@ -240,10 +240,6 @@ public class ModificaProfiloActivity extends AppCompatActivity {
             numeroTelefonoErrorTextView.setText("Numero di telefono troppo lungo!");
             return false;
         }
-        if(base64String.length() > 8000){
-            immagineErrorTextView.setText("Dimensione dell'immagine troppo grande!");
-            return false;
-        }
         return true;
     }
 }

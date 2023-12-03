@@ -78,7 +78,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         pallinoImg.setVisibility(View.INVISIBLE);
 
 
-        controllaNotifiche();
+        //controllaNotifiche();
 
         riempiLista();
 
@@ -246,7 +246,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
     }
 
-    private void controllaNotifiche() {
+    /*private void controllaNotifiche() {
         Call<NumeroResponse> call = apiService.checkNotifications(nickname);
         call.enqueue(new Callback<NumeroResponse>() {
             @Override
@@ -265,7 +265,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita per check notifiche", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
     private void riempiLista() {
         Call<ArrayList<Asta>> call = apiService.getAste();
