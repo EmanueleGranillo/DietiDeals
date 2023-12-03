@@ -59,7 +59,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             productImage = (ImageView) convertView.findViewById(R.id.imageProduct);
             titolo.setText(aste.get(position).getNomeProdotto());
             data.setText(aste.get(position).getDataScadenzaTF());
-            prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+            //prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
@@ -107,7 +107,12 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView sogliaDecremento = (TextView) convertView.findViewById(R.id.sogliaDecrementoValueRibasso);
             productImage = (ImageView) convertView.findViewById(R.id.imageProductRibasso);
             titolo.setText(aste.get(position).getNomeProdotto());
-            prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+//            if(!aste.get(position).getOffertaAttuale().toString().isEmpty()){
+            //              prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+            //}
+            //else {
+              //  prezzoAttuale.setText("Nessun offerta");
+            //}
             //tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "€");
 

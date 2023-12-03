@@ -23,17 +23,11 @@ public class CreateAstaTFRequest {
     @SerializedName("keywords")
     private String paroleChiave;
 
-    @SerializedName("statoAsta")
-    private int statoAsta;
-
     @SerializedName("data_scadenza")
     private String dataScadenzaTF;
 
     @SerializedName("prezzo_iniziale")
     private BigDecimal prezzoIniziale;
-
-    @SerializedName("offerta_attuale")
-    private BigDecimal offertaAttuale;
 
     @SerializedName("soglia_segreta")
     private BigDecimal sogliaMinimaSegreta;
@@ -42,17 +36,15 @@ public class CreateAstaTFRequest {
     private String creatore;
 
 
-    public CreateAstaTFRequest(String nomeProdotto, String tipologia, String descrizione, String image, String categoria, String paroleChiave, int statoAsta, String dataScadenzaTF, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaMinimaSegreta, String creatore) {
+    public CreateAstaTFRequest(String nomeProdotto, String tipologia, String descrizione, String image, String categoria, String paroleChiave, String dataScadenzaTF, BigDecimal prezzoIniziale, BigDecimal sogliaMinimaSegreta, String creatore) {
         this.nomeProdotto = nomeProdotto;
         this.tipologia = tipologia;
         this.descrizione = descrizione;
         this.image = image;
         this.categoria = categoria;
         this.paroleChiave = paroleChiave;
-        this.statoAsta = statoAsta;
         this.dataScadenzaTF = dataScadenzaTF;
         this.prezzoIniziale = prezzoIniziale;
-        this.offertaAttuale = offertaAttuale;
         this.sogliaMinimaSegreta = sogliaMinimaSegreta;
         this.creatore = creatore;
     }

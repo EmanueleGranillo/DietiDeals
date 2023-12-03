@@ -37,7 +37,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
     private Date dataScadenza;
     private int statoAsta, tipologiaPosition, categoriaPosition;
     private Button creaAstaIngleseButton, backButton;
-    private BigDecimal prezzoBaseAstaBigD, sogliaRialzoMinimaBigD, prezzoInizialeBigD;
+    private BigDecimal sogliaRialzoMinimaBigD, prezzoInizialeBigD;
     String prezzoBaseAsta;
     String sogliaRialzoMinima;
     String prezzoIniziale;
@@ -171,7 +171,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
                 sogliaRialzoErrorTextView.setText("");
                 timerInsertedErrorTextView.setText("");
                 if(check()){
-                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaString, prezzoInizialeBigD, prezzoBaseAstaBigD, sogliaRialzoMinimaBigD, nickname, timerInSecondi);
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaString, prezzoInizialeBigD, sogliaRialzoMinimaBigD, nickname, timerInSecondi);
                     Intent goToHomePageVenditore = new Intent(CreaAstaIngleseActivity.this, HomepageVenditoreActivity.class);
                     goToHomePageVenditore.putExtra("nickname", nickname);
                     goToHomePageVenditore.putExtra("tipo", tipo);
@@ -185,11 +185,11 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
 
 
 
-    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, String creatore, long timerInSecondi) {
+    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal sogliaSegreta, String creatore, long timerInSecondi) {
         if(base64Image == null){
             base64Image = "";
         }
-        CreateAstaIngRequest createAstaRequest = new CreateAstaIngRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, offertaAttuale, sogliaSegreta, creatore, timerInSecondi);
+        CreateAstaIngRequest createAstaRequest = new CreateAstaIngRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, sogliaSegreta, creatore, timerInSecondi);
         Call<ResponseBody> call = apiService.createAstaIng(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
