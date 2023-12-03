@@ -23,6 +23,7 @@ public class AstaIngleseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_asta_inglese);
 
         nickname = getIntent().getStringExtra("nickname");
+        //Fare controlli sul tipo
         tipo = getIntent().getStringExtra("tipo");
 
         Button backBtn = findViewById(R.id.backButtonInfoAsta);

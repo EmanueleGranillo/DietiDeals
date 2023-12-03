@@ -4,20 +4,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.SystemClock;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dietideals24.activities.AstaIngleseActivity;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.R;
 
+import org.w3c.dom.Text;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class CustomBaseAdapterProducts extends BaseAdapter {
     Context context;
@@ -27,7 +39,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
     ImageView productImage;
 
     String imageBase64, dateString;
-    Date date;
+    Date date = null;
     private TextView titoloTextView, scadenzaDataTextView, prezzoAttualeTextView;
 
     // timeAttuale, timeScadenza,
@@ -64,7 +76,14 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.valoreCorrenteTFTextView);
             productImage = (ImageView) convertView.findViewById(R.id.productTFImageView);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
-            scadenzaDataTextView.setText(aste.get(position).getDataScadenzaTF());
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            try {
+                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            scadenzaDataTextView.setText(outputFormat.format(date));
             // prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€"); nuovo
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
@@ -88,14 +107,46 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
         if(aste.get(position).getTipologia().equals("asta inglese")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_english, null);
             TextView titoloTextView = (TextView) convertView.findViewById(R.id.titoloIngleseTextView);
-            TextView prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.baseAstaIngleseValueTextView);
-            TextView tempoRimanente = (TextView) convertView.findViewById(R.id.scadenzaIngleseValueTextView);
-            TextView sogliaRialzo = (TextView) convertView.findViewById(R.id.sogliaRialzoValueTextView);
+            TextView conclusaIngleseTextView = convertView.findViewById(R.id.conclusaIngleseTextView);
+            conclusaIngleseTextView.setVisibility(View.INVISIBLE);
+            TextView offertaAttualeIngleseTextView = convertView.findViewById(R.id.offertaAttualeIngleseTextView);
             productImage = (ImageView) convertView.findViewById(R.id.productIngleseImageView);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
-            //prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€");
-            //tempoRimanente.setText(aste.get(position).getTimer().toString());
-            sogliaRialzo.setText(aste.get(position).getSogliaRialzoMinima().toString() + "€");
+
+            Calendar calendar = Calendar.getInstance();
+            Date dataOraAttuale = calendar.getTime();
+            calendar.setTime(dataOraAttuale);
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+
+            try {
+                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            long timer = date.getTime() - dataOraAttuale.getTime();
+
+            // GESTIONE TIMER
+            Chronometer chronometer = convertView.findViewById(R.id.chronometerInglese);
+            long elapsedTime = SystemClock.elapsedRealtime() + timer;
+            chronometer.setBase(elapsedTime);
+            chronometer.start();
+
+            chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                @Override
+                public void onChronometerTick(Chronometer chronometer) {
+                    if(chronometer.getBase() < SystemClock.elapsedRealtime() + 10000) {
+                        chronometer.setTextColor(Color.RED);
+                    }
+                    if(chronometer.getBase() < SystemClock.elapsedRealtime() + 1) {
+                        chronometer.stop();
+                        conclusaIngleseTextView.setVisibility(View.VISIBLE);
+                        chronometer.setVisibility(View.INVISIBLE);
+                        //manda notifiche
+
+                    }
+                }
+            });
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
@@ -110,24 +161,63 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
         if(aste.get(position).getTipologia().equals("asta al ribasso")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_ribasso, null);
             TextView titoloTextView = (TextView) convertView.findViewById(R.id.titoloRibassoTextView);
             TextView prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.valoreCorrenteRibasso);
-            //TextView tempoRimanente = (TextView) convertView.findViewById(R.id.decrementoTimerValueRibasso);
+            TextView conclusaRibassoTextView = (TextView) convertView.findViewById(R.id.conclusaRibassoTextView);
             TextView sogliaDecremento = (TextView) convertView.findViewById(R.id.sogliaDecrementoValueRibasso);
             productImage = (ImageView) convertView.findViewById(R.id.productRibassoImageView);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
-            /*if(!aste.get(position).getOffertaAttuale().toString().isEmpty()){
-            //              prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
-            //}
-            //else {
-              //  prezzoAttuale.setText("Nessun offerta");
-            //}
-            //tempoRimanente.setText(aste.get(position).getTimer().toString());
-            sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "€");
 
-             */
+            Calendar calendar = Calendar.getInstance();
+            Date dataOraAttuale = calendar.getTime();
+            calendar.setTime(dataOraAttuale);
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+
+            try {
+                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            long timer = date.getTime() - dataOraAttuale.getTime();
+
+            // GESTIONE TIMER
+            Chronometer chronometer = convertView.findViewById(R.id.chronometerRibasso);
+            long elapsedTime = SystemClock.elapsedRealtime() + timer;
+            chronometer.setBase(elapsedTime);
+            chronometer.start();
+
+            chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                @Override
+                public void onChronometerTick(Chronometer chronometer) {
+                    if(chronometer.getBase() < SystemClock.elapsedRealtime() + 10000) {
+                        chronometer.setTextColor(Color.RED);
+                    }
+                    if(chronometer.getBase() < SystemClock.elapsedRealtime() + 1) {
+                        chronometer.stop();
+                        conclusaRibassoTextView.setVisibility(View.VISIBLE);
+                        chronometer.setVisibility(View.INVISIBLE);
+                        //manda notifiche
+
+                    }
+                }
+            });
+
+
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
                 imageBase64 = aste.get(position).getFotoProdotto();

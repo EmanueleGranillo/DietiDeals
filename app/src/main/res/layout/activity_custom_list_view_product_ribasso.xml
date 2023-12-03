@@ -135,6 +135,28 @@
                 android:text="€tot"
                 android:textSize="16dp" />
 
+            <Chronometer
+                android:id="@+id/chronometerRibasso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:countDown="true"
+                android:textSize="30dp"></Chronometer>
+
+            <TextView
+                android:id="@+id/conclusaRibassoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/decrementoTimerValueRibasso"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="27dp"
+                android:layout_toEndOf="@+id/soglisDecrementoRibasso"
+                android:text="€tot"
+                android:textSize="16dp" />
+
+
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

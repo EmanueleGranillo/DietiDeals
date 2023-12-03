@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -103,6 +104,38 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
 
 
 
+        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(aste.get(position).getTipologia().toString().equals("asta inglese")){
+                    Intent goToAstaIngleseActivity = new Intent(HomepageVenditoreActivity.this, AstaIngleseActivity.class);
+                    goToAstaIngleseActivity.putExtra("nickname", nickname);
+                    goToAstaIngleseActivity.putExtra("tipo", tipo);
+                    goToAstaIngleseActivity.putExtra("asta", aste.get(position));
+                    startActivity(goToAstaIngleseActivity);
+                }
+                if(aste.get(position).getTipologia().toString().equals("asta al ribasso")){
+                    Intent goToAstaRibassoActivity = new Intent(HomepageVenditoreActivity.this, AstaRibassoActivity.class);
+                    goToAstaRibassoActivity.putExtra("nickname", nickname);
+                    goToAstaRibassoActivity.putExtra("tipo", tipo);
+                    goToAstaRibassoActivity.putExtra("asta", aste.get(position));
+                    startActivity(goToAstaRibassoActivity);
+                }
+                if(aste.get(position).getTipologia().toString().equals("asta a tempo fisso")){
+                    Intent goToAstaTempoFissoActivity = new Intent(HomepageVenditoreActivity.this, AstaTempoFissoActivity.class);
+                    goToAstaTempoFissoActivity.putExtra("nickname", nickname);
+                    goToAstaTempoFissoActivity.putExtra("tipo", tipo);
+                    goToAstaTempoFissoActivity.putExtra("asta", aste.get(position));
+                    startActivity(goToAstaTempoFissoActivity);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 
@@ -225,7 +258,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
     }
 
     public void riempiListaAttive(){
-        Call<ArrayList<Asta>> call = apiService.getAstePerVenditore(nickname);
+        Call<ArrayList<Asta>> call = apiService.getAstePerVenditoreAttive(nickname);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
@@ -233,10 +266,6 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     aste.clear();
                     aste.addAll(response.body());
-                    Iterator<Asta> iterator = aste.iterator();
-                    while(iterator.hasNext()){
-                        Asta a = iterator.next();
-                    }
                     // Aggiorna la ListView con i nuovi dati custom
                     customBaseAdapterProducts.notifyDataSetChanged();
 
@@ -253,7 +282,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
     }
 
     public void riempiListaConcluse(){
-        Call<ArrayList<Asta>> call = apiService.getAstePerVenditore(nickname);
+        Call<ArrayList<Asta>> call = apiService.getAstePerVenditoreConcluse(nickname);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {

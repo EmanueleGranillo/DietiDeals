@@ -18,6 +18,8 @@ public class CustomListViewProductEnglish extends AppCompatActivity {
         setContentView(R.layout.activity_custom_list_view_product_english);
     }
 
+
+
     public static void setListViewHeightBasedOnChildren(ListView listView)
     {
         ListAdapter listAdapter = listView.getAdapter();

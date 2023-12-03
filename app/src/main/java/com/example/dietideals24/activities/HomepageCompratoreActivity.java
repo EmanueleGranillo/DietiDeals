@@ -7,6 +7,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -82,6 +83,38 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
         riempiLista();
 
+        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(aste.get(position).getTipologia().toString().equals("asta inglese")){
+                    Intent goToAstaIngleseActivity = new Intent(HomepageCompratoreActivity.this, AstaIngleseActivity.class);
+                    goToAstaIngleseActivity.putExtra("nickname", nickname);
+                    goToAstaIngleseActivity.putExtra("tipo", tipo);
+                    goToAstaIngleseActivity.putExtra("asta", aste.get(position));
+                    startActivity(goToAstaIngleseActivity);
+                }
+                if(aste.get(position).getTipologia().toString().equals("asta al ribasso")){
+                    Intent goToAstaRibassoActivity = new Intent(HomepageCompratoreActivity.this, AstaRibassoActivity.class);
+                    goToAstaRibassoActivity.putExtra("nickname", nickname);
+                    goToAstaRibassoActivity.putExtra("tipo", tipo);
+                    goToAstaRibassoActivity.putExtra("asta", aste.get(position));
+                    startActivity(goToAstaRibassoActivity);
+                }
+                if(aste.get(position).getTipologia().toString().equals("asta a tempo fisso")){
+                    Intent goToAstaTempoFissoActivity = new Intent(HomepageCompratoreActivity.this, AstaTempoFissoActivity.class);
+                    goToAstaTempoFissoActivity.putExtra("nickname", nickname);
+                    goToAstaTempoFissoActivity.putExtra("tipo", tipo);
+                    goToAstaTempoFissoActivity.putExtra("asta", aste.get(position));
+                    startActivity(goToAstaTempoFissoActivity);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         profiloBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -277,7 +310,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     aste.clear();
                     aste.addAll(response.body());
 
-
                     // Aggiorna la ListView con i nuovi dati
                     customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
                     listView.setAdapter(customBaseAdapterProducts);
@@ -330,15 +362,10 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
-                // Gestisci la risposta del server
                 if (response.isSuccessful()) {
                     aste.clear();
                     aste.addAll(response.body());
-
-                    // Aggiorna la ListView con i nuovi dati
                     customBaseAdapterProducts.notifyDataSetChanged();
-
-                    //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
