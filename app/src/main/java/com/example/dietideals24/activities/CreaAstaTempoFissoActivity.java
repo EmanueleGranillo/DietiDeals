@@ -30,12 +30,12 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
 
     private MyApiService apiService;
     private DatePicker datePicker;
-    private String activity = "creatempofisso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, selectedDate = "";
+    private String activity = "creatempofisso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, imageString, descrizione, selectedDate = "";
     private TextView textViewSelectedDate, selezionaDataErrorTextView, prezzoErrorTextView, sogliaMinimaErrorTextView;
     private EditText prezzoInizialeEditText, sogliaMinimaEditText;
-    private int statoAsta, tipologiaPosition, categoriaPosition;
+    private int tipologiaPosition, categoriaPosition;
     private Button creaAstaTFButton, backButton;
-    private BigDecimal prezzoInizialeBD, offertaAttualeBD, sogliaMinimaSegretaBD;
+    private BigDecimal prezzoInizialeBD, sogliaMinimaSegretaBD;
 
 
     @Override
@@ -61,7 +61,7 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
-        base64Image = getIntent().getStringExtra("imageBase64");
+        imageString = getIntent().getStringExtra("imageString");
         paroleChiave = getIntent().getStringExtra("paroleChiave");
         descrizione = getIntent().getStringExtra("descrizione");
         tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
@@ -89,7 +89,7 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
                 goToCreateAstaPT1.putExtra("activity", activity);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
                 goToCreateAstaPT1.putExtra("tipo", tipo);
-                goToCreateAstaPT1.putExtra("base64Image", base64Image);
+                goToCreateAstaPT1.putExtra("imageString", imageString);
                 goToCreateAstaPT1.putExtra("titoloProdotto", titoloProdotto);
                 goToCreateAstaPT1.putExtra("descrizione", descrizione);
                 goToCreateAstaPT1.putExtra("tipologiaSelezionata", tipologiaSelezionata);
@@ -109,7 +109,18 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
                 sogliaMinimaErrorTextView.setText("");
                 selezionaDataErrorTextView.setText("");
                 if (check()) {
-                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoInizialeBD, offertaAttualeBD, sogliaMinimaSegretaBD, nickname);
+                    System.out.println("titolo prodotto: " + titoloProdotto);
+                    System.out.println("tipologiaSelezionata: " + tipologiaSelezionata);
+                    System.out.println("descrizione: " + descrizione);
+                    System.out.println("imageString: " + imageString.length());
+                    System.out.println(" categoriaSelezionata: " + categoriaSelezionata);
+                    System.out.println(" paroleChiave: " + paroleChiave);
+                    System.out.println(" selectedDate:" + selectedDate);
+                    System.out.println(" prezzoInizialeBD: " + prezzoInizialeBD);
+                    System.out.println(" sogliaMinimaSegretaBD: " + sogliaMinimaSegretaBD);
+                    System.out.println(" nickname: " + nickname);
+
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, selectedDate, prezzoInizialeBD, sogliaMinimaSegretaBD, nickname);
                     Intent goToHomePageVenditore = new Intent(CreaAstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
                     goToHomePageVenditore.putExtra("nickname", nickname);
                     goToHomePageVenditore.putExtra("tipo", tipo);
@@ -145,7 +156,6 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        offertaAttualeBD = prezzoInizialeBD;
         //Controllo lunghezza campi
         if (prezzoInizialeEditText.getText().toString().length() > 15) {
             prezzoErrorTextView.setText("Inserisci un prezzo più piccolo!");
@@ -162,11 +172,8 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         return true;
     }
 
-    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal offertaAttuale, BigDecimal sogliaSegreta, String creatore) {
-        if (base64Image.isEmpty()) {
-            base64Image = "";
-        }
-        CreateAstaTFRequest createAstaRequest = new CreateAstaTFRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, offertaAttuale, sogliaSegreta, creatore);
+    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String imageString, String categoriaSelezionata, String paroleChiave, String selectedDate, BigDecimal prezzoIniziale, BigDecimal sogliaSegreta, String creatore) {
+        CreateAstaTFRequest createAstaRequest = new CreateAstaTFRequest(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, selectedDate, prezzoIniziale, sogliaSegreta, creatore);
         Call<ResponseBody> call = apiService.createAstatf(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

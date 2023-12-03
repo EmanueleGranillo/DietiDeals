@@ -85,6 +85,9 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             scadenzaDataTextView.setText(dateString);
             prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€");
 
+            titolo.setText(aste.get(position).getNomeProdotto());
+            data.setText(aste.get(position).getDataScadenzaTF());
+            //prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
@@ -128,7 +131,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             }
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
 
-
+/*
             try {
                 date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
                 dateString = outputFormat.format(date);
@@ -152,7 +155,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             long secondsUsingDuration = duration.getSeconds();
         }
 
-
+*/
 
 
 
@@ -171,7 +174,12 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             TextView sogliaDecremento = (TextView) convertView.findViewById(R.id.sogliaDecrementoValueRibasso);
             productImage = (ImageView) convertView.findViewById(R.id.imageProductRibasso);
             titolo.setText(aste.get(position).getNomeProdotto());
-            prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+//            if(!aste.get(position).getOffertaAttuale().toString().isEmpty()){
+            //              prezzoAttuale.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+            //}
+            //else {
+              //  prezzoAttuale.setText("Nessun offerta");
+            //}
             //tempoRimanente.setText(aste.get(position).getTimer().toString());
             sogliaDecremento.setText(aste.get(position).getImportoDecremento().toString() + "€");
 
