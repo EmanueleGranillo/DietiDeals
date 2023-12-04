@@ -23,9 +23,6 @@ public class CreateAstaIngRequest {
     @SerializedName("keywords")
     private String paroleChiave;
 
-    @SerializedName("statoAsta")
-    private int statoAsta;
-
     @SerializedName("data_scadenza")
     private String dataScadenzaTF;
 
@@ -45,14 +42,13 @@ public class CreateAstaIngRequest {
 
 
     //asta inglese
-    public CreateAstaIngRequest(String nomeProdotto, String tipologia, String descrizione, String image, String categoria, String paroleChiave, int statoAsta, String dataScadenzaTF, BigDecimal prezzoIniziale, BigDecimal sogliaRialzoMinima, String creatore, long resetTimer) {
+    public CreateAstaIngRequest(String nomeProdotto, String tipologia, String descrizione, String image, String categoria, String paroleChiave, String dataScadenzaTF, BigDecimal prezzoIniziale, BigDecimal sogliaRialzoMinima, String creatore, long resetTimer) {
         this.nomeProdotto = nomeProdotto;
         this.tipologia = tipologia;
         this.descrizione = descrizione;
         this.image = image;
         this.categoria = categoria;
         this.paroleChiave = paroleChiave;
-        this.statoAsta = statoAsta;
         this.dataScadenzaTF = dataScadenzaTF;
         this.prezzoIniziale = prezzoIniziale;
         this.sogliaRialzoMinima = sogliaRialzoMinima;

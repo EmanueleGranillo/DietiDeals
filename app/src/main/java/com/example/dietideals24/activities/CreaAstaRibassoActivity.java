@@ -34,7 +34,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     private EditText baseAstaEditText, decrementoEditText, sogliaMinimaEditText;
     private Button backButton, createAstaRibassoButton;
     private NumberPicker numberPickerHours, numberPickerMinutes;
-    private String activity = "crearibasso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, timerInsertedString, dataScadenzaString;
+    private String activity = "crearibasso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, imageString, descrizione, timerInsertedString, dataScadenzaString;
     private long timerInSecondi;
     private Date dataScadenza;
     private BigDecimal prezzoInizialeBD, importoDecrementoBD, sogliaMinimaBD;
@@ -74,7 +74,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         // GET EXTRAS
         nickname = getIntent().getStringExtra("nickname");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
-        base64Image = getIntent().getStringExtra("imageBase64");
+        imageString = getIntent().getStringExtra("imageString");
         categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
         paroleChiave = getIntent().getStringExtra("paroleChiave");
         descrizione = getIntent().getStringExtra("descrizione");
@@ -155,7 +155,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 goToCreateAstaPT1.putExtra("activity", activity);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
                 goToCreateAstaPT1.putExtra("tipo", tipo);
-                goToCreateAstaPT1.putExtra("base64Image", base64Image);
+                goToCreateAstaPT1.putExtra("imageString", imageString);
                 goToCreateAstaPT1.putExtra("titoloProdotto", titoloProdotto);
                 goToCreateAstaPT1.putExtra("descrizione", descrizione);
                 goToCreateAstaPT1.putExtra("tipologiaSelezionata", tipologiaSelezionata);
@@ -175,7 +175,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 decrementoErrorTextView.setText("");
                 sogliaMinimaErrorTextView.setText("");
                 if(check()){
-                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, importoDecrementoBD, nickname, timerInSecondi);
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, importoDecrementoBD, nickname, timerInSecondi);
                 }
             }
         });
@@ -183,11 +183,11 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
 
 
-    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, String selectedDate, BigDecimal prezzoIniziale, BigDecimal importoDecremento, String creatore, long timerInSecondi) {
-        if(base64Image == null){
-            base64Image = "";
+    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String imageString, String categoriaSelezionata, String paroleChiave, String selectedDate, BigDecimal prezzoIniziale, BigDecimal importoDecremento, String creatore, long timerInSecondi) {
+        if(imageString == null){
+            imageString = "";
         }
-        CreateAstaRibassoRequest createAstaRequest = new CreateAstaRibassoRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, selectedDate, prezzoIniziale, importoDecremento, creatore, timerInSecondi);
+        CreateAstaRibassoRequest createAstaRequest = new CreateAstaRibassoRequest(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, selectedDate, prezzoIniziale, importoDecremento, creatore, timerInSecondi);
         Call<ResponseBody> call = apiService.createAstaRibasso(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

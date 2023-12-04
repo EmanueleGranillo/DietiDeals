@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,7 +28,6 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
 
     String activity;
     ImageView uploadImage;
-    String base64Image;
     private String titoloProdotto;
     private String tipologiaSelezionata;
     private int tipologiaPosition = 0;
@@ -61,8 +61,6 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
 
 
         activity = getIntent().getStringExtra("activity");
-        Toast.makeText(CreaAstaPT1Activity.this, activity, Toast.LENGTH_SHORT).show();
-
         if(activity.equals("homepage")){
             nickname = getIntent().getStringExtra("nickname");
             tipo = getIntent().getStringExtra("tipo");
@@ -70,7 +68,13 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             nickname = getIntent().getStringExtra("nickname");
             tipo = getIntent().getStringExtra("tipo");
             titoloProdotto = getIntent().getStringExtra("titoloProdotto");
-            base64Image = getIntent().getStringExtra("imageBase64");
+
+            imageString = getIntent().getStringExtra("imageString");
+            byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            uploadImage.setImageBitmap(decodedByte);
+            uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
             categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
             paroleChiave = getIntent().getStringExtra("paroleChiave");
             descrizione = getIntent().getStringExtra("descrizione");
@@ -84,7 +88,13 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             nickname = getIntent().getStringExtra("nickname");
             tipo = getIntent().getStringExtra("tipo");
             titoloProdotto = getIntent().getStringExtra("titoloProdotto");
-            base64Image = getIntent().getStringExtra("imageBase64");
+
+            imageString = getIntent().getStringExtra("imageString");
+            byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            uploadImage.setImageBitmap(decodedByte);
+            uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
             categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
             paroleChiave = getIntent().getStringExtra("paroleChiave");
             descrizione = getIntent().getStringExtra("descrizione");
@@ -98,7 +108,13 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             nickname = getIntent().getStringExtra("nickname");
             tipo = getIntent().getStringExtra("tipo");
             titoloProdotto = getIntent().getStringExtra("titoloProdotto");
-            base64Image = getIntent().getStringExtra("imageBase64");
+
+            imageString = getIntent().getStringExtra("imageString");
+            byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            uploadImage.setImageBitmap(decodedByte);
+            uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
             categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
             paroleChiave = getIntent().getStringExtra("paroleChiave");
             descrizione = getIntent().getStringExtra("descrizione");
@@ -109,9 +125,6 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             descrizioneEditText.setText(descrizione);
             keywordsEditText.setText(paroleChiave);
         }
-
-
-
 
 
 
@@ -228,7 +241,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
                         goToCreateAstaInglese.putExtra("nickname", nickname);
                         goToCreateAstaInglese.putExtra("tipo", tipo);
                         goToCreateAstaInglese.putExtra("titoloProdotto", titoloProdotto);
-                        goToCreateAstaInglese.putExtra("imageBase64", imageString);
+                        goToCreateAstaInglese.putExtra("imageString", imageString);
                         goToCreateAstaInglese.putExtra("categoriaSelezionata", categoriaSelezionata);
                         goToCreateAstaInglese.putExtra("paroleChiave", paroleChiave);
                         goToCreateAstaInglese.putExtra("descrizione", descrizione);
@@ -247,7 +260,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
                         goToCreateAstaRibasso.putExtra("nickname", nickname);
                         goToCreateAstaRibasso.putExtra("tipo", tipo);
                         goToCreateAstaRibasso.putExtra("titoloProdotto", titoloProdotto);
-                        goToCreateAstaRibasso.putExtra("imageBase64", imageString);
+                        goToCreateAstaRibasso.putExtra("imageString", imageString);
                         goToCreateAstaRibasso.putExtra("categoriaSelezionata", categoriaSelezionata);
                         goToCreateAstaRibasso.putExtra("paroleChiave", paroleChiave);
                         goToCreateAstaRibasso.putExtra("descrizione", descrizione);
@@ -278,6 +291,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri = data.getData();
         uploadImage.setImageURI(uri);
+        uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
         // Ottieni un'immagine Bitmap da qualche fonte (ad esempio, dalla fotocamera o dalla galleria)
         Bitmap imageBitmap = BitmapFactory.decodeFile(uri.getPath());
         System.out.println(uri.getPath());

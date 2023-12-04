@@ -29,18 +29,15 @@ import retrofit2.Response;
 public class CreaAstaIngleseActivity extends AppCompatActivity {
 
     private MyApiService apiService;
-    private String activity = "creainglese", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, base64Image, descrizione, dataScadenzaString = "", timerInserted;
+    private String activity = "creainglese", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, imageString, descrizione, dataScadenzaString = "", timerInserted;
     private TextView timerInsertedTextView, timerInsertedErrorTextView, baseAstaErrorTextView, sogliaRialzoErrorTextView;
     private EditText baseAstaEditText, sogliaRialzoMinimaEditText;
     NumberPicker numberPickerHoursIng, numberPickerMinutesIng;
     long timerInSecondi;
     private Date dataScadenza;
-    private int statoAsta, tipologiaPosition, categoriaPosition;
+    private int tipologiaPosition, categoriaPosition;
     private Button creaAstaIngleseButton, backButton;
     private BigDecimal sogliaRialzoMinimaBigD, prezzoInizialeBigD;
-    String prezzoBaseAsta;
-    String sogliaRialzoMinima;
-    String prezzoIniziale;
 
 
     @Override
@@ -66,7 +63,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
-        base64Image = getIntent().getStringExtra("imageBase64");
+        imageString = getIntent().getStringExtra("imageString");
         paroleChiave = getIntent().getStringExtra("paroleChiave");
         descrizione = getIntent().getStringExtra("descrizione");
         tipologiaSelezionata = getIntent().getStringExtra("tipologiaSelezionata");
@@ -156,7 +153,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
                 goToCreateAstaPT1.putExtra("activity", activity);
                 goToCreateAstaPT1.putExtra("nickname", nickname);
                 goToCreateAstaPT1.putExtra("tipo", tipo);
-                goToCreateAstaPT1.putExtra("base64Image", base64Image);
+                goToCreateAstaPT1.putExtra("imageString", imageString);
                 goToCreateAstaPT1.putExtra("titoloProdotto", titoloProdotto);
                 goToCreateAstaPT1.putExtra("descrizione", descrizione);
                 goToCreateAstaPT1.putExtra("tipologiaSelezionata", tipologiaSelezionata);
@@ -175,7 +172,7 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
                 sogliaRialzoErrorTextView.setText("");
                 timerInsertedErrorTextView.setText("");
                 if(check()){
-                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, dataScadenzaString, prezzoInizialeBigD, sogliaRialzoMinimaBigD, nickname, timerInSecondi);
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBigD, sogliaRialzoMinimaBigD, nickname, timerInSecondi);
                     Intent goToHomePageVenditore = new Intent(CreaAstaIngleseActivity.this, HomepageVenditoreActivity.class);
                     goToHomePageVenditore.putExtra("nickname", nickname);
                     goToHomePageVenditore.putExtra("tipo", tipo);
@@ -189,11 +186,11 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
 
 
 
-    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String base64Image, String categoriaSelezionata, String paroleChiave, int statoAsta, String selectedDate, BigDecimal prezzoIniziale, BigDecimal sogliaSegreta, String creatore, long timerInSecondi) {
-        if(base64Image == null){
-            base64Image = "";
+    private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String imageString, String categoriaSelezionata, String paroleChiave, String selectedDate, BigDecimal prezzoIniziale, BigDecimal sogliaSegreta, String creatore, long timerInSecondi) {
+        if(imageString == null){
+            imageString = "";
         }
-        CreateAstaIngRequest createAstaRequest = new CreateAstaIngRequest(titoloProdotto, tipologiaSelezionata, descrizione, base64Image, categoriaSelezionata, paroleChiave, statoAsta, selectedDate, prezzoIniziale, sogliaSegreta, creatore, timerInSecondi);
+        CreateAstaIngRequest createAstaRequest = new CreateAstaIngRequest(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, selectedDate, prezzoIniziale, sogliaSegreta, creatore, timerInSecondi);
         Call<ResponseBody> call = apiService.createAstaIng(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
