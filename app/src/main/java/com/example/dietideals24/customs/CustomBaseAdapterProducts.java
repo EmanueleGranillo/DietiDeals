@@ -14,18 +14,13 @@ import android.widget.BaseAdapter;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.dietideals24.activities.AstaIngleseActivity;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.R;
 
-import org.w3c.dom.Text;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -72,9 +67,11 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
         if(aste.get(position).getTipologia().equals("asta a tempo fisso")){
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_t_f, null);
             titoloTextView = (TextView) convertView.findViewById(R.id.titoloTFTextView);
-            scadenzaDataTextView = (TextView) convertView.findViewById(R.id.dataScadenzaValueTextView);
-            prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.valoreCorrenteTFTextView);
+            scadenzaDataTextView = (TextView) convertView.findViewById(R.id.dataScadenzaTextView);
+            prezzoAttualeTextView = (TextView) convertView.findViewById(R.id.offertaAttualeTFTextView);
             productImage = (ImageView) convertView.findViewById(R.id.productTFImageView);
+            TextView conclusaTFTextView = convertView.findViewById(R.id.conclusaTFTextView);
+            conclusaTFTextView.setVisibility(View.INVISIBLE);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
             SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -83,7 +80,13 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            Calendar calendar = Calendar.getInstance();
+            Date dataOraAttuale = calendar.getTime();
             scadenzaDataTextView.setText(outputFormat.format(date));
+            if (date.getTime() < dataOraAttuale.getTime()) {
+                scadenzaDataTextView.setVisibility(View.INVISIBLE);
+                conclusaTFTextView.setVisibility(View.VISIBLE);
+            }
             // prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€"); nuovo
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla

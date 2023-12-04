@@ -142,7 +142,7 @@
                 android:alpha="0.2"/>
 
             <TextView
-                android:id="@+id/offertaAttualeTextView"
+                android:id="@+id/offertaAttualeRibassoTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/separatore3"
@@ -157,7 +157,7 @@
                 android:id="@+id/separatore4"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@id/offertaAttualeTextView"
+                android:layout_below="@id/offertaAttualeRibassoTextView"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"

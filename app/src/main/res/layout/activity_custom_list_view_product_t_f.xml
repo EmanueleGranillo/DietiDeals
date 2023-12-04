@@ -25,90 +25,65 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_toEndOf="@+id/productTFImageView"
                 android:text="Fac-Simile Tempo fisso"
-                android:textSize="18dp"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <ImageView
-            android:id="@+id/productTFImageView"
-            android:layout_width="150dp"
-            android:layout_height="167dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp" />
-
-            <TextView
-                android:id="@+id/tipologiaAstaTFValueTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/titoloTFTextView"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="3dp"
-                android:layout_toEndOf="@+id/tipologiaAstaTFTextView"
-                android:text="Tempo fisso"
-                android:textSize="16dp" />
+                android:id="@+id/productTFImageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp" />
 
             <TextView
                 android:id="@+id/tipologiaAstaTFTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titoloTFTextView"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/productTFImageView"
-                android:text="Tipologia:"
-                android:textSize="16dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Asta a tempo fisso"
+                android:textSize="22dp" />
 
             <TextView
                 android:id="@+id/dataScadenzaTextView"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tipologiaAstaTFTextView"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
-                android:layout_toEndOf="@+id/productTFImageView"
-                android:text="Fine asta:"
-                android:textSize="16dp" />
-
-            <TextView
-                android:id="@+id/dataScadenzaValueTextView"
-                android:layout_width="105dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tipologiaAstaTFValueTextView"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="43dp"
-                android:layout_toEndOf="@+id/dataScadenzaTextView"
-                android:text="25/12/2024"
-                android:textSize="16dp" />
-
-            <TextView
-                android:id="@+id/offertaCorrenteTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dataScadenzaTextView"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/productTFImageView"
-                android:text="Offerta attuale:"
-                android:textSize="16dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="110dp"
+                android:text="25/12/2024"
+                android:textSize="25dp" />
 
             <TextView
-                android:id="@+id/valoreCorrenteTFTextView"
-                android:layout_width="87dp"
+                android:id="@+id/conclusaTFTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dataScadenzaTextView"
+                android:text="Conclusa"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/productTFImageView"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="110dp"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/offertaAttualeTFTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="3dp"
-                android:layout_toEndOf="@+id/offertaCorrenteTextView"
-                android:text="€tot"
-                android:textSize="16dp" />
+                android:layout_marginEnd="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="110dp"
+                android:text="€15000"
+                android:textColor="#00CC66"
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 

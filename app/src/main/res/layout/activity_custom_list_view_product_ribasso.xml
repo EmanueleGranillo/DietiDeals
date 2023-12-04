@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="25dp"
+        app:cardCornerRadius="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:cardElevation="3dp">
@@ -23,10 +23,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/productRibassoImageView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="5dp"
                 android:text="Fac-Simile Ribasso"
                 android:textSize="25dp"
                 android:textStyle="bold" />
@@ -34,9 +35,8 @@
             <ImageView
                 android:id="@+id/productRibassoImageView"
                 android:layout_width="150dp"
-                android:layout_height="167dp"
+                android:layout_height="150dp"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp"
                 />
 
             <TextView
@@ -50,8 +50,6 @@
                 android:text="Asta al ribasso"
                 android:textSize="22dp" />
 
-
-
             <Chronometer
                 android:id="@+id/chronometerRibasso"
                 android:layout_width="wrap_content"
@@ -59,9 +57,9 @@
                 android:countDown="true"
                 android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/productRibassoImageView"
-                android:layout_below="@id/tipologiaAstaRibassoTextView"
-                android:layout_marginTop="45dp"
-                android:textSize="25dp"></Chronometer>
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="110dp"
+                android:textSize="25dp"/>
 
             <TextView
                 android:id="@+id/conclusaRibassoTextView"
@@ -70,22 +68,22 @@
                 android:text="Conclusa"
                 android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/productRibassoImageView"
-                android:layout_below="@id/tipologiaAstaRibassoTextView"
-                android:layout_marginTop="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="110dp"
                 android:textSize="25dp"/>
 
             <TextView
-                android:id="@+id/offertaAttualeTextView"
+                android:id="@+id/offertaAttualeRibassoTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="15dp"
-                android:layout_marginTop="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="110dp"
                 android:text="€13,45"
                 android:textColor="#00CC66"
                 android:textSize="25dp"
-                android:textStyle="bold"
-                android:layout_below="@id/tipologiaAstaRibassoTextView"/>
+                android:textStyle="bold"/>
 
         </RelativeLayout>
 
