@@ -42,7 +42,7 @@ public class CreateAstaRibassoRequest {
     private long resetTimer;
 
 
-    public CreateAstaRibassoRequest(String nomeProdotto, String tipologia, String descrizione, String image, String categoria, String paroleChiave, String dataScadenzaTF, BigDecimal prezzoIniziale, BigDecimal importoDecremento, String creatore, long resetTimer) {
+    public CreateAstaRibassoRequest(String nomeProdotto, String tipologia, String descrizione, String image, String categoria, String paroleChiave, String dataScadenzaTF, BigDecimal prezzoIniziale, BigDecimal importoDecremento, BigDecimal sogliaMinimaSegreta, String creatore, long resetTimer) {
         this.nomeProdotto = nomeProdotto;
         this.tipologia = tipologia;
         this.descrizione = descrizione;
@@ -51,8 +51,8 @@ public class CreateAstaRibassoRequest {
         this.paroleChiave = paroleChiave;
         this.dataScadenzaTF = dataScadenzaTF;
         this.prezzoIniziale = prezzoIniziale;
-        this.sogliaMinimaSegreta = new BigDecimal(1000);
         this.importoDecremento = importoDecremento;
+        this.sogliaMinimaSegreta = sogliaMinimaSegreta;
         this.creatore = creatore;
         this.resetTimer = resetTimer;
     }
