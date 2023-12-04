@@ -50,6 +50,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     String nickname;
     String tipo;
     SearchView searchView;
+    String checkActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         ImageButton notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
         searchView = findViewById(R.id.cercaAstaSearchView);
 
+        checkActivity = "mine";
         listView = (ListView) findViewById(R.id.customListViewProducts);
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
@@ -115,6 +117,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 Intent goToProfilo = new Intent(HomepageCompratoreActivity.this, ProfiloActivity.class);
                 goToProfilo.putExtra("nickname", nickname);
                 goToProfilo.putExtra("tipo", tipo);
+                goToProfilo.putExtra("checkActivity", checkActivity);
                 startActivity(goToProfilo);
             }
         });

@@ -141,6 +141,29 @@ public class AstaIngleseActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
+
+
+        if(asta.getVincente() != null){
+            vincenteTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String checkActivity = "notmine";
+                    Intent goToVincente = new Intent(AstaIngleseActivity.this, ProfiloActivity.class);
+                    goToVincente.putExtra("nickname", nickname);
+                    goToVincente.putExtra("tipo", tipo);
+                    goToVincente.putExtra("checkActivity", checkActivity);
+                    goToVincente.putExtra("other", asta.getVincente());
+                    goToVincente.putExtra("asta", asta);
+                    startActivity(goToVincente);
+                }
+            });
+        }
+
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

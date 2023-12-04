@@ -92,6 +92,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
                 Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
                 backToProfilo.putExtra("nickname", nickname);
                 backToProfilo.putExtra("tipo", tipo);
+                backToProfilo.putExtra("checkActivity", "mine");
                 startActivity(backToProfilo);
             }
         });
@@ -113,6 +114,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
                     Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
                     backToProfilo.putExtra("nickname", nickname);
                     backToProfilo.putExtra("tipo", tipo);
+                    backToProfilo.putExtra("checkActivity", "mine");
                     startActivity(backToProfilo);
                 } else {
 

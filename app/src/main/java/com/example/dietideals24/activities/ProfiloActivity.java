@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.dietideals24.R;
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.RetrofitClient;
+import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.models.Profilo;
 
 import retrofit2.Call;
@@ -40,6 +41,9 @@ public class ProfiloActivity extends AppCompatActivity {
     private TextView sitoWebProfiloTextView;
     private ImageView linkInstagramImageView;
     private String linkInstagram;
+    private String checkActivity;
+    private String other;
+    private Asta asta;
 
 
 
@@ -50,8 +54,12 @@ public class ProfiloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profilo);
 
+
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
+        checkActivity = getIntent().getStringExtra("checkActivity");
+
+
 
         nicknameProfiloTextView = findViewById(R.id.nicknameProfiloTextView);
         nomeCognomeProfiloTextView = findViewById(R.id.nomeCognomeProfiloTextView);
@@ -68,22 +76,53 @@ public class ProfiloActivity extends AppCompatActivity {
 
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
-        getProfiloDaModificare();
+        if(checkActivity.equals("notmine")){
+            modificaTxt.setVisibility(View.INVISIBLE);
+            logoutBtn.setVisibility(View.INVISIBLE);
+            other = getIntent().getStringExtra("other");
+            getProfiloDaModificare(other);
+            asta = (Asta) getIntent().getSerializableExtra("asta");
+        } else {
+            getProfiloDaModificare(nickname);
+        }
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(tipo.equals("compratore")){
-                    Intent backToHomeCompratore = new Intent(ProfiloActivity.this, HomepageCompratoreActivity.class);
-                    backToHomeCompratore.putExtra("nickname", nickname);
-                    backToHomeCompratore.putExtra("tipo", tipo);
-                    startActivity(backToHomeCompratore);
-                } else if (tipo.equals("venditore")) {
-                    Intent backToHomeVenditore = new Intent(ProfiloActivity.this, HomepageVenditoreActivity.class);
-                    backToHomeVenditore.putExtra("nickname", nickname);
-                    backToHomeVenditore.putExtra("tipo", tipo);
-                    startActivity(backToHomeVenditore);
+                if(checkActivity.equals("notmine")){
+                    if(asta.getTipologia().equals("asta inglese")){
+                        Intent backToAsta = new Intent(ProfiloActivity.this, AstaIngleseActivity.class);
+                        backToAsta.putExtra("nickname", nickname);
+                        backToAsta.putExtra("tipo", tipo);
+                        backToAsta.putExtra("asta", asta);
+                        startActivity(backToAsta);
+                    } else if (asta.getTipologia().equals("asta al ribasso")) {
+                        Intent backToAsta = new Intent(ProfiloActivity.this, AstaRibassoActivity.class);
+                        backToAsta.putExtra("nickname", nickname);
+                        backToAsta.putExtra("tipo", tipo);
+                        backToAsta.putExtra("asta", asta);
+                        startActivity(backToAsta);
+                    } else if (asta.getTipologia().equals("asta a tempo fisso")) {
+                        Intent backToAsta = new Intent(ProfiloActivity.this, AstaTempoFissoActivity.class);
+                        backToAsta.putExtra("nickname", nickname);
+                        backToAsta.putExtra("tipo", tipo);
+                        backToAsta.putExtra("asta", asta);
+                        startActivity(backToAsta);
+                    }
+                } else {
+                    if(tipo.equals("compratore")){
+                        Intent backToHomeCompratore = new Intent(ProfiloActivity.this, HomepageCompratoreActivity.class);
+                        backToHomeCompratore.putExtra("nickname", nickname);
+                        backToHomeCompratore.putExtra("tipo", tipo);
+                        startActivity(backToHomeCompratore);
+                    } else if (tipo.equals("venditore")) {
+                        Intent backToHomeVenditore = new Intent(ProfiloActivity.this, HomepageVenditoreActivity.class);
+                        backToHomeVenditore.putExtra("nickname", nickname);
+                        backToHomeVenditore.putExtra("tipo", tipo);
+                        startActivity(backToHomeVenditore);
+                    }
                 }
+
             }
         });
 
@@ -148,7 +187,7 @@ public class ProfiloActivity extends AppCompatActivity {
     }
 
 
-    public void getProfiloDaModificare() {
+    public void getProfiloDaModificare(String nickname) {
         Call<Profilo> call = apiService.getUser(nickname);
         call.enqueue(new Callback<Profilo>() {
             @Override
@@ -182,6 +221,7 @@ public class ProfiloActivity extends AppCompatActivity {
                             byte[] decodedString = Base64.decode(profilo.getFotoProfilo(), Base64.DEFAULT);
                             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                             profiloImage.setImageBitmap(decodedByte);
+                            profiloImage.setScaleType(ImageView.ScaleType.FIT_XY);
                         }
                     }
                 } else {
