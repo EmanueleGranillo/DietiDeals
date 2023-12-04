@@ -40,7 +40,6 @@ public interface MyApiService {
     @POST("/get_aste_per_venditore_concluse/{nickname}")
     Call<ArrayList<Asta>> getAstePerVenditoreConcluse(@Path("nickname") String nickname);
 
-
     @POST("/check_notifiche/{nickname}")
     Call<NumeroResponse> checkNotifications(@Path("nickname") String nickname);
 
