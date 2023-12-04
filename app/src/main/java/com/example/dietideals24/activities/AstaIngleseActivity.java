@@ -130,7 +130,12 @@ public class AstaIngleseActivity extends AppCompatActivity {
                 }
                 if(chronometer.getBase() < SystemClock.elapsedRealtime() + 1) {
                     chronometer.stop();
-                    vincenteTextView.setText("Vincitore: " + asta.getVincente());
+                    if(asta.getVincente() != null){
+                        offertaAttualeIngTextView.setText("Venduto per \u20AC" + asta.getOffertaAttuale());
+                        vincenteTextView.setText("Venduto a " + asta.getVincente());
+                    } else {
+                        vincenteTextView.setText("Non venduto");
+                    }
                     tempoRimanenteTextView.setText("Conclusa");
                     chronometer.setVisibility(View.INVISIBLE);
                     presentaOffertaIngleseButton.setEnabled(false);
@@ -163,6 +168,20 @@ public class AstaIngleseActivity extends AppCompatActivity {
             });
         }
 
+        venditoreTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String checkActivity = "notmine";
+                Intent goToVenditore = new Intent(AstaIngleseActivity.this, ProfiloActivity.class);
+                goToVenditore.putExtra("nickname", nickname);
+                goToVenditore.putExtra("tipo", tipo);
+                goToVenditore.putExtra("checkActivity", checkActivity);
+                goToVenditore.putExtra("other", asta.getCreatore());
+                goToVenditore.putExtra("asta", asta);
+                startActivity(goToVenditore);
+            }
+        });
+
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +190,13 @@ public class AstaIngleseActivity extends AppCompatActivity {
                 backToHome.putExtra("nickname", nickname);
                 backToHome.putExtra("tipo", tipo);
                 startActivity(backToHome);
+            }
+        });
+
+        presentaOffertaIngleseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
