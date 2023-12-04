@@ -122,7 +122,7 @@ public class AstaRibassoActivity extends AppCompatActivity {
                     chronometer.stop();
                     if(asta.getVincente() != null){
                         decrementoPrezzoTextView.setText("Venduto per \u20AC" + asta.getOffertaAttuale());
-                        vincitoreTextView.setText("Venduto a " + asta.getVincente());
+                        vincitoreTextView.setText("Venduto a: " + asta.getVincente());
                         prezzoAttualeTextView.setText("Prezzo vendita: €" + asta.getOffertaAttuale());
                     } else {
                         vincitoreTextView.setText("Non venduto");
