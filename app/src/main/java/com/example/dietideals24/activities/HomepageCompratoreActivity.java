@@ -83,36 +83,29 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
         riempiLista();
 
-        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(aste.get(position).getTipologia().toString().equals("asta inglese")){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Logic to handle item click
+                if (aste.get(position).getTipologia().equals("asta inglese")) {
                     Intent goToAstaIngleseActivity = new Intent(HomepageCompratoreActivity.this, AstaIngleseActivity.class);
                     goToAstaIngleseActivity.putExtra("nickname", nickname);
                     goToAstaIngleseActivity.putExtra("tipo", tipo);
                     goToAstaIngleseActivity.putExtra("asta", aste.get(position));
                     startActivity(goToAstaIngleseActivity);
-                }
-                if(aste.get(position).getTipologia().toString().equals("asta al ribasso")){
+                } else if (aste.get(position).getTipologia().equals("asta al ribasso")) {
                     Intent goToAstaRibassoActivity = new Intent(HomepageCompratoreActivity.this, AstaRibassoActivity.class);
                     goToAstaRibassoActivity.putExtra("nickname", nickname);
                     goToAstaRibassoActivity.putExtra("tipo", tipo);
                     goToAstaRibassoActivity.putExtra("asta", aste.get(position));
                     startActivity(goToAstaRibassoActivity);
-                }
-                if(aste.get(position).getTipologia().toString().equals("asta a tempo fisso")){
+                } else if (aste.get(position).getTipologia().equals("asta a tempo fisso")) {
                     Intent goToAstaTempoFissoActivity = new Intent(HomepageCompratoreActivity.this, AstaTempoFissoActivity.class);
                     goToAstaTempoFissoActivity.putExtra("nickname", nickname);
                     goToAstaTempoFissoActivity.putExtra("tipo", tipo);
                     goToAstaTempoFissoActivity.putExtra("asta", aste.get(position));
                     startActivity(goToAstaTempoFissoActivity);
                 }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 

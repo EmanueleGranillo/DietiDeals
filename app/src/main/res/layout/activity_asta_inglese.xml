@@ -68,7 +68,7 @@
 
 
             <TextView
-                android:id="@+id/creatoreTextView"
+                android:id="@+id/venditoreTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/nomeProdottoTextView"
@@ -83,7 +83,7 @@
                 android:id="@+id/separatore0"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@id/creatoreTextView"
+                android:layout_below="@id/venditoreTextView"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
@@ -169,7 +169,7 @@
                 android:alpha="0.2"/>
 
             <TextView
-                android:id="@+id/offertaAttualeRibassoTextView"
+                android:id="@+id/offertaAttualeIngTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/separatore3"
@@ -184,7 +184,7 @@
                 android:id="@+id/separatore4"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@id/offertaAttualeRibassoTextView"
+                android:layout_below="@id/offertaAttualeIngTextView"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
