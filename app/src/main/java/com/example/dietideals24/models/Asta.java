@@ -69,18 +69,6 @@ public class Asta implements Serializable {
     }
 
 
-    public void presentaOffertaTempoFisso(BigDecimal importo) {
-        if (importo.compareTo(sogliaSegreta) > 0) {
-            System.out.println("Oggetto venduto con successo ad acquirente x");
-        }
-        if ((importo.compareTo(offertaAttuale)) > 0 && (importo.compareTo(sogliaSegreta) < 0)) {
-            System.out.println("Offerta presentata con successo da x");
-            this.offertaAttuale = importo;
-        } else {
-            System.out.println("Impossibile presentare l'offerta.");
-        }
-    }
-
 
     // Costruttore per asta all'inglese CON intervalloTimer specificato
     public Asta(int id, String titoloAsta, String tipologia, String descrizione, BigDecimal baseAsta, BigDecimal sogliaRialzoMinima, long intervalloTimer) {
@@ -92,11 +80,6 @@ public class Asta implements Serializable {
         this.offertaAttuale = baseAsta;
         this.sogliaRialzoMinima = sogliaRialzoMinima;
         this.resetTimer = intervalloTimer;
-
-
-        // Inizializza e avvia il timer con l'intervallo specificato
-        //this.timer = new Timer();
-        //this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, intervalloTimer);
     }
 
 
@@ -109,64 +92,10 @@ public class Asta implements Serializable {
         this.offertaAttuale = baseAsta;
         this.sogliaRialzoMinima = sogliaRialzoMinima;
         this.resetTimer = 3600 * 1000;
-
-
-        // Inizializza e avvia il timer con l'intervallo specificato
-        //this.timer = new Timer();
-        //this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, resetTimer);
     }
 
 
-    // Metodo per gestire l'offerta effettuata (asta all'inglese)
-    public void effettuaOffertaIng(BigDecimal importo) {
-        if (importo.subtract(offertaAttuale).compareTo(sogliaRialzoMinima) > 0) {
-            this.offertaAttuale = importo;
-            //this.timer.cancel(); // Annulla il timer corrente
 
-            //Avvio di nuovo timer di un'ora
-            //this.timer = new Timer();
-            //this.timer.scheduleAtFixedRate(new AstaTimerTask(), 0, resetTimer);
-        }
-    }
-
-    // Classe interna per rappresentare l'attività del timer
-    private class AstaTimerTask extends TimerTask {
-        @Override
-        public void run() {
-
-            if (tipologia.equals("Asta all'inglese")) {
-                // Logica da eseguire quando il timer scade
-                System.out.println("Timer scaduto per l'asta: " + nomeProdotto);
-
-                // Considera l'asta come fallita se nessuna offerta è stata presentata
-                if (offertaAttuale.equals(prezzoIniziale)) {
-                    System.out.println("Asta fallita. Nessuna offerta presentata.");
-                    //invio notifiche ecc
-                } else {
-                    System.out.println("L'asta è stata vinta da chi ha offerto: " + offertaAttuale);
-                    //invio notifiche ecc
-                }
-                // Annulla il timer quando arriva a zero
-                //timer.cancel();
-            }
-
-
-            if (tipologia.equals("Asta al ribasso")) {
-                decrementaPrezzo();
-            }
-
-        }
-    }
-
-
-    // Metodo per decrementare il prezzo (asta al ribasso)
-    private void decrementaPrezzo() {
-        this.offertaAttuale = offertaAttuale.subtract(importoDecremento);
-
-        if (this.offertaAttuale.compareTo(this.sogliaSegreta) < 0) {
-            System.out.println("Asta fallita. Nessuna offerta presentata.");
-        }
-    }
 
 
     //costruttore per asta al ribasso
@@ -179,13 +108,6 @@ public class Asta implements Serializable {
         this.resetTimer = intervalloTimer;
         this.importoDecremento = importoDecremento;
         this.sogliaSegreta = prezzoMinimoSegreto;
-
-
-        // Inizializza e avvia il timer con l'intervallo specificato
-        //this.timer = new Timer();
-        //AstaTimerTask astaTimerTask = new AstaTimerTask();
-        //this.timer.scheduleAtFixedRate(astaTimerTask, 0, intervalloTimer);
-
     }
 
 
