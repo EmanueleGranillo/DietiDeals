@@ -114,4 +114,19 @@ public class NotificationsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(tipo.equals("compratore")){
+            Intent backToHomeCompratore = new Intent(NotificationsActivity.this, HomepageCompratoreActivity.class);
+            backToHomeCompratore.putExtra("nickname", nickname);
+            backToHomeCompratore.putExtra("tipo", tipo);
+            startActivity(backToHomeCompratore);
+        } else if (tipo.equals("venditore")) {
+            Intent backToHomeVenditore = new Intent(NotificationsActivity.this, HomepageVenditoreActivity.class);
+            backToHomeVenditore.putExtra("nickname", nickname);
+            backToHomeVenditore.putExtra("tipo", tipo);
+            startActivity(backToHomeVenditore);
+        }
+    }
 }

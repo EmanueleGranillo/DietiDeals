@@ -394,4 +394,9 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
         arredamentoBtn.setTextColor(Color.parseColor("#000000"));
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -13,4 +13,9 @@ public class AstaRibassoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asta_ribasso);
     }
+
+
+
+
+
 }

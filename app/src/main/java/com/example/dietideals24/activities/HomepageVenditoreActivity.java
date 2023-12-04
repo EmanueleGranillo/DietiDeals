@@ -32,7 +32,7 @@ import retrofit2.Response;
 
 public class HomepageVenditoreActivity extends AppCompatActivity {
 
-    private String activity = "homepage";
+    private String activity = "homepage", checkActivity = "mine";
     private MyApiService apiService;
     ImageView pallinoImg;
     ListView listView;
@@ -68,26 +68,6 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         controllaNotifiche();
 
         riempiListaPerVenditore();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -145,6 +125,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
                 Intent goToProfilo = new Intent(HomepageVenditoreActivity.this, ProfiloActivity.class);
                 goToProfilo.putExtra("nickname", nickname);
                 goToProfilo.putExtra("tipo", tipo);
+                goToProfilo.putExtra("checkActivity", checkActivity);
                 startActivity(goToProfilo);
             }
         });
@@ -316,5 +297,8 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         asteConcluseBtn.setTextColor(Color.parseColor("#000000"));
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

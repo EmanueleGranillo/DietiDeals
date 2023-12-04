@@ -244,4 +244,14 @@ public class ModificaProfiloActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
+        backToProfilo.putExtra("nickname", nickname);
+        backToProfilo.putExtra("tipo", tipo);
+        backToProfilo.putExtra("checkActivity", "mine");
+        startActivity(backToProfilo);
+        super.onBackPressed();
+    }
 }

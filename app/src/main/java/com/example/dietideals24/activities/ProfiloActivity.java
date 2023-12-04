@@ -275,5 +275,41 @@ public class ProfiloActivity extends AppCompatActivity {
 
     }*/
 
-
+    @Override
+    public void onBackPressed() {
+        if(checkActivity.equals("notmine")){
+            if(asta.getTipologia().equals("asta inglese")){
+                Intent backToAsta = new Intent(ProfiloActivity.this, AstaIngleseActivity.class);
+                backToAsta.putExtra("nickname", nickname);
+                backToAsta.putExtra("tipo", tipo);
+                backToAsta.putExtra("asta", asta);
+                startActivity(backToAsta);
+            } else if (asta.getTipologia().equals("asta al ribasso")) {
+                Intent backToAsta = new Intent(ProfiloActivity.this, AstaRibassoActivity.class);
+                backToAsta.putExtra("nickname", nickname);
+                backToAsta.putExtra("tipo", tipo);
+                backToAsta.putExtra("asta", asta);
+                startActivity(backToAsta);
+            } else if (asta.getTipologia().equals("asta a tempo fisso")) {
+                Intent backToAsta = new Intent(ProfiloActivity.this, AstaTempoFissoActivity.class);
+                backToAsta.putExtra("nickname", nickname);
+                backToAsta.putExtra("tipo", tipo);
+                backToAsta.putExtra("asta", asta);
+                startActivity(backToAsta);
+            }
+        } else {
+            if(tipo.equals("compratore")){
+                Intent backToHomeCompratore = new Intent(ProfiloActivity.this, HomepageCompratoreActivity.class);
+                backToHomeCompratore.putExtra("nickname", nickname);
+                backToHomeCompratore.putExtra("tipo", tipo);
+                startActivity(backToHomeCompratore);
+            } else if (tipo.equals("venditore")) {
+                Intent backToHomeVenditore = new Intent(ProfiloActivity.this, HomepageVenditoreActivity.class);
+                backToHomeVenditore.putExtra("nickname", nickname);
+                backToHomeVenditore.putExtra("tipo", tipo);
+                startActivity(backToHomeVenditore);
+            }
+        }
+        super.onBackPressed();
+    }
 }

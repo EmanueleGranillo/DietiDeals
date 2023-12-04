@@ -193,11 +193,22 @@ public class AstaIngleseActivity extends AppCompatActivity {
             }
         });
 
+
         presentaOffertaIngleseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent backToHome = new Intent(AstaIngleseActivity.this, HomepageCompratoreActivity.class);
+        backToHome.putExtra("nickname", nickname);
+        backToHome.putExtra("tipo", tipo);
+        startActivity(backToHome);
+        super.onBackPressed();
     }
 }

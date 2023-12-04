@@ -194,4 +194,22 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent goToCreateAstaPT1 = new Intent(CreaAstaTempoFissoActivity.this, CreaAstaPT1Activity.class);
+        goToCreateAstaPT1.putExtra("activity", activity);
+        goToCreateAstaPT1.putExtra("nickname", nickname);
+        goToCreateAstaPT1.putExtra("tipo", tipo);
+        goToCreateAstaPT1.putExtra("imageString", imageString);
+        goToCreateAstaPT1.putExtra("titoloProdotto", titoloProdotto);
+        goToCreateAstaPT1.putExtra("descrizione", descrizione);
+        goToCreateAstaPT1.putExtra("tipologiaSelezionata", tipologiaSelezionata);
+        goToCreateAstaPT1.putExtra("tipologiaPosition", tipologiaPosition);
+        goToCreateAstaPT1.putExtra("categoriaSelezionata", categoriaSelezionata);
+        goToCreateAstaPT1.putExtra("categoriaPosition", categoriaPosition);
+        goToCreateAstaPT1.putExtra("paroleChiave", paroleChiave);
+        startActivity(goToCreateAstaPT1);
+        super.onBackPressed();
+    }
 }

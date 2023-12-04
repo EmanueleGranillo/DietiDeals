@@ -319,4 +319,13 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         }
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent goToHPVenditore = new Intent(CreaAstaPT1Activity.this, HomepageVenditoreActivity.class);
+        goToHPVenditore.putExtra("tipo", tipo);
+        goToHPVenditore.putExtra("nickname", nickname);
+        startActivity(goToHPVenditore);
+        super.onBackPressed();
+    }
 }
