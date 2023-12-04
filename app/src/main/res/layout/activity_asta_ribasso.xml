@@ -1,9 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AstaRibassoActivity">
+    tools:context=".activities.AstaRibassoActivity"
+    android:background="#F2F4F8">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/backButtonInfoAsta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:backgroundTint="#F2F4F8"
+        app:icon="@drawable/ic_back_foreground"
+        app:iconSize="50dp"
+        app:iconTint="@color/black" />
+
+
+    <TextView
+        android:id="@+id/astaRibassoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="120dp"
+        android:text="Asta al ribasso"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/astaRibassoTextView"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/fotoProdottoImage"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp"
+                android:src="@mipmap/ic_profilo"
+                />
+
+            <TextView
+                android:id="@+id/nomeProdottoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/fotoProdottoImage"
+                android:text="Nome prodotto"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/creatoreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nomeProdottoTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Creatore"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore0"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/creatoreTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+
+            <TextView
+                android:id="@+id/descrizioneTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore0"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Descrizione"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/descrizioneTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+            <TextView
+                android:id="@+id/categoriaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore1"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Categoria"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/categoriaTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+            <TextView
+                android:id="@+id/keywordsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore2"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Parole chiave"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/keywordsTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+            <TextView
+                android:id="@+id/prezzoAttualeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore3"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Prezzo attuale"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/prezzoAttualeTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+
+
+
+            <TextView
+                android:id="@+id/decrementoPrezzoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore4"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:text="Prossimo decremento tra: "
+                android:textSize="15dp" />
+
+            <Chronometer
+                android:id="@+id/scadenzaChronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore4"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@+id/decrementoPrezzoTextView"
+                android:countDown="true"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/acquistaRibassoButton"
+                android:layout_width="147dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/decrementoPrezzoTextView"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="121dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="109dp"
+                android:backgroundTint="#00CC66"
+                android:text="Acquista" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+</RelativeLayout>

@@ -66,8 +66,9 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
+
             <TextView
-                android:id="@+id/descrizioneTextView"
+                android:id="@+id/creatoreTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/nomeProdottoTextView"
@@ -75,8 +76,34 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:text="Creatore"
+                android:textSize="15dp" />
+
+            <View
+                android:id="@+id/separatore0"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/creatoreTextView"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#2C2C2C"
+                android:alpha="0.2"/>
+
+
+            <TextView
+                android:id="@+id/descrizioneTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/separatore0"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="Descrizione"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <View
                 android:id="@+id/separatore1"
@@ -100,7 +127,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="categoria"
+                android:text="Categoria"
                 android:textSize="15dp" />
 
             <View
@@ -125,7 +152,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="paroleChiave"
+                android:text="Parole chiave"
                 android:textSize="15dp" />
 
             <View
@@ -150,7 +177,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="offerta attuale"
+                android:text="Offerta attuale"
                 android:textSize="15dp" />
 
             <View
@@ -175,7 +202,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="vincente"
+                android:text="Vincente"
                 android:textSize="15dp" />
 
             <View
@@ -191,33 +218,44 @@
                 android:background="#2C2C2C"
                 android:alpha="0.2"/>
 
+
             <TextView
-                android:id="@+id/sitoWebProfiloTextView"
+                android:id="@+id/tempoRimanenteTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/separatore5"
-                android:layout_marginTop="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
-                android:text="www.mylink.com"
+                android:text="Tempo rimanente"
                 android:textSize="15dp" />
-
-            <ImageView
-                android:id="@+id/linkInstagramImageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@mipmap/ic_instagram_foreground"
-                android:layout_below="@id/sitoWebProfiloTextView"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"/>
 
             <Chronometer
                 android:id="@+id/scadenzaChronometer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/separatore5"
+                android:layout_marginStart="175dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/tempoRimanenteTextView"
                 android:countDown="true"
-                android:textSize="30dp" />
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/presentaOffertaIngleseButton"
+                android:layout_width="147dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tempoRimanenteTextView"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="121dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="109dp"
+                android:backgroundTint="#00CC66"
+                android:text="Rialza di €10" />
+
 
         </RelativeLayout>
 
