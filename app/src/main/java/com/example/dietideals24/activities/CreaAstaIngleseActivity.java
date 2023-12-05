@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dietideals24.R;
 import com.example.dietideals24.connection.CreateAstaIngRequest;
@@ -199,15 +200,16 @@ public class CreaAstaIngleseActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Intent goToHomePageVenditore = new Intent(CreaAstaIngleseActivity.this, HomepageVenditoreActivity.class);
                     goToHomePageVenditore.putExtra("nickname", nickname);
+                    goToHomePageVenditore.putExtra("tipo", tipo);
                     startActivity(goToHomePageVenditore);
                 } else {
-                    System.out.println("Richiesta fallita");
+                    Toast.makeText(CreaAstaIngleseActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println(t.getMessage());
+                Toast.makeText(CreaAstaIngleseActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
             }
         });
     }

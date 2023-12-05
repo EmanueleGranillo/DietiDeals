@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dietideals24.R;
 import com.example.dietideals24.connection.CreateAstaTFRequest;
@@ -109,22 +110,7 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
                 sogliaMinimaErrorTextView.setText("");
                 selezionaDataErrorTextView.setText("");
                 if (check()) {
-                    System.out.println("titolo prodotto: " + titoloProdotto);
-                    System.out.println("tipologiaSelezionata: " + tipologiaSelezionata);
-                    System.out.println("descrizione: " + descrizione);
-                    System.out.println("imageString: " + imageString.length());
-                    System.out.println(" categoriaSelezionata: " + categoriaSelezionata);
-                    System.out.println(" paroleChiave: " + paroleChiave);
-                    System.out.println(" selectedDate:" + selectedDate);
-                    System.out.println(" prezzoInizialeBD: " + prezzoInizialeBD);
-                    System.out.println(" sogliaMinimaSegretaBD: " + sogliaMinimaSegretaBD);
-                    System.out.println(" nickname: " + nickname);
-
                     creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, selectedDate, prezzoInizialeBD, sogliaMinimaSegretaBD, nickname);
-                    Intent goToHomePageVenditore = new Intent(CreaAstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
-                    goToHomePageVenditore.putExtra("nickname", nickname);
-                    goToHomePageVenditore.putExtra("tipo", tipo);
-                    startActivity(goToHomePageVenditore);
                 }
             }
         });
@@ -173,6 +159,9 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
     }
 
     private void creaAsta(String titoloProdotto, String tipologiaSelezionata, String descrizione, String imageString, String categoriaSelezionata, String paroleChiave, String selectedDate, BigDecimal prezzoIniziale, BigDecimal sogliaSegreta, String creatore) {
+        if(imageString == null) {
+            imageString = "";
+        }
         CreateAstaTFRequest createAstaRequest = new CreateAstaTFRequest(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, selectedDate, prezzoIniziale, sogliaSegreta, creatore);
         Call<ResponseBody> call = apiService.createAstatf(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
@@ -182,15 +171,16 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Intent goToHomePageVenditore = new Intent(CreaAstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
                     goToHomePageVenditore.putExtra("nickname", nickname);
+                    goToHomePageVenditore.putExtra("tipo", tipo);
                     startActivity(goToHomePageVenditore);
                 } else {
-                    System.out.println("Richiesta fallita");
+                    Toast.makeText(CreaAstaTempoFissoActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println(t.getMessage());
+                Toast.makeText(CreaAstaTempoFissoActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
             }
         });
     }

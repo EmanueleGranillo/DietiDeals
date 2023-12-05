@@ -30,6 +30,7 @@ public class ProfiloActivity extends AppCompatActivity {
     private ImageView profiloImage;
     private String nickname;
     private String tipo;
+    private String tipologia;
     private MyApiService apiService;
     private Profilo profilo = new Profilo();
     private TextView nicknameProfiloTextView;
@@ -44,6 +45,7 @@ public class ProfiloActivity extends AppCompatActivity {
     private String checkActivity;
     private String other;
     private Asta asta;
+    private int id;
 
 
 
@@ -81,7 +83,9 @@ public class ProfiloActivity extends AppCompatActivity {
             logoutBtn.setVisibility(View.INVISIBLE);
             other = getIntent().getStringExtra("other");
             getProfiloDaModificare(other);
-            asta = (Asta) getIntent().getSerializableExtra("asta");
+            id = getIntent().getIntExtra("id", 0);
+            tipologia = getIntent().getStringExtra("tipologia");
+            //asta = (Asta) getIntent().getSerializableExtra("asta");
         } else {
             getProfiloDaModificare(nickname);
         }
@@ -90,23 +94,23 @@ public class ProfiloActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(checkActivity.equals("notmine")){
-                    if(asta.getTipologia().equals("asta inglese")){
+                    if(tipologia.equals("asta inglese")){
                         Intent backToAsta = new Intent(ProfiloActivity.this, AstaIngleseActivity.class);
                         backToAsta.putExtra("nickname", nickname);
                         backToAsta.putExtra("tipo", tipo);
-                        backToAsta.putExtra("asta", asta);
+                        backToAsta.putExtra("id", id);
                         startActivity(backToAsta);
-                    } else if (asta.getTipologia().equals("asta al ribasso")) {
+                    } else if (tipologia.equals("asta al ribasso")) {
                         Intent backToAsta = new Intent(ProfiloActivity.this, AstaRibassoActivity.class);
                         backToAsta.putExtra("nickname", nickname);
                         backToAsta.putExtra("tipo", tipo);
-                        backToAsta.putExtra("asta", asta);
+                        backToAsta.putExtra("id", id);
                         startActivity(backToAsta);
-                    } else if (asta.getTipologia().equals("asta a tempo fisso")) {
+                    } else if (tipologia.equals("asta a tempo fisso")) {
                         Intent backToAsta = new Intent(ProfiloActivity.this, AstaTempoFissoActivity.class);
                         backToAsta.putExtra("nickname", nickname);
                         backToAsta.putExtra("tipo", tipo);
-                        backToAsta.putExtra("asta", asta);
+                        backToAsta.putExtra("id", id);
                         startActivity(backToAsta);
                     }
                 } else {

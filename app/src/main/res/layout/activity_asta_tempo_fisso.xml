@@ -8,7 +8,7 @@
     android:background="#F2F4F8">
 
     <Button
-        android:id="@+id/backButtonInfoAsta"
+        android:id="@+id/astaTFBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -46,9 +46,9 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/fotoProdottoImage"
+                android:id="@+id/fotoProdottoTFImageView"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="200dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 app:strokeColor="@color/black"
@@ -57,11 +57,11 @@
                 />
 
             <TextView
-                android:id="@+id/nomeProdottoTextView"
+                android:id="@+id/nomeProdottoTFTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/fotoProdottoImage"
+                android:layout_below="@id/fotoProdottoTFImageView"
                 android:text="Nome prodotto"
                 android:textSize="25dp"
                 android:textStyle="bold" />
@@ -71,7 +71,7 @@
                 android:id="@+id/creatoreTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/nomeProdottoTextView"
+                android:layout_below="@id/nomeProdottoTFTextView"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
@@ -243,16 +243,34 @@
                 android:background="#2C2C2C"
                 android:alpha="0.2"/>
 
+            <Button
+                android:id="@+id/incrementaButton"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/dataScadenzaAstaTextView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="80dp"
+                android:layout_marginTop="50dp"
+                android:text="+"
+                android:textColor="#000000"
+                android:textSize="10dp"
+                android:gravity="center"
+                android:textAlignment="center"/>
 
-            <EditText
-                android:id="@+id/inserisciImportoOffertaEditText"
-                android:layout_width="360dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/separatore6"
-                android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:hint="Inserisci prezzo di partenza"
-                android:inputType="numberDecimal" />
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:id="@+id/decrementaButton"
+                android:layout_below="@+id/dataScadenzaAstaTextView"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="50dp"
+                android:text="-"
+                android:textColor="#000000"
+                android:textSize="10dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                />
 
 
             <Button
@@ -267,7 +285,36 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="112dp"
                 android:backgroundTint="#00CC66"
-                android:text="Presenta Offerta" />
+                android:text="Offri" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/offertaAttualeErrorTextView"
+                android:layout_below="@+id/inserisciImportoOffertaEditText"
+                android:layout_alignStart="@+id/inserisciImportoOffertaEditText"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:textColor="#F44336"
+                android:textSize="12dp"
+                ></TextView>
+
+            <EditText
+                android:id="@+id/inserisciImportoOffertaEditText"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/dataScadenzaAstaTextView"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#F2F4F8"
+                android:hint="Inserisci offerta"
+                android:inputType="numberDecimal"
+                android:text="€314.36"
+                android:textColor="#000000"
+                android:textSize="10dp"/>
+
+
 
 
         </RelativeLayout>

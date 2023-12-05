@@ -27,6 +27,9 @@ public interface MyApiService {
     @POST("/check_user_credentials/")
     Call<NumeroResponse> checkCredentials(@Body UserAccessRequest request);
 
+    @GET("/get_asta/{idasta}")
+    Call<Asta> getAsta(@Path("idasta") int idasta);
+
     @GET("/get_aste/")
     Call<ArrayList<Asta>> getAste();
 
@@ -35,8 +38,10 @@ public interface MyApiService {
 
     @POST("/get_aste_per_venditore/{nickname}")
     Call<ArrayList<Asta>> getAstePerVenditore(@Path("nickname") String nickname);
+
     @POST("/get_aste_per_venditore_attive/{nickname}")
     Call<ArrayList<Asta>> getAstePerVenditoreAttive(@Path("nickname") String nickname);
+
     @POST("/get_aste_per_venditore_concluse/{nickname}")
     Call<ArrayList<Asta>> getAstePerVenditoreConcluse(@Path("nickname") String nickname);
 
@@ -60,6 +65,9 @@ public interface MyApiService {
 
     @POST("/get_aste_per_ricerca/")
     Call<ArrayList<Asta>> getAstePerRicerca(@Body SearchRequest request);
+
+    @POST("/offerta_inglese/")
+    Call<NumeroResponse> offertaInglese(@Body OffertaIngleseRequest request);
 
 }
 

@@ -29,6 +29,7 @@ import retrofit2.Response;
 
 
 public class CreaAstaRibassoActivity extends AppCompatActivity {
+
     private MyApiService apiService;
     private TextView timerInsertedErrorTextView, prezzoInizialeErrorTextView, decrementoErrorTextView, sogliaMinimaErrorTextView, textViewTimerInsertedRibasso;
     private EditText prezzoInizialeEditText, decrementoEditText, sogliaMinimaEditText;
@@ -175,7 +176,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 decrementoErrorTextView.setText("");
                 sogliaMinimaErrorTextView.setText("");
                 if(check()){
-                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, sogliaMinimaBD, importoDecrementoBD, nickname, timerInSecondi);
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, importoDecrementoBD, sogliaMinimaBD, nickname, timerInSecondi);
                 }
             }
         });
@@ -237,9 +238,6 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
     public boolean check(){
         // Controllo campi vuoti
-        /*if(timerInsertedString.isEmpty()){
-            // timerInsertedString =       da impostare di default 1 ora
-        }*/
         if(prezzoInizialeEditText.getText().toString().isEmpty()){
             prezzoInizialeErrorTextView.setText("Inserire il prezzo iniziale");
             return false;

@@ -57,7 +57,7 @@
                 />
 
             <TextView
-                android:id="@+id/nomeProdottoTextView"
+                android:id="@+id/nomeProdottoTFTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -71,7 +71,7 @@
                 android:id="@+id/venditoreTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/nomeProdottoTextView"
+                android:layout_below="@id/nomeProdottoTFTextView"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"

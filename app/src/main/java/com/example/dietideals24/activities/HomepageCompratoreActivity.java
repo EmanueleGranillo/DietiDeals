@@ -94,6 +94,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     goToAstaIngleseActivity.putExtra("nickname", nickname);
                     goToAstaIngleseActivity.putExtra("tipo", tipo);
                     goToAstaIngleseActivity.putExtra("asta", aste.get(position));
+                    goToAstaIngleseActivity.putExtra("id", aste.get(position).getId());
                     startActivity(goToAstaIngleseActivity);
                 } else if (aste.get(position).getTipologia().equals("asta al ribasso")) {
                     Intent goToAstaRibassoActivity = new Intent(HomepageCompratoreActivity.this, AstaRibassoActivity.class);

@@ -15,8 +15,13 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dietideals24.R;
+import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.connection.NumeroResponse;
+import com.example.dietideals24.connection.OffertaIngleseRequest;
+import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.models.Asta;
 
 import java.math.BigDecimal;
@@ -26,35 +31,54 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AstaIngleseActivity extends AppCompatActivity {
 
-    private String nickname, tipo, imageString;
+    private MyApiService apiService;
+    private String nickname, tipo, imageString, tipologia = "asta inglese", dateString;
+    private boolean check;
     Date date;
     Chronometer chronometer;
+    private Asta asta;
+    private int id;
+    private TextView nomeProdottoTextView, venditoreTextView, descrizioneTextView, categoriaTextView, keywordsTextView, offertaAttualeIngTextView, vincenteTextView, tempoRimanenteTextView;
+    private Button presentaOffertaIngleseButton, backBtn;
+    private ImageView fotoProdottoImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asta_inglese);
 
-        TextView nomeProdottoTextView = findViewById(R.id.nomeProdottoTextView);
-        TextView venditoreTextView = findViewById(R.id.venditoreTextView);
-        TextView descrizioneTextView = findViewById(R.id.descrizioneTextView);
-        TextView categoriaTextView = findViewById(R.id.categoriaTextView);
-        TextView keywordsTextView = findViewById(R.id.keywordsTextView);
-        TextView offertaAttualeIngTextView = findViewById(R.id.offertaAttualeIngTextView);
-        TextView vincenteTextView = findViewById(R.id.vincenteTextView);
-        TextView tempoRimanenteTextView = findViewById(R.id.tempoRimanenteTextView);
+        apiService = RetrofitClient.getInstance().create(MyApiService.class);
+
+        nomeProdottoTextView = findViewById(R.id.nomeProdottoTFTextView);
+        venditoreTextView = findViewById(R.id.venditoreTextView);
+        descrizioneTextView = findViewById(R.id.descrizioneTextView);
+        categoriaTextView = findViewById(R.id.categoriaTextView);
+        keywordsTextView = findViewById(R.id.keywordsTextView);
+        offertaAttualeIngTextView = findViewById(R.id.offertaAttualeIngTextView);
+        vincenteTextView = findViewById(R.id.vincenteTextView);
+        tempoRimanenteTextView = findViewById(R.id.tempoRimanenteTextView);
         chronometer = findViewById(R.id.scadenzaChronometer);
-        Button presentaOffertaIngleseButton = findViewById(R.id.presentaOffertaIngleseButton);
-        Button backBtn = findViewById(R.id.backButtonInfoAsta);
-        ImageView fotoProdottoImageView = findViewById(R.id.fotoProdottoImage);
+        presentaOffertaIngleseButton = findViewById(R.id.presentaOffertaIngleseButton);
+        backBtn = findViewById(R.id.backButtonInfoAsta);
+        fotoProdottoImageView = findViewById(R.id.fotoProdottoImage);
 
         nickname = getIntent().getStringExtra("nickname");
-        //Fare controlli sul tipo
         tipo = getIntent().getStringExtra("tipo");
-        Asta asta = (Asta) getIntent().getSerializableExtra("asta");
+        id = getIntent().getIntExtra("id", 0);
+        aggiornaCard(id);
+        //asta = (Asta) getIntent().getSerializableExtra("asta");
+        //Toast.makeText(this, asta.getNomeProdotto(), Toast.LENGTH_SHORT).show();
 
+
+
+        /*
         nomeProdottoTextView.setText(asta.getNomeProdotto());
         venditoreTextView.setText("Venditore: " + asta.getCreatore());
         if (asta.getDescrizione().isEmpty()) {
@@ -69,7 +93,7 @@ public class AstaIngleseActivity extends AppCompatActivity {
             keywordsTextView.setText("Parole chiave: " + asta.getParoleChiave());
         }
         if (asta.getOffertaAttuale() != null) {
-            offertaAttualeIngTextView.setText("Offerta attuale: €" + asta.getOffertaAttuale().toString());
+            offertaAttualeIngTextView.setText("Offerta attuale: €" + asta.getOffertaAttuale());
         } else {
             offertaAttualeIngTextView.setText("Prezzo iniziale: €" + asta.getPrezzoIniziale());
         }
@@ -101,26 +125,25 @@ public class AstaIngleseActivity extends AppCompatActivity {
             presentaOffertaIngleseButton.setText("Offri \u20AC" + x.toString());
         }
 
-
-
-
         Calendar calendar = Calendar.getInstance();
         Date dataOraAttuale = calendar.getTime();
         calendar.setTime(dataOraAttuale);
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-
         try {
             date = inputFormat.parse(asta.getDataScadenzaTF());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         long timer = date.getTime() - dataOraAttuale.getTime();
 
         // GESTIONE TIMER
         long elapsedTime = SystemClock.elapsedRealtime() + timer;
         chronometer.setBase(elapsedTime);
         chronometer.start();
+        */
+
+
+        // LISTENERS
 
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -146,27 +169,22 @@ public class AstaIngleseActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-        if(asta.getVincente() != null){
-            vincenteTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        vincenteTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(asta.getVincente() != null) {
                     String checkActivity = "notmine";
                     Intent goToVincente = new Intent(AstaIngleseActivity.this, ProfiloActivity.class);
                     goToVincente.putExtra("nickname", nickname);
                     goToVincente.putExtra("tipo", tipo);
                     goToVincente.putExtra("checkActivity", checkActivity);
                     goToVincente.putExtra("other", asta.getVincente());
-                    goToVincente.putExtra("asta", asta);
+                    goToVincente.putExtra("id", id);
+                    goToVincente.putExtra("tipologia", tipologia);
                     startActivity(goToVincente);
                 }
-            });
-        }
+            }
+        });
 
         venditoreTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +195,8 @@ public class AstaIngleseActivity extends AppCompatActivity {
                 goToVenditore.putExtra("tipo", tipo);
                 goToVenditore.putExtra("checkActivity", checkActivity);
                 goToVenditore.putExtra("other", asta.getCreatore());
-                goToVenditore.putExtra("asta", asta);
+                goToVenditore.putExtra("id", id);
+                goToVenditore.putExtra("tipologia", tipologia);
                 startActivity(goToVenditore);
             }
         });
@@ -197,10 +216,58 @@ public class AstaIngleseActivity extends AppCompatActivity {
         presentaOffertaIngleseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BigDecimal x = new BigDecimal(0) ;
+                if(asta.getOffertaAttuale()==null){
+                    x = asta.getPrezzoIniziale();
+                } else {
+                    x = asta.getOffertaAttuale().add(asta.getSogliaRialzoMinima());
+                }
+
+                Calendar calendar = Calendar.getInstance();
+                Date dataOraAttuale = calendar.getTime();
+                calendar.setTime(dataOraAttuale);
+                calendar.add(Calendar.SECOND, (int) asta.getResetTimer());
+                date = calendar.getTime();
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                dateString = outputFormat.format(date);
+
+                if(offerta(asta.getId(), x, nickname, dateString)){
+                    aggiornaCard(asta.getId());
+                } else {
+                    //Offerta fallita
+                }
 
             }
         });
 
+    }
+
+    private boolean offerta(int id, BigDecimal x, String nickname, String dateString) {
+        check = true;
+        OffertaIngleseRequest offertaIngleseRequest = new OffertaIngleseRequest(id, x, nickname, dateString);
+        Call<NumeroResponse> call = apiService.offertaInglese(offertaIngleseRequest);
+        call.enqueue(new Callback<NumeroResponse>() {
+            @Override
+            public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
+                if(response.isSuccessful()){
+                    NumeroResponse num = response.body();
+                    if (num.getNumero() == 1) {
+                        check = true;
+                        Toast.makeText(AstaIngleseActivity.this, "1", Toast.LENGTH_SHORT).show();
+                    } else {
+                        check = false;
+                        Toast.makeText(AstaIngleseActivity.this, "0", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NumeroResponse> call, Throwable t) {
+
+            }
+        });
+
+        return check;
     }
 
     @Override
@@ -210,5 +277,86 @@ public class AstaIngleseActivity extends AppCompatActivity {
         backToHome.putExtra("tipo", tipo);
         startActivity(backToHome);
         super.onBackPressed();
+    }
+
+    public void aggiornaCard(int idasta){
+        Call<Asta> call = apiService.getAsta(idasta);
+        call.enqueue(new Callback<Asta>() {
+            @Override
+            public void onResponse(Call<Asta> call, Response<Asta> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(AstaIngleseActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                    asta = response.body();
+                    Toast.makeText(AstaIngleseActivity.this, asta.getNomeProdotto(), Toast.LENGTH_SHORT).show();
+                    nomeProdottoTextView.setText(asta.getNomeProdotto());
+                    venditoreTextView.setText("Venditore: " + asta.getCreatore());
+                    if (asta.getDescrizione().isEmpty()) {
+                        descrizioneTextView.setText("Nessuna descrizione");
+                    } else {
+                        descrizioneTextView.setText(asta.getDescrizione());
+                    }
+                    categoriaTextView.setText(asta.getCategoria());
+                    if (asta.getParoleChiave().isEmpty()) {
+                        keywordsTextView.setText("Nessuna parola chiave");
+                    } else {
+                        keywordsTextView.setText("Parole chiave: " + asta.getParoleChiave());
+                    }
+                    if (asta.getOffertaAttuale() != null) {
+                        offertaAttualeIngTextView.setText("Offerta attuale: €" + asta.getOffertaAttuale());
+                    } else {
+                        offertaAttualeIngTextView.setText("Prezzo iniziale: €" + asta.getPrezzoIniziale());
+                    }
+                    if (asta.getVincente() != null) {
+                        vincenteTextView.setText("Vincente: " + asta.getVincente());
+                    } else {
+                        vincenteTextView.setText("Nessuna offerta");
+                    }
+
+                    // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
+                    if (asta.getFotoProdotto() != null && !asta.getFotoProdotto().isEmpty()) {
+                        imageString = asta.getFotoProdotto();
+                        byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        fotoProdottoImageView.setImageBitmap(decodedByte);
+                    } else {
+                        // Immagine di fallback o gestisci la situazione come desideri
+                        fotoProdottoImageView.setImageResource(R.mipmap.ic_no_icon_foreground);
+                    }
+                    fotoProdottoImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                    if (asta.getOffertaAttuale() != null) {
+                        BigDecimal x = new BigDecimal(0);
+                        x = asta.getOffertaAttuale().add(asta.getSogliaRialzoMinima());
+                        presentaOffertaIngleseButton.setText("Offri \u20AC" + x.toString());
+                    } else {
+                        BigDecimal x = new BigDecimal(0);
+                        x = asta.getPrezzoIniziale();
+                        presentaOffertaIngleseButton.setText("Offri \u20AC" + x.toString());
+                    }
+
+                    Calendar calendar = Calendar.getInstance();
+                    Date dataOraAttuale = calendar.getTime();
+                    calendar.setTime(dataOraAttuale);
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                    try {
+                        date = inputFormat.parse(asta.getDataScadenzaTF());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    long timer = date.getTime() - dataOraAttuale.getTime();
+
+                    // GESTIONE TIMER
+                    long elapsedTime = SystemClock.elapsedRealtime() + timer;
+                    chronometer.setBase(elapsedTime);
+                    chronometer.start();
+                } else {
+
+                }
+            }
+            @Override
+            public void onFailure(Call<Asta> call, Throwable t) {
+
+            }
+        });
     }
 }

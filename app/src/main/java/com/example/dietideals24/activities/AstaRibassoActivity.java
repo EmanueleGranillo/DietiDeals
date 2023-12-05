@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.example.dietideals24.R;
 import com.example.dietideals24.models.Asta;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,15 +28,15 @@ import java.util.Locale;
 public class AstaRibassoActivity extends AppCompatActivity {
 
     private String nickname, tipo, imageString;
-    Date date;
-    Chronometer chronometer;
+    private Date date;
+    private Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asta_ribasso);
 
-        TextView nomeProdottoTextView = findViewById(R.id.nomeProdottoTextView);
+        TextView nomeProdottoTextView = findViewById(R.id.nomeProdottoTFTextView);
         TextView venditoreTextView = findViewById(R.id.venditoreTextView);
         TextView descrizioneTextView = findViewById(R.id.descrizioneTextView);
         TextView categoriaTextView = findViewById(R.id.categoriaTextView);
