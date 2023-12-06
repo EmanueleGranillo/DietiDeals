@@ -2,6 +2,7 @@ package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -104,6 +106,22 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
         dataScadenzaTextView.setText("Data di scadenza: " + outputFormat.format(date));
 
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tipo.equals("compratore")){
+                    Intent backToHome = new Intent(AstaTempoFissoActivity.this, HomepageCompratoreActivity.class);
+                    backToHome.putExtra("nickname", nickname);
+                    backToHome.putExtra("tipo", tipo);
+                    startActivity(backToHome);
+                } else {
+                    Intent backToHome = new Intent(AstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
+                    backToHome.putExtra("nickname", nickname);
+                    backToHome.putExtra("tipo", tipo);
+                    startActivity(backToHome);
+                }
+            }
+        });
         inserisciOffertaEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {

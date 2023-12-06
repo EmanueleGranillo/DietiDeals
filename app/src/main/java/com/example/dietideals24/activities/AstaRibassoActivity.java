@@ -235,10 +235,17 @@ public class AstaRibassoActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageCompratoreActivity.class);
-                backToHome.putExtra("nickname", nickname);
-                backToHome.putExtra("tipo", tipo);
-                startActivity(backToHome);
+                if(tipo.equals("compratore")){
+                    Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageCompratoreActivity.class);
+                    backToHome.putExtra("nickname", nickname);
+                    backToHome.putExtra("tipo", tipo);
+                    startActivity(backToHome);
+                } else {
+                    Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageVenditoreActivity.class);
+                    backToHome.putExtra("nickname", nickname);
+                    backToHome.putExtra("tipo", tipo);
+                    startActivity(backToHome);
+                }
             }
         });
 
