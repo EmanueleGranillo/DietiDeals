@@ -80,6 +80,8 @@ public interface MyApiService {
 
     @POST("/offerta_inglese/")
     Call<NumeroResponse> offertaInglese(@Body OffertaIngleseRequest request);
+    @POST("/offerta_tempo_fisso/")
+    Call<NumeroResponse> offertaTempoFisso(@Body OffertaTempoFissoRequest request);
     @POST("/offerta_ribasso/")
     Call<Void> updateRibasso(@Body OffertaRibassoRequest request);
 

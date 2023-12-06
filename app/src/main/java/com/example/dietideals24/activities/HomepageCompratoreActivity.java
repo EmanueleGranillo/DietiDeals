@@ -34,23 +34,13 @@ import retrofit2.Response;
 public class HomepageCompratoreActivity extends AppCompatActivity {
 
     private MyApiService apiService;
-    ArrayList<Asta> aste = new ArrayList<Asta>();
-    ListView listView;
-    CustomBaseAdapterProducts customBaseAdapterProducts;
-    ImageView pallinoImg;
-    Button tutteBtn;
-    Button elettronicaBtn;
-    Button motoriBtn;
-    Button animaliBtn;
-    Button modaBtn;
-    Button intrattenimentoBtn;
-    Button immobiliBtn;
-    Button sportBtn;
-    Button arredamentoBtn;
-    String nickname;
-    String tipo;
-    SearchView searchView;
-    String checkActivity;
+    private ListView listView;
+    private CustomBaseAdapterProducts customBaseAdapterProducts;
+    private ImageView pallinoImg;
+    private SearchView searchView;
+    private Button tutteBtn, elettronicaBtn, motoriBtn, animaliBtn, modaBtn, intrattenimentoBtn, immobiliBtn, sportBtn, arredamentoBtn;
+    private String nickname, tipo, checkActivity= "mine";
+    private ArrayList<Asta> aste = new ArrayList<Asta>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +63,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         ImageButton profiloBtn = findViewById(R.id.profiloButtonHomeCompratore);
         ImageButton notificheBtn = findViewById(R.id.notificheButtonHomeCompratore);
         searchView = findViewById(R.id.cercaAstaSearchView);
-
-        checkActivity = "mine";
         listView = (ListView) findViewById(R.id.customListViewProducts);
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
@@ -82,7 +70,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
 
         controllaNotifiche();
-
         riempiLista();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -41,8 +41,8 @@ public class AstaIngleseActivity extends AppCompatActivity {
     private MyApiService apiService;
     private String nickname, tipo, imageString, tipologia = "asta inglese", dateString;
     private boolean check;
-    Date date;
-    Chronometer chronometer;
+    private Date date;
+    private Chronometer chronometer;
     private Asta asta;
     private int id;
     private TextView nomeProdottoTextView, venditoreTextView, descrizioneTextView, categoriaTextView, keywordsTextView, offertaAttualeIngTextView, vincenteTextView, tempoRimanenteTextView;
@@ -64,8 +64,6 @@ public class AstaIngleseActivity extends AppCompatActivity {
         offertaAttualeIngTextView = findViewById(R.id.offertaAttualeIngTextView);
         vincenteTextView = findViewById(R.id.vincenteTextView);
         tempoRimanenteTextView = findViewById(R.id.tempoRimanenteTextView);
-
-
         chronometer = findViewById(R.id.scadenzaChronometer);
         presentaOffertaIngleseButton = findViewById(R.id.presentaOffertaIngleseButton);
         backBtn = findViewById(R.id.backButtonInfoAsta);
@@ -73,9 +71,7 @@ public class AstaIngleseActivity extends AppCompatActivity {
 
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
-        if(tipo.equals("compratore")){
-
-        } else {
+        if(tipo.equals("venditore")){
             presentaOffertaIngleseButton.setVisibility(View.INVISIBLE);
         }
         id = getIntent().getIntExtra("id", 0);
@@ -181,7 +177,7 @@ public class AstaIngleseActivity extends AppCompatActivity {
                 dateString = outputFormat.format(date);
 
                 if(offerta(asta.getId(), x, nickname, dateString)){
-                    aggiornaCard(asta.getId());
+                    aggiornaCard(id);
                 } else {
                     //Offerta fallita
                 }

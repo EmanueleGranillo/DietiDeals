@@ -68,7 +68,7 @@
 
 
             <TextView
-                android:id="@+id/creatoreTextView"
+                android:id="@+id/venditoreTFTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/nomeProdottoTFTextView"
@@ -76,14 +76,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Creatore"
+                android:text="Venditore: "
                 android:textSize="15dp" />
 
             <View
                 android:id="@+id/separatore0"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@id/creatoreTextView"
+                android:layout_below="@id/venditoreTFTextView"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
@@ -245,32 +245,31 @@
 
             <Button
                 android:id="@+id/incrementaButton"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_below="@id/dataScadenzaAstaTextView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@+id/inserisciImportoOffertaEditText"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="80dp"
-                android:layout_marginTop="50dp"
-                android:text="+"
-                android:textColor="#000000"
-                android:textSize="10dp"
+                android:backgroundTint="#00CC66"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:text="+"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="1dp" />
 
             <Button
-                android:layout_width="60dp"
-                android:layout_height="30dp"
                 android:id="@+id/decrementaButton"
-                android:layout_below="@+id/dataScadenzaAstaTextView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@+id/inserisciImportoOffertaEditText"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="50dp"
-                android:text="-"
-                android:textColor="#000000"
-                android:textSize="10dp"
+                android:backgroundTint="#00CC66"
                 android:gravity="center"
+                android:text="-"
                 android:textAlignment="center"
-                />
+                android:textColor="#FFFFFF"
+                android:textSize="10dp" />
 
 
             <Button
@@ -282,37 +281,63 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="118dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginEnd="112dp"
                 android:backgroundTint="#00CC66"
                 android:text="Offri" />
 
             <TextView
+                android:id="@+id/offertaAttualeErrorTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/offertaAttualeErrorTextView"
                 android:layout_below="@+id/inserisciImportoOffertaEditText"
-                android:layout_alignStart="@+id/inserisciImportoOffertaEditText"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="2dp"
                 android:text=""
                 android:textColor="#F44336"
                 android:textSize="12dp"
-                ></TextView>
+                android:layout_centerInParent="true"
+                android:gravity="center"></TextView>
 
             <EditText
                 android:id="@+id/inserisciImportoOffertaEditText"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/dataScadenzaAstaTextView"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:backgroundTint="#F2F4F8"
-                android:hint="Inserisci offerta"
+                android:hint="Inserisci offerta..."
                 android:inputType="numberDecimal"
-                android:text="€314.36"
+
                 android:textColor="#000000"
-                android:textSize="10dp"/>
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/scadutaTFTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/separatore5"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/dataScadenzaAstaTextView"
+                android:text="SCADUTA"
+                android:textColor="#F44336"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/attivaTFTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/separatore5"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/dataScadenzaAstaTextView"
+                android:text="ATTIVA"
+                android:textColor="#00CC66"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                ></TextView>
 
 
 
