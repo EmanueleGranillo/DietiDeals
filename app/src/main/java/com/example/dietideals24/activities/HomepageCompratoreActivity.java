@@ -101,7 +101,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     goToAstaRibassoActivity.putExtra("nickname", nickname);
                     goToAstaRibassoActivity.putExtra("tipo", tipo);
                     goToAstaRibassoActivity.putExtra("id", aste.get(position).getId());
-                    goToAstaRibassoActivity.putExtra("asta", aste.get(position));
 
                     startActivity(goToAstaRibassoActivity);
                 } else if (aste.get(position).getTipologia().equals("asta a tempo fisso")) {
