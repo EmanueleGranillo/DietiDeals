@@ -42,6 +42,7 @@ public class ProfiloActivity extends AppCompatActivity {
     private TextView sitoWebProfiloTextView;
     private ImageView linkInstagramImageView;
     private String linkInstagram;
+    private String linkSitoWeb;
     private String checkActivity;
     private String other;
     private Asta asta;
@@ -151,7 +152,7 @@ public class ProfiloActivity extends AppCompatActivity {
         sitoWebProfiloTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sitoWebProfiloTextView.getText().toString().isEmpty()){
+                if(linkSitoWeb.isEmpty()){
 
                 } else {
                     Uri uri;
@@ -202,24 +203,38 @@ public class ProfiloActivity extends AppCompatActivity {
                         nicknameProfiloTextView.setText(nickname);
                         if (profilo.getNome() != null && profilo.getCognome() != null) {
                             nomeCognomeProfiloTextView.setText(profilo.getNome() + " " + profilo.getCognome());
+                        } else {
+                            nomeCognomeProfiloTextView.setText("");
                         }
                         if (profilo.getBiografia() != null) {
                             bioProfiloTextView.setText(profilo.getBiografia());
+                        } else {
+                            bioProfiloTextView.setText("Nessuna biografia.");
                         }
                         if (profilo.getEmail() != null) {
                             emailProfiloTextView.setText(profilo.getEmail());
                         }
                         if (profilo.getNumeroTelefono() != null) {
                             cellulareProfiloTextView.setText(profilo.getNumeroTelefono());
+                        } else {
+                            cellulareProfiloTextView.setText("Nessun numero di telefono.");
                         }
-                        if (profilo.getPosizione() != null) {
+                        if (profilo.getPosizione().isEmpty()) {
                             posizioneProfiloTextView.setText(profilo.getPosizione());
+                        } else {
+                            posizioneProfiloTextView.setText("Nessuna posizione.");
                         }
                         if (profilo.getLinkWeb() != null) {
                             sitoWebProfiloTextView.setText(profilo.getLinkWeb());
+                            linkSitoWeb = profilo.getLinkWeb();
+                        } else {
+                            sitoWebProfiloTextView.setText("Nessun sito web collegato.");
+                            linkSitoWeb = "";
                         }
                         if (profilo.getLinkInsta() != null) {
                             linkInstagram = profilo.getLinkInsta();
+                        } else {
+                            linkInstagram = "";
                         }
                         if(profilo.getFotoProfilo() != null) {
                             byte[] decodedString = Base64.decode(profilo.getFotoProfilo(), Base64.DEFAULT);
@@ -241,43 +256,6 @@ public class ProfiloActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-    /*private static String encodeImage(String imgPath) {
-
-        //da mettere sopra
-        Uri uri = data.getData();
-        String imgString = uri.toString();
-        profiloImage.setImageURI(uri);
-        String stringDB = encodeImage(imgString);
-        System.out.println(stringDB);
-        //Caricare stringa sul server
-
-
-
-
-        try {
-            FileInputStream imageStream = new FileInputStream(imgPath);
-            byte[] data = new byte[0];
-            String imageString = null;
-
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                data = imageStream.readAllBytes();
-                imageString = Base64.getEncoder().encodeToString(data);
-            }
-            return imageString;
-        } catch (Exception e){
-        }
-        return imgPath;
-
-    }*/
 
     @Override
     public void onBackPressed() {

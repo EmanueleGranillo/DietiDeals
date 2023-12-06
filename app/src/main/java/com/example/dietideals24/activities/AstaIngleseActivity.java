@@ -73,76 +73,13 @@ public class AstaIngleseActivity extends AppCompatActivity {
 
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
+        if(tipo.equals("compratore")){
+
+        } else {
+            presentaOffertaIngleseButton.setVisibility(View.INVISIBLE);
+        }
         id = getIntent().getIntExtra("id", 0);
         aggiornaCard(id);
-        //asta = (Asta) getIntent().getSerializableExtra("asta");
-        //Toast.makeText(this, asta.getNomeProdotto(), Toast.LENGTH_SHORT).show();
-
-
-
-        /*
-        nomeProdottoTextView.setText(asta.getNomeProdotto());
-        venditoreTextView.setText("Venditore: " + asta.getCreatore());
-        if (asta.getDescrizione().isEmpty()) {
-            descrizioneTextView.setText("Nessuna descrizione");
-        } else {
-            descrizioneTextView.setText(asta.getDescrizione());
-        }
-        categoriaTextView.setText(asta.getCategoria());
-        if (asta.getParoleChiave().isEmpty()) {
-            keywordsTextView.setText("Nessuna parola chiave");
-        } else {
-            keywordsTextView.setText("Parole chiave: " + asta.getParoleChiave());
-        }
-        if (asta.getOffertaAttuale() != null) {
-            offertaAttualeIngTextView.setText("Offerta attuale: €" + asta.getOffertaAttuale());
-        } else {
-            offertaAttualeIngTextView.setText("Prezzo iniziale: €" + asta.getPrezzoIniziale());
-        }
-        if (asta.getVincente() != null) {
-            vincenteTextView.setText("Vincente: " + asta.getVincente());
-        } else {
-            vincenteTextView.setText("Nessuna offerta");
-        }
-
-        // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
-        if (asta.getFotoProdotto() != null && !asta.getFotoProdotto().isEmpty()) {
-            imageString = asta.getFotoProdotto();
-            byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            fotoProdottoImageView.setImageBitmap(decodedByte);
-        } else {
-            // Immagine di fallback o gestisci la situazione come desideri
-            fotoProdottoImageView.setImageResource(R.mipmap.ic_no_icon_foreground);
-        }
-        fotoProdottoImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
-        if (asta.getOffertaAttuale() != null) {
-            BigDecimal x = new BigDecimal(0);
-            x = asta.getOffertaAttuale().add(asta.getSogliaRialzoMinima());
-            presentaOffertaIngleseButton.setText("Offri \u20AC" + x.toString());
-        } else {
-            BigDecimal x = new BigDecimal(0);
-            x = asta.getPrezzoIniziale().add(asta.getSogliaRialzoMinima());
-            presentaOffertaIngleseButton.setText("Offri \u20AC" + x.toString());
-        }
-
-        Calendar calendar = Calendar.getInstance();
-        Date dataOraAttuale = calendar.getTime();
-        calendar.setTime(dataOraAttuale);
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-        try {
-            date = inputFormat.parse(asta.getDataScadenzaTF());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long timer = date.getTime() - dataOraAttuale.getTime();
-
-        // GESTIONE TIMER
-        long elapsedTime = SystemClock.elapsedRealtime() + timer;
-        chronometer.setBase(elapsedTime);
-        chronometer.start();
-        */
 
 
         // LISTENERS
@@ -165,6 +102,7 @@ public class AstaIngleseActivity extends AppCompatActivity {
                     chronometer.setVisibility(View.INVISIBLE);
                     presentaOffertaIngleseButton.setEnabled(false);
                     presentaOffertaIngleseButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
+                    mandaNotifiche(id);
                     //manda notifiche
 
                 }
@@ -191,15 +129,17 @@ public class AstaIngleseActivity extends AppCompatActivity {
         venditoreTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String checkActivity = "notmine";
-                Intent goToVenditore = new Intent(AstaIngleseActivity.this, ProfiloActivity.class);
-                goToVenditore.putExtra("nickname", nickname);
-                goToVenditore.putExtra("tipo", tipo);
-                goToVenditore.putExtra("checkActivity", checkActivity);
-                goToVenditore.putExtra("other", asta.getCreatore());
-                goToVenditore.putExtra("id", id);
-                goToVenditore.putExtra("tipologia", tipologia);
-                startActivity(goToVenditore);
+                if(tipo.equals("compratore")){
+                    String checkActivity = "notmine";
+                    Intent goToVenditore = new Intent(AstaIngleseActivity.this, ProfiloActivity.class);
+                    goToVenditore.putExtra("nickname", nickname);
+                    goToVenditore.putExtra("tipo", tipo);
+                    goToVenditore.putExtra("checkActivity", checkActivity);
+                    goToVenditore.putExtra("other", asta.getCreatore());
+                    goToVenditore.putExtra("id", id);
+                    goToVenditore.putExtra("tipologia", tipologia);
+                    startActivity(goToVenditore);
+                }
             }
         });
 
@@ -207,10 +147,17 @@ public class AstaIngleseActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent backToHome = new Intent(AstaIngleseActivity.this, HomepageCompratoreActivity.class);
-                backToHome.putExtra("nickname", nickname);
-                backToHome.putExtra("tipo", tipo);
-                startActivity(backToHome);
+                if(tipo.equals("compratore")){
+                    Intent backToHome = new Intent(AstaIngleseActivity.this, HomepageCompratoreActivity.class);
+                    backToHome.putExtra("nickname", nickname);
+                    backToHome.putExtra("tipo", tipo);
+                    startActivity(backToHome);
+                } else {
+                    Intent backToHome = new Intent(AstaIngleseActivity.this, HomepageVenditoreActivity.class);
+                    backToHome.putExtra("nickname", nickname);
+                    backToHome.putExtra("tipo", tipo);
+                    startActivity(backToHome);
+                }
             }
         });
 
@@ -255,10 +202,10 @@ public class AstaIngleseActivity extends AppCompatActivity {
                     NumeroResponse num = response.body();
                     if (num.getNumero() == 1) {
                         check = true;
-                        Toast.makeText(AstaIngleseActivity.this, "1", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AstaIngleseActivity.this, "Offerta riuscita", Toast.LENGTH_SHORT).show();
                     } else {
                         check = false;
-                        Toast.makeText(AstaIngleseActivity.this, "0", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AstaIngleseActivity.this, "Offerta fallita", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -287,9 +234,7 @@ public class AstaIngleseActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Asta> call, Response<Asta> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(AstaIngleseActivity.this, "ok", Toast.LENGTH_SHORT).show();
                     asta = response.body();
-                    Toast.makeText(AstaIngleseActivity.this, asta.getNomeProdotto(), Toast.LENGTH_SHORT).show();
                     nomeProdottoTextView.setText(asta.getNomeProdotto());
                     venditoreTextView.setText("Venditore: " + asta.getCreatore());
                     if (asta.getDescrizione().isEmpty()) {
@@ -348,7 +293,7 @@ public class AstaIngleseActivity extends AppCompatActivity {
                     long timer = date.getTime() - dataOraAttuale.getTime();
 
                     // GESTIONE TIMER
-                    long elapsedTime = SystemClock.elapsedRealtime() + timer;
+                    long elapsedTime = SystemClock.elapsedRealtime() + (timer);
                     chronometer.setBase(elapsedTime);
                     chronometer.start();
                 } else {
@@ -360,5 +305,21 @@ public class AstaIngleseActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void mandaNotifiche(int id){
+        Call<Void> call = apiService.mandaNotifiche(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+
     }
 }

@@ -59,13 +59,14 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         ImageButton profiloBtn = findViewById(R.id.profiloButtonHomeVenditore);
         ImageButton notificheBtn = findViewById(R.id.notificheButtonHomeVenditore);
 
+        checkActivity = "mine";
         listView = (ListView) findViewById(R.id.customListViewSellProducts);
         tipo = getIntent().getStringExtra("tipo");
         nickname = getIntent().getStringExtra("nickname");
         aste = new ArrayList<Asta>();
         pallinoImg.setVisibility(View.INVISIBLE);
 
-        controllaNotifiche();
+        //controllaNotifiche();
 
         riempiListaPerVenditore();
 
@@ -84,36 +85,30 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
 
 
 
-        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(aste.get(position).getTipologia().toString().equals("asta inglese")){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (aste.get(position).getTipologia().equals("asta inglese")) {
                     Intent goToAstaIngleseActivity = new Intent(HomepageVenditoreActivity.this, AstaIngleseActivity.class);
                     goToAstaIngleseActivity.putExtra("nickname", nickname);
                     goToAstaIngleseActivity.putExtra("tipo", tipo);
-                    goToAstaIngleseActivity.putExtra("asta", aste.get(position));
+                    goToAstaIngleseActivity.putExtra("id", aste.get(position).getId());
                     startActivity(goToAstaIngleseActivity);
                 }
-                if(aste.get(position).getTipologia().toString().equals("asta al ribasso")){
+                if (aste.get(position).getTipologia().equals("asta al ribasso")) {
                     Intent goToAstaRibassoActivity = new Intent(HomepageVenditoreActivity.this, AstaRibassoActivity.class);
                     goToAstaRibassoActivity.putExtra("nickname", nickname);
                     goToAstaRibassoActivity.putExtra("tipo", tipo);
-                    goToAstaRibassoActivity.putExtra("asta", aste.get(position));
+                    goToAstaRibassoActivity.putExtra("id", aste.get(position).getId());
                     startActivity(goToAstaRibassoActivity);
                 }
-                if(aste.get(position).getTipologia().toString().equals("asta a tempo fisso")){
+                if (aste.get(position).getTipologia().equals("asta a tempo fisso")) {
                     Intent goToAstaTempoFissoActivity = new Intent(HomepageVenditoreActivity.this, AstaTempoFissoActivity.class);
                     goToAstaTempoFissoActivity.putExtra("nickname", nickname);
                     goToAstaTempoFissoActivity.putExtra("tipo", tipo);
-                    goToAstaTempoFissoActivity.putExtra("asta", aste.get(position));
+                    goToAstaTempoFissoActivity.putExtra("id", aste.get(position).getId());
                     startActivity(goToAstaTempoFissoActivity);
                 }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -186,7 +181,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
     }
 
 
-    private void controllaNotifiche() {
+    /*private void controllaNotifiche() {
         Call<NumeroResponse> call = apiService.checkNotifications(nickname);
         call.enqueue(new Callback<NumeroResponse>() {
             @Override
@@ -207,6 +202,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         });
     }
 
+     */
 
     public void riempiListaPerVenditore(){
         Call<ArrayList<Asta>> call = apiService.getAstePerVenditore(nickname);

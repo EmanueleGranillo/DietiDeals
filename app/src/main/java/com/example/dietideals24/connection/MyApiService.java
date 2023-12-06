@@ -48,8 +48,11 @@ public interface MyApiService {
     @POST("/get_aste_per_venditore_concluse/{nickname}")
     Call<ArrayList<Asta>> getAstePerVenditoreConcluse(@Path("nickname") String nickname);
 
-    @POST("/check_notifiche/{nickname}")
-    Call<NumeroResponse> checkNotifications(@Path("nickname") String nickname);
+    @POST("/manda_notifiche/{id}")
+    Call<Void> mandaNotifiche(@Path("id") int id);
+
+    @POST("/check_notifiche_compratore/{nickname}")
+    Call<NumeroResponse> checkNotificationsCompratore(@Path("nickname") String nickname);
 
     @POST("/set_notifiche_a_lette/{nickname}")
     Call<Void> setNotificheALette(@Path("nickname") String nickname);

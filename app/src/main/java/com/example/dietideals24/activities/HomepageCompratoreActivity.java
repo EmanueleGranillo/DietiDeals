@@ -81,7 +81,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         pallinoImg.setVisibility(View.INVISIBLE);
 
 
-        //controllaNotifiche();
+        controllaNotifiche();
 
         riempiLista();
         riempiListaRibasso();
@@ -94,7 +94,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     Intent goToAstaIngleseActivity = new Intent(HomepageCompratoreActivity.this, AstaIngleseActivity.class);
                     goToAstaIngleseActivity.putExtra("nickname", nickname);
                     goToAstaIngleseActivity.putExtra("tipo", tipo);
-                    goToAstaIngleseActivity.putExtra("asta", aste.get(position));
                     goToAstaIngleseActivity.putExtra("id", aste.get(position).getId());
                     startActivity(goToAstaIngleseActivity);
                 } else if (aste.get(position).getTipologia().equals("asta al ribasso")) {
@@ -103,12 +102,13 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     goToAstaRibassoActivity.putExtra("tipo", tipo);
                     goToAstaRibassoActivity.putExtra("id", aste.get(position).getId());
                     goToAstaRibassoActivity.putExtra("asta", aste.get(position));
+
                     startActivity(goToAstaRibassoActivity);
                 } else if (aste.get(position).getTipologia().equals("asta a tempo fisso")) {
                     Intent goToAstaTempoFissoActivity = new Intent(HomepageCompratoreActivity.this, AstaTempoFissoActivity.class);
                     goToAstaTempoFissoActivity.putExtra("nickname", nickname);
                     goToAstaTempoFissoActivity.putExtra("tipo", tipo);
-                    goToAstaTempoFissoActivity.putExtra("asta", aste.get(position));
+                    goToAstaTempoFissoActivity.putExtra("id", aste.get(position).getId());
                     startActivity(goToAstaTempoFissoActivity);
                 }
             }
@@ -279,8 +279,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
     }
 
-    /*private void controllaNotifiche() {
-        Call<NumeroResponse> call = apiService.checkNotifications(nickname);
+    private void controllaNotifiche() {
+        Call<NumeroResponse> call = apiService.checkNotificationsCompratore(nickname);
         call.enqueue(new Callback<NumeroResponse>() {
             @Override
             public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
@@ -298,7 +298,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita per check notifiche", Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
+    }
 
     private void riempiLista() {
         Call<ArrayList<Asta>> call = apiService.getAste();

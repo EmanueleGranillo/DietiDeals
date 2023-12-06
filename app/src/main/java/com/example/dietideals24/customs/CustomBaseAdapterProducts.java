@@ -146,7 +146,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
             // GESTIONE TIMER
             Chronometer chronometer = convertView.findViewById(R.id.chronometerInglese);
-            long elapsedTime = SystemClock.elapsedRealtime() + timer;
+            long elapsedTime = SystemClock.elapsedRealtime() + (timer);
             chronometer.setBase(elapsedTime);
             chronometer.start();
 
