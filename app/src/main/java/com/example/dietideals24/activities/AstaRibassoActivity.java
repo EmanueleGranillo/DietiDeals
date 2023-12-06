@@ -253,7 +253,13 @@ public class AstaRibassoActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 // Update UI on each tick (every second)
                 long secondsRemaining = millisUntilFinished / 1000;
-                timerTextView.setText(String.valueOf(secondsRemaining));
+
+                // Converti i secondi rimanenti in un formato "00:00"
+                String formattedTime = String.format(Locale.getDefault(), "%02d:%02d",secondsRemaining / 60, secondsRemaining % 60);
+
+                timerTextView.setText(String.valueOf(formattedTime));
+
+
 
                 if (secondsRemaining < 10) {
                     timerTextView.setTextColor(Color.RED);

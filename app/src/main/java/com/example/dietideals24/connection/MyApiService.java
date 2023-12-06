@@ -71,7 +71,7 @@ public interface MyApiService {
 
     @POST("/offerta_inglese/")
     Call<NumeroResponse> offertaInglese(@Body OffertaIngleseRequest request);
-    @POST("/update_ribasso/")
+    @POST("/offerta_ribasso/")
     Call<Void> updateRibasso(@Body OffertaRibassoRequest request);
 
 }
