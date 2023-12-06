@@ -4,150 +4,163 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
     android:background="#F2F4F8"
-    >
+    tools:context=".activities.MainActivity">
 
 
-    <TextView
-        android:id="@+id/bentornatoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
-        android:text="Bentornato!"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/martelloImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bentornatoTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:background="@mipmap/ic_martello_foreground" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <android.widget.Button
-        android:id="@+id/compraButtonLogin"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/martelloImage"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#00CC66"
-        android:text="Compra"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/rounded_left"/>
 
-    <android.widget.Button
-        android:id="@+id/vendiButtonLogin"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/martelloImage"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="100dp"
-        android:layout_toEndOf="@+id/compraButtonLogin"
-        android:backgroundTint="#FFFFFF"
-        android:text="Vendi"
-        android:textAllCaps="false"
-        android:textColor="#000000"
-        android:background="@drawable/rounded_right"/>
+            <TextView
+                android:id="@+id/bentornatoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                android:text="Bentornato!"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/nicknameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_below="@+id/compraButtonLogin"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="70dp"
-        android:background="@drawable/rounded_edittext_bg"
-        android:gravity="center_vertical"
-        android:hint="Nickname"
-        android:paddingStart="5dp"
-        android:textSize="15dp" />
+            <ImageView
+                android:id="@+id/martelloImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bentornatoTextView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:background="@mipmap/ic_martello_foreground" />
 
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_below="@+id/nicknameEditText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="70dp"
-        android:background="@drawable/rounded_edittext_bg"
-        android:hint="Password"
-        android:textSize="15dp"
-        android:inputType="textPassword"
-        android:gravity="center_vertical"
-        android:paddingStart="5dp"
-        />
+            <android.widget.Button
+                android:id="@+id/compraButtonLogin"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/martelloImage"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/rounded_left"
+                android:backgroundTint="#00CC66"
+                android:text="Compra"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
 
-    <Button
-        android:id="@+id/accediButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/passwordEditText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="120dp"
-        android:backgroundTint="#00CC66"
-        android:text="Accedi" />
+            <android.widget.Button
+                android:id="@+id/vendiButtonLogin"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/martelloImage"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="100dp"
+                android:layout_toEndOf="@+id/compraButtonLogin"
+                android:background="@drawable/rounded_right"
+                android:backgroundTint="#FFFFFF"
+                android:text="Vendi"
+                android:textAllCaps="false"
+                android:textColor="#000000" />
 
-    <TextView
-        android:id="@+id/nonSeiRegistratoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/accediButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
-        android:text="Non hai ancora un account?"
-        android:textSize="15dp"
-        android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/nicknameEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@+id/compraButtonLogin"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="70dp"
+                android:background="@drawable/rounded_edittext_bg"
+                android:gravity="center_vertical"
+                android:hint="Nickname"
+                android:paddingStart="5dp"
+                android:textSize="15dp" />
 
-    <TextView
-        android:id="@+id/registratiTextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nonSeiRegistratoTextView"
-        android:layout_centerHorizontal="true"
-        android:text="@string/underline"
-        android:textStyle="bold"
-        android:textSize="15dp"/>
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@+id/nicknameEditText"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="38dp"
+                android:layout_marginEnd="70dp"
+                android:background="@drawable/rounded_edittext_bg"
+                android:gravity="center_vertical"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingStart="5dp"
+                android:textSize="15dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nicknameErrorTextView"
-        android:layout_below="@+id/nicknameEditText"
-        android:layout_alignStart="@+id/nicknameEditText"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
-        android:text=""
-        android:textColor="#F44336"
-        android:textSize="12dp"/>
+            <Button
+                android:id="@+id/accediButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/passwordEditText"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="38dp"
+                android:layout_marginEnd="120dp"
+                android:backgroundTint="#00CC66"
+                android:text="Accedi" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/passwordErrorTextView"
-        android:layout_below="@+id/passwordEditText"
-        android:layout_alignStart="@+id/passwordEditText"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
-        android:text=""
-        android:textColor="#F44336"
-        android:textSize="12dp"/>
+            <TextView
+                android:id="@+id/nonSeiRegistratoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/accediButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                android:text="Non hai ancora un account?"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/registratiTextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nonSeiRegistratoTextView"
+                android:layout_centerHorizontal="true"
+                android:text="@string/underline"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/nicknameErrorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nicknameEditText"
+                android:layout_alignStart="@+id/nicknameEditText"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:textColor="#F44336"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/passwordErrorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/passwordEditText"
+                android:layout_alignStart="@+id/passwordEditText"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:textColor="#F44336"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
 
 </RelativeLayout>
