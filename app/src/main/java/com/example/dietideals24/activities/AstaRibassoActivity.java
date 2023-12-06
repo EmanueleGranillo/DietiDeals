@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.util.Base64;
 import android.view.View;
@@ -14,49 +15,77 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dietideals24.R;
+import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.connection.OffertaRibassoRequest;
+import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.models.Asta;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class AstaRibassoActivity extends AppCompatActivity {
-
+    MyApiService apiService;
+    int id;
     private String nickname, tipo, imageString;
     private Date date;
-    private Chronometer chronometer;
+    //private Chronometer chronometer;
+    Date dateCreazioneAsta;
 
+    double differenzaSecondi, numeroIntervalli, tempoPassatoPercentuale, secondiPassatiTimerCorrente, prezzoAttualeDouble;
+    int numeroIntervalliPassati, timerRimanenteSecondi;
+    BigDecimal prezzoAttuale;
+    Asta asta;
+    TextView nomeProdottoTextView, venditoreTextView, descrizioneTextView, categoriaTextView, keywordsTextView, prezzoAttualeTextView, importoDecrementoTextView, decrementoPrezzoTextView, vincitoreTextView, countDownRibTxtView;
+    ImageView fotoProdottoImageView;
+    Button acquistaRibassoButton, backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asta_ribasso);
 
-        TextView nomeProdottoTextView = findViewById(R.id.nomeProdottoTFTextView);
-        TextView venditoreTextView = findViewById(R.id.venditoreTextView);
-        TextView descrizioneTextView = findViewById(R.id.descrizioneTextView);
-        TextView categoriaTextView = findViewById(R.id.categoriaTextView);
-        TextView keywordsTextView = findViewById(R.id.keywordsTextView);
-        TextView prezzoAttualeTextView = findViewById(R.id.prezzoAttualeTextView);
-        TextView importoDecrementoTextView = findViewById(R.id.importoDecrementoTextView);
-        TextView decrementoPrezzoTextView = findViewById(R.id.decrementoPrezzoTextView);
-        TextView vincitoreTextView = findViewById(R.id.vincitoreTextView);
-        chronometer = findViewById(R.id.scadenzaChronometer);
-        Button acquistaRibassoButton = findViewById(R.id.acquistaRibassoButton);
-        Button backBtn = findViewById(R.id.backButtonInfoAsta);
-        ImageView fotoProdottoImageView = findViewById(R.id.fotoProdottoImage);
+        apiService = RetrofitClient.getInstance().create(MyApiService.class);
+
+        nomeProdottoTextView = findViewById(R.id.nomeProdottoTextView);
+        venditoreTextView = findViewById(R.id.venditoreTextView);
+        descrizioneTextView = findViewById(R.id.descrizioneTextView);
+        categoriaTextView = findViewById(R.id.categoriaTextView);
+        keywordsTextView = findViewById(R.id.keywordsTextView);
+        prezzoAttualeTextView = findViewById(R.id.prezzoAttualeTextView);
+        importoDecrementoTextView = findViewById(R.id.importoDecrementoTextView);
+        decrementoPrezzoTextView = findViewById(R.id.decrementoPrezzoTextView);
+        vincitoreTextView = findViewById(R.id.vincitoreTextView);
+        countDownRibTxtView = findViewById(R.id.countDownRibTextView);
+        acquistaRibassoButton = findViewById(R.id.acquistaRibassoButton);
+        backBtn = findViewById(R.id.backButtonInfoAsta);
+        fotoProdottoImageView = findViewById(R.id.fotoProdottoImage);
 
 
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
-        Asta asta = (Asta) getIntent().getSerializableExtra("asta");
+        id = getIntent().getIntExtra("id", 0);
+
+        aggiornaCard(id);
 
 
 
+
+
+
+
+
+        /*
         // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
         if (asta.getFotoProdotto() != null && !asta.getFotoProdotto().isEmpty()) {
             imageString = asta.getFotoProdotto();
@@ -91,55 +120,88 @@ public class AstaRibassoActivity extends AppCompatActivity {
         importoDecrementoTextView.setText("Importo decremento: " + asta.getImportoDecremento());
 
 
+         */
 
 
-        Calendar calendar = Calendar.getInstance();
-        Date dataOraAttuale = calendar.getTime();
-        calendar.setTime(dataOraAttuale);
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-
-        try {
-            date = inputFormat.parse(asta.getDataScadenzaTF());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        long timer = date.getTime() - dataOraAttuale.getTime();
-
-        // GESTIONE TIMER
-        long elapsedTime = SystemClock.elapsedRealtime() + timer;
-        chronometer.setBase(elapsedTime);
-        chronometer.start();
-
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                if(chronometer.getBase() < SystemClock.elapsedRealtime() + 10000) {
-                    chronometer.setTextColor(Color.RED);
-                }
-                if(chronometer.getBase() < SystemClock.elapsedRealtime() + 1) {
-                    chronometer.stop();
-                    if(asta.getVincente() != null){
-                        decrementoPrezzoTextView.setText("Venduto per \u20AC" + asta.getOffertaAttuale());
-                        vincitoreTextView.setText("Venduto a: " + asta.getVincente());
-                        prezzoAttualeTextView.setText("Prezzo vendita: €" + asta.getOffertaAttuale());
-                    } else {
-                        vincitoreTextView.setText("Non venduto");
-                    }
-                    decrementoPrezzoTextView.setText("Conclusa");
-                    chronometer.setVisibility(View.INVISIBLE);
-                    acquistaRibassoButton.setEnabled(false);
-                    acquistaRibassoButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
-                    //manda notifiche
-                }
-            }
-        });
 
 
-        if(asta.getVincente() != null){
-            vincitoreTextView.setOnClickListener(new View.OnClickListener() {
+
+
+
+        /*
+        differenzaSecondi = (dataOraAttuale.getTime() - dateCreazioneAsta.getTime())/1000;
+        System.out.println("differenza secondi: " + differenzaSecondi);
+        System.out.println("timer: " + asta.getResetTimer());
+        numeroIntervalli = differenzaSecondi/(double) asta.getResetTimer();
+        System.out.println("numero intervalli: " + numeroIntervalli);
+
+        numeroIntervalliPassati = (int) numeroIntervalli;
+        System.out.println("numero intervalli passati: " + numeroIntervalliPassati);
+
+        tempoPassatoPercentuale = numeroIntervalli - numeroIntervalliPassati;
+        System.out.println("tempo passato percentuale: " + tempoPassatoPercentuale);
+
+        secondiPassatiTimerCorrente = tempoPassatoPercentuale * asta.getResetTimer();
+        System.out.println("secondi passati timer corrente: " + (int) secondiPassatiTimerCorrente);
+
+        timerRimanenteSecondi = (int)asta.getResetTimer() - (int)secondiPassatiTimerCorrente;
+        System.out.println("secondi rimanenti timer corrente: " + (int) timerRimanenteSecondi);
+         */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        if(prezzoAttuale.compareTo(asta.getSogliaSegreta()) <= 0) {
+            // Asta conclusa. Fallita per raggiungimento soglia minima
+            decrementoPrezzoTextView.setText("Conclusa");
+            vincitoreTextView.setText("Non venduta");
+            chronometer.setVisibility(View.INVISIBLE);
+            acquistaRibassoButton.setEnabled(false);
+            acquistaRibassoButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
+            //manda notifiche
+
+        } else {
+
+            prezzoAttualeTextView.setText("Prezzo attuale: \u20AC" + prezzoAttuale);
+
+            long timer = timerRimanenteSecondi / 1000;
+
+
+            // GESTIONE TIMER
+            long elapsedTime = SystemClock.elapsedRealtime() + timer;
+            chronometer.setBase(elapsedTime);
+            chronometer.start();
+
+            chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onChronometerTick(Chronometer chronometer) {
+                    if(chronometer.getBase() <= SystemClock.elapsedRealtime() + 10000) {
+                        chronometer.setTextColor(Color.RED);
+                    }
+                    if(chronometer.getBase() < SystemClock.elapsedRealtime() + 1) {
+                        chronometer.stop();
+                    }
+                }
+            });
+        }
+         */
+
+
+        vincitoreTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (asta.getVincente() != null) {
                     String checkActivity = "notmine";
                     Intent goToVincente = new Intent(AstaRibassoActivity.this, ProfiloActivity.class);
                     goToVincente.putExtra("nickname", nickname);
@@ -149,8 +211,9 @@ public class AstaRibassoActivity extends AppCompatActivity {
                     goToVincente.putExtra("asta", asta);
                     startActivity(goToVincente);
                 }
-            });
-        }
+            }
+        });
+
 
 
 
@@ -180,6 +243,183 @@ public class AstaRibassoActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+
+    private void createAndStartCountDownTimer(TextView timerTextView, TextView offertaAttualeRibassoTextView, long timeMillis, Asta asta) {
+        CountDownTimer countDownTimer = new CountDownTimer(timeMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Update UI on each tick (every second)
+                long secondsRemaining = millisUntilFinished / 1000;
+                timerTextView.setText(String.valueOf(secondsRemaining));
+
+                if (secondsRemaining < 10) {
+                    timerTextView.setTextColor(Color.RED);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                // Actions to be performed when the timer finishes
+                timerTextView.setTextColor(Color.BLACK);
+                prezzoAttuale = asta.getOffertaAttuale();
+                prezzoAttuale = prezzoAttuale.subtract(asta.getImportoDecremento());
+                asta.setOffertaAttuale(prezzoAttuale);
+                offertaAttualeRibassoTextView.setText("Offerta attuale: \u20AC" + prezzoAttuale);
+
+                if (prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
+                    updateRibasso(prezzoAttuale, asta.getId());
+                    timerTextView.setText("Conclusa");
+                } else {
+                    createAndStartCountDownTimer(timerTextView, offertaAttualeRibassoTextView, asta.getResetTimer() * 1000, asta);
+                }
+            }
+        };
+
+        // Start the timer
+        countDownTimer.start();
+    }
+
+
+
+    public void aggiornaValoriAstaRibasso(Asta asta) {
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        Date dataOraAttuale = calendar.getTime();
+        calendar.setTime(dataOraAttuale);
+        System.out.println("data ora attuale: " + dataOraAttuale);
+
+        try {
+            Date dataCreazioneAsta = inputFormat.parse(asta.getDataScadenzaTF()); // Assumi che esista un metodo getDataCreazione nella classe Asta
+            System.out.println("data creazione asta: " + dataCreazioneAsta);
+
+            differenzaSecondi = (dataOraAttuale.getTime() - dataCreazioneAsta.getTime()) / 1000;
+            System.out.println("differenza secondi: " + differenzaSecondi);
+
+            numeroIntervalli = differenzaSecondi / (double) asta.getResetTimer();
+            System.out.println("numero Intervalli : " + numeroIntervalli);
+
+            numeroIntervalliPassati = (int) numeroIntervalli;
+            System.out.println("numero Intervalli Passati: " + numeroIntervalliPassati);
+
+            tempoPassatoPercentuale = numeroIntervalli - numeroIntervalliPassati;
+            System.out.println("tempo Passato Percentuale: " + tempoPassatoPercentuale);
+
+            secondiPassatiTimerCorrente = tempoPassatoPercentuale * asta.getResetTimer();
+            System.out.println("secondi Passati Timer Corrente: " + secondiPassatiTimerCorrente);
+
+            timerRimanenteSecondi = (int) asta.getResetTimer() - (int) secondiPassatiTimerCorrente;
+            System.out.println("timer Rimanente Secondi: " + timerRimanenteSecondi);
+
+            prezzoAttualeDouble = (asta.getPrezzoIniziale().subtract(asta.getImportoDecremento().multiply(BigDecimal.valueOf(numeroIntervalliPassati)))).doubleValue();
+            System.out.println("Prezzo attuale double: " + prezzoAttualeDouble);
+
+            prezzoAttuale = new BigDecimal(prezzoAttualeDouble);
+            System.out.println("prezzo Attuale" + prezzoAttuale);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+    public void updateRibasso(BigDecimal offertaAttuale, int id){
+        OffertaRibassoRequest offertaRibassoRequest = new OffertaRibassoRequest(offertaAttuale, id);
+        Call<Void> call = apiService.updateRibasso(offertaRibassoRequest);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                } else {
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
+    }
+
+
+
+
+
+
+    public void aggiornaCard(int idasta){
+        Call<Asta> call = apiService.getAsta(idasta);
+        call.enqueue(new Callback<Asta>() {
+            @Override
+            public void onResponse(Call<Asta> call, Response<Asta> response) {
+                if(response.isSuccessful()){
+                    asta = response.body();
+                    nomeProdottoTextView.setText(asta.getNomeProdotto());
+                    venditoreTextView.setText("Venditore: " + asta.getCreatore());
+                    if (asta.getDescrizione().isEmpty()) {
+                        descrizioneTextView.setText("Nessuna descrizione");
+                    } else {
+                        descrizioneTextView.setText(asta.getDescrizione());
+                    }
+                    categoriaTextView.setText(asta.getCategoria());
+                    if (asta.getParoleChiave().isEmpty()) {
+                        keywordsTextView.setText("Nessuna parola chiave");
+                    } else {
+                        keywordsTextView.setText("Parole chiave: " + asta.getParoleChiave());
+                    }
+                    if (asta.getOffertaAttuale() != null) {
+                        prezzoAttualeTextView.setText("Offerta attuale: €" + asta.getOffertaAttuale());
+                    } else {
+                        prezzoAttualeTextView.setText("Prezzo iniziale: €" + asta.getPrezzoIniziale());
+                    }
+                    if (asta.getVincente() != null) {
+                        vincitoreTextView.setText("Vincente: " + asta.getVincente());
+                    } else {
+                        vincitoreTextView.setText("Nessuna offerta");
+                    }
+
+                    // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
+                    if (asta.getFotoProdotto() != null && !asta.getFotoProdotto().isEmpty()) {
+                        imageString = asta.getFotoProdotto();
+                        byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        fotoProdottoImageView.setImageBitmap(decodedByte);
+                    } else {
+                        // Immagine di fallback o gestisci la situazione come desideri
+                        fotoProdottoImageView.setImageResource(R.mipmap.ic_no_icon_foreground);
+                    }
+                    fotoProdottoImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
+                    aggiornaValoriAstaRibasso(asta);
+                    prezzoAttualeDouble = (asta.getPrezzoIniziale().subtract(asta.getImportoDecremento().multiply(BigDecimal.valueOf(numeroIntervalliPassati)))).doubleValue();
+
+                    prezzoAttuale = new BigDecimal(prezzoAttualeDouble);
+                    System.out.println("Prezzo attuale: " + prezzoAttuale);
+
+                    prezzoAttualeTextView.setText("Offerta attuale: \u20AC" + prezzoAttuale);
+
+                    asta.setOffertaAttuale(prezzoAttuale);
+
+
+                    long initialTimeMillis = timerRimanenteSecondi * 1000;
+
+                    createAndStartCountDownTimer(countDownRibTxtView, prezzoAttualeTextView, initialTimeMillis, asta);
+
+
+                } else {
+
+                }
+            }
+            @Override
+            public void onFailure(Call<Asta> call, Throwable t) {
+
+            }
+        });
     }
 
 

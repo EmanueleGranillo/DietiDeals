@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -69,7 +70,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
         timerInsertedString = (String.format("0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
         timerInSecondi = convertiStringaInSecondi(timerInsertedString);
-        aggiornaDataScadenza((int) timerInSecondi);
+
 
 
         // GET EXTRAS
@@ -92,25 +93,21 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
-                    aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() >= 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
-                    aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() >= 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
-                    aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() < 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
-                    aggiornaDataScadenza((int) timerInSecondi);
 
                 }
             }
@@ -122,25 +119,21 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
-                    aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() >= 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
-                    aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() >= 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
-                    aggiornaDataScadenza((int) timerInSecondi);
 
                 } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() < 10)) {
                     textViewTimerInsertedRibasso.setText(String.format("Timer inserito:     %s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInsertedString = (String.format("%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
                     timerInSecondi = convertiStringaInSecondi(timerInsertedString);
-                    aggiornaDataScadenza((int) timerInSecondi);
 
                 }
             }
@@ -171,12 +164,24 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         createAstaRibassoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                Calendar calendar = Calendar.getInstance();
+                Date dataOraAttuale = calendar.getTime();
+                calendar.setTime(dataOraAttuale);
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                String dataOraAttualeString = inputFormat.format(dataOraAttuale);
+
+                aggiornaDataScadenza((int) timerInSecondi);
+
                 timerInsertedErrorTextView.setText("");
                 prezzoInizialeErrorTextView.setText("");
                 decrementoErrorTextView.setText("");
                 sogliaMinimaErrorTextView.setText("");
                 if(check()){
-                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, importoDecrementoBD, sogliaMinimaBD, nickname, timerInSecondi);
+                    //creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, importoDecrementoBD, sogliaMinimaBD, nickname, timerInSecondi);
+
+                    creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, dataOraAttualeString, prezzoInizialeBD, importoDecrementoBD, sogliaMinimaBD, nickname, timerInSecondi);
                 }
             }
         });
@@ -210,6 +215,8 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     public long convertiStringaInSecondi(String tempoStringa) {
         SimpleDateFormat formatoTimer = new SimpleDateFormat("HH:mm:ss");

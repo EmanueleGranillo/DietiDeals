@@ -84,6 +84,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         //controllaNotifiche();
 
         riempiLista();
+        riempiListaRibasso();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,6 +101,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     Intent goToAstaRibassoActivity = new Intent(HomepageCompratoreActivity.this, AstaRibassoActivity.class);
                     goToAstaRibassoActivity.putExtra("nickname", nickname);
                     goToAstaRibassoActivity.putExtra("tipo", tipo);
+                    goToAstaRibassoActivity.putExtra("id", aste.get(position).getId());
                     goToAstaRibassoActivity.putExtra("asta", aste.get(position));
                     startActivity(goToAstaRibassoActivity);
                 } else if (aste.get(position).getTipologia().equals("asta a tempo fisso")) {
@@ -144,6 +146,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     tutteBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiLista();
+                    //riempiListaRibasso();
                 }
             }
         });
@@ -305,6 +308,34 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 // Gestisci la risposta del server
                 if (response.isSuccessful()) {
                     aste.clear();
+                    aste.addAll(response.body());
+
+                    // Aggiorna la ListView con i nuovi dati
+                    //customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
+                    //listView.setAdapter(customBaseAdapterProducts);
+                    //CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
+
+
+                    //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
+                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void riempiListaRibasso() {
+        Call<ArrayList<Asta>> call = apiService.getAsteRibasso();
+        call.enqueue(new Callback<ArrayList<Asta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
+                // Gestisci la risposta del server
+                if (response.isSuccessful()) {
                     aste.addAll(response.body());
 
                     // Aggiorna la ListView con i nuovi dati

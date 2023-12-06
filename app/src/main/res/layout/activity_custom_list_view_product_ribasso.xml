@@ -23,11 +23,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/productRibassoImageView"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="7dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="6dp"
+                android:layout_toEndOf="@+id/productRibassoImageView"
                 android:text="Fac-Simile Ribasso"
                 android:textSize="25dp"
                 android:textStyle="bold" />
@@ -44,46 +44,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titoloRibassoTextView"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="57dp"
+                android:layout_marginTop="35dp"
                 android:layout_toEndOf="@+id/productRibassoImageView"
                 android:text="Asta al ribasso"
                 android:textSize="22dp" />
 
-            <Chronometer
-                android:id="@+id/chronometerRibasso"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:countDown="true"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/productRibassoImageView"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="110dp"
-                android:textSize="25dp"/>
-
-            <TextView
-                android:id="@+id/conclusaRibassoTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Conclusa"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/productRibassoImageView"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="110dp"
-                android:textSize="25dp"/>
-
-            <TextView
-                android:id="@+id/offertaAttualeIngTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="15dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="110dp"
-                android:text="€13,45"
-                android:textColor="#00CC66"
-                android:textSize="25dp"
-                android:textStyle="bold"/>
+            <!--  <Chronometer
+                  android:id="@+id/chronometerRibasso"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:countDown="true"
+                  android:layout_marginStart="8dp"
+                  android:layout_toEndOf="@+id/productRibassoImageView"
+                  android:layout_alignParentTop="true"
+                  android:layout_marginTop="110dp"
+                  android:textSize="25dp"/>       -->
 
         </RelativeLayout>
 

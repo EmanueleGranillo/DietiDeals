@@ -1,10 +1,12 @@
 package com.example.dietideals24.customs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -16,9 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dietideals24.activities.AstaIngleseActivity;
+import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.connection.OffertaRibassoRequest;
+import com.example.dietideals24.connection.RetrofitClient;
+import com.example.dietideals24.connection.UserModifiedRequest;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.R;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,7 +33,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CustomBaseAdapterProducts extends BaseAdapter {
+    //MyApiService apiService;
+    //double differenzaSecondi, numeroIntervalli, tempoPassatoPercentuale, secondiPassatiTimerCorrente, prezzoAttualeDouble;
+    //int numeroIntervalliPassati, timerRimanenteSecondi;
+    //BigDecimal prezzoAttuale;
     Context context;
     ArrayList<Asta> aste;
     LayoutInflater inflater;
@@ -173,52 +188,44 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
 
 
-
-
-
         if(aste.get(position).getTipologia().equals("asta al ribasso")){
+            //apiService = RetrofitClient.getInstance().create(MyApiService.class);
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_ribasso, null);
             TextView titoloTextView = (TextView) convertView.findViewById(R.id.titoloRibassoTextView);
-            TextView conclusaRibassoTextView = (TextView) convertView.findViewById(R.id.conclusaRibassoTextView);
+            //TextView offertaAttualeRibassoTextView = (TextView) convertView.findViewById(R.id.offertaRibassoTextView);
+            //TextView countDownRibassoTxtView = (TextView) convertView.findViewById(R.id.countDownRibassoTextView);
             productImage = (ImageView) convertView.findViewById(R.id.productRibassoImageView);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
-            conclusaRibassoTextView.setVisibility(View.INVISIBLE);
+            //offertaAttualeRibassoTextView.setText(""+aste.get(position).getOffertaAttuale());
 
+
+            /*
             Calendar calendar = Calendar.getInstance();
             Date dataOraAttuale = calendar.getTime();
             calendar.setTime(dataOraAttuale);
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
 
             try {
-                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
+                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());       //date adesso è uguale alla data di creazione dell'asta.
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            long timer = date.getTime() - dataOraAttuale.getTime();
+            //long timer = date.getTime() - dataOraAttuale.getTime();
 
-            // GESTIONE TIMER
-            Chronometer chronometer = convertView.findViewById(R.id.chronometerRibasso);
-            long elapsedTime = SystemClock.elapsedRealtime() + timer;
-            chronometer.setBase(elapsedTime);
-            chronometer.start();
+            //ci serve sapere a quanto impostare il timer
+            Date dataCreazioneAsta = null;
+            try {
+                dataCreazioneAsta = inputFormat.parse(aste.get(position).getDataScadenzaTF());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-            chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-                @Override
-                public void onChronometerTick(Chronometer chronometer) {
-                    if(chronometer.getBase() < SystemClock.elapsedRealtime() + 10000) {
-                        chronometer.setTextColor(Color.RED);
-                    }
-                    if(chronometer.getBase() < SystemClock.elapsedRealtime() + 1) {
-                        chronometer.stop();
-                        conclusaRibassoTextView.setVisibility(View.VISIBLE);
-                        chronometer.setVisibility(View.INVISIBLE);
-                        //manda notifiche
+            long initialTimeMillis = aste.get(position).getResetTimer() * 1000;
 
-                    }
-                }
-            });
+            createAndStartCountDownTimer(countDownRibassoTxtView, offertaAttualeRibassoTextView, initialTimeMillis, aste.get(position));
 
+             */
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
@@ -235,6 +242,8 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
         }
 
+
+        /*
         productImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -244,6 +253,103 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             }
         });
 
+
+         */
+
         return convertView;
     }
+
+
+
+
+
+        /*
+    private void createAndStartCountDownTimer(TextView timerTextView, TextView offertaAttualeRibassoTextView, long timeMillis, Asta asta) {
+        CountDownTimer countDownTimer = new CountDownTimer(timeMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Update UI on each tick (every second)
+                long secondsRemaining = millisUntilFinished / 1000;
+                timerTextView.setText(String.valueOf(secondsRemaining));
+
+                if (secondsRemaining < 10) {
+                    timerTextView.setTextColor(Color.RED);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                // Actions to be performed when the timer finishes
+                timerTextView.setTextColor(Color.BLACK);
+                prezzoAttuale = asta.getOffertaAttuale();
+                prezzoAttuale = prezzoAttuale.subtract(asta.getImportoDecremento());
+                asta.setOffertaAttuale(prezzoAttuale);
+                offertaAttualeRibassoTextView.setText("\u20AC" + prezzoAttuale);
+
+                if (prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
+                    updateRibasso(prezzoAttuale, asta.getId());
+                    timerTextView.setText("Conclusa");
+                } else {
+                    createAndStartCountDownTimer(timerTextView, offertaAttualeRibassoTextView, timeMillis, asta);
+                }
+            }
+        };
+
+        // Start the timer
+        countDownTimer.start();
+    }
+
+         */
+
+
+
+        /*
+    public void aggiornaValoriAstaRibasso(Asta asta) {
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        Date dataOraAttuale = calendar.getTime();
+
+        try {
+            Date dataCreazioneAsta = inputFormat.parse(asta.getDataScadenzaTF()); // Assumi che esista un metodo getDataCreazione nella classe Asta
+            differenzaSecondi = (dataOraAttuale.getTime() - dataCreazioneAsta.getTime()) / 1000;
+            numeroIntervalli = differenzaSecondi / (double) asta.getResetTimer();
+
+            numeroIntervalliPassati = (int) numeroIntervalli;
+
+            tempoPassatoPercentuale = numeroIntervalli - numeroIntervalliPassati;
+
+            secondiPassatiTimerCorrente = tempoPassatoPercentuale * asta.getResetTimer();
+
+            timerRimanenteSecondi = (int) asta.getResetTimer() - (int) secondiPassatiTimerCorrente;
+
+            prezzoAttualeDouble = (asta.getPrezzoIniziale().subtract(asta.getImportoDecremento().multiply(BigDecimal.valueOf(numeroIntervalliPassati)))).doubleValue();
+
+            prezzoAttuale = new BigDecimal(prezzoAttualeDouble);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void updateRibasso(BigDecimal offertaAttuale, int id){
+        OffertaRibassoRequest offertaRibassoRequest = new OffertaRibassoRequest(offertaAttuale, id);
+        Call<Void> call = apiService.updateRibasso(offertaRibassoRequest);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                } else {
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
+
+         */
+
+
 }

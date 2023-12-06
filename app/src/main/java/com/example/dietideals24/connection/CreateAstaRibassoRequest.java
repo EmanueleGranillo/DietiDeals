@@ -29,6 +29,9 @@ public class CreateAstaRibassoRequest {
     @SerializedName("prezzo_iniziale")
     private BigDecimal prezzoIniziale;
 
+    @SerializedName("prezzoAttuale")
+    private BigDecimal prezzoAttuale;
+
     @SerializedName("sogliaSegreta")
     private BigDecimal sogliaMinimaSegreta;
 
@@ -51,6 +54,7 @@ public class CreateAstaRibassoRequest {
         this.paroleChiave = paroleChiave;
         this.dataScadenzaTF = dataScadenzaTF;
         this.prezzoIniziale = prezzoIniziale;
+        this.prezzoAttuale = prezzoIniziale;
         this.importoDecremento = importoDecremento;
         this.sogliaMinimaSegreta = sogliaMinimaSegreta;
         this.creatore = creatore;

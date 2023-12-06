@@ -64,6 +64,8 @@ public class AstaIngleseActivity extends AppCompatActivity {
         offertaAttualeIngTextView = findViewById(R.id.offertaAttualeIngTextView);
         vincenteTextView = findViewById(R.id.vincenteTextView);
         tempoRimanenteTextView = findViewById(R.id.tempoRimanenteTextView);
+
+
         chronometer = findViewById(R.id.scadenzaChronometer);
         presentaOffertaIngleseButton = findViewById(R.id.presentaOffertaIngleseButton);
         backBtn = findViewById(R.id.backButtonInfoAsta);
