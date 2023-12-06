@@ -100,7 +100,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     goToAstaRibassoActivity.putExtra("nickname", nickname);
                     goToAstaRibassoActivity.putExtra("tipo", tipo);
                     goToAstaRibassoActivity.putExtra("id", aste.get(position).getId());
-
                     startActivity(goToAstaRibassoActivity);
                 } else if (aste.get(position).getTipologia().equals("asta a tempo fisso")) {
                     Intent goToAstaTempoFissoActivity = new Intent(HomepageCompratoreActivity.this, AstaTempoFissoActivity.class);
@@ -159,7 +158,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     elettronicaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     elettronicaBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("elettronica");
-                    riempiListaRibassoPerCategoria("elettronica");
                 }
             }
         });
@@ -174,7 +172,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     motoriBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     motoriBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("motori");
-                    riempiListaRibassoPerCategoria("motori");
                 }
             }
         });
@@ -189,7 +186,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     animaliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     animaliBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("animali");
-                    riempiListaRibassoPerCategoria("animali");
                 }
             }
         });
@@ -204,7 +200,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     modaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     modaBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("moda");
-                    riempiListaRibassoPerCategoria("moda");
                 }
             }
         });
@@ -219,7 +214,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     intrattenimentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     intrattenimentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("intrattenimento");
-                    riempiListaRibassoPerCategoria("intrattenimento");
                 }
             }
         });
@@ -234,7 +228,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     immobiliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     immobiliBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("immobili");
-                    riempiListaRibassoPerCategoria("immobili");
                 }
             }
         });
@@ -249,7 +242,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     sportBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     sportBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("sport");
-                    riempiListaRibassoPerCategoria("sport");
                 }
             }
         });
@@ -264,7 +256,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     arredamentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("arredamento");
-                    riempiListaRibassoPerCategoria("arredamento");
                 }
             }
         });
@@ -273,14 +264,12 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 performSearch(query);
-                performSearchRibasso(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 performSearch(newText);
-                performSearchRibasso(newText);
                 return false;
             }
         });
@@ -402,7 +391,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     aste.addAll(response.body());
 
                     // Aggiorna la ListView con i nuovi dati
-                    customBaseAdapterProducts.notifyDataSetChanged();
+                    //customBaseAdapterProducts.notifyDataSetChanged();
+                    riempiListaRibassoPerCategoria(categoria);
 
                     //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
                 } else {
@@ -453,7 +443,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     aste.clear();
                     aste.addAll(response.body());
-                    customBaseAdapterProducts.notifyDataSetChanged();
+                    performSearchRibasso(query);
                 } else {
                     Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }

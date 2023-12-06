@@ -83,5 +83,8 @@ public interface MyApiService {
     @POST("/offerta_ribasso/")
     Call<Void> updateRibasso(@Body OffertaRibassoRequest request);
 
+    @POST("/update_vincitore_ribasso/")
+    Call<Void> updatevincitoreribasso(@Body VincitoreRibassoRequest request);
+
 }
 

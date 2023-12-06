@@ -75,6 +75,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
         // GET EXTRAS
         nickname = getIntent().getStringExtra("nickname");
+        tipo = getIntent().getStringExtra("tipo");
         titoloProdotto = getIntent().getStringExtra("titoloProdotto");
         imageString = getIntent().getStringExtra("imageString");
         categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
@@ -181,8 +182,11 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 sogliaMinimaErrorTextView.setText("");
                 if(check()){
                     //creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, dataScadenzaString, prezzoInizialeBD, importoDecrementoBD, sogliaMinimaBD, nickname, timerInSecondi);
-
                     creaAsta(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, dataOraAttualeString, prezzoInizialeBD, importoDecrementoBD, sogliaMinimaBD, nickname, timerInSecondi);
+                    Intent goToHomePageVenditore = new Intent(CreaAstaRibassoActivity.this, HomepageVenditoreActivity.class);
+                    goToHomePageVenditore.putExtra("nickname", nickname);
+                    goToHomePageVenditore.putExtra("tipo", tipo);
+                    startActivity(goToHomePageVenditore);
                 }
             }
         });

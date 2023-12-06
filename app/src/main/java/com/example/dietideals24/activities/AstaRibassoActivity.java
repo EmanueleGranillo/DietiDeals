@@ -21,6 +21,7 @@ import com.example.dietideals24.R;
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.OffertaRibassoRequest;
 import com.example.dietideals24.connection.RetrofitClient;
+import com.example.dietideals24.connection.VincitoreRibassoRequest;
 import com.example.dietideals24.models.Asta;
 
 import java.math.BigDecimal;
@@ -250,6 +251,22 @@ public class AstaRibassoActivity extends AppCompatActivity {
         });
 
 
+        acquistaRibassoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageCompratoreActivity.class);
+                backToHome.putExtra("nickname", nickname);
+                backToHome.putExtra("tipo", tipo);
+                startActivity(backToHome);
+                // update table con vincente
+                updateVincitore(nickname, id);
+                vincitoreTextView.setText("Venduto a: " + nickname);
+                countDownRibTxtView.setVisibility(View.INVISIBLE);
+                decrementoPrezzoTextView.setText("Asta conclusa");
+            }
+        });
+
+
     }
 
 
@@ -366,6 +383,23 @@ public class AstaRibassoActivity extends AppCompatActivity {
     }
 
 
+    public void updateVincitore(String nickname, int id){
+        VincitoreRibassoRequest vincitoreRibassoRequest = new VincitoreRibassoRequest(nickname, id);
+        Call<Void> call = apiService.updatevincitoreribasso(vincitoreRibassoRequest);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                } else {
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
+    }
+
+
 
 
 
@@ -391,11 +425,7 @@ public class AstaRibassoActivity extends AppCompatActivity {
                         keywordsTextView.setText("Parole chiave: " + asta.getParoleChiave());
                     }
                     prezzoAttualeTextView.setText("Prezzo attuale: €" + asta.getOffertaAttuale());
-                    if (asta.getVincente() != null) {
-                        vincitoreTextView.setText("Vincente: " + asta.getVincente());
-                    } else {
-                        vincitoreTextView.setText("Nessuna offerta");
-                    }
+                    vincitoreTextView.setText("Nessuna offerta");
                     importoDecrementoTextView.setText("Importo decremento: " + asta.getImportoDecremento());
 
                     // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
@@ -415,6 +445,14 @@ public class AstaRibassoActivity extends AppCompatActivity {
                     }
 
                     aggiornaValoriAstaRibasso(asta);
+
+
+                    if (asta.getVincente() != null) {
+                        vincitoreTextView.setText("Vincente: " + asta.getVincente());
+                        prezzoAttualeTextView.setText("Prezzo di partenza: \u20AC" + asta.getPrezzoIniziale());
+                        countDownRibTxtView.setVisibility(View.INVISIBLE);
+                        decrementoPrezzoTextView.setText("Asta conclusa con successo");
+                    }
 
                     if(prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
                         prezzoAttualeTextView.setText("Prezzo di partenza: \u20AC" + asta.getPrezzoIniziale());
