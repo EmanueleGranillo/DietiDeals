@@ -261,11 +261,15 @@ public class AstaRibassoActivity extends AppCompatActivity {
                 // Update UI on each tick (every second)
                 long secondsRemaining = millisUntilFinished / 1000;
 
-                // Converti i secondi rimanenti in un formato "00:00"
-                String formattedTime = String.format(Locale.getDefault(), "%02d:%02d",secondsRemaining / 60, secondsRemaining % 60);
+                // Calcola ore, minuti e secondi rimanenti
+                long hours = secondsRemaining / 3600;
+                long minutes = (secondsRemaining % 3600) / 60;
+                long seconds = secondsRemaining % 60;
 
-                timerTextView.setText(String.valueOf(formattedTime));
+                // Converti il tempo rimanente in un formato "00:00:00"
+                String formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
 
+                timerTextView.setText(formattedTime);
 
 
                 if (secondsRemaining < 10) {
@@ -280,7 +284,7 @@ public class AstaRibassoActivity extends AppCompatActivity {
                 prezzoAttuale = asta.getOffertaAttuale();
                 prezzoAttuale = prezzoAttuale.subtract(asta.getImportoDecremento());
                 asta.setOffertaAttuale(prezzoAttuale);
-                offertaAttualeRibassoTextView.setText("Offerta attuale: \u20AC" + prezzoAttuale);
+                offertaAttualeRibassoTextView.setText("Prezzo attuale: \u20AC" + prezzoAttuale);
 
                 if (prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
                     updateRibasso(prezzoAttuale, asta.getId());
@@ -308,8 +312,10 @@ public class AstaRibassoActivity extends AppCompatActivity {
         try {
             Date dataCreazioneAsta = inputFormat.parse(asta.getDataScadenzaTF()); // Assumi che esista un metodo getDataCreazione nella classe Asta
             System.out.println("data creazione asta: " + dataCreazioneAsta);
+            System.out.println("data creazione asta secondi: " + dataCreazioneAsta.getTime()/1000);
+            System.out.println("data creazione asta secondi + un'ora: " + (dataCreazioneAsta.getTime() + 360000)/1000);
 
-            differenzaSecondi = (dataOraAttuale.getTime() - dataCreazioneAsta.getTime()) / 1000;
+            differenzaSecondi = (dataOraAttuale.getTime() - (dataCreazioneAsta.getTime() + 3600000)) / 1000;    //aggiungo a dataCreazioneAsta un'ora perchè sul db GTM00
             System.out.println("differenza secondi: " + differenzaSecondi);
 
             numeroIntervalli = differenzaSecondi / (double) asta.getResetTimer();
@@ -384,16 +390,13 @@ public class AstaRibassoActivity extends AppCompatActivity {
                     } else {
                         keywordsTextView.setText("Parole chiave: " + asta.getParoleChiave());
                     }
-                    if (asta.getOffertaAttuale() != null) {
-                        prezzoAttualeTextView.setText("Offerta attuale: €" + asta.getOffertaAttuale());
-                    } else {
-                        prezzoAttualeTextView.setText("Prezzo iniziale: €" + asta.getPrezzoIniziale());
-                    }
+                    prezzoAttualeTextView.setText("Prezzo attuale: €" + asta.getOffertaAttuale());
                     if (asta.getVincente() != null) {
                         vincitoreTextView.setText("Vincente: " + asta.getVincente());
                     } else {
                         vincitoreTextView.setText("Nessuna offerta");
                     }
+                    importoDecrementoTextView.setText("Importo decremento: " + asta.getImportoDecremento());
 
                     // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
                     if (asta.getFotoProdotto() != null && !asta.getFotoProdotto().isEmpty()) {
@@ -407,23 +410,27 @@ public class AstaRibassoActivity extends AppCompatActivity {
                     }
                     fotoProdottoImageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
+                    if (tipo.equals("venditore")) {
+                        acquistaRibassoButton.setVisibility(View.INVISIBLE);
+                    }
 
                     aggiornaValoriAstaRibasso(asta);
-                    prezzoAttualeDouble = (asta.getPrezzoIniziale().subtract(asta.getImportoDecremento().multiply(BigDecimal.valueOf(numeroIntervalliPassati)))).doubleValue();
 
-                    prezzoAttuale = new BigDecimal(prezzoAttualeDouble);
-                    System.out.println("Prezzo attuale: " + prezzoAttuale);
+                    if(prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
+                        prezzoAttualeTextView.setText("Prezzo di partenza: \u20AC" + asta.getPrezzoIniziale());
+                        countDownRibTxtView.setVisibility(View.INVISIBLE);
+                        decrementoPrezzoTextView.setText("Asta conclusa");
+                    } else {
 
-                    prezzoAttualeTextView.setText("Offerta attuale: \u20AC" + prezzoAttuale);
+                        prezzoAttualeTextView.setText("Prezzo attuale: \u20AC" + prezzoAttuale);
 
-                    asta.setOffertaAttuale(prezzoAttuale);
+                        asta.setOffertaAttuale(prezzoAttuale);
 
+                        long initialTimeMillis = timerRimanenteSecondi * 1000;
 
-                    long initialTimeMillis = timerRimanenteSecondi * 1000;
+                        createAndStartCountDownTimer(countDownRibTxtView, prezzoAttualeTextView, initialTimeMillis, asta);
 
-                    createAndStartCountDownTimer(countDownRibTxtView, prezzoAttualeTextView, initialTimeMillis, asta);
-
-
+                    }
                 } else {
 
                 }

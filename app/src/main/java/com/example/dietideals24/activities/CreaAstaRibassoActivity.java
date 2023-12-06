@@ -167,8 +167,9 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
 
 
                 Calendar calendar = Calendar.getInstance();
-                Date dataOraAttuale = calendar.getTime();
-                calendar.setTime(dataOraAttuale);
+                calendar.add(Calendar.HOUR_OF_DAY, -1);  // Sottrai un'ora
+                Date dataOraAttuale = calendar.getTime();   // Ora attuale meno un'ora
+
                 SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                 String dataOraAttualeString = inputFormat.format(dataOraAttuale);
 
@@ -233,7 +234,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         Date dataOraAttuale = calendar.getTime();  //otteniamo data e ora attuale
         calendar.setTime(dataOraAttuale);
-        // Aggiunta di 7200 secondi (2 ore)
+        // Aggiunta di tot secondi (timerSeconds ore)
         calendar.add(Calendar.SECOND, (int) timerSeconds);
 
         // Ottenere la nuova data (cioè la data di scadenza del timer)

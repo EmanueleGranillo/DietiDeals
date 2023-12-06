@@ -39,6 +39,9 @@ public interface MyApiService {
     @POST("/get_aste_per_categoria/")
     Call<ArrayList<Asta>> getAstePerCategoria(@Body CategoriaRequest request);
 
+    @POST("/get_aste_ribasso_per_categoria/")
+    Call<ArrayList<Asta>> getAsteRibassoPerCategoria(@Body CategoriaRequest request);
+
     @POST("/get_aste_per_venditore/{nickname}")
     Call<ArrayList<Asta>> getAstePerVenditore(@Path("nickname") String nickname);
 
@@ -71,6 +74,9 @@ public interface MyApiService {
 
     @POST("/get_aste_per_ricerca/")
     Call<ArrayList<Asta>> getAstePerRicerca(@Body SearchRequest request);
+
+    @POST("/get_aste_ribasso_per_ricerca/")
+    Call<ArrayList<Asta>> getAsteRibassoPerRicerca(@Body SearchRequest request);
 
     @POST("/offerta_inglese/")
     Call<NumeroResponse> offertaInglese(@Body OffertaIngleseRequest request);

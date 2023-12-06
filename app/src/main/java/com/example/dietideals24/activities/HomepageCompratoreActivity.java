@@ -84,7 +84,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         controllaNotifiche();
 
         riempiLista();
-        riempiListaRibasso();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -145,7 +144,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     tutteBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiLista();
-                    //riempiListaRibasso();
+                    riempiListaRibasso();
                 }
             }
         });
@@ -160,6 +159,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     elettronicaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     elettronicaBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("elettronica");
+                    riempiListaRibassoPerCategoria("elettronica");
                 }
             }
         });
@@ -174,6 +174,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     motoriBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     motoriBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("motori");
+                    riempiListaRibassoPerCategoria("motori");
                 }
             }
         });
@@ -188,6 +189,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     animaliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     animaliBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("animali");
+                    riempiListaRibassoPerCategoria("animali");
                 }
             }
         });
@@ -202,6 +204,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     modaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     modaBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("moda");
+                    riempiListaRibassoPerCategoria("moda");
                 }
             }
         });
@@ -216,6 +219,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     intrattenimentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     intrattenimentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("intrattenimento");
+                    riempiListaRibassoPerCategoria("intrattenimento");
                 }
             }
         });
@@ -230,6 +234,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     immobiliBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     immobiliBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("immobili");
+                    riempiListaRibassoPerCategoria("immobili");
                 }
             }
         });
@@ -244,6 +249,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     sportBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     sportBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("sport");
+                    riempiListaRibassoPerCategoria("sport");
                 }
             }
         });
@@ -258,6 +264,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     arredamentoBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     arredamentoBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiListaPerCategoria("arredamento");
+                    riempiListaRibassoPerCategoria("arredamento");
                 }
             }
         });
@@ -266,12 +273,14 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 performSearch(query);
+                performSearchRibasso(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 performSearch(newText);
+                performSearchRibasso(newText);
                 return false;
             }
         });
@@ -306,9 +315,17 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
                 // Gestisci la risposta del server
                 if (response.isSuccessful()) {
-                    aste.clear();
-                    aste.addAll(response.body());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            aste.clear();
+                            aste.addAll(response.body());
+                            riempiListaRibasso();
 
+                            // Aggiorna la ListView con i nuovi dati
+                            //customBaseAdapterProducts.notifyDataSetChanged();
+                        }
+                    });
                     // Aggiorna la ListView con i nuovi dati
                     //customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
                     //listView.setAdapter(customBaseAdapterProducts);
@@ -323,7 +340,12 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
-                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -335,13 +357,52 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
                 // Gestisci la risposta del server
                 if (response.isSuccessful()) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            aste.addAll(response.body());
+
+                            // Aggiorna la ListView con i nuovi dati
+                            customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
+                            listView.setAdapter(customBaseAdapterProducts);
+                            CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
+
+                            customBaseAdapterProducts.notifyDataSetChanged();
+
+                            //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    private void riempiListaPerCategoria(String categoria) {
+        CategoriaRequest categoriaRequest = new CategoriaRequest(categoria);
+        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(categoriaRequest);
+        call.enqueue(new Callback<ArrayList<Asta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
+                // Gestisci la risposta del server
+                if (response.isSuccessful()) {
+                    aste.clear();
                     aste.addAll(response.body());
 
                     // Aggiorna la ListView con i nuovi dati
-                    customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
-                    listView.setAdapter(customBaseAdapterProducts);
-                    CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
-
+                    customBaseAdapterProducts.notifyDataSetChanged();
 
                     //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
                 } else {
@@ -356,15 +417,15 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         });
     }
 
-    private void riempiListaPerCategoria(String categoria) {
+
+    private void riempiListaRibassoPerCategoria(String categoria) {
         CategoriaRequest categoriaRequest = new CategoriaRequest(categoria);
-        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(categoriaRequest);
+        Call<ArrayList<Asta>> call = apiService.getAsteRibassoPerCategoria(categoriaRequest);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
                 // Gestisci la risposta del server
                 if (response.isSuccessful()) {
-                    aste.clear();
                     aste.addAll(response.body());
 
                     // Aggiorna la ListView con i nuovi dati
@@ -404,6 +465,29 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void performSearchRibasso(String query) {
+        SearchRequest searchRequest = new SearchRequest(query);
+        Call<ArrayList<Asta>> call = apiService.getAsteRibassoPerRicerca(searchRequest);
+        call.enqueue(new Callback<ArrayList<Asta>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
+                if (response.isSuccessful()) {
+                    aste.addAll(response.body());
+                    customBaseAdapterProducts.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
+                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     private void setWhite() {
         tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
