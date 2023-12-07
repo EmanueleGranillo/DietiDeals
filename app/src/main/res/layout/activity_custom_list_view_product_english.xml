@@ -20,16 +20,16 @@
 
             <TextView
                 android:id="@+id/titoloIngleseTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="251dp"
+                android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_toEndOf="@+id/productIngleseImageView"
                 android:text="Fac-Simile Inglese"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -43,46 +43,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titoloIngleseTextView"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/productIngleseImageView"
                 android:text="Asta all'inglese"
-                android:textSize="22dp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/conclusaIngleseTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/tipologiaAstaIngleseTextView"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="15dp"
                 android:layout_toEndOf="@+id/productIngleseImageView"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="110dp"
                 android:text="Conclusa"
-                android:textSize="25dp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/offertaAttualeIngleseTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="15dp"
-                android:layout_marginTop="110dp"
+                android:layout_below="@+id/tipologiaAstaIngleseTextView"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/conclusaIngleseTextView"
                 android:text="€185"
                 android:textColor="#00CC66"
-                android:textSize="25dp"
-                android:textStyle="bold"/>
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <Chronometer
                 android:id="@+id/chronometerInglese"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:countDown="true"
-                android:layout_marginStart="8dp"
+                android:layout_below="@+id/tipologiaAstaIngleseTextView"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="15dp"
                 android:layout_toEndOf="@+id/productIngleseImageView"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="110dp"
-                android:textSize="25dp"></Chronometer>
+                android:countDown="true"
+                android:textSize="18dp"></Chronometer>
 
         </RelativeLayout>
 
