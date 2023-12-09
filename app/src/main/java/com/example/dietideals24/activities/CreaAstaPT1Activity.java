@@ -87,8 +87,9 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             imageString = getIntent().getStringExtra("imageString");
             byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            uploadImage.setImageBitmap(decodedByte);
-            uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
+            // Mostra l'immagine nel client tagliata 1:1
+            displayImage(decodedByte);
 
             categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
             paroleChiave = getIntent().getStringExtra("paroleChiave");
@@ -107,8 +108,8 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             imageString = getIntent().getStringExtra("imageString");
             byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            uploadImage.setImageBitmap(decodedByte);
-            uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
+            // Mostra l'immagine nel client tagliata 1:1
+            displayImage(decodedByte);
 
             categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
             paroleChiave = getIntent().getStringExtra("paroleChiave");
@@ -127,8 +128,8 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             imageString = getIntent().getStringExtra("imageString");
             byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            uploadImage.setImageBitmap(decodedByte);
-            uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
+            // Mostra l'immagine nel client tagliata 1:1
+            displayImage(decodedByte);
 
             categoriaSelezionata = getIntent().getStringExtra("categoriaSelezionata");
             paroleChiave = getIntent().getStringExtra("paroleChiave");
