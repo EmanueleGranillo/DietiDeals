@@ -176,19 +176,14 @@ public class AstaIngleseActivity extends AppCompatActivity {
                 SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                 dateString = outputFormat.format(date);
 
-                if(offerta(asta.getId(), x, nickname, dateString)){
-                    aggiornaCard(id);
-                } else {
-                    //Offerta fallita
-                }
+                offerta(asta.getId(), x, nickname, dateString);
 
             }
         });
 
     }
 
-    private boolean offerta(int id, BigDecimal x, String nickname, String dateString) {
-        check = true;
+    private void offerta(int id, BigDecimal x, String nickname, String dateString) {
         OffertaIngleseRequest offertaIngleseRequest = new OffertaIngleseRequest(id, x, nickname, dateString);
         Call<NumeroResponse> call = apiService.offertaInglese(offertaIngleseRequest);
         call.enqueue(new Callback<NumeroResponse>() {
@@ -197,10 +192,10 @@ public class AstaIngleseActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     NumeroResponse num = response.body();
                     if (num.getNumero() == 1) {
-                        check = true;
+                        aggiornaCard(id);
                         Toast.makeText(AstaIngleseActivity.this, "Offerta riuscita", Toast.LENGTH_SHORT).show();
                     } else {
-                        check = false;
+                        aggiornaCard(id);
                         Toast.makeText(AstaIngleseActivity.this, "Offerta fallita", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -211,8 +206,6 @@ public class AstaIngleseActivity extends AppCompatActivity {
 
             }
         });
-
-        return check;
     }
 
     @Override
