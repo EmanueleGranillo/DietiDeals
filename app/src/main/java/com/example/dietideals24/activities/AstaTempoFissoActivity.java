@@ -149,26 +149,13 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
                         if (offerta.compareTo(asta.getOffertaAttuale()) <= 0) {
                             inserisciOffertaErrorTextView.setText("Inserisci un'offerta più alta di quella attuale");
                         } else {
-                            if (offerta(id, offerta, nickname)) {
-                                aggiornaCard(id);
-                                Toast.makeText(AstaTempoFissoActivity.this, "Offerta riuscita", Toast.LENGTH_SHORT).show();
-                            } else {
-                                aggiornaCard(id);
-                                Toast.makeText(AstaTempoFissoActivity.this, "Offerta fallita", Toast.LENGTH_SHORT).show();
-                            }
+                            offerta(id, offerta,nickname);
                         }
                     } else {
                         if (offerta.compareTo(asta.getPrezzoIniziale()) <= 0) {
                             inserisciOffertaErrorTextView.setText("Inserisci un'offerta più alta del prezzo iniziale");
                         } else {
-                            if (offerta(id, offerta, nickname)) {
-                                aggiornaCard(id);
-                                Toast.makeText(AstaTempoFissoActivity.this, "Offerta riuscita", Toast.LENGTH_SHORT).show();
-                            } else {
-                                aggiornaCard(id);
-                                Toast.makeText(AstaTempoFissoActivity.this, "Offerta fallita", Toast.LENGTH_SHORT).show();
-                            }
-
+                            offerta(id, offerta, nickname);
                         }
                     }
                 }
@@ -279,8 +266,7 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
         });
     }
 
-    private boolean offerta(int id, BigDecimal x, String nickname) {
-        check = true;
+    private void offerta(int id, BigDecimal x, String nickname) {
         OffertaTempoFissoRequest offertaTempoFissoRequest = new OffertaTempoFissoRequest(id, x, nickname);
         Call<NumeroResponse> call = apiService.offertaTempoFisso(offertaTempoFissoRequest);
         call.enqueue(new Callback<NumeroResponse>() {
@@ -289,9 +275,11 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     NumeroResponse num = response.body();
                     if (num.getNumero() == 1) {
-                        check = true;
+                        aggiornaCard(id);
+                        Toast.makeText(AstaTempoFissoActivity.this, "Offerta riuscita", Toast.LENGTH_SHORT).show();
                     } else {
-                        check = false;
+                        aggiornaCard(id);
+                        Toast.makeText(AstaTempoFissoActivity.this, "Offerta fallita", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -301,8 +289,6 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
 
             }
         });
-
-        return check;
     }
 
 
