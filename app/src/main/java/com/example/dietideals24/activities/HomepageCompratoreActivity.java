@@ -374,12 +374,17 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
                 // Gestisci la risposta del server
                 if (response.isSuccessful()) {
-                    aste.clear();
-                    aste.addAll(response.body());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            aste.clear();
+                            aste.addAll(response.body());
 
-                    // Aggiorna la ListView con i nuovi dati
-                    //customBaseAdapterProducts.notifyDataSetChanged();
-                    riempiListaRibassoPerCategoria(categoria);
+                            // Aggiorna la ListView con i nuovi dati
+                            //customBaseAdapterProducts.notifyDataSetChanged();
+                            riempiListaRibassoPerCategoria(categoria);
+                        }
+                    });
 
                     //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
                 } else {
@@ -389,7 +394,12 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
-                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -403,12 +413,17 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
                 // Gestisci la risposta del server
                 if (response.isSuccessful()) {
-                    aste.addAll(response.body());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            aste.addAll(response.body());
 
-                    // Aggiorna la ListView con i nuovi dati
-                    customBaseAdapterProducts.notifyDataSetChanged();
+                            // Aggiorna la ListView con i nuovi dati
+                            customBaseAdapterProducts.notifyDataSetChanged();
 
-                    //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } else {
                     Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
@@ -416,7 +431,12 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
-                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
