@@ -13,6 +13,8 @@ import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.customs.CustomBaseAdapterNotifications;
 import com.example.dietideals24.R;
+import com.example.dietideals24.customs.CustomBaseAdapterProducts;
+import com.example.dietideals24.customs.CustomListViewProductEnglish;
 import com.example.dietideals24.customs.SingleRowListNotifications;
 import com.example.dietideals24.models.Notifica;
 
@@ -23,13 +25,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NotificationsActivity extends AppCompatActivity {
-    String notificationsTitleList[] = {"Hai vinto", "Hai perso"};
     int checkOrXIcons[] = {R.drawable.ic_check_foreground, R.drawable.ic_x_foreground};
     ListView listView;
-    CustomBaseAdapterNotifications customBaseAdapter;
+    CustomBaseAdapterNotifications customBaseAdapterNotifications;
     private MyApiService apiService;
     ArrayList<Notifica> notifiche = new ArrayList<Notifica>();
-
     private String nickname;
     private String tipo;
 
@@ -44,12 +44,17 @@ public class NotificationsActivity extends AppCompatActivity {
 
         Button backBtn = findViewById(R.id.backButtonNotifiche);
         listView = (ListView) findViewById(R.id.customListView);
-        customBaseAdapter = new CustomBaseAdapterNotifications(getApplicationContext(), notificationsTitleList, checkOrXIcons);
-        listView.setAdapter(customBaseAdapter);
-        SingleRowListNotifications.setListViewHeightBasedOnChildren(listView);
 
         setNotificheALette();
         recuperaNotifiche();
+
+        /*
+        customBaseAdapterNotifications = new CustomBaseAdapterNotifications(getApplicationContext(), notifiche, checkOrXIcons);
+        listView.setAdapter(customBaseAdapterNotifications);
+        SingleRowListNotifications.setListViewHeightBasedOnChildren(listView);
+        customBaseAdapterNotifications.notifyDataSetChanged();
+
+         */
 
 
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +105,10 @@ public class NotificationsActivity extends AppCompatActivity {
                     notifiche.clear();
                     notifiche.addAll(response.body());
                     // Aggiorna la ListView con i nuovi dati custom
-                    customBaseAdapter.notifyDataSetChanged();
+                    customBaseAdapterNotifications = new CustomBaseAdapterNotifications(getApplicationContext(), notifiche, checkOrXIcons);
+                    listView.setAdapter(customBaseAdapterNotifications);
+                    SingleRowListNotifications.setListViewHeightBasedOnChildren(listView);
+                    customBaseAdapterNotifications.notifyDataSetChanged();
 
                 } else {
                     Toast.makeText(NotificationsActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();

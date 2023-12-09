@@ -9,17 +9,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dietideals24.R;
+import com.example.dietideals24.models.Notifica;
+
+import java.util.ArrayList;
 
 public class CustomBaseAdapterNotifications extends BaseAdapter {
 
      Context context;
-     String notificationsTitleList[];
+     ArrayList<Notifica> notifiche;
      int checkOrXIcons[];
      LayoutInflater inflater;
 
-     public CustomBaseAdapterNotifications(Context ctx, String[] notificationsTitleList, int [] checkOrXIcons) {
+     public CustomBaseAdapterNotifications(Context ctx, ArrayList<Notifica> notifiche, int [] checkOrXIcons) {
          this.context = ctx;
-         this.notificationsTitleList = notificationsTitleList;
+         this.notifiche = notifiche;
          this.checkOrXIcons = checkOrXIcons;
          inflater = LayoutInflater.from(ctx);
      }
@@ -27,7 +30,7 @@ public class CustomBaseAdapterNotifications extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return notificationsTitleList.length;
+        return notifiche.size();
     }
 
     @Override
@@ -42,11 +45,53 @@ public class CustomBaseAdapterNotifications extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-         convertView = inflater.inflate(R.layout.activity_single_row_list_notifications, null);
-         TextView textViewTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
-         ImageView checkOrXImages = (ImageView) convertView.findViewById(R.id.imageIconCheck);
-         textViewTitle.setText(notificationsTitleList[position]);
-         checkOrXImages.setImageResource(checkOrXIcons[position]);
-         return convertView;
+
+        if(notifiche.get(position).getIntestazione().equals("Hai vinto!")){
+            convertView = inflater.inflate(R.layout.activity_single_row_list_notifications, null);
+            TextView textViewTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
+            TextView textViewDescription = (TextView) convertView.findViewById(R.id.textViewDescription);
+            ImageView checkOrXImages = (ImageView) convertView.findViewById(R.id.imageIconCheck);
+
+            textViewTitle.setText(notifiche.get(position).getIntestazione());
+            textViewDescription.setText(notifiche.get(position).getDescrizione());
+            checkOrXImages.setImageResource(checkOrXIcons[0]);
+        }
+
+        if(notifiche.get(position).getIntestazione().equals("Hai perso!")){
+            convertView = inflater.inflate(R.layout.activity_single_row_list_notifications, null);
+            TextView textViewTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
+            TextView textViewDescription = (TextView) convertView.findViewById(R.id.textViewDescription);
+            ImageView checkOrXImages = (ImageView) convertView.findViewById(R.id.imageIconCheck);
+
+            textViewTitle.setText(notifiche.get(position).getIntestazione());
+            textViewDescription.setText(notifiche.get(position).getDescrizione());
+            checkOrXImages.setImageResource(checkOrXIcons[1]);
+        }
+
+
+        if(notifiche.get(position).getDescrizione().equals("Prodotto venduto!")){
+            convertView = inflater.inflate(R.layout.activity_single_row_list_notifications, null);
+            TextView textViewTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
+            TextView textViewDescription = (TextView) convertView.findViewById(R.id.textViewDescription);
+            ImageView checkOrXImages = (ImageView) convertView.findViewById(R.id.imageIconCheck);
+
+            textViewTitle.setText(notifiche.get(position).getIntestazione());
+            textViewDescription.setText(notifiche.get(position).getDescrizione());
+            checkOrXImages.setImageResource(checkOrXIcons[0]);
+        }
+
+        if(notifiche.get(position).getDescrizione().equals("Prodotto non venduto!")){
+            convertView = inflater.inflate(R.layout.activity_single_row_list_notifications, null);
+            TextView textViewTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
+            TextView textViewDescription = (TextView) convertView.findViewById(R.id.textViewDescription);
+            ImageView checkOrXImages = (ImageView) convertView.findViewById(R.id.imageIconCheck);
+
+            textViewTitle.setText(notifiche.get(position).getIntestazione());
+            textViewDescription.setText(notifiche.get(position).getDescrizione());
+            checkOrXImages.setImageResource(checkOrXIcons[1]);
+        }
+
+
+        return convertView;
     }
 }

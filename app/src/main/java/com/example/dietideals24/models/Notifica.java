@@ -6,6 +6,14 @@ public class Notifica {
     String descrizione;
     boolean letta;
 
+
+    public Notifica(String intestazione, String descrizione, boolean letta) {
+        this.intestazione = intestazione;
+        this.descrizione = descrizione;
+        this.letta = letta;
+    }
+
+
     public String getIntestazione() {
         return intestazione;
     }
