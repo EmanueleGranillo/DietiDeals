@@ -32,15 +32,8 @@ public interface MyApiService {
 
     @GET("/get_aste/")
     Call<ArrayList<Asta>> getAste();
-
-    @GET("/get_aste_ribasso/")
-    Call<ArrayList<Asta>> getAsteRibasso();
-
-    @POST("/get_aste_per_categoria/")
-    Call<ArrayList<Asta>> getAstePerCategoria(@Body CategoriaRequest request);
-
-    @POST("/get_aste_ribasso_per_categoria/")
-    Call<ArrayList<Asta>> getAsteRibassoPerCategoria(@Body CategoriaRequest request);
+    @GET("/get_aste_per_categoria/{categoria}")
+    Call<ArrayList<Asta>> getAstePerCategoria(@Path("categoria") String categoria);
 
     @POST("/get_aste_per_venditore/{nickname}")
     Call<ArrayList<Asta>> getAstePerVenditore(@Path("nickname") String nickname);
@@ -75,18 +68,14 @@ public interface MyApiService {
     @POST("/create_asta_ribasso/")
     Call<ResponseBody> createAstaRibasso(@Body CreateAstaRibassoRequest request);
 
-    @POST("/get_aste_per_ricerca/")
-    Call<ArrayList<Asta>> getAstePerRicerca(@Body SearchRequest request);
-
-    @POST("/get_aste_ribasso_per_ricerca/")
-    Call<ArrayList<Asta>> getAsteRibassoPerRicerca(@Body SearchRequest request);
-
+    @GET("/get_aste_per_ricerca/{ricerca}")
+    Call<ArrayList<Asta>> getAstePerRicerca(@Path("ricerca") String ricerca);
     @POST("/offerta_inglese/")
     Call<NumeroResponse> offertaInglese(@Body OffertaIngleseRequest request);
     @POST("/offerta_tempo_fisso/")
     Call<NumeroResponse> offertaTempoFisso(@Body OffertaTempoFissoRequest request);
-    @POST("/offerta_ribasso/")
-    Call<Void> updateRibasso(@Body OffertaRibassoRequest request);
+    @POST("/offerta_ribasso/{id}")
+    Call<Void> updateRibasso(@Path("id") int id);
 
     @POST("/update_vincitore_ribasso/")
     Call<Void> updatevincitoreribasso(@Body VincitoreRibassoRequest request);

@@ -15,11 +15,9 @@ import android.widget.ListView;
 import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.dietideals24.connection.CategoriaRequest;
 import com.example.dietideals24.connection.MyApiService;
 import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
-import com.example.dietideals24.connection.SearchRequest;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.customs.CustomBaseAdapterProducts;
 import com.example.dietideals24.customs.CustomListViewProductEnglish;
@@ -130,7 +128,6 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     tutteBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     tutteBtn.setTextColor(Color.parseColor("#FFFFFF"));
                     riempiLista();
-                    riempiListaRibasso();
                 }
             }
         });
@@ -249,14 +246,18 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                performSearch(query);
+            public boolean onQueryTextSubmit(String ricerca) {
+                getAstePerRicerca(ricerca);
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                performSearch(newText);
+            public boolean onQueryTextChange(String ricerca) {
+                if(!ricerca.isEmpty()){
+                    getAstePerRicerca(ricerca);
+                } else {
+                    riempiLista();
+                }
                 return false;
             }
         });
@@ -296,16 +297,17 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                         public void run() {
                             aste.clear();
                             aste.addAll(response.body());
-                            riempiListaRibasso();
+                            //riempiListaRibasso();
 
                             // Aggiorna la ListView con i nuovi dati
-                            //customBaseAdapterProducts.notifyDataSetChanged();
+                            customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
+                            listView.setAdapter(customBaseAdapterProducts);
+                            CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
+                            customBaseAdapterProducts.notifyDataSetChanged();
                         }
                     });
                     // Aggiorna la ListView con i nuovi dati
-                    //customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
-                    //listView.setAdapter(customBaseAdapterProducts);
-                    //CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
+
 
 
                     //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
@@ -326,49 +328,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         });
     }
 
-    private void riempiListaRibasso() {
-        Call<ArrayList<Asta>> call = apiService.getAsteRibasso();
-        call.enqueue(new Callback<ArrayList<Asta>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
-                // Gestisci la risposta del server
-                if (response.isSuccessful()) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            aste.addAll(response.body());
-
-                            // Aggiorna la ListView con i nuovi dati
-                            customBaseAdapterProducts = new CustomBaseAdapterProducts(getApplicationContext(), aste);
-                            listView.setAdapter(customBaseAdapterProducts);
-                            CustomListViewProductEnglish.setListViewHeightBasedOnChildren(listView);
-
-                            customBaseAdapterProducts.notifyDataSetChanged();
-
-                            //Toast.makeText(HomepageCompratoreActivity.this, "Ci siamo quasi: "+ aste.size(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                } else {
-                    Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-    }
-
     private void riempiListaPerCategoria(String categoria) {
-        CategoriaRequest categoriaRequest = new CategoriaRequest(categoria);
-        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(categoriaRequest);
+        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(categoria);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
@@ -381,8 +342,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                             aste.addAll(response.body());
 
                             // Aggiorna la ListView con i nuovi dati
-                            //customBaseAdapterProducts.notifyDataSetChanged();
-                            riempiListaRibassoPerCategoria(categoria);
+                            customBaseAdapterProducts.notifyDataSetChanged();
+                            //riempiListaRibassoPerCategoria(categoria);
                         }
                     });
 
@@ -406,8 +367,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
 
     private void riempiListaRibassoPerCategoria(String categoria) {
-        CategoriaRequest categoriaRequest = new CategoriaRequest(categoria);
-        Call<ArrayList<Asta>> call = apiService.getAsteRibassoPerCategoria(categoriaRequest);
+        Call<ArrayList<Asta>> call = apiService.getAstePerCategoria(categoria);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
@@ -441,38 +401,16 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         });
     }
 
-    private void performSearch(String query) {
-        SearchRequest searchRequest = new SearchRequest(query);
-        Call<ArrayList<Asta>> call = apiService.getAstePerRicerca(searchRequest);
+    private void getAstePerRicerca(String ricerca) {
+        Call<ArrayList<Asta>> call = apiService.getAstePerRicerca(ricerca);
         call.enqueue(new Callback<ArrayList<Asta>>() {
             @Override
             public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
                 if (response.isSuccessful()) {
                     aste.clear();
                     aste.addAll(response.body());
-                    performSearchRibasso(query);
-                } else {
-                    Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Asta>> call, Throwable t) {
-                Toast.makeText(HomepageCompratoreActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-    private void performSearchRibasso(String query) {
-        SearchRequest searchRequest = new SearchRequest(query);
-        Call<ArrayList<Asta>> call = apiService.getAsteRibassoPerRicerca(searchRequest);
-        call.enqueue(new Callback<ArrayList<Asta>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Asta>> call, Response<ArrayList<Asta>> response) {
-                if (response.isSuccessful()) {
-                    aste.addAll(response.body());
                     customBaseAdapterProducts.notifyDataSetChanged();
+                    //performSearchRibasso(query);
                 } else {
                     Toast.makeText(HomepageCompratoreActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
@@ -484,6 +422,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     private void setWhite() {

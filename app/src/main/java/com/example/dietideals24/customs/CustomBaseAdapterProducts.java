@@ -1,12 +1,9 @@
 package com.example.dietideals24.customs;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -17,25 +14,15 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dietideals24.activities.AstaIngleseActivity;
-import com.example.dietideals24.connection.MyApiService;
-import com.example.dietideals24.connection.OffertaRibassoRequest;
-import com.example.dietideals24.connection.RetrofitClient;
-import com.example.dietideals24.connection.UserModifiedRequest;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.R;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CustomBaseAdapterProducts extends BaseAdapter {
     //MyApiService apiService;

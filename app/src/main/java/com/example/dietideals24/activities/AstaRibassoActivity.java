@@ -2,24 +2,19 @@ package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.dietideals24.R;
 import com.example.dietideals24.connection.MyApiService;
-import com.example.dietideals24.connection.OffertaRibassoRequest;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.VincitoreRibassoRequest;
 import com.example.dietideals24.models.Asta;
@@ -259,10 +254,6 @@ public class AstaRibassoActivity extends AppCompatActivity {
                 vincitoreTextView.setText("Venduto a: " + nickname);
                 countDownRibTxtView.setVisibility(View.INVISIBLE);
                 decrementoPrezzoTextView.setText("Asta conclusa");
-                Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageCompratoreActivity.class);
-                backToHome.putExtra("nickname", nickname);
-                backToHome.putExtra("tipo", tipo);
-                startActivity(backToHome);
             }
         });
 
@@ -304,7 +295,7 @@ public class AstaRibassoActivity extends AppCompatActivity {
                 offertaAttualeRibassoTextView.setText("Prezzo attuale: \u20AC" + prezzoAttuale);
 
                 if (prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
-                    updateRibasso(prezzoAttuale, asta.getId());
+                    updateRibasso(asta.getId());
                     timerTextView.setText("Conclusa");
                 } else {
                     createAndStartCountDownTimer(timerTextView, offertaAttualeRibassoTextView, asta.getResetTimer() * 1000, asta);
@@ -366,9 +357,8 @@ public class AstaRibassoActivity extends AppCompatActivity {
 
 
 
-    public void updateRibasso(BigDecimal offertaAttuale, int id){
-        OffertaRibassoRequest offertaRibassoRequest = new OffertaRibassoRequest(offertaAttuale, id);
-        Call<Void> call = apiService.updateRibasso(offertaRibassoRequest);
+    public void updateRibasso(int id){
+        Call<Void> call = apiService.updateRibasso(id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
