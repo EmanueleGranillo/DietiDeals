@@ -16,20 +16,22 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="Esplora"
         android:textSize="40dp"
         android:textStyle="bold" />
 
     <ImageButton
         android:id="@+id/profiloButtonHomeCompratore"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/notificheButtonHomeCompratore"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
         android:backgroundTint="#F2F4F8"
-        android:src="@drawable/ic_profilo_foreground" />
+        android:scaleType="center"
+        android:src="@mipmap/ic_profilo_nuovo_2_foreground" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/cercaAstaSearchView"
@@ -39,7 +41,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="18dp"
         android:background="@drawable/rounded_edittext_bg"
         app:iconifiedByDefault="false"
@@ -194,10 +196,13 @@
         android:id="@+id/notificheButtonHomeCompratore"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignTop="@+id/esploraTextView"
+        android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/profiloButtonHomeCompratore"
-        android:layout_marginEnd="20dp"
-        android:src="@mipmap/ic_ring_foreground"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:src="@mipmap/ic_notifiche_nuovo_foreground"
+        android:background="#F2F4F8"
+        android:scaleType="center"
         />
 
     <ImageView

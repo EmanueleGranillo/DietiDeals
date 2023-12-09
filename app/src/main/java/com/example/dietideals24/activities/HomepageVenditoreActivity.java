@@ -55,7 +55,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         tutteLeAsteBtn = findViewById(R.id.buttonTutteLeAste);
         asteAttiveBtn = findViewById(R.id.buttonAsteAttive);
         asteConcluseBtn = findViewById(R.id.buttonAsteConcluse);
-        Button creaAstaBtn = findViewById(R.id.sellNewProductButton);
+        ImageButton creaAstaBtn = findViewById(R.id.sellNewProductButton);
         ImageButton profiloBtn = findViewById(R.id.profiloButtonHomeVenditore);
         ImageButton notificheBtn = findViewById(R.id.notificheButtonHomeVenditore);
 
