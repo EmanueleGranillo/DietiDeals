@@ -96,7 +96,13 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 imageBase64 = aste.get(position).getFotoProdotto();
                 byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                productImage.setImageBitmap(decodedByte);
+
+                // Esegui il ritaglio dell'immagine per renderla quadrata
+                Bitmap squareImage = cropSquareImage(decodedByte);
+
+                // Imposta l'immagine nell'ImageView
+                productImage.setImageBitmap(squareImage);
+
             } else {
                 // Immagine di fallback o gestisci la situazione come desideri
                 productImage.setImageResource(R.drawable.shopping_bag);
@@ -158,7 +164,13 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 imageBase64 = aste.get(position).getFotoProdotto();
                 byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                productImage.setImageBitmap(decodedByte);
+
+                // Esegui il ritaglio dell'immagine per renderla quadrata
+                Bitmap squareImage = cropSquareImage(decodedByte);
+
+                // Imposta l'immagine nell'ImageView
+                productImage.setImageBitmap(squareImage);
+
             } else {
                 // Immagine di fallback o gestisci la situazione come desideri
                 productImage.setImageResource(R.mipmap.ic_no_icon_foreground);
@@ -219,7 +231,13 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 imageBase64 = aste.get(position).getFotoProdotto();
                 byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                productImage.setImageBitmap(decodedByte);
+
+                // Esegui il ritaglio dell'immagine per renderla quadrata
+                Bitmap squareImage = cropSquareImage(decodedByte);
+
+                // Imposta l'immagine nell'ImageView
+                productImage.setImageBitmap(squareImage);
+
             } else {
                 // Immagine di fallback o gestisci la situazione come desideri
                 productImage.setImageResource(R.drawable.shopping_bag);
@@ -337,6 +355,19 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
         });
 
          */
+
+
+
+    private Bitmap cropSquareImage(Bitmap originalImage) {
+        int targetWidth = Math.min(originalImage.getWidth(), originalImage.getHeight());
+        int targetHeight = targetWidth;
+
+        int startX = (originalImage.getWidth() - targetWidth) / 2;
+        int startY = (originalImage.getHeight() - targetHeight) / 2;
+
+        return Bitmap.createBitmap(originalImage, startX, startY, targetWidth, targetHeight);
+    }
+
 
 
 }

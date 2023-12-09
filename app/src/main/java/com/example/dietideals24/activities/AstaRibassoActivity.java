@@ -307,7 +307,13 @@ public class AstaRibassoActivity extends AppCompatActivity {
                         imageString = asta.getFotoProdotto();
                         byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        fotoProdottoImageView.setImageBitmap(decodedByte);
+
+                        // Esegui il ritaglio dell'immagine
+                        Bitmap croppedImage = cropImage(decodedByte);
+
+                        // Imposta l'immagine nell'ImageView
+                        fotoProdottoImageView.setImageBitmap(croppedImage);
+
                     } else {
                         // Immagine di fallback o gestisci la situazione come desideri
                         fotoProdottoImageView.setImageResource(R.mipmap.ic_no_icon_foreground);
@@ -352,6 +358,18 @@ public class AstaRibassoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+
+    private Bitmap cropImage(Bitmap originalImage) {
+        int targetWidth = originalImage.getWidth();
+        int targetHeight = (int) (targetWidth * 9.0 / 16.0); // Proporzione 16:9
+
+        int startX = 0;
+        int startY = (originalImage.getHeight() - targetHeight) / 2;
+
+        return Bitmap.createBitmap(originalImage, startX, startY, targetWidth, targetHeight);
     }
 
 

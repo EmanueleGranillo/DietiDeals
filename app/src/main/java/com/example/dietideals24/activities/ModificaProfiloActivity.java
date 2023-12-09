@@ -143,6 +143,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
     }
 
     public void aggiornaProfilo(String nome, String cognome, String biografia, String link_web, String link_insta, String posizione, String numero_telefono, String foto_profilo){
+        numero_telefono = "+39 " + numero_telefono;
         UserModifiedRequest userModifiedRequest = new UserModifiedRequest(nickname, nome, cognome, biografia, link_web, link_insta, posizione, numero_telefono, foto_profilo);
         Call<Void> call = apiService.editUser(userModifiedRequest);
         call.enqueue(new Callback<Void>() {

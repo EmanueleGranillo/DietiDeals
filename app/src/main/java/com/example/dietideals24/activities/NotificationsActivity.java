@@ -107,7 +107,7 @@ public class NotificationsActivity extends AppCompatActivity {
                     // Aggiorna la ListView con i nuovi dati custom
                     customBaseAdapterNotifications = new CustomBaseAdapterNotifications(getApplicationContext(), notifiche, checkOrXIcons);
                     listView.setAdapter(customBaseAdapterNotifications);
-                    SingleRowListNotifications.setListViewHeightBasedOnChildren(listView);
+                    //SingleRowListNotifications.setListViewHeightBasedOnChildren(listView);
                     customBaseAdapterNotifications.notifyDataSetChanged();
 
                 } else {

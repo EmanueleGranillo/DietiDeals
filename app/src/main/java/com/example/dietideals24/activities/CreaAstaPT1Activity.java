@@ -236,7 +236,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
                 ImagePicker.with(CreaAstaPT1Activity.this)
                         .crop()                    //Crop image(Optional), Check Customization for more option
                         .compress(1024)            //Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(240, 240)    //Final image resolution will be less than 1080 x 1080(Optional)
+                        .maxResultSize(480, 480)    //Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
             }
         });
@@ -327,14 +327,36 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri = data.getData();
-        uploadImage.setImageURI(uri);
-        uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
+        //uploadImage.setImageURI(uri);
+        //uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
         // Ottieni un'immagine Bitmap da qualche fonte (ad esempio, dalla fotocamera o dalla galleria)
         Bitmap imageBitmap = BitmapFactory.decodeFile(uri.getPath());
-        System.out.println(uri.getPath());
         // Converti l'immagine Bitmap in una stringa Base64
         imageString = ImageUtils.bitmapToBase64(imageBitmap);
+
+        // Mostra l'immagine nel client tagliata 1:1
+        displayImage(imageBitmap);
     }
+
+
+    private void displayImage(Bitmap imageBitmap) {
+        // Imposta l'immagine nell'ImageView
+        uploadImage.setImageBitmap(getSquareBitmap(imageBitmap));
+        uploadImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+    }
+
+    private Bitmap getSquareBitmap(Bitmap bitmap) {
+        // Taglia l'immagine in un quadrato
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int size = Math.min(width, height);
+
+        int x = (width - size) / 2;
+        int y = (height - size) / 2;
+
+        return Bitmap.createBitmap(bitmap, x, y, size, size);
+    }
+
 
     public boolean check(){
         if(titoloProdottoEditText.getText().toString().isEmpty()){
@@ -393,4 +415,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         startActivity(goToHPVenditore);
         super.onBackPressed();
     }
+
+
+
 }
