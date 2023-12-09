@@ -134,32 +134,35 @@
         android:paddingStart="10dp"/>
 
 
-
-
-
-    <Button
-        android:id="@+id/confermaButtonModificaProfilo"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/linkinstagramEditText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_toEndOf="@+id/annullaButtonModificaProfilo"
-        android:backgroundTint="#00CC66"
-        android:text="Conferma" />
+    <RelativeLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linkinstagramEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
 
     <Button
         android:id="@+id/annullaButtonModificaProfilo"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_below="@id/linkinstagramEditText"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
         android:backgroundTint="#AEA7A7"
         android:text="Annulla" />
+
+
+
+        <Button
+            android:id="@+id/confermaButtonModificaProfilo"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="33dp"
+            android:layout_toEndOf="@+id/annullaButtonModificaProfilo"
+            android:backgroundTint="#00CC66"
+            android:text="Conferma" />
+
+
+    </RelativeLayout>
 
     <ImageView
         android:layout_width="32dp"

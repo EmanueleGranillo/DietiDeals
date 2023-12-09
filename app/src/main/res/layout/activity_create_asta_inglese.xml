@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreaAstaTempoFissoActivity"
-    android:background="#F2F4F8">
+    android:background="#F2F4F8"
+    tools:context=".activities.CreaAstaTempoFissoActivity">
 
 
     <Button
@@ -28,19 +28,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
         android:text="Inserisci le informazioni finali"
         android:textColor="#000000"
         android:textSize="24dp" />
 
     <EditText
         android:id="@+id/baseAstaEditText"
-        android:layout_width="360dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/timerInsertedTextView"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:hint="Inserisci base d'asta"
         android:inputType="numberDecimal" />
 
@@ -50,85 +50,82 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewInfoFinaliIng"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="Inserisci intervallo di tempo"
         android:textColor="#000000"
         android:textSize="18dp" />
 
     <TextView
         android:id="@+id/timerInsertedTextView"
-        android:layout_width="304dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/numberPickerHoursIng"
+        android:layout_below="@id/pickersContainer"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginStart="52dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="55dp"
         android:text="Timer inserito "
         android:textColor="#000000"
         android:textSize="23dp" />
 
 
-    <TextView
-        android:id="@+id/textViewOreIng"
-        android:layout_width="24dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewInsertTimerIng"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="254dp"
-        android:text="Ore"
-        android:textColor="#000000"
-        android:textSize="15dp" />
-
-
-    <TextView
-        android:id="@+id/textViewMinutiIng"
-        android:layout_width="44dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewInsertTimerIng"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="267dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="99dp"
-        android:text="Minuti"
-        android:textColor="#000000"
-        android:textSize="15dp" />
-
-    <NumberPicker
-        android:id="@+id/numberPickerHoursIng"
+    <RelativeLayout
+        android:id="@+id/pickersContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewOreIng"
-        android:gravity="center"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="114dp"
-        android:layout_marginEnd="24dp"
-        />
+        android:layout_below="@+id/textViewInsertTimerIng"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/textViewOreIng"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Ore"
+            android:layout_marginStart="18dp"
+            android:textColor="#000000"
+            android:textSize="15dp" />
 
 
-    <NumberPicker
-        android:id="@+id/numberPickerMinutesIng"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewMinutiIng"
-        android:layout_marginStart="54dp"
-        android:layout_marginEnd="24dp"
-        android:layout_toEndOf="@+id/numberPickerHoursIng"
-        android:gravity="center" />
+        <TextView
+            android:id="@+id/textViewMinutiIng"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_toEndOf="@+id/textViewOreIng"
+            android:text="Minuti"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+        <NumberPicker
+            android:id="@+id/numberPickerHoursIng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewOreIng"
+            android:layout_alignParentStart="true"
+            android:gravity="center" />
+
+
+        <NumberPicker
+            android:id="@+id/numberPickerMinutesIng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewMinutiIng"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/numberPickerHoursIng"
+            android:gravity="center" />
+
+    </RelativeLayout>
+
 
     <EditText
         android:id="@+id/sogliaRialzoEditText"
-        android:layout_width="360dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/baseAstaEditText"
-        android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
         android:hint="Inserisci soglia di rialzo (default €10)"
         android:inputType="numberDecimal" />
 
@@ -137,45 +134,45 @@
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_below="@id/sogliaRialzoEditText"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:backgroundTint="#00CC66"
         android:text="Crea" />
 
     <TextView
+        android:id="@+id/timerErrorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/timerErrorTextView"
         android:layout_below="@+id/timerInsertedTextView"
         android:layout_alignStart="@+id/timerInsertedTextView"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:text=""
         android:textColor="#F44336"
-        android:textSize="12dp"/>
+        android:textSize="12dp" />
 
     <TextView
+        android:id="@+id/baseAstaErrorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/baseAstaErrorTextView"
         android:layout_below="@+id/baseAstaEditText"
         android:layout_alignStart="@+id/baseAstaEditText"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:text=""
         android:textColor="#F44336"
-        android:textSize="12dp"/>
+        android:textSize="12dp" />
 
     <TextView
+        android:id="@+id/sogliaRialzoErrorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sogliaRialzoErrorTextView"
         android:layout_below="@+id/sogliaRialzoEditText"
         android:layout_alignStart="@+id/sogliaRialzoEditText"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:text=""
         android:textColor="#F44336"
-        android:textSize="12dp"/>
+        android:textSize="12dp" />
 
 </RelativeLayout>

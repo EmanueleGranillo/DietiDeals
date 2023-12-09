@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreaAstaTempoFissoActivity"
-    android:background="#F2F4F8">
+    android:background="#F2F4F8"
+    tools:context=".activities.CreaAstaTempoFissoActivity">
 
     <Button
         android:id="@+id/backButtonCreateAstaRibasso"
@@ -26,19 +26,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
         android:text="Inserisci le informazioni finali"
         android:textColor="#000000"
         android:textSize="24dp" />
 
     <EditText
         android:id="@+id/prezzoInizialeEditText"
-        android:layout_width="360dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/timerInsertedTextView"
-        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:hint="Inserisci prezzo di partenza"
         android:inputType="numberDecimal" />
 
@@ -47,86 +47,90 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewDateInsert"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="Inserisci timer per decremento prezzo"
         android:textColor="#000000"
         android:textSize="18dp" />
 
     <TextView
         android:id="@+id/timerInsertedTextView"
-        android:layout_width="304dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/numberPickerHours"
+        android:layout_below="@+id/pickersContainerRibasso"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="55dp"
         android:text="Timer inserito: "
         android:textColor="#000000"
-        android:textSize="23dp" />
+        android:textSize="21dp" />
 
-    <TextView
-        android:id="@+id/textViewOreRibasso"
-        android:layout_width="24dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/inserisciTimerRibassoTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="30dp"
-        android:text="Ore"
-        android:textColor="#000000"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/textViewMinutiRibasso"
-        android:layout_width="44dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/inserisciTimerRibassoTextView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="131dp"
-        android:text="Minuti"
-        android:textColor="#000000"
-        android:textSize="15dp" />
-
-    <NumberPicker
-        android:id="@+id/numberPickerHours"
+    <RelativeLayout
+        android:id="@+id/pickersContainerRibasso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewOreRibasso"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="118dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="center" />
+        android:layout_below="@+id/inserisciTimerRibassoTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
 
-    <NumberPicker
-        android:id="@+id/numberPickerMinutes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewMinutiRibasso"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="118dp"
-        android:gravity="center" />
+        <TextView
+            android:id="@+id/textViewOreRibasso"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="18dp"
+            android:text="Ore"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/textViewMinutiRibasso"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_toEndOf="@+id/textViewOreRibasso"
+            android:text="Minuti"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+        <NumberPicker
+            android:id="@+id/numberPickerHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewOreRibasso"
+            android:layout_alignParentStart="true"
+            android:gravity="center" />
+
+
+        <NumberPicker
+            android:id="@+id/numberPickerMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewMinutiRibasso"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/numberPickerHours"
+            android:gravity="center" />
+
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/decrementoEditText"
-        android:layout_width="360dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/prezzoInizialeEditText"
-        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:hint="Inserisci importo di decremento"
         android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/sogliaMinimaEditText"
-        android:layout_width="360dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/decrementoEditText"
-        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:hint="Inserisci una soglia minima"
         android:inputType="numberDecimal" />
 
@@ -135,57 +139,57 @@
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_below="@id/sogliaMinimaEditText"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:backgroundTint="#00CC66"
         android:text="Crea" />
 
     <TextView
+        android:id="@+id/timerInsertedErrorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/timerInsertedErrorTextView"
         android:layout_below="@+id/timerInsertedTextView"
         android:layout_alignStart="@+id/timerInsertedTextView"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:text=""
         android:textColor="#F44336"
-        android:textSize="12dp"/>
+        android:textSize="12dp" />
 
     <TextView
+        android:id="@+id/prezzoInizialeErrorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/prezzoInizialeErrorTextView"
         android:layout_below="@+id/prezzoInizialeEditText"
         android:layout_alignStart="@+id/prezzoInizialeEditText"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:text=""
         android:textColor="#F44336"
-        android:textSize="12dp"/>
+        android:textSize="12dp" />
 
     <TextView
+        android:id="@+id/decrementoErrorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/decrementoErrorTextView"
         android:layout_below="@+id/decrementoEditText"
         android:layout_alignStart="@+id/decrementoEditText"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:text=""
         android:textColor="#F44336"
-        android:textSize="12dp"/>
+        android:textSize="12dp" />
 
     <TextView
+        android:id="@+id/sogliaMinimaErrorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sogliaMinimaErrorTextView"
         android:layout_below="@+id/sogliaMinimaEditText"
         android:layout_alignStart="@+id/sogliaMinimaEditText"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:text=""
         android:textColor="#F44336"
-        android:textSize="12dp"/>
+        android:textSize="12dp" />
 
 </RelativeLayout>

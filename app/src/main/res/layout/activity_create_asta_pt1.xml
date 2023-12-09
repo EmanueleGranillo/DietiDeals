@@ -45,23 +45,25 @@
 
     <EditText
         android:id="@+id/editTextTitle"
-        android:layout_width="370dp"
+        android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_below="@id/uploadImageIcon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_edittext_bg"
-        android:hint="Inserisci titolo dell'asta" />
+        android:hint="Inserisci titolo dell'asta"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/editTextDescrizione"
-        android:layout_width="370dp"
+        android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_below="@id/editTextTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_edittext_bg"
-        android:hint="Inserisci descrizione del prodotto" />
+        android:hint="Inserisci descrizione del prodotto"
+        android:padding="10dp" />
 
     <TextView
         android:id="@+id/textViewChooseAuctionType"
@@ -113,13 +115,14 @@
 
     <EditText
         android:id="@+id/editTextParoleChiave"
-        android:layout_width="370dp"
+        android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_below="@id/spinnerCategory"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_edittext_bg"
-        android:hint="Inserisci parole chiave" />
+        android:hint="Inserisci parole chiave"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/forwardButtonCreateAsta"

@@ -89,8 +89,8 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
             // Imposta il DatePicker con gli spinner nell'ordine desiderato (anno, mese, giorno)
             datePicker.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
                 // Formatta la data selezionata e impostala nel TextView
-                selectedDate = String.format(Locale.getDefault(), "%d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
-                textViewSelectedDate.setText("Data selezionata: " + selectedDate + selectedTime);
+                selectedDate = String.format(Locale.getDefault(), "%d/%02d/%02d", year, monthOfYear + 1, dayOfMonth);
+                textViewSelectedDate.setText("Data selezionata: " + selectedDate + " - " + selectedTime);
             });
         }
 
