@@ -25,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NotificationsActivity extends AppCompatActivity {
-    int checkOrXIcons[] = {R.drawable.ic_check_foreground, R.drawable.ic_x_foreground};
+    int checkOrXIcons[] = {R.mipmap.ic_check_2_foreground, R.mipmap.ic_cross_foreground};
     ListView listView;
     CustomBaseAdapterNotifications customBaseAdapterNotifications;
     private MyApiService apiService;
