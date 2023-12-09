@@ -199,7 +199,7 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         }
         long secondiOggi = calendar.getTime().getHours() * 3600 + calendar.getTime().getMinutes() * 60 + calendar.getTime().getSeconds();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        if ((timerInSecondi < secondiOggi) && (selectedDate == dateFormat.format(calendar.getTime()))){
+        if ((timerInSecondi < secondiOggi) && (selectedDate.equals(dateFormat.format(calendar.getTime())))){
             selezionaDataErrorTextView.setText("Devi selezionare una data futura!");
             return false;
         }
