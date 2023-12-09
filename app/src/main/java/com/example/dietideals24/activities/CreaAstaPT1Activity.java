@@ -8,12 +8,21 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +53,10 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
     private TextView titoloErrorTextView;
     private TextView descrizioneErrorTextView;
     private TextView keywordsErrorTextView;
+    private ImageButton infoButton;
+    private PopupWindow popupWindow;
+    private TextView popupText;
+    private View mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +71,8 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         titoloErrorTextView = findViewById(R.id.titoloAstaErrorTextView);
         descrizioneErrorTextView = findViewById(R.id.descrizioneErrorTextView);
         keywordsErrorTextView = findViewById(R.id.keywordsErrorEditText);
+        infoButton = findViewById(R.id.infoCreaAstaButton);
+        mainLayout = findViewById(R.id.creaAstaLayout);
 
 
         activity = getIntent().getStringExtra("activity");
@@ -161,8 +176,30 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
 
 
 
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                } else {
+                    showPopup(tipologiaSelezionata);
+                }
 
 
+            }
+        });
+
+        mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Nascondi il popup quando si tocca fuori da esso
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    return true; // Indica che l'evento è stato gestito
+                }
+                return false; // Lascia l'evento di tocco inalterato
+            }
+        });
         spinnerTipologia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -318,6 +355,34 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void showPopup(String tipologia){
+        View popupView = LayoutInflater.from(this).inflate(R.layout.popup_layout, null);
+        popupText = popupView.findViewById(R.id.popupText);
+        if(tipologia.equals("asta a tempo fisso")){
+            popupText.setText("Asta a tempo fisso: scegli una data di scadenza. Specifica una soglia minima di prezzo al quale vendere il prodotto (la soglia minima rimarrà segreta).");
+        } else if (tipologia.equals("asta inglese")){
+            popupText.setText("Asta all'inglese: scegli una base d'asta iniziale, un intervallo di tempo fisso per presentare nuove offerte e una soglia di rialzo del prezzo. Quando viene presentata un'offerta, il timer viene resettato.");
+        } else {
+            popupText.setText("Asta al ribasso: scegli un prezzo iniziale, un intervallo di tempo per il decremento del prezzo, la quantità da sottrarre al prezzo ad ogni intervallo di tempo e una soglia minima (segreta) a cui vendere il prodotto. Quando viene raggiunto il timer, il prezzo verrà decrementato dell'importo previsto.");
+        }
+
+        popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0f);
+        scaleAnimation.setDuration(300);
+        popupView.startAnimation(scaleAnimation);
+
+        int offsetX = -50;
+        int offsetY = -infoButton.getHeight()/2 - popupWindow.getHeight()/2; // Offset verso l'alto rispetto al bottone
+
+        // Mostra il pop-up nella posizione desiderata
+        popupWindow.showAsDropDown(infoButton, offsetX, offsetY, Gravity.CENTER);
     }
 
     @Override

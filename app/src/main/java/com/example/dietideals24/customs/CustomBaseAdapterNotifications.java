@@ -69,7 +69,7 @@ public class CustomBaseAdapterNotifications extends BaseAdapter {
         }
 
 
-        if(notifiche.get(position).getDescrizione().equals("Prodotto venduto!")){
+        if(notifiche.get(position).getIntestazione().equals("Prodotto venduto!")){
             convertView = inflater.inflate(R.layout.activity_single_row_list_notifications, null);
             TextView textViewTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
             TextView textViewDescription = (TextView) convertView.findViewById(R.id.textViewDescription);
@@ -80,7 +80,7 @@ public class CustomBaseAdapterNotifications extends BaseAdapter {
             checkOrXImages.setImageResource(checkOrXIcons[0]);
         }
 
-        if(notifiche.get(position).getDescrizione().equals("Prodotto non venduto!")){
+        if(notifiche.get(position).getIntestazione().equals("Prodotto non venduto!")){
             convertView = inflater.inflate(R.layout.activity_single_row_list_notifications, null);
             TextView textViewTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
             TextView textViewDescription = (TextView) convertView.findViewById(R.id.textViewDescription);

@@ -1,0 +1,21 @@
+<!-- popup_layout.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popupLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+
+    <!-- Contenuto del pop-up -->
+    <TextView
+        android:id="@+id/popupText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <!-- Puoi aggiungere altri elementi del pop-up come bottoni, immagini, ecc. -->
+
+</LinearLayout>
