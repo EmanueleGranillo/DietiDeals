@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="18dp"
         android:text="Esplora"
         android:textColor="#000000"
@@ -28,7 +28,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:backgroundTint="#F2F4F8"
         android:scaleType="center"
         android:src="@mipmap/ic_profilo_nuovo_2_foreground" />
@@ -38,7 +38,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         android:layout_toStartOf="@+id/notificheButtonHomeVenditore"
         android:src="@mipmap/ic_crea_asta_2_foreground"
         android:background="#F2F4F8"/>
@@ -49,47 +49,53 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/sellNewProductButton"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="14dp"
         android:text="Le tue aste"
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/buttonTutteLeAste"
-        android:layout_width="115dp"
+
+    <RelativeLayout
+        android:id="@+id/buttonsAsteContainer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/leTueAsteTextView"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true" >
+
+    <Button
+        android:id="@+id/buttonTutteLeAste"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="#00CC66"
         android:text="Tutte"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"/>
 
     <Button
         android:id="@+id/buttonAsteAttive"
-        android:layout_width="115dp"
+        android:layout_width="113dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/leTueAsteTextView"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/buttonTutteLeAste"
         android:backgroundTint="#FFFFFF"
         android:text="Attive"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:textSize="15dp"/>
 
     <Button
         android:id="@+id/buttonAsteConcluse"
-        android:layout_width="115dp"
+        android:layout_width="113dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/leTueAsteTextView"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/buttonAsteAttive"
         android:backgroundTint="#FFFFFF"
         android:text="Concluse"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:textSize="15dp"/>
+
+    </RelativeLayout>
 
 
     <ListView
@@ -98,7 +104,7 @@
         android:layout_height="77dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:layout_below="@+id/buttonTutteLeAste"
+        android:layout_below="@+id/buttonsAsteContainer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="11dp"
@@ -113,7 +119,7 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/profiloButtonHomeVenditore"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         android:src="@mipmap/ic_notifiche_nuovo_foreground"
         android:background="#F2F4F8"
         android:scaleType="center"/>

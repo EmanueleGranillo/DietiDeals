@@ -401,11 +401,12 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
         scaleAnimation.setDuration(300);
         popupView.startAnimation(scaleAnimation);
 
-        int offsetX = -50;
-        int offsetY = -infoButton.getHeight()/2 - popupWindow.getHeight()/2; // Offset verso l'alto rispetto al bottone
+        int offsetX = -750;
+        int offsetY = -350; // Offset verso l'alto rispetto al bottone
 
         // Mostra il pop-up nella posizione desiderata
-        popupWindow.showAsDropDown(infoButton, offsetX, offsetY, Gravity.CENTER);
+        popupWindow.showAsDropDown(infoButton, offsetX, offsetY);
+
     }
 
     @Override
