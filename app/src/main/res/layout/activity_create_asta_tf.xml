@@ -37,24 +37,65 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewDateInsert"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="35dp"
         android:calendarViewShown="false"
         android:datePickerMode="spinner" />
 
+    <TextView
+        android:id="@+id/textViewOreTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewDateInsert"
+        android:layout_toEndOf="@+id/datePicker"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="30dp"
+        android:text="Ore"
+        android:textColor="#000000"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/textViewMinutiTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewDateInsert"
+        android:layout_toEndOf="@+id/textViewOreTF"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="30dp"
+        android:text="Minuti"
+        android:textColor="#000000"
+        android:textSize="15dp" />
+
+    <NumberPicker
+        android:id="@+id/numberPickerHoursTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewOreTF"
+        android:layout_alignStart="@+id/textViewOreTF"
+        android:layout_marginStart="-22dp"
+        android:gravity="center" />
+
+    <NumberPicker
+        android:id="@+id/numberPickerMinutesTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewMinutiTF"
+        android:layout_alignStart="@+id/textViewMinutiTF"
+        android:layout_marginStart="-10dp"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/selezionaDataTextView"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/datePicker"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
-        android:text="Data selezionata:"
+        android:text="Data selezionata: "
         android:textColor="#000000"
         android:textSize="19dp" />
-
 
     <EditText
         android:id="@+id/prezzoEditText"
@@ -121,6 +162,5 @@
         android:text=""
         android:textColor="#F44336"
         android:textSize="12dp"/>
-
 
 </RelativeLayout>

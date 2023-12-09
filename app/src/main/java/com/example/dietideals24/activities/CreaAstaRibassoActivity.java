@@ -140,8 +140,6 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
             }
         });
 
-
-
         // LISTENERS
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

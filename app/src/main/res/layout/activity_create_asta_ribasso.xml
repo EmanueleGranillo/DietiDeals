@@ -42,7 +42,6 @@
         android:hint="Inserisci prezzo di partenza"
         android:inputType="numberDecimal" />
 
-
     <TextView
         android:id="@+id/inserisciTimerRibassoTextView"
         android:layout_width="wrap_content"
@@ -68,7 +67,6 @@
         android:textColor="#000000"
         android:textSize="23dp" />
 
-
     <TextView
         android:id="@+id/textViewOreRibasso"
         android:layout_width="24dp"
@@ -80,7 +78,6 @@
         android:text="Ore"
         android:textColor="#000000"
         android:textSize="15dp" />
-
 
     <TextView
         android:id="@+id/textViewMinutiRibasso"
@@ -190,6 +187,5 @@
         android:text=""
         android:textColor="#F44336"
         android:textSize="12dp"/>
-
 
 </RelativeLayout>

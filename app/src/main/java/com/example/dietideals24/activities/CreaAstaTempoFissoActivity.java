@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,10 @@ import com.example.dietideals24.connection.RetrofitClient;
 
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import okhttp3.ResponseBody;
@@ -31,12 +35,15 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
 
     private MyApiService apiService;
     private DatePicker datePicker;
-    private String activity = "creatempofisso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, imageString, descrizione, selectedDate = "";
+    private NumberPicker numberPickerHours, numberPickerMinutes;
+    private String activity = "creatempofisso", titoloProdotto, tipologiaSelezionata, categoriaSelezionata, paroleChiave, nickname, tipo, imageString, descrizione, selectedDate = "", selectedTime = "";
     private TextView textViewSelectedDate, selezionaDataErrorTextView, prezzoErrorTextView, sogliaMinimaErrorTextView;
     private EditText prezzoInizialeEditText, sogliaMinimaEditText;
     private int tipologiaPosition, categoriaPosition;
+    private long timerInSecondi;
     private Button creaAstaTFButton, backButton;
     private BigDecimal prezzoInizialeBD, sogliaMinimaSegretaBD;
+    private Calendar calendar;
 
 
     @Override
@@ -47,8 +54,10 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
 
         creaAstaTFButton = findViewById(R.id.creaAstaTFButton);
         backButton = findViewById(R.id.backButtonCreateAstaTF);
-        DatePicker datePicker = findViewById(R.id.datePicker);
-        Calendar calendar = Calendar.getInstance();     // Imposta il limite inferiore del DatePicker alla data corrente
+        datePicker = findViewById(R.id.datePicker);
+        numberPickerHours = findViewById(R.id.numberPickerHoursTF);
+        numberPickerMinutes = findViewById(R.id.numberPickerMinutesTF);
+        calendar = Calendar.getInstance();     // Imposta il limite inferiore del DatePicker alla data corrente
         datePicker.setMinDate(calendar.getTimeInMillis());
         textViewSelectedDate = findViewById(R.id.selezionaDataTextView);
         prezzoInizialeEditText = findViewById(R.id.prezzoEditText);
@@ -57,6 +66,10 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         prezzoErrorTextView = findViewById(R.id.prezzoErrorTextView);
         sogliaMinimaErrorTextView = findViewById(R.id.sogliaMinimaErrorTextView);
 
+        numberPickerHours.setMinValue(0);
+        numberPickerHours.setMaxValue(23);
+        numberPickerMinutes.setMinValue(0);
+        numberPickerMinutes.setMaxValue(59);
 
         // GET EXTRAS
         nickname = getIntent().getStringExtra("nickname");
@@ -77,10 +90,62 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
             datePicker.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
                 // Formatta la data selezionata e impostala nel TextView
                 selectedDate = String.format(Locale.getDefault(), "%d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
-                textViewSelectedDate.setText("Data selezionata: " + selectedDate);
+                textViewSelectedDate.setText("Data selezionata: " + selectedDate + selectedTime);
             });
         }
 
+        numberPickerHours.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() < 10)) {
+                    textViewSelectedDate.setText(String.format("Data selezionata: " + selectedDate + " 0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    selectedTime = (String.format("0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(selectedTime);
+
+                } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() >= 10)) {
+                    textViewSelectedDate.setText(String.format("Data selezionata: " + selectedDate + " %s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    selectedTime = (String.format("%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(selectedTime);
+
+                } else if ((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() >= 10)) {
+                    textViewSelectedDate.setText(String.format("Data selezionata: " + selectedDate + " 0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    selectedTime = (String.format("0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(selectedTime);
+
+                } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() < 10)) {
+                    textViewSelectedDate.setText(String.format("Data selezionata: " + selectedDate + " %s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    selectedTime = (String.format("%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(selectedTime);
+
+                }
+            }
+        });
+        numberPickerMinutes.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() < 10)) {
+                    textViewSelectedDate.setText(String.format("Data selezionata: " + selectedDate + " 0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    selectedTime = (String.format("0%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(selectedTime);
+
+                } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() >= 10)) {
+                    textViewSelectedDate.setText(String.format("Data selezionata: " + selectedDate + " %s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    selectedTime = (String.format("%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(selectedTime);
+
+                } else if ((numberPickerHours.getValue() < 10) && (numberPickerMinutes.getValue() >= 10)) {
+                    textViewSelectedDate.setText(String.format("Data selezionata: " + selectedDate + " 0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    selectedTime = (String.format("0%s:%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(selectedTime);
+
+                } else if ((numberPickerHours.getValue() >= 10) && (numberPickerMinutes.getValue() < 10)) {
+                    textViewSelectedDate.setText(String.format("Data selezionata: " + selectedDate + " %s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    selectedTime = (String.format("%s:0%s:00", numberPickerHours.getValue(), numberPickerMinutes.getValue()));
+                    timerInSecondi = convertiStringaInSecondi(selectedTime);
+
+                }
+            }
+        });
 
         // LISTENERS
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +181,28 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         });
     }
 
+    public long convertiStringaInSecondi(String tempoStringa) {
+        SimpleDateFormat formatoTimer = new SimpleDateFormat("HH:mm:ss");
+
+        try {
+            Date orario = formatoTimer.parse(tempoStringa);
+            return orario.getHours() * 3600 + orario.getMinutes() * 60 + orario.getSeconds();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean check() {
         //Controllo campi vuoti
+        if (selectedTime.isEmpty()) {
+            selectedTime = "00:00:00";
+        }
+        long secondiOggi = calendar.getTime().getHours() * 3600 + calendar.getTime().getMinutes() * 60 + calendar.getTime().getSeconds();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if ((timerInSecondi < secondiOggi) && (selectedDate == dateFormat.format(calendar.getTime()))){
+            selezionaDataErrorTextView.setText("Devi selezionare una data futura!");
+            return false;
+        }
         if (selectedDate.isEmpty()) {
             selezionaDataErrorTextView.setText("Devi selezionare una data!");
             return false;
@@ -162,7 +247,8 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         if(imageString == null) {
             imageString = "";
         }
-        CreateAstaTFRequest createAstaRequest = new CreateAstaTFRequest(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, selectedDate, prezzoIniziale, sogliaSegreta, creatore);
+        String date = selectedDate + "T" + selectedTime;
+        CreateAstaTFRequest createAstaRequest = new CreateAstaTFRequest(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, date, prezzoIniziale, sogliaSegreta, creatore);
         Call<ResponseBody> call = apiService.createAstatf(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
