@@ -19,7 +19,6 @@ import com.example.dietideals24.R;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.UserAccessRequest;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         nicknameErrorTextView = findViewById(R.id.nicknameErrorTextView);
         passwordErrorTextView = findViewById(R.id.passwordErrorTextView);
-
-
-
 
 
 
@@ -160,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
 
     @Override
     public void onBackPressed() {

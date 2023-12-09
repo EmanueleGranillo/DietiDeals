@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="35dp"
         android:layout_centerHorizontal="true"
         android:text="Crea un account"
         android:textSize="30dp"
@@ -30,10 +30,11 @@
 
     <Button
         android:id="@+id/backButtonRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="79dp"
+        android:layout_height="57dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
         android:backgroundTint="#F2F4F8"
         app:icon="@drawable/ic_back_foreground"
         app:iconSize="50dp"
@@ -43,7 +44,7 @@
         android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_below="@+id/compraButtonRegister"
+        android:layout_below="@+id/buttonsContainer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="70dp"
@@ -105,34 +106,37 @@
         android:hint="Conferma Password"
         android:textSize="15dp" />
 
-    <android.widget.Button
-        android:id="@+id/compraButtonRegister"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
+    <RelativeLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/martelloImage"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#00CC66"
-        android:text="Compra"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/rounded_left"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp">
 
-    <android.widget.Button
-        android:id="@+id/vendiButtonRegister"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/martelloImage"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
-        android:layout_toEndOf="@+id/compraButtonRegister"
-        android:backgroundTint="#FFFFFF"
-        android:text="Vendi"
-        android:textAllCaps="false"
-        android:textColor="#000000"
-        android:background="@drawable/rounded_right"/>
+        <android.widget.Button
+            android:id="@+id/compraButtonRegister"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/rounded_left"
+            android:backgroundTint="#00CC66"
+            android:text="Compra"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+        <android.widget.Button
+            android:id="@+id/vendiButtonRegister"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_toEndOf="@+id/compraButtonRegister"
+            android:background="@drawable/rounded_right"
+            android:backgroundTint="#FFFFFF"
+            android:text="Vendi"
+            android:textAllCaps="false"
+            android:textColor="#000000" />
+
+    </RelativeLayout>
 
 
     <Button
