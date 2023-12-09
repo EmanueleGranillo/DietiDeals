@@ -49,47 +49,53 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/sellNewProductButton"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="14dp"
         android:text="Le tue aste"
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/buttonTutteLeAste"
-        android:layout_width="115dp"
+
+    <RelativeLayout
+        android:id="@+id/buttonsAsteContainer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/leTueAsteTextView"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true" >
+
+    <Button
+        android:id="@+id/buttonTutteLeAste"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="#00CC66"
         android:text="Tutte"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"/>
 
     <Button
         android:id="@+id/buttonAsteAttive"
-        android:layout_width="115dp"
+        android:layout_width="113dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/leTueAsteTextView"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/buttonTutteLeAste"
         android:backgroundTint="#FFFFFF"
         android:text="Attive"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:textSize="15dp"/>
 
     <Button
         android:id="@+id/buttonAsteConcluse"
-        android:layout_width="115dp"
+        android:layout_width="113dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/leTueAsteTextView"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/buttonAsteAttive"
         android:backgroundTint="#FFFFFF"
         android:text="Concluse"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:textSize="15dp"/>
+
+    </RelativeLayout>
 
 
     <ListView
@@ -98,7 +104,7 @@
         android:layout_height="77dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:layout_below="@+id/buttonTutteLeAste"
+        android:layout_below="@+id/buttonsAsteContainer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="11dp"
