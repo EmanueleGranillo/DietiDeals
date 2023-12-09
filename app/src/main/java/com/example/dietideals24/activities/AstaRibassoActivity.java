@@ -76,124 +76,6 @@ public class AstaRibassoActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-        /*
-        // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
-        if (asta.getFotoProdotto() != null && !asta.getFotoProdotto().isEmpty()) {
-            imageString = asta.getFotoProdotto();
-            byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            fotoProdottoImageView.setImageBitmap(decodedByte);
-        } else {
-            // Immagine di fallback o gestisci la situazione come desideri
-            fotoProdottoImageView.setImageResource(R.mipmap.ic_no_icon_foreground);
-        }
-        fotoProdottoImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
-
-        nomeProdottoTextView.setText(asta.getNomeProdotto());
-        venditoreTextView.setText("Venditore: " + asta.getCreatore());
-        if (asta.getDescrizione().isEmpty()) {
-            descrizioneTextView.setText("Nessuna descrizione");
-        } else {
-            descrizioneTextView.setText(asta.getDescrizione());
-        }
-        categoriaTextView.setText(asta.getCategoria());
-        if (asta.getParoleChiave().isEmpty()) {
-            keywordsTextView.setText("Nessuna parola chiave");
-        } else {
-            keywordsTextView.setText("Parole chiave: " + asta.getParoleChiave());
-        }
-        if (asta.getOffertaAttuale() != null) {
-            prezzoAttualeTextView.setText("Prezzo attuale: €" + asta.getOffertaAttuale().toString());
-        } else {
-            prezzoAttualeTextView.setText("Prezzo iniziale: €" + asta.getPrezzoIniziale());
-        }
-        importoDecrementoTextView.setText("Importo decremento: " + asta.getImportoDecremento());
-
-
-         */
-
-
-
-
-
-
-
-        /*
-        differenzaSecondi = (dataOraAttuale.getTime() - dateCreazioneAsta.getTime())/1000;
-        System.out.println("differenza secondi: " + differenzaSecondi);
-        System.out.println("timer: " + asta.getResetTimer());
-        numeroIntervalli = differenzaSecondi/(double) asta.getResetTimer();
-        System.out.println("numero intervalli: " + numeroIntervalli);
-
-        numeroIntervalliPassati = (int) numeroIntervalli;
-        System.out.println("numero intervalli passati: " + numeroIntervalliPassati);
-
-        tempoPassatoPercentuale = numeroIntervalli - numeroIntervalliPassati;
-        System.out.println("tempo passato percentuale: " + tempoPassatoPercentuale);
-
-        secondiPassatiTimerCorrente = tempoPassatoPercentuale * asta.getResetTimer();
-        System.out.println("secondi passati timer corrente: " + (int) secondiPassatiTimerCorrente);
-
-        timerRimanenteSecondi = (int)asta.getResetTimer() - (int)secondiPassatiTimerCorrente;
-        System.out.println("secondi rimanenti timer corrente: " + (int) timerRimanenteSecondi);
-         */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        if(prezzoAttuale.compareTo(asta.getSogliaSegreta()) <= 0) {
-            // Asta conclusa. Fallita per raggiungimento soglia minima
-            decrementoPrezzoTextView.setText("Conclusa");
-            vincitoreTextView.setText("Non venduta");
-            chronometer.setVisibility(View.INVISIBLE);
-            acquistaRibassoButton.setEnabled(false);
-            acquistaRibassoButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
-            //manda notifiche
-
-        } else {
-
-            prezzoAttualeTextView.setText("Prezzo attuale: \u20AC" + prezzoAttuale);
-
-            long timer = timerRimanenteSecondi / 1000;
-
-
-            // GESTIONE TIMER
-            long elapsedTime = SystemClock.elapsedRealtime() + timer;
-            chronometer.setBase(elapsedTime);
-            chronometer.start();
-
-            chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-                @Override
-                public void onChronometerTick(Chronometer chronometer) {
-                    if(chronometer.getBase() <= SystemClock.elapsedRealtime() + 10000) {
-                        chronometer.setTextColor(Color.RED);
-                    }
-                    if(chronometer.getBase() < SystemClock.elapsedRealtime() + 1) {
-                        chronometer.stop();
-                    }
-                }
-            });
-        }
-         */
-
-
         vincitoreTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -280,7 +162,7 @@ public class AstaRibassoActivity extends AppCompatActivity {
                 timerTextView.setText(formattedTime);
 
 
-                if (secondsRemaining < 10) {
+                if (secondsRemaining <= 10) {
                     timerTextView.setTextColor(Color.RED);
                 }
             }
@@ -297,6 +179,8 @@ public class AstaRibassoActivity extends AppCompatActivity {
                 if (prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
                     updateRibasso(asta.getId());
                     timerTextView.setText("Conclusa");
+                    acquistaRibassoButton.setVisibility(View.INVISIBLE);
+                    decrementoPrezzoTextView.setVisibility(View.INVISIBLE);
                 } else {
                     createAndStartCountDownTimer(timerTextView, offertaAttualeRibassoTextView, asta.getResetTimer() * 1000, asta);
                 }
