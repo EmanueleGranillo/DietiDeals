@@ -172,7 +172,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
                 SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                 String dataOraAttualeString = inputFormat.format(dataOraAttuale);
 
-                aggiornaDataScadenza((int) timerInSecondi);
+                aggiornaDataScadenza((int) timerInSecondi); // non serve, ma non cancellare (per Granillo)
 
                 timerInsertedErrorTextView.setText("");
                 prezzoInizialeErrorTextView.setText("");
@@ -247,9 +247,13 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
     }
 
     public boolean check(){
+        if (timerInSecondi == 0) {
+            timerInsertedErrorTextView.setText("Inserisci un timer valido");
+            return false;
+        }
         // Controllo campi vuoti
         if(prezzoInizialeEditText.getText().toString().isEmpty()){
-            prezzoInizialeErrorTextView.setText("Inserire il prezzo iniziale");
+            prezzoInizialeErrorTextView.setText("Inserisci il prezzo iniziale");
             return false;
         } else {
             try {
@@ -269,7 +273,7 @@ public class CreaAstaRibassoActivity extends AppCompatActivity {
             }
         }
         if(sogliaMinimaEditText.getText().toString().isEmpty()){
-            sogliaMinimaErrorTextView.setText("Inserire una soglia minima");
+            sogliaMinimaErrorTextView.setText("Inserisci una soglia minima");
             return false;
         } else {
             try {
