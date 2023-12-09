@@ -69,8 +69,8 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         pallinoImg.setVisibility(View.INVISIBLE);
 
 
-        controllaNotifiche();
         riempiLista();
+        controllaNotifiche();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

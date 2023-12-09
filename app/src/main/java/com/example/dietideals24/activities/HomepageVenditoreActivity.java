@@ -66,9 +66,9 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         aste = new ArrayList<Asta>();
         pallinoImg.setVisibility(View.INVISIBLE);
 
-        //controllaNotifiche();
 
         riempiListaPerVenditore();
+        controllaNotifiche();
 
 
 
@@ -178,6 +178,27 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void controllaNotifiche() {
+        Call<NumeroResponse> call = apiService.checkNotificationsVenditore(nickname);
+        call.enqueue(new Callback<NumeroResponse>() {
+            @Override
+            public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
+                if (response.isSuccessful()) {
+                    NumeroResponse num = response.body();
+                    if (num.getNumero() == 0) {
+                        pallinoImg.setVisibility(View.INVISIBLE);
+                    } else {
+                        pallinoImg.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<NumeroResponse> call, Throwable t) {
+                Toast.makeText(HomepageVenditoreActivity.this, "Connessione fallita per check notifiche", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

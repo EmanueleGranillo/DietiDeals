@@ -57,6 +57,9 @@ public interface MyApiService {
     @POST("/check_notifiche_compratore/{nickname}")
     Call<NumeroResponse> checkNotificationsCompratore(@Path("nickname") String nickname);
 
+    @POST("/check_notifiche_venditore/{nickname}")
+    Call<NumeroResponse> checkNotificationsVenditore(@Path("nickname") String nickname);
+
     @POST("/set_notifiche_a_lette/{nickname}")
     Call<Void> setNotificheALette(@Path("nickname") String nickname);
 

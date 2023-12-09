@@ -219,7 +219,7 @@ public class ProfiloActivity extends AppCompatActivity {
                         } else {
                             cellulareProfiloTextView.setText("Nessun numero di telefono.");
                         }
-                        if (profilo.getPosizione().isEmpty()) {
+                        if (profilo.getPosizione() != null) {
                             posizioneProfiloTextView.setText(profilo.getPosizione());
                         } else {
                             posizioneProfiloTextView.setText("Nessuna posizione.");

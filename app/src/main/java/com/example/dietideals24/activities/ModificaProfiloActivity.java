@@ -110,7 +110,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
                 numeroTelefonoErrorTextView.setText("");
 
                 if(check()){
-                    aggiornaProfilo(nomeEditText.getText().toString().trim(), cognomeEditText.getText().toString().trim(), biografiaEditText.getText().toString().trim(), linkWebEditText.getText().toString().trim(), linkInstaEditText.getText().toString().trim(), posizioneEditText.getText().toString().trim(), numeroTelefonoEditText.getText().toString().trim(), base64String);
+                    aggiornaProfilo(nomeEditText.getText().toString(), cognomeEditText.getText().toString(), biografiaEditText.getText().toString(), linkWebEditText.getText().toString(), linkInstaEditText.getText().toString(), posizioneEditText.getText().toString(), numeroTelefonoEditText.getText().toString(), base64String);
                     Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
                     backToProfilo.putExtra("nickname", nickname);
                     backToProfilo.putExtra("tipo", tipo);

@@ -254,15 +254,15 @@ public class AstaRibassoActivity extends AppCompatActivity {
         acquistaRibassoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageCompratoreActivity.class);
-                backToHome.putExtra("nickname", nickname);
-                backToHome.putExtra("tipo", tipo);
-                startActivity(backToHome);
                 // update table con vincente
                 updateVincitore(nickname, id);
                 vincitoreTextView.setText("Venduto a: " + nickname);
                 countDownRibTxtView.setVisibility(View.INVISIBLE);
                 decrementoPrezzoTextView.setText("Asta conclusa");
+                Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageCompratoreActivity.class);
+                backToHome.putExtra("nickname", nickname);
+                backToHome.putExtra("tipo", tipo);
+                startActivity(backToHome);
             }
         });
 
