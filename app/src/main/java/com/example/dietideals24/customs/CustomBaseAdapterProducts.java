@@ -201,7 +201,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_ribasso, null);
             TextView titoloTextView = (TextView) convertView.findViewById(R.id.titoloRibassoTextView);
             TextView offertaAttualeRibassoTextView = (TextView) convertView.findViewById(R.id.prezzoAttualeTextView);
-            TextView countDownRibassoTxtView = (TextView) convertView.findViewById(R.id.countdownAstaRibassoTextView);
+            //TextView countDownRibassoTxtView = (TextView) convertView.findViewById(R.id.countdownAstaRibassoTextView);
             productImage = (ImageView) convertView.findViewById(R.id.productRibassoImageView);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
             //offertaAttualeRibassoTextView.setText(""+aste.get(position).getOffertaAttuale());
@@ -231,22 +231,9 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             offertaAttualeRibassoTextView.setText("\u20AC" + prezzoAttuale);        //controllare (qui variabile in comune a tutti)
 
 
+            //long initialTimeMillis = aste.get(position).getResetTimer() * 1000;
 
-            // Calcola ore, minuti e secondi rimanenti
-            long ore = timerRimanenteSecondi / 3600;
-            long minuti = (timerRimanenteSecondi % 3600) / 60;
-            long secondi = timerRimanenteSecondi % 60;
-
-            // Converti il tempo rimanente in un formato "00:00:00"
-            String formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", ore, minuti, secondi);
-
-            countDownRibassoTxtView.setText(formattedTime);
-
-
-
-            long initialTimeMillis = aste.get(position).getResetTimer() * 1000;
-
-            createAndStartCountDownTimer(countDownRibassoTxtView, offertaAttualeRibassoTextView, initialTimeMillis, aste.get(position));
+            //createAndStartCountDownTimer(countDownRibassoTxtView, offertaAttualeRibassoTextView, initialTimeMillis, aste.get(position));
 
         }
 
@@ -254,7 +241,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
     }
 
 
-
+/*
     private void createAndStartCountDownTimer(TextView timerTextView, TextView offertaAttualeRibassoTextView, long timeMillis, Asta asta) {
         CountDownTimer countDownTimer = new CountDownTimer(timeMillis, 1000) {
             @Override
@@ -294,13 +281,29 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 }
             }
         };
-
         // Start the timer
         countDownTimer.start();
     }
 
 
 
+
+    public void updateRibasso(int id){
+        Call<Void> call = apiService.updateRibasso(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                } else {
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
+    }
+
+ */
 
 
 
@@ -333,23 +336,6 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-    }
-
-
-
-    public void updateRibasso(int id){
-        Call<Void> call = apiService.updateRibasso(id);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                } else {
-                }
-            }
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-            }
-        });
     }
 
 

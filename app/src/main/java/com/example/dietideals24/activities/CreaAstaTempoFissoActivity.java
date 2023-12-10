@@ -247,7 +247,9 @@ public class CreaAstaTempoFissoActivity extends AppCompatActivity {
         if(imageString == null) {
             imageString = "";
         }
-        String date = selectedDate + "T" + selectedTime;
+        String date = selectedDate + " " + selectedTime;
+        System.out.println(date);
+        Toast.makeText(getApplicationContext(), date, Toast.LENGTH_LONG).show();
         CreateAstaTFRequest createAstaRequest = new CreateAstaTFRequest(titoloProdotto, tipologiaSelezionata, descrizione, imageString, categoriaSelezionata, paroleChiave, date, prezzoIniziale, sogliaSegreta, creatore);
         Call<ResponseBody> call = apiService.createAstatf(createAstaRequest);
         call.enqueue(new Callback<ResponseBody>() {

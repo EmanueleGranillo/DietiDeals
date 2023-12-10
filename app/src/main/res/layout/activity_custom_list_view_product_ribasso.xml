@@ -51,6 +51,7 @@
                 android:textSize="18dp" />
 
 
+            <!--
             <TextView
                 android:id="@+id/countdownAstaRibassoTextView"
                 android:layout_width="wrap_content"
@@ -61,15 +62,17 @@
                 android:layout_toEndOf="@+id/productRibassoImageView"
                 android:text="00:00:00"
                 android:textSize="18dp" />
+            -->
+
 
             <TextView
                 android:id="@+id/prezzoAttualeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tipologiaAstaRibassoTextView"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/countdownAstaRibassoTextView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="28dp"
                 android:text="€25"
                 android:textColor="#00CC66"
                 android:textSize="18dp"
