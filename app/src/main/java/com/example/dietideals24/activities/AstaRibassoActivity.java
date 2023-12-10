@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.dietideals24.R;
 import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.VincitoreRibassoRequest;
 import com.example.dietideals24.models.Asta;
@@ -158,7 +159,6 @@ public class AstaRibassoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // update table con vincente
                 updateVincitore(nickname, id);
-                vincitoreTextView.setText("Venduto a: " + nickname);
                 countDownRibTxtView.setVisibility(View.INVISIBLE);
                 decrementoPrezzoTextView.setText("Asta conclusa");
                 decrementoPrezzoTextView.setTextColor(Color.RED);
@@ -287,16 +287,22 @@ public class AstaRibassoActivity extends AppCompatActivity {
 
     public void updateVincitore(String nickname, int id){
         VincitoreRibassoRequest vincitoreRibassoRequest = new VincitoreRibassoRequest(nickname, id);
-        Call<Void> call = apiService.updatevincitoreribasso(vincitoreRibassoRequest);
-        call.enqueue(new Callback<Void>() {
+        Call<NumeroResponse> call = apiService.updatevincitoreribasso(vincitoreRibassoRequest);
+        call.enqueue(new Callback<NumeroResponse>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
                 if (response.isSuccessful()) {
+                    NumeroResponse num = response.body();
+                    if(num.getNumero() == 0){
+                        vincitoreTextView.setText("Il prodotto è già stato venduto!");
+                    } else {
+                        vincitoreTextView.setText("Hai vinto!");
+                    }
                 } else {
                 }
             }
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<NumeroResponse> call, Throwable t) {
             }
         });
     }
@@ -363,7 +369,7 @@ public class AstaRibassoActivity extends AppCompatActivity {
                         decrementoPrezzoTextView.setTextColor(Color.RED);
                     }
 
-                    if(prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
+                    else if(prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
                         prezzoAttualeTextView.setText("Prezzo di partenza: \u20AC" + asta.getPrezzoIniziale());
                         countDownRibTxtView.setVisibility(View.INVISIBLE);
                         decrementoPrezzoTextView.setText("Asta conclusa");

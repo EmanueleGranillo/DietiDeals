@@ -78,7 +78,7 @@ public interface MyApiService {
     Call<Void> updateRibasso(@Path("id") int id);
 
     @POST("/update_vincitore_ribasso/")
-    Call<Void> updatevincitoreribasso(@Body VincitoreRibassoRequest request);
+    Call<NumeroResponse> updatevincitoreribasso(@Body VincitoreRibassoRequest request);
 
 }
 

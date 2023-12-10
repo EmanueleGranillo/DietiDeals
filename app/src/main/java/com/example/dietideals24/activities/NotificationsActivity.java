@@ -83,10 +83,8 @@ public class NotificationsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-
-                    Toast.makeText(NotificationsActivity.this, nickname+" appoooo", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(NotificationsActivity.this, "male male", Toast.LENGTH_SHORT).show();
+
                 }
             }
             @Override

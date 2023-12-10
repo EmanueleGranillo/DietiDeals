@@ -162,7 +162,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="email.prova@gmail.com"
+                android:text=""
                 android:textSize="15dp" />
 
             <View
@@ -212,7 +212,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Napoli,Italia"
+                android:text=""
                 android:textSize="15dp" />
 
             <View
