@@ -46,7 +46,7 @@
 
     <EditText
         android:id="@+id/editTextTitle"
-        android:layout_width="340dp"
+        android:layout_width="360dp"
         android:layout_height="50dp"
         android:layout_below="@id/uploadImageIcon"
         android:layout_centerHorizontal="true"
@@ -57,7 +57,7 @@
 
     <EditText
         android:id="@+id/editTextDescrizione"
-        android:layout_width="340dp"
+        android:layout_width="360dp"
         android:layout_height="50dp"
         android:layout_below="@id/editTextTitle"
         android:layout_centerHorizontal="true"
@@ -116,7 +116,7 @@
 
     <EditText
         android:id="@+id/editTextParoleChiave"
-        android:layout_width="340dp"
+        android:layout_width="360dp"
         android:layout_height="50dp"
         android:layout_below="@id/spinnerCategory"
         android:layout_centerHorizontal="true"

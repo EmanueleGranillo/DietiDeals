@@ -48,7 +48,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/fotoProdottoImage"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="226dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 app:strokeColor="@color/black"

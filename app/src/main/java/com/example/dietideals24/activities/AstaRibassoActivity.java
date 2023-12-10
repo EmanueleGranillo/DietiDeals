@@ -2,6 +2,7 @@ package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -135,6 +136,9 @@ public class AstaRibassoActivity extends AppCompatActivity {
                 vincitoreTextView.setText("Venduto a: " + nickname);
                 countDownRibTxtView.setVisibility(View.INVISIBLE);
                 decrementoPrezzoTextView.setText("Asta conclusa");
+                decrementoPrezzoTextView.setTextColor(Color.RED);
+                acquistaRibassoButton.setEnabled(false);
+                acquistaRibassoButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
             }
         });
 
@@ -330,13 +334,15 @@ public class AstaRibassoActivity extends AppCompatActivity {
                         vincitoreTextView.setText("Vincente: " + asta.getVincente());
                         prezzoAttualeTextView.setText("Prezzo di partenza: \u20AC" + asta.getPrezzoIniziale());
                         countDownRibTxtView.setVisibility(View.INVISIBLE);
-                        decrementoPrezzoTextView.setText("Asta conclusa con successo");
+                        decrementoPrezzoTextView.setText("Asta conclusa");
+                        decrementoPrezzoTextView.setTextColor(Color.RED);
                     }
 
                     if(prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
                         prezzoAttualeTextView.setText("Prezzo di partenza: \u20AC" + asta.getPrezzoIniziale());
                         countDownRibTxtView.setVisibility(View.INVISIBLE);
                         decrementoPrezzoTextView.setText("Asta conclusa");
+                        decrementoPrezzoTextView.setTextColor(Color.RED);
                     } else {
 
                         prezzoAttualeTextView.setText("Prezzo attuale: \u20AC" + prezzoAttuale);

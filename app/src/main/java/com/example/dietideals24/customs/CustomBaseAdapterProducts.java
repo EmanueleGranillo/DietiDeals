@@ -230,6 +230,16 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
             offertaAttualeRibassoTextView.setText("\u20AC" + prezzoAttuale);        //controllare (qui variabile in comune a tutti)
 
+            if(aste.get(position).getVincente()!=null) {
+                offertaAttualeRibassoTextView.setText("Conclusa");
+                offertaAttualeRibassoTextView.setTextColor(Color.RED);
+            }
+
+            if (prezzoAttuale.compareTo(aste.get(position).getSogliaSegreta()) < 0) {
+                offertaAttualeRibassoTextView.setText("Conclusa");
+                offertaAttualeRibassoTextView.setTextColor(Color.RED);
+            }
+
 
             //long initialTimeMillis = aste.get(position).getResetTimer() * 1000;
 
