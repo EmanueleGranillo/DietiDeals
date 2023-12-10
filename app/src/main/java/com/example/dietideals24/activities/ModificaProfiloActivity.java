@@ -32,7 +32,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
 
     private MyApiService apiService;
     ImageView uploadImage;
-    private String base64String;
+    private String base64String = "";
     private String nickname;
     private String tipo;
     EditText nomeEditText;
@@ -195,7 +195,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
                         if (profilo.getLinkInsta() != null) {
                             linkInstaEditText.setText(profilo.getLinkInsta());
                         }
-                        if (profilo.getFotoProfilo() != null) {
+                        if (profilo.getFotoProfilo() != null && !profilo.getFotoProfilo().isEmpty()) {
                             byte[] decodedString = Base64.decode(profilo.getFotoProfilo(), Base64.DEFAULT);
                             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                             uploadImage.setImageBitmap(decodedByte);
