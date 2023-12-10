@@ -1,9 +1,11 @@
 package com.example.dietideals24.customs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -14,9 +16,12 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dietideals24.connection.MyApiService;
+import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.models.Asta;
 import com.example.dietideals24.R;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,11 +29,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CustomBaseAdapterProducts extends BaseAdapter {
-    //MyApiService apiService;
-    //double differenzaSecondi, numeroIntervalli, tempoPassatoPercentuale, secondiPassatiTimerCorrente, prezzoAttualeDouble;
-    //int numeroIntervalliPassati, timerRimanenteSecondi;
-    //BigDecimal prezzoAttuale;
+    MyApiService apiService;
+    double differenzaSecondi, numeroIntervalli, tempoPassatoPercentuale, secondiPassatiTimerCorrente, prezzoAttualeDouble;
+    int numeroIntervalliPassati, timerRimanenteSecondi;
+    BigDecimal prezzoAttuale;
     Context context;
     ArrayList<Asta> aste;
     LayoutInflater inflater;
@@ -188,43 +197,14 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
 
         if(aste.get(position).getTipologia().equals("asta al ribasso")){
-            //apiService = RetrofitClient.getInstance().create(MyApiService.class);
+            apiService = RetrofitClient.getInstance().create(MyApiService.class);
             convertView = inflater.inflate(R.layout.activity_custom_list_view_product_ribasso, null);
             TextView titoloTextView = (TextView) convertView.findViewById(R.id.titoloRibassoTextView);
-            //TextView offertaAttualeRibassoTextView = (TextView) convertView.findViewById(R.id.offertaRibassoTextView);
-            //TextView countDownRibassoTxtView = (TextView) convertView.findViewById(R.id.countDownRibassoTextView);
+            TextView offertaAttualeRibassoTextView = (TextView) convertView.findViewById(R.id.prezzoAttualeTextView);
+            TextView countDownRibassoTxtView = (TextView) convertView.findViewById(R.id.countdownAstaRibassoTextView);
             productImage = (ImageView) convertView.findViewById(R.id.productRibassoImageView);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
             //offertaAttualeRibassoTextView.setText(""+aste.get(position).getOffertaAttuale());
-
-
-            /*
-            Calendar calendar = Calendar.getInstance();
-            Date dataOraAttuale = calendar.getTime();
-            calendar.setTime(dataOraAttuale);
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-
-            try {
-                date = inputFormat.parse(aste.get(position).getDataScadenzaTF());       //date adesso è uguale alla data di creazione dell'asta.
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            //long timer = date.getTime() - dataOraAttuale.getTime();
-
-            //ci serve sapere a quanto impostare il timer
-            Date dataCreazioneAsta = null;
-            try {
-                dataCreazioneAsta = inputFormat.parse(aste.get(position).getDataScadenzaTF());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            long initialTimeMillis = aste.get(position).getResetTimer() * 1000;
-
-            createAndStartCountDownTimer(countDownRibassoTxtView, offertaAttualeRibassoTextView, initialTimeMillis, aste.get(position));
-
-             */
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
@@ -242,42 +222,57 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 // Immagine di fallback o gestisci la situazione come desideri
                 productImage.setImageResource(R.drawable.shopping_bag);
             }
-
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
 
+
+
+            aggiornaValoriAstaRibasso(aste.get(position));
+
+            offertaAttualeRibassoTextView.setText("\u20AC" + prezzoAttuale);        //controllare (qui variabile in comune a tutti)
+
+
+
+            // Calcola ore, minuti e secondi rimanenti
+            long ore = timerRimanenteSecondi / 3600;
+            long minuti = (timerRimanenteSecondi % 3600) / 60;
+            long secondi = timerRimanenteSecondi % 60;
+
+            // Converti il tempo rimanente in un formato "00:00:00"
+            String formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", ore, minuti, secondi);
+
+            countDownRibassoTxtView.setText(formattedTime);
+
+
+
+            long initialTimeMillis = aste.get(position).getResetTimer() * 1000;
+
+            createAndStartCountDownTimer(countDownRibassoTxtView, offertaAttualeRibassoTextView, initialTimeMillis, aste.get(position));
+
         }
-
-
-        /*
-        productImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goToInformazioniAsta = new Intent(context, AstaIngleseActivity.class);
-                goToInformazioniAsta.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Add this line
-                context.startActivity(goToInformazioniAsta);
-            }
-        });
-
-
-         */
 
         return convertView;
     }
 
 
 
-
-
-        /*
     private void createAndStartCountDownTimer(TextView timerTextView, TextView offertaAttualeRibassoTextView, long timeMillis, Asta asta) {
         CountDownTimer countDownTimer = new CountDownTimer(timeMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 // Update UI on each tick (every second)
                 long secondsRemaining = millisUntilFinished / 1000;
-                timerTextView.setText(String.valueOf(secondsRemaining));
 
-                if (secondsRemaining < 10) {
+                // Calcola ore, minuti e secondi rimanenti
+                long hours = secondsRemaining / 3600;
+                long minutes = (secondsRemaining % 3600) / 60;
+                long seconds = secondsRemaining % 60;
+
+                // Converti il tempo rimanente in un formato "00:00:00"
+                String formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
+
+                timerTextView.setText(formattedTime);
+
+                if (secondsRemaining <= 10) {
                     timerTextView.setTextColor(Color.RED);
                 }
             }
@@ -292,7 +287,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 offertaAttualeRibassoTextView.setText("\u20AC" + prezzoAttuale);
 
                 if (prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
-                    updateRibasso(prezzoAttuale, asta.getId());
+                    updateRibasso(asta.getId());
                     timerTextView.setText("Conclusa");
                 } else {
                     createAndStartCountDownTimer(timerTextView, offertaAttualeRibassoTextView, timeMillis, asta);
@@ -304,20 +299,23 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
         countDownTimer.start();
     }
 
-         */
 
 
 
-        /*
+
+
     public void aggiornaValoriAstaRibasso(Asta asta) {
 
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         Calendar calendar = Calendar.getInstance();
         Date dataOraAttuale = calendar.getTime();
+        calendar.setTime(dataOraAttuale);
 
         try {
-            Date dataCreazioneAsta = inputFormat.parse(asta.getDataScadenzaTF()); // Assumi che esista un metodo getDataCreazione nella classe Asta
-            differenzaSecondi = (dataOraAttuale.getTime() - dataCreazioneAsta.getTime()) / 1000;
+            Date dataCreazioneAsta = inputFormat.parse(asta.getDataScadenzaTF());
+
+            differenzaSecondi = (dataOraAttuale.getTime() - (dataCreazioneAsta.getTime() + 3600000)) / 1000;        //aggiungo a dataCreazioneAsta un'ora perchè sul db GTM00
+
             numeroIntervalli = differenzaSecondi / (double) asta.getResetTimer();
 
             numeroIntervalliPassati = (int) numeroIntervalli;
@@ -339,9 +337,8 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
 
 
-    public void updateRibasso(BigDecimal offertaAttuale, int id){
-        OffertaRibassoRequest offertaRibassoRequest = new OffertaRibassoRequest(offertaAttuale, id);
-        Call<Void> call = apiService.updateRibasso(offertaRibassoRequest);
+    public void updateRibasso(int id){
+        Call<Void> call = apiService.updateRibasso(id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -353,8 +350,9 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             public void onFailure(Call<Void> call, Throwable t) {
             }
         });
+    }
 
-         */
+
 
 
 

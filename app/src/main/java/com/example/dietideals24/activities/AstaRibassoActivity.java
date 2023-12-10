@@ -36,9 +36,6 @@ public class AstaRibassoActivity extends AppCompatActivity {
     int id;
     private String nickname, tipo, imageString;
     private Date date;
-    //private Chronometer chronometer;
-    Date dateCreazioneAsta;
-
     double differenzaSecondi, numeroIntervalli, tempoPassatoPercentuale, secondiPassatiTimerCorrente, prezzoAttualeDouble;
     int numeroIntervalliPassati, timerRimanenteSecondi;
     BigDecimal prezzoAttuale;
@@ -117,6 +114,8 @@ public class AstaRibassoActivity extends AppCompatActivity {
                     Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageCompratoreActivity.class);
                     backToHome.putExtra("nickname", nickname);
                     backToHome.putExtra("tipo", tipo);
+                    backToHome.putExtra("tempoRimanente", timerRimanenteSecondi);
+                    backToHome.putExtra("prezzoAttuale", prezzoAttuale);
                     startActivity(backToHome);
                 } else {
                     Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageVenditoreActivity.class);

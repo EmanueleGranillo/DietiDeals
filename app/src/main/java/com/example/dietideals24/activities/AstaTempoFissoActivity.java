@@ -149,7 +149,7 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
                         if (offerta.compareTo(asta.getOffertaAttuale()) <= 0) {
                             inserisciOffertaErrorTextView.setText("Inserisci un'offerta più alta di quella attuale");
                         } else {
-                            offerta(id, offerta,nickname);
+                            offerta(id, offerta, nickname);
                         }
                     } else {
                         if (offerta.compareTo(asta.getPrezzoIniziale()) <= 0) {
