@@ -236,7 +236,7 @@ public class ProfiloActivity extends AppCompatActivity {
                         } else {
                             linkInstagram = "";
                         }
-                        if(profilo.getFotoProfilo() != null) {
+                        if(profilo.getFotoProfilo() != null && !profilo.getFotoProfilo().isEmpty()) {
                             byte[] decodedString = Base64.decode(profilo.getFotoProfilo(), Base64.DEFAULT);
                             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                             profiloImage.setImageBitmap(decodedByte);

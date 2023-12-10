@@ -32,7 +32,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
 
     private MyApiService apiService;
     ImageView uploadImage;
-    private String base64String;
+    private String base64String = "";
     private String nickname;
     private String tipo;
     EditText nomeEditText;
@@ -143,7 +143,6 @@ public class ModificaProfiloActivity extends AppCompatActivity {
     }
 
     public void aggiornaProfilo(String nome, String cognome, String biografia, String link_web, String link_insta, String posizione, String numero_telefono, String foto_profilo){
-        numero_telefono = "+39 " + numero_telefono;
         UserModifiedRequest userModifiedRequest = new UserModifiedRequest(nickname, nome, cognome, biografia, link_web, link_insta, posizione, numero_telefono, foto_profilo);
         Call<Void> call = apiService.editUser(userModifiedRequest);
         call.enqueue(new Callback<Void>() {
@@ -196,7 +195,7 @@ public class ModificaProfiloActivity extends AppCompatActivity {
                         if (profilo.getLinkInsta() != null) {
                             linkInstaEditText.setText(profilo.getLinkInsta());
                         }
-                        if (profilo.getFotoProfilo() != null) {
+                        if (profilo.getFotoProfilo() != null && !profilo.getFotoProfilo().isEmpty()) {
                             byte[] decodedString = Base64.decode(profilo.getFotoProfilo(), Base64.DEFAULT);
                             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                             uploadImage.setImageBitmap(decodedByte);
