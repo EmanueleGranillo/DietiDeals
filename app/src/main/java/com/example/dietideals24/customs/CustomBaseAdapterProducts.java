@@ -85,7 +85,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             conclusaTFTextView.setVisibility(View.INVISIBLE);
             titoloTextView.setText(aste.get(position).getNomeProdotto());
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
             try {
                 date = inputFormat.parse(aste.get(position).getDataScadenzaTF());
             } catch (ParseException e) {

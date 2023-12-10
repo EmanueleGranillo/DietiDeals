@@ -220,22 +220,47 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 inserisciOffertaErrorTextView.setText("");
-                if (inserisciOffertaEditText.getText().toString().isEmpty()) {
-                    inserisciOffertaErrorTextView.setText("Inserisci un'offerta");
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                try {
+                    date = inputFormat.parse(asta.getDataScadenzaTF());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Calendar calendar = Calendar.getInstance();                           //IMPOSTA DATA SCADENZA
+                Date dataAttuale = calendar.getTime();
+                //System.out.println(date);
+                //System.out.println(dataAttuale);
+                if(date.before(dataAttuale)) {
+                    presentaOffertaTFButton.setEnabled(false);
+                    presentaOffertaTFButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
+                    incrementaButton.setEnabled(false);
+                    incrementaButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
+                    decrementaButton.setEnabled(false);
+                    decrementaButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
+                    attivaTextView.setText("");
+                    scadutaTextView.setText("SCADUTA");
+                    inserisciOffertaEditText.setFocusable(false);
+                    inserisciOffertaEditText.setClickable(false);
+                    inserisciOffertaEditText.setCursorVisible(false);
+                    inserisciOffertaEditText.setFocusableInTouchMode(false);
                 } else {
-                    offerta = new BigDecimal(inserisciOffertaEditText.getText().toString());
-
-                    if (asta.getOffertaAttuale() != null) {
-                        if (offerta.compareTo(asta.getOffertaAttuale()) <= 0) {
-                            inserisciOffertaErrorTextView.setText("Inserisci un'offerta più alta di quella attuale");
-                        } else {
-                            offerta(id, offerta, nickname);
-                        }
+                    if (inserisciOffertaEditText.getText().toString().isEmpty()) {
+                        inserisciOffertaErrorTextView.setText("Inserisci un'offerta");
                     } else {
-                        if (offerta.compareTo(asta.getPrezzoIniziale()) < 0) {
-                            inserisciOffertaErrorTextView.setText("Inserisci un'offerta più alta del prezzo iniziale");
+                        offerta = new BigDecimal(inserisciOffertaEditText.getText().toString());
+
+                        if (asta.getOffertaAttuale() != null) {
+                            if (offerta.compareTo(asta.getOffertaAttuale()) <= 0) {
+                                inserisciOffertaErrorTextView.setText("Inserisci un'offerta più alta di quella attuale");
+                            } else {
+                                offerta(id, offerta, nickname);
+                            }
                         } else {
-                            offerta(id, offerta, nickname);
+                            if (offerta.compareTo(asta.getPrezzoIniziale()) < 0) {
+                                inserisciOffertaErrorTextView.setText("Inserisci un'offerta più alta del prezzo iniziale");
+                            } else {
+                                offerta(id, offerta, nickname);
+                            }
                         }
                     }
                 }
@@ -291,7 +316,7 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
                     }
 
                     SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                     try {
                         date = inputFormat.parse(asta.getDataScadenzaTF());
                     } catch (ParseException e) {
@@ -300,6 +325,8 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
                     dataScadenzaTextView.setText("Data di scadenza: " + outputFormat.format(date));
                     Calendar calendar = Calendar.getInstance();                           //IMPOSTA DATA SCADENZA
                     Date dataAttuale = calendar.getTime();
+                    System.out.println(date);
+                    System.out.println(dataAttuale);
                     if(date.before(dataAttuale)){
                         presentaOffertaTFButton.setEnabled(false);
                         presentaOffertaTFButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));

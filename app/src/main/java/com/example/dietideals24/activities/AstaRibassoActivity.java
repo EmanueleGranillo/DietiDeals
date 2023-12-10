@@ -367,6 +367,8 @@ public class AstaRibassoActivity extends AppCompatActivity {
                         countDownRibTxtView.setVisibility(View.INVISIBLE);
                         decrementoPrezzoTextView.setText("Asta conclusa");
                         decrementoPrezzoTextView.setTextColor(Color.RED);
+                        acquistaRibassoButton.setEnabled(false);
+                        acquistaRibassoButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
                     }
 
                     else if(prezzoAttuale.compareTo(asta.getSogliaSegreta()) < 0) {
@@ -374,6 +376,8 @@ public class AstaRibassoActivity extends AppCompatActivity {
                         countDownRibTxtView.setVisibility(View.INVISIBLE);
                         decrementoPrezzoTextView.setText("Asta conclusa");
                         decrementoPrezzoTextView.setTextColor(Color.RED);
+                        acquistaRibassoButton.setEnabled(false);
+                        acquistaRibassoButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
                     } else {
 
                         prezzoAttualeTextView.setText("Prezzo attuale: \u20AC" + prezzoAttuale);
