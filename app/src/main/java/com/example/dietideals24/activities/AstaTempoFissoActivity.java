@@ -11,10 +11,16 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,13 +49,16 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
     private TextView nomeProdottoTextView, venditoreTextView, descrizioneTextView, categoriaTextView, keywordsTextView, offertaAttualeTFTextView, vincenteTextView, dataScadenzaTextView, scadutaTextView, attivaTextView, inserisciOffertaErrorTextView;
     private EditText inserisciOffertaEditText;
     private Button presentaOffertaTFButton, backButton, incrementaButton, decrementaButton;
-    private String nickname, tipo, imageString;
+    private String nickname, tipo, imageString, tipologia = "asta a tempo fisso";
     private boolean check;
     private Date date;
     private Asta asta;
     private int id;
     private ImageView fotoProdottoImageView;
     private BigDecimal offerta;
+    private ImageButton infoAstaTempoFissoButton;
+    private PopupWindow popupWindow;
+    private TextView popupText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +84,7 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
         incrementaButton = findViewById(R.id.incrementaButton);
         decrementaButton = findViewById(R.id.decrementaButton);
         fotoProdottoImageView = findViewById(R.id.fotoProdottoTFImageView);
+        infoAstaTempoFissoButton = findViewById(R.id.infoAstaTempoFissoButton);
 
         inserisciOffertaErrorTextView.setText("");
         presentaOffertaTFButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
@@ -92,6 +102,42 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
         aggiornaCard(id);
 
 
+
+
+
+
+
+        infoAstaTempoFissoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                } else {
+                    showPopup();
+                }
+
+
+            }
+        });
+
+        incrementaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BigDecimal x = new BigDecimal(inserisciOffertaEditText.getText().toString());
+                x = x.add(BigDecimal.valueOf(1));
+                inserisciOffertaEditText.setText(x.toString());
+            }
+        });
+
+        decrementaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BigDecimal x = new BigDecimal(inserisciOffertaEditText.getText().toString());
+                x = x.subtract(BigDecimal.valueOf(1));
+                inserisciOffertaEditText.setText(x.toString());
+            }
+        });
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +151,40 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
                     backToHome.putExtra("nickname", nickname);
                     backToHome.putExtra("tipo", tipo);
                     startActivity(backToHome);
+                }
+            }
+        });
+
+        vincenteTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(asta.getVincente() != null) {
+                    String checkActivity = "notmine";
+                    Intent goToVincente = new Intent(AstaTempoFissoActivity.this, ProfiloActivity.class);
+                    goToVincente.putExtra("nickname", nickname);
+                    goToVincente.putExtra("tipo", tipo);
+                    goToVincente.putExtra("checkActivity", checkActivity);
+                    goToVincente.putExtra("other", asta.getVincente());
+                    goToVincente.putExtra("id", id);
+                    goToVincente.putExtra("tipologia", tipologia);
+                    startActivity(goToVincente);
+                }
+            }
+        });
+
+        venditoreTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tipo.equals("compratore")){
+                    String checkActivity = "notmine";
+                    Intent goToVenditore = new Intent(AstaTempoFissoActivity.this, ProfiloActivity.class);
+                    goToVenditore.putExtra("nickname", nickname);
+                    goToVenditore.putExtra("tipo", tipo);
+                    goToVenditore.putExtra("checkActivity", checkActivity);
+                    goToVenditore.putExtra("other", asta.getCreatore());
+                    goToVenditore.putExtra("id", id);
+                    goToVenditore.putExtra("tipologia", tipologia);
+                    startActivity(goToVenditore);
                 }
             }
         });
@@ -152,7 +232,7 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
                             offerta(id, offerta, nickname);
                         }
                     } else {
-                        if (offerta.compareTo(asta.getPrezzoIniziale()) <= 0) {
+                        if (offerta.compareTo(asta.getPrezzoIniziale()) < 0) {
                             inserisciOffertaErrorTextView.setText("Inserisci un'offerta più alta del prezzo iniziale");
                         } else {
                             offerta(id, offerta, nickname);
@@ -227,8 +307,8 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
                         incrementaButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
                         decrementaButton.setEnabled(false);
                         decrementaButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
-                        attivaTextView.setVisibility(View.INVISIBLE);
-                        scadutaTextView.setVisibility(View.VISIBLE);
+                        attivaTextView.setText("");
+                        scadutaTextView.setText("SCADUTA");
                         inserisciOffertaEditText.setFocusable(false);
                         inserisciOffertaEditText.setClickable(false);
                         inserisciOffertaEditText.setCursorVisible(false);
@@ -242,19 +322,17 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
                             vincenteTextView.setText("Nessun vincente.");
                         }
                     } else {
-                        attivaTextView.setVisibility(View.VISIBLE);
-                        scadutaTextView.setVisibility(View.INVISIBLE);
+                        attivaTextView.setText("ATTIVA");
+                        scadutaTextView.setText("");
                     }
 
                     if(asta.getOffertaAttuale()==null){
                         inserisciOffertaEditText.setText(asta.getPrezzoIniziale().toString());
                     } else {
-                        inserisciOffertaEditText.setText(asta.getOffertaAttuale().toString());
+                        BigDecimal x = new BigDecimal(asta.getOffertaAttuale().toString());
+                        x = x.add(BigDecimal.valueOf(1));
+                        inserisciOffertaEditText.setText(x.toString());
                     }
-
-
-
-                    Toast.makeText(AstaTempoFissoActivity.this, asta.getId()+asta.getNomeProdotto(), Toast.LENGTH_LONG).show();
                 } else {
 
                 }
@@ -303,4 +381,40 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
         return Bitmap.createBitmap(originalImage, startX, startY, targetWidth, targetHeight);
     }
 
+    private void showPopup(){
+        View popupView = LayoutInflater.from(this).inflate(R.layout.popup_layout, null);
+        popupText = popupView.findViewById(R.id.popupText);
+        popupText.setText("Presenta un'offerta per partecipare all'asta. Alla scadenza il vincente si aggiudicherà il prodotto.");
+
+        popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0f);
+        scaleAnimation.setDuration(300);
+        popupView.startAnimation(scaleAnimation);
+
+        int offsetX = -750;
+        int offsetY = -350; // Offset verso l'alto rispetto al bottone
+
+        // Mostra il pop-up nella posizione desiderata
+        popupWindow.showAsDropDown(infoAstaTempoFissoButton, offsetX, offsetY);
+
+    }
+    @Override
+    public void onBackPressed() {
+        if(tipo.equals("compratore")){
+            Intent backToHome = new Intent(AstaTempoFissoActivity.this, HomepageCompratoreActivity.class);
+            backToHome.putExtra("nickname", nickname);
+            backToHome.putExtra("tipo", tipo);
+            startActivity(backToHome);
+        } else {
+            Intent backToHome = new Intent(AstaTempoFissoActivity.this, HomepageVenditoreActivity.class);
+            backToHome.putExtra("nickname", nickname);
+            backToHome.putExtra("tipo", tipo);
+            startActivity(backToHome);
+        }
+    }
 }

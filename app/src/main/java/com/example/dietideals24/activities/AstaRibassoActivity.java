@@ -8,9 +8,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.dietideals24.R;
@@ -43,6 +49,12 @@ public class AstaRibassoActivity extends AppCompatActivity {
     TextView nomeProdottoTextView, venditoreTextView, descrizioneTextView, categoriaTextView, keywordsTextView, prezzoAttualeTextView, importoDecrementoTextView, decrementoPrezzoTextView, vincitoreTextView, countDownRibTxtView;
     ImageView fotoProdottoImageView;
     Button acquistaRibassoButton, backBtn;
+
+    private ImageButton infoAstaRibassoButton;
+    private PopupWindow popupWindow;
+    private TextView popupText;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +75,26 @@ public class AstaRibassoActivity extends AppCompatActivity {
         acquistaRibassoButton = findViewById(R.id.acquistaRibassoButton);
         backBtn = findViewById(R.id.backButtonInfoAsta);
         fotoProdottoImageView = findViewById(R.id.fotoProdottoImage);
-
+        infoAstaRibassoButton = findViewById(R.id.infoAstaRibassoButton);
 
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
         id = getIntent().getIntExtra("id", 0);
 
         aggiornaCard(id);
+
+        infoAstaRibassoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                } else {
+                    showPopup();
+                }
+
+
+            }
+        });
 
 
 
@@ -371,7 +396,45 @@ public class AstaRibassoActivity extends AppCompatActivity {
         return Bitmap.createBitmap(originalImage, startX, startY, targetWidth, targetHeight);
     }
 
+    private void showPopup(){
+        View popupView = LayoutInflater.from(this).inflate(R.layout.popup_layout, null);
+        popupText = popupView.findViewById(R.id.popupText);
+        popupText.setText("Ogni volta che il timer scade il prezzo verrà decrementato. Il primo a presentare un'offerta si aggiudicherà il prodotto a quel prezzo.");
 
+        popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0f);
+        scaleAnimation.setDuration(300);
+        popupView.startAnimation(scaleAnimation);
+
+        int offsetX = -750;
+        int offsetY = -350; // Offset verso l'alto rispetto al bottone
+
+        // Mostra il pop-up nella posizione desiderata
+        popupWindow.showAsDropDown(infoAstaRibassoButton, offsetX, offsetY);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(tipo.equals("compratore")){
+            Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageCompratoreActivity.class);
+            backToHome.putExtra("nickname", nickname);
+            backToHome.putExtra("tipo", tipo);
+            backToHome.putExtra("tempoRimanente", timerRimanenteSecondi);
+            backToHome.putExtra("prezzoAttuale", prezzoAttuale);
+            startActivity(backToHome);
+        } else {
+            Intent backToHome = new Intent(AstaRibassoActivity.this, HomepageVenditoreActivity.class);
+            backToHome.putExtra("nickname", nickname);
+            backToHome.putExtra("tipo", tipo);
+            startActivity(backToHome);
+        }
+    }
 
 
 

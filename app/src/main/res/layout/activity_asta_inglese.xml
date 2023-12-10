@@ -30,6 +30,20 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
+    <ImageButton
+        android:id="@+id/infoAstaIngleseButton"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="-11dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#F2F4F8"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_info_point_2_round"></ImageButton>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,7 +67,6 @@
                 android:layout_centerHorizontal="true"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp"
-                android:src="@mipmap/ic_profilo"
                 />
 
             <TextView
@@ -62,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/fotoProdottoImage"
-                android:text="Nome prodotto"
+                android:text=""
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -76,7 +89,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Creatore"
+                android:text=""
                 android:textSize="15dp" />
 
             <View
@@ -102,7 +115,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Descrizione"
+                android:text=""
                 android:textSize="15dp" />
 
             <View
@@ -127,7 +140,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Categoria"
+                android:text=""
                 android:textSize="15dp" />
 
             <View
@@ -152,7 +165,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Parole chiave"
+                android:text=""
                 android:textSize="15dp" />
 
             <View
@@ -177,7 +190,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Offerta attuale"
+                android:text=""
                 android:textSize="15dp" />
 
             <View
@@ -202,7 +215,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Vincente"
+                android:text=""
                 android:textSize="15dp" />
 
             <View
@@ -228,7 +241,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
-                android:text="Tempo rimanente"
+                android:text=""
                 android:textSize="15dp" />
 
             <Chronometer
@@ -260,7 +273,6 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 
 

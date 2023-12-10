@@ -448,6 +448,5 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
     }
 }

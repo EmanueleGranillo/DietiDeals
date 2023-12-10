@@ -111,11 +111,6 @@ public class ModificaProfiloActivity extends AppCompatActivity {
 
                 if(check()){
                     aggiornaProfilo(nomeEditText.getText().toString(), cognomeEditText.getText().toString(), biografiaEditText.getText().toString(), linkWebEditText.getText().toString(), linkInstaEditText.getText().toString(), posizioneEditText.getText().toString(), numeroTelefonoEditText.getText().toString(), base64String);
-                    Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
-                    backToProfilo.putExtra("nickname", nickname);
-                    backToProfilo.putExtra("tipo", tipo);
-                    backToProfilo.putExtra("checkActivity", "mine");
-                    startActivity(backToProfilo);
                 } else {
 
                 }
@@ -143,13 +138,17 @@ public class ModificaProfiloActivity extends AppCompatActivity {
     }
 
     public void aggiornaProfilo(String nome, String cognome, String biografia, String link_web, String link_insta, String posizione, String numero_telefono, String foto_profilo){
-        numero_telefono = "+39 " + numero_telefono;
         UserModifiedRequest userModifiedRequest = new UserModifiedRequest(nickname, nome, cognome, biografia, link_web, link_insta, posizione, numero_telefono, foto_profilo);
         Call<Void> call = apiService.editUser(userModifiedRequest);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
+                    Intent backToProfilo = new Intent(ModificaProfiloActivity.this, ProfiloActivity.class);
+                    backToProfilo.putExtra("nickname", nickname);
+                    backToProfilo.putExtra("tipo", tipo);
+                    backToProfilo.putExtra("checkActivity", "mine");
+                    startActivity(backToProfilo);
                 } else {
                 }
             }

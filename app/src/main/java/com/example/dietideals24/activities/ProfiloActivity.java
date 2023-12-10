@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
@@ -45,7 +46,6 @@ public class ProfiloActivity extends AppCompatActivity {
     private String linkSitoWeb;
     private String checkActivity;
     private String other;
-    private Asta asta;
     private int id;
 
 
@@ -86,7 +86,6 @@ public class ProfiloActivity extends AppCompatActivity {
             getProfiloDaModificare(other);
             id = getIntent().getIntExtra("id", 0);
             tipologia = getIntent().getStringExtra("tipologia");
-            //asta = (Asta) getIntent().getSerializableExtra("asta");
         } else {
             getProfiloDaModificare(nickname);
         }
@@ -219,16 +218,17 @@ public class ProfiloActivity extends AppCompatActivity {
                         } else {
                             cellulareProfiloTextView.setText("Nessun numero di telefono.");
                         }
-                        if (profilo.getPosizione() != null) {
-                            posizioneProfiloTextView.setText(profilo.getPosizione());
-                        } else {
+                        if (profilo.getPosizione() == null || profilo.getPosizione().toString().isEmpty()) {
                             posizioneProfiloTextView.setText("Nessuna posizione.");
+                        } else {
+                            posizioneProfiloTextView.setText(profilo.getPosizione());
                         }
                         if (profilo.getLinkWeb() != null) {
                             sitoWebProfiloTextView.setText(profilo.getLinkWeb());
                             linkSitoWeb = profilo.getLinkWeb();
                         } else {
                             sitoWebProfiloTextView.setText("Nessun sito web collegato.");
+                            sitoWebProfiloTextView.setPaintFlags(sitoWebProfiloTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                             linkSitoWeb = "";
                         }
                         if (profilo.getLinkInsta() != null) {
@@ -260,23 +260,23 @@ public class ProfiloActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(checkActivity.equals("notmine")){
-            if(asta.getTipologia().equals("asta inglese")){
+            if(tipologia.equals("asta inglese")){
                 Intent backToAsta = new Intent(ProfiloActivity.this, AstaIngleseActivity.class);
                 backToAsta.putExtra("nickname", nickname);
                 backToAsta.putExtra("tipo", tipo);
-                backToAsta.putExtra("asta", asta);
+                backToAsta.putExtra("id", id);
                 startActivity(backToAsta);
-            } else if (asta.getTipologia().equals("asta al ribasso")) {
+            } else if (tipologia.equals("asta al ribasso")) {
                 Intent backToAsta = new Intent(ProfiloActivity.this, AstaRibassoActivity.class);
                 backToAsta.putExtra("nickname", nickname);
                 backToAsta.putExtra("tipo", tipo);
-                backToAsta.putExtra("asta", asta);
+                backToAsta.putExtra("id", id);
                 startActivity(backToAsta);
-            } else if (asta.getTipologia().equals("asta a tempo fisso")) {
+            } else if (tipologia.equals("asta a tempo fisso")) {
                 Intent backToAsta = new Intent(ProfiloActivity.this, AstaTempoFissoActivity.class);
                 backToAsta.putExtra("nickname", nickname);
                 backToAsta.putExtra("tipo", tipo);
-                backToAsta.putExtra("asta", asta);
+                backToAsta.putExtra("id", id);
                 startActivity(backToAsta);
             }
         } else {
@@ -292,6 +292,5 @@ public class ProfiloActivity extends AppCompatActivity {
                 startActivity(backToHomeVenditore);
             }
         }
-        super.onBackPressed();
     }
 }

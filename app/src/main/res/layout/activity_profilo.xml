@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="25dp"
-                android:text="Nickname"
+                android:text=""
                 android:layout_below="@id/fotoProfiloImage"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"/>
@@ -112,7 +112,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Nome Cognome"
+                android:text=""
                 android:textSize="20dp" />
 
             <View
@@ -137,7 +137,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Questa è una breve desrizione del compratore o venditore a cui appartiene questo profilo!"
+                android:text=""
                 android:textSize="15dp" />
 
             <View
@@ -187,7 +187,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="+39 3330001234"
+            android:text=""
             android:textSize="15dp" />
 
             <View
@@ -237,8 +237,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="www.mylink.com"
-                android:textSize="15dp" />
+                android:text=""
+                android:textSize="15dp"
+                android:textColor="#add8e6"/>
 
             <ImageView
                 android:id="@+id/linkInstagramImageView"

@@ -182,6 +182,5 @@ public class RegisterActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent backToLogin = new Intent(RegisterActivity.this, MainActivity.class);
         startActivity(backToLogin);
-        super.onBackPressed();
     }
 }
