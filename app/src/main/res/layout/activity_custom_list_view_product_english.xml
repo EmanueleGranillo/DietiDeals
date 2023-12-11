@@ -21,8 +21,8 @@
 
             <TextView
                 android:id="@+id/titoloIngleseTextView"
-                android:layout_width="251dp"
-                android:layout_height="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="5dp"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titoloIngleseTextView"
                 android:layout_marginStart="9dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="3dp"
                 android:layout_toEndOf="@+id/productIngleseImageView"
                 android:text="Asta all'inglese"
                 android:textSize="18dp" />
@@ -54,22 +54,23 @@
                 android:id="@+id/conclusaIngleseTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tipologiaAstaIngleseTextView"
-                android:layout_marginStart="9dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/productIngleseImageView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="113dp"
+                android:layout_marginEnd="16dp"
                 android:text="Conclusa"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/offertaAttualeIngleseTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tipologiaAstaIngleseTextView"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="28dp"
-                android:text="€185"
+                android:layout_marginTop="113dp"
+                android:layout_marginEnd="16dp"
+                android:text=""
                 android:textColor="#00CC66"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -80,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tipologiaAstaIngleseTextView"
                 android:layout_marginStart="9dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="8dp"
                 android:layout_toEndOf="@+id/productIngleseImageView"
                 android:countDown="true"
                 android:textSize="18dp"></Chronometer>

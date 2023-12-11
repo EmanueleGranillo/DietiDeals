@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -55,6 +56,7 @@ public class AstaRibassoActivity extends AppCompatActivity {
     private ImageButton infoAstaRibassoButton;
     private PopupWindow popupWindow;
     private TextView popupText;
+    private View mainLayout, cardLayout;
 
 
     @Override
@@ -78,12 +80,39 @@ public class AstaRibassoActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.backButtonInfoAsta);
         fotoProdottoImageView = findViewById(R.id.fotoProdottoImage);
         infoAstaRibassoButton = findViewById(R.id.infoAstaRibassoButton);
+        mainLayout = findViewById(R.id.astaRibassoLayout);
+        cardLayout = findViewById(R.id.astaRibassoCardView);
 
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
         id = getIntent().getIntExtra("id", 0);
 
         aggiornaCard(id);
+
+
+        mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Nascondi il popup quando si tocca fuori da esso
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    return true; // Indica che l'evento è stato gestito
+                }
+                return false; // Lascia l'evento di tocco inalterato
+            }
+        });
+
+        cardLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Nascondi il popup quando si tocca fuori da esso
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    return true; // Indica che l'evento è stato gestito
+                }
+                return false; // Lascia l'evento di tocco inalterato
+            }
+        });
 
         infoAstaRibassoButton.setOnClickListener(new View.OnClickListener() {
             @Override

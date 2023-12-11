@@ -365,7 +365,7 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             return false;
         }
         // Controllo lunghezza campi
-        if(titoloProdottoEditText.getText().toString().length() > 50) {
+        if(titoloProdottoEditText.getText().toString().length() > 40) {
             titoloErrorTextView.setText("Nome troppo lungo");
             return false;
         }

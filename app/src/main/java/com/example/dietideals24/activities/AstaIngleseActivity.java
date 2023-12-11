@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -58,6 +59,8 @@ public class AstaIngleseActivity extends AppCompatActivity {
     private PopupWindow popupWindow;
     private TextView popupText;
 
+    private View mainLayout, cardLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,8 @@ public class AstaIngleseActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.backButtonInfoAsta);
         fotoProdottoImageView = findViewById(R.id.fotoProdottoImage);
         infoAstaIngleseButton = findViewById(R.id.infoAstaIngleseButton);
+        mainLayout = findViewById(R.id.astaIngleseLayout);
+        cardLayout = findViewById(R.id.astaIngleseCardView);
 
 
         nickname = getIntent().getStringExtra("nickname");
@@ -91,6 +96,29 @@ public class AstaIngleseActivity extends AppCompatActivity {
 
         // LISTENERS
 
+        mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Nascondi il popup quando si tocca fuori da esso
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    return true; // Indica che l'evento è stato gestito
+                }
+                return false; // Lascia l'evento di tocco inalterato
+            }
+        });
+
+        cardLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Nascondi il popup quando si tocca fuori da esso
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    return true; // Indica che l'evento è stato gestito
+                }
+                return false; // Lascia l'evento di tocco inalterato
+            }
+        });
 
         infoAstaIngleseButton.setOnClickListener(new View.OnClickListener() {
             @Override

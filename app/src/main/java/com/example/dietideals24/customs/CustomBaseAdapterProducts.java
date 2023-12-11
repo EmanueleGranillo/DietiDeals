@@ -97,11 +97,13 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             if (date.getTime() < dataOraAttuale.getTime()) {
                 scadenzaDataTextView.setVisibility(View.INVISIBLE);
                 conclusaTFTextView.setVisibility(View.VISIBLE);
+                conclusaTFTextView.setTextColor(Color.RED);
+                prezzoAttualeTextView.setVisibility(View.INVISIBLE);
             }
             if((aste.get(position).getOffertaAttuale() != null) && !(aste.get(position).getOffertaAttuale().toString().isEmpty())){
-                prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+                prezzoAttualeTextView.setText("€" + aste.get(position).getOffertaAttuale().toString());
             } else {
-                prezzoAttualeTextView.setText(aste.get(position).getPrezzoIniziale().toString() + "€");
+                prezzoAttualeTextView.setText("€" + aste.get(position).getPrezzoIniziale().toString());
             }
 
 
@@ -168,6 +170,8 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                     if(chronometer.getBase() < SystemClock.elapsedRealtime() + 1) {
                         chronometer.stop();
                         conclusaIngleseTextView.setVisibility(View.VISIBLE);
+                        conclusaIngleseTextView.setTextColor(Color.RED);
+                        offertaAttualeIngleseTextView.setVisibility(View.INVISIBLE);
                         chronometer.setVisibility(View.INVISIBLE);
                         //manda notifiche
 
@@ -194,9 +198,9 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
 
             if((aste.get(position).getOffertaAttuale() != null) && !(aste.get(position).getOffertaAttuale().toString().isEmpty())){
-                prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+                offertaAttualeIngleseTextView.setText("€" + aste.get(position).getOffertaAttuale().toString());
             } else {
-                prezzoAttualeTextView.setText(aste.get(position).getPrezzoIniziale().toString() + "€");
+                offertaAttualeIngleseTextView.setText("€" + aste.get(position).getPrezzoIniziale().toString());
             }
         }
 
@@ -241,7 +245,7 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
 
             aggiornaValoriAstaRibasso(aste.get(position));
 
-            offertaAttualeRibassoTextView.setText("\u20AC" + prezzoAttuale);        //controllare (qui variabile in comune a tutti)
+            offertaAttualeRibassoTextView.setText("€" + prezzoAttuale);        //controllare (qui variabile in comune a tutti)
 
             if(aste.get(position).getVincente()!=null) {
                 offertaAttualeRibassoTextView.setText("Conclusa");

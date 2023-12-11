@@ -21,8 +21,8 @@
 
             <TextView
                 android:id="@+id/titoloTFTextView"
-                android:layout_width="251dp"
-                android:layout_height="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="5dp"
@@ -47,7 +47,7 @@
                 android:layout_below="@+id/titoloTFTextView"
                 android:layout_toEndOf="@+id/productTFImageView"
                 android:layout_marginStart="9dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="3dp"
                 android:text="Asta a tempo fisso"
                 android:textSize="18dp" />
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tipologiaAstaTFTextView"
                 android:layout_marginStart="9dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="8dp"
                 android:layout_toEndOf="@+id/productTFImageView"
                 android:text="25/12/2024"
                 android:textSize="15dp" />
@@ -66,21 +66,23 @@
                 android:id="@+id/conclusaTFTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tipologiaAstaTFTextView"
-                android:layout_marginStart="9dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/productTFImageView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="113dp"
+                android:layout_marginEnd="16dp"
                 android:text="Conclusa"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/offertaAttualeTFTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tipologiaAstaTFTextView"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="28dp"
+                android:layout_marginTop="113dp"
+                android:layout_marginEnd="16dp"
                 android:text="€15"
                 android:textColor="#00CC66"
                 android:textSize="18dp"

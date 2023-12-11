@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -59,6 +60,7 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
     private ImageButton infoAstaTempoFissoButton;
     private PopupWindow popupWindow;
     private TextView popupText;
+    private View mainLayout, cardLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,8 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
         decrementaButton = findViewById(R.id.decrementaButton);
         fotoProdottoImageView = findViewById(R.id.fotoProdottoTFImageView);
         infoAstaTempoFissoButton = findViewById(R.id.infoAstaTempoFissoButton);
+        mainLayout = findViewById(R.id.astaTempoFissoLayout);
+        cardLayout = findViewById(R.id.astaTempoFissoCardView);
 
         inserisciOffertaErrorTextView.setText("");
         presentaOffertaTFButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F2F4F8")));
@@ -105,7 +109,29 @@ public class AstaTempoFissoActivity extends AppCompatActivity {
 
 
 
+        mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Nascondi il popup quando si tocca fuori da esso
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    return true; // Indica che l'evento è stato gestito
+                }
+                return false; // Lascia l'evento di tocco inalterato
+            }
+        });
 
+        cardLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Nascondi il popup quando si tocca fuori da esso
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    return true; // Indica che l'evento è stato gestito
+                }
+                return false; // Lascia l'evento di tocco inalterato
+            }
+        });
 
         infoAstaTempoFissoButton.setOnClickListener(new View.OnClickListener() {
             @Override
