@@ -43,7 +43,7 @@ import retrofit2.Response;
 public class AstaRibassoActivity extends AppCompatActivity {
     MyApiService apiService;
     int id;
-    private String nickname, tipo, imageString;
+    private String nickname, tipo, imageString, tipologia = "asta al ribasso";
     private Date date;
     double differenzaSecondi, numeroIntervalli, tempoPassatoPercentuale, secondiPassatiTimerCorrente, prezzoAttualeDouble;
     int numeroIntervalliPassati, timerRimanenteSecondi;
@@ -158,6 +158,7 @@ public class AstaRibassoActivity extends AppCompatActivity {
                 goToVenditore.putExtra("checkActivity", checkActivity);
                 goToVenditore.putExtra("other", asta.getCreatore());
                 goToVenditore.putExtra("asta", asta);
+                goToVenditore.putExtra("tipologia", tipologia);
                 startActivity(goToVenditore);
             }
         });
