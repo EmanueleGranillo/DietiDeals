@@ -222,19 +222,19 @@ public class ModificaProfiloActivity extends AppCompatActivity {
             cognomeErrorTextView.setText("Cognome troppo lungo!");
             return false;
         }
-        if(biografiaEditText.getText().toString().length() > 500){
-            biografiaErrorTextView.setText("Biografia troppo lunga! "+biografiaEditText.getText().toString().length()+"/500");
+        if(biografiaEditText.getText().toString().length() > 300){
+            biografiaErrorTextView.setText("Biografia troppo lunga! "+biografiaEditText.getText().toString().length()+"/300");
             return false;
         }
-        if(linkWebEditText.getText().toString().length() > 255){
-            linkWebErrorTextView.setText("Link troppo lungo! "+linkWebEditText.getText().toString().length()+"/255" );
+        if(linkWebEditText.getText().toString().length() > 100){
+            linkWebErrorTextView.setText("Link troppo lungo! "+linkWebEditText.getText().toString().length()+"/100" );
             return false;
         }
-        if(linkInstaEditText.getText().toString().length() > 255){
-            linkInstaErrorTextView.setText("Link troppo lungo! "+linkInstaEditText.getText().toString().length()+"/255");
+        if(linkInstaEditText.getText().toString().length() > 100){
+            linkInstaErrorTextView.setText("Link troppo lungo! "+linkInstaEditText.getText().toString().length()+"/100");
             return false;
         }
-        if(posizioneEditText.getText().toString().length() > 255){
+        if(posizioneEditText.getText().toString().length() > 50){
             posizioneErrorTextView.setText("Posizione troppo lunga!");
             return false;
         }

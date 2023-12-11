@@ -98,7 +98,14 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 scadenzaDataTextView.setVisibility(View.INVISIBLE);
                 conclusaTFTextView.setVisibility(View.VISIBLE);
             }
-            // prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€"); nuovo
+            if((aste.get(position).getOffertaAttuale() != null) && !(aste.get(position).getOffertaAttuale().toString().isEmpty())){
+                prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+            } else {
+                prezzoAttualeTextView.setText(aste.get(position).getPrezzoIniziale().toString() + "€");
+            }
+
+
+
 
             // Decodifica la stringa Base64 e imposta l'immagine solo se la stringa non è vuota o nulla
             if (aste.get(position).getFotoProdotto() != null && !aste.get(position).getFotoProdotto().isEmpty()) {
@@ -185,6 +192,12 @@ public class CustomBaseAdapterProducts extends BaseAdapter {
                 productImage.setImageResource(R.mipmap.ic_no_icon_foreground);
             }
             productImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
+            if((aste.get(position).getOffertaAttuale() != null) && !(aste.get(position).getOffertaAttuale().toString().isEmpty())){
+                prezzoAttualeTextView.setText(aste.get(position).getOffertaAttuale().toString() + "€");
+            } else {
+                prezzoAttualeTextView.setText(aste.get(position).getPrezzoIniziale().toString() + "€");
+            }
         }
 
 

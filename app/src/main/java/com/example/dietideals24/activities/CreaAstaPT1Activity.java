@@ -369,12 +369,12 @@ public class CreaAstaPT1Activity extends AppCompatActivity {
             titoloErrorTextView.setText("Nome troppo lungo");
             return false;
         }
-        if(descrizioneEditText.getText().toString().length() > 500){
-            descrizioneErrorTextView.setText("Descrizione troppo lunga! "+descrizioneEditText.getText().toString().length()+"/500");
+        if(descrizioneEditText.getText().toString().length() > 300){
+            descrizioneErrorTextView.setText("Descrizione troppo lunga! "+descrizioneEditText.getText().toString().length()+"/300");
             return false;
         }
         if(keywordsEditText.getText().toString().length() > 100) {
-            keywordsErrorTextView.setText("Numero massimo di caratteri raggiunto! "+keywordsEditText.getText().toString().length()+"/500");
+            keywordsErrorTextView.setText("Numero massimo di caratteri raggiunto! "+keywordsEditText.getText().toString().length()+"/100");
             return false;
         }
         return true;
