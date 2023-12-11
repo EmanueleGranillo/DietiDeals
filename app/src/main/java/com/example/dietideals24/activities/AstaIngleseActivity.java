@@ -58,7 +58,6 @@ public class AstaIngleseActivity extends AppCompatActivity {
     private ImageButton infoAstaIngleseButton;
     private PopupWindow popupWindow;
     private TextView popupText;
-
     private View mainLayout, cardLayout;
 
     @Override
