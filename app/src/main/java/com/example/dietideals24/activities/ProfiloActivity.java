@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -171,7 +172,7 @@ public class ProfiloActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(linkInstagram.isEmpty()){
-
+                    Toast.makeText(ProfiloActivity.this, "Nessun account Instagram collegato", Toast.LENGTH_SHORT).show();
                 } else {
                     if ((linkInstagram.startsWith("http://")) || (linkInstagram.startsWith("https://"))){
                         Uri uri = Uri.parse(linkInstagram);
@@ -182,8 +183,6 @@ public class ProfiloActivity extends AppCompatActivity {
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                     }
-
-                    Toast.makeText(ProfiloActivity.this, linkInstagram, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -223,15 +222,16 @@ public class ProfiloActivity extends AppCompatActivity {
                         } else {
                             posizioneProfiloTextView.setText(profilo.getPosizione());
                         }
-                        if (profilo.getLinkWeb() != null) {
+                        if (profilo.getLinkWeb() != null || !(profilo.getLinkWeb().toString().isEmpty())) {
                             sitoWebProfiloTextView.setText(profilo.getLinkWeb());
+                            sitoWebProfiloTextView.setPaintFlags(sitoWebProfiloTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                             linkSitoWeb = profilo.getLinkWeb();
                         } else {
                             sitoWebProfiloTextView.setText("Nessun sito web collegato.");
-                            sitoWebProfiloTextView.setPaintFlags(sitoWebProfiloTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                            sitoWebProfiloTextView.setTextColor(Color.BLACK);
                             linkSitoWeb = "";
                         }
-                        if (profilo.getLinkInsta() != null) {
+                        if (profilo.getLinkInsta() != null || !(profilo.getLinkInsta().toString().isEmpty())) {
                             linkInstagram = profilo.getLinkInsta();
                         } else {
                             linkInstagram = "";
@@ -244,12 +244,12 @@ public class ProfiloActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    Toast.makeText(ProfiloActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ProfiloActivity.this, "Richiesta fallita", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<Profilo> call, Throwable t) {
-                Toast.makeText(ProfiloActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProfiloActivity.this, "Connessione fallita", Toast.LENGTH_SHORT).show();
             }
         });
     }

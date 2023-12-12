@@ -6,9 +6,16 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +41,10 @@ public class RegisterActivity extends AppCompatActivity {
     TextView passwordErrorTextView;
     TextView confermaPasswordErrorTextView;
     private String tipo;
+    private PopupWindow popupWindow;
+    private TextView popupText;
+    private View mainLayout, cardLayout;
+    private ImageButton infoRegistrazioneButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +66,42 @@ public class RegisterActivity extends AppCompatActivity {
         nicknameErrorTextView = findViewById(R.id.nicknameErrorRegisterTextView);
         passwordErrorTextView = findViewById(R.id.passwordErrorRegisterTextView);
         confermaPasswordErrorTextView = findViewById(R.id.confermaPasswordErrorRegisterTextView);
+        infoRegistrazioneButton = findViewById(R.id.infoRegistrazioneButton);
+        mainLayout = findViewById(R.id.registrazioneLayout);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent backToLogin = new Intent(RegisterActivity.this, MainActivity.class);
                 startActivity(backToLogin);
+            }
+        });
+
+
+
+
+        mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Nascondi il popup quando si tocca fuori da esso
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    return true; // Indica che l'evento è stato gestito
+                }
+                return false; // Lascia l'evento di tocco inalterato
+            }
+        });
+
+        infoRegistrazioneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                } else {
+                    showPopup();
+                }
+
+
             }
         });
 
@@ -102,6 +143,28 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showPopup() {
+        View popupView = LayoutInflater.from(this).inflate(R.layout.popup_layout, null);
+        popupText = popupView.findViewById(R.id.popupText);
+        popupText.setText("Puoi associare la tua email ad un account compratore e ad un account venditore. Non puoi creare due account con lo stesso nickname.");
+
+        popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0f);
+        scaleAnimation.setDuration(300);
+        popupView.startAnimation(scaleAnimation);
+
+        int offsetX = -750;
+        int offsetY = -350; // Offset verso l'alto rispetto al bottone
+
+        // Mostra il pop-up nella posizione desiderata
+        popupWindow.showAsDropDown(infoRegistrazioneButton, offsetX, offsetY);
     }
 
     private boolean check() {

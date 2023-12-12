@@ -183,7 +183,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     setWhite();
                     modaBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00CC66")));
                     modaBtn.setTextColor(Color.parseColor("#FFFFFF"));
-                    riempiListaPerCategoria("moda");
+                    riempiListaPerCategoria("moda e bellezza");
                 }
             }
         });
