@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="60dp"
             android:text="Bentornato!"
             android:textSize="30dp"
             android:textStyle="bold" />
