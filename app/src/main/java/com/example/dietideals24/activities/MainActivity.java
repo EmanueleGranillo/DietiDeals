@@ -2,7 +2,6 @@ package com.example.dietideals24.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -18,6 +17,7 @@ import com.example.dietideals24.connection.NumeroResponse;
 import com.example.dietideals24.R;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.UserAccessRequest;
+import com.example.dietideals24.models.ProfiloCheck;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,7 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     tipo = "venditore";
                 }
-                if (check()){
+                ProfiloCheck profiloCheck = new ProfiloCheck(nicknameEditText.getText().toString(), passwordEditText.getText().toString());
+                boolean controllo = profiloCheck.check();
+                if (check() && controllo){
                     controlloCredenziali(nicknameEditText.getText().toString(), passwordEditText.getText().toString(), tipo);
                 }
             }

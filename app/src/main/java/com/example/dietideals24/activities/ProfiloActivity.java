@@ -222,7 +222,7 @@ public class ProfiloActivity extends AppCompatActivity {
                         } else {
                             posizioneProfiloTextView.setText(profilo.getPosizione());
                         }
-                        if (profilo.getLinkWeb() != null || !(profilo.getLinkWeb().toString().isEmpty())) {
+                        if (profilo.getLinkWeb() != null && !(profilo.getLinkWeb().toString().isEmpty())) {
                             sitoWebProfiloTextView.setText(profilo.getLinkWeb());
                             sitoWebProfiloTextView.setPaintFlags(sitoWebProfiloTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                             linkSitoWeb = profilo.getLinkWeb();
@@ -231,7 +231,7 @@ public class ProfiloActivity extends AppCompatActivity {
                             sitoWebProfiloTextView.setTextColor(Color.BLACK);
                             linkSitoWeb = "";
                         }
-                        if (profilo.getLinkInsta() != null || !(profilo.getLinkInsta().toString().isEmpty())) {
+                        if (profilo.getLinkInsta() != null && !(profilo.getLinkInsta().toString().isEmpty())) {
                             linkInstagram = profilo.getLinkInsta();
                         } else {
                             linkInstagram = "";

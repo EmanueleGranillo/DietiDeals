@@ -317,11 +317,12 @@ public class AstaRibassoActivity extends AppCompatActivity {
 
     public void updateVincitore(String nickname, int id){
         VincitoreRibassoRequest vincitoreRibassoRequest = new VincitoreRibassoRequest(nickname, id);
+        String validazione = vincitoreRibassoRequest.validate();
         Call<NumeroResponse> call = apiService.updatevincitoreribasso(vincitoreRibassoRequest);
         call.enqueue(new Callback<NumeroResponse>() {
             @Override
             public void onResponse(Call<NumeroResponse> call, Response<NumeroResponse> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && validazione.equals("I valori sono corretti.")) {
                     NumeroResponse num = response.body();
                     if(num.getNumero() == 0){
                         vincitoreTextView.setText("Il prodotto è già stato venduto!");
@@ -329,6 +330,7 @@ public class AstaRibassoActivity extends AppCompatActivity {
                         vincitoreTextView.setText("Hai vinto!");
                     }
                 } else {
+                    vincitoreTextView.setText(validazione);
                 }
             }
             @Override
