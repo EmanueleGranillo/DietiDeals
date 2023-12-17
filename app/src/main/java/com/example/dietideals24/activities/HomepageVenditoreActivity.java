@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dietideals24.connection.MyApiService;
@@ -35,6 +36,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
     private String activity = "homepage", checkActivity = "mine";
     private MyApiService apiService;
     ImageView pallinoImg;
+    private TextView notificheVenditoreCount;
     ListView listView;
     ArrayList<Asta> aste;
     CustomBaseAdapterProducts customBaseAdapterProducts;
@@ -52,6 +54,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
 
 
         pallinoImg = findViewById(R.id.pallinoButton);
+        notificheVenditoreCount = findViewById(R.id.notificheVenditoreCount);
         tutteLeAsteBtn = findViewById(R.id.buttonTutteLeAste);
         asteAttiveBtn = findViewById(R.id.buttonAsteAttive);
         asteConcluseBtn = findViewById(R.id.buttonAsteConcluse);
@@ -65,6 +68,7 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
         nickname = getIntent().getStringExtra("nickname");
         aste = new ArrayList<Asta>();
         pallinoImg.setVisibility(View.INVISIBLE);
+        notificheVenditoreCount.setVisibility(View.INVISIBLE);
 
 
         riempiListaPerVenditore();
@@ -189,8 +193,11 @@ public class HomepageVenditoreActivity extends AppCompatActivity {
                     NumeroResponse num = response.body();
                     if (num.getNumero() == 0) {
                         pallinoImg.setVisibility(View.INVISIBLE);
+                        notificheVenditoreCount.setVisibility(View.INVISIBLE);
                     } else {
                         pallinoImg.setVisibility(View.VISIBLE);
+                        notificheVenditoreCount.setVisibility(View.VISIBLE);
+                        notificheVenditoreCount.setText(""+num.getNumero());
                     }
                 }
             }

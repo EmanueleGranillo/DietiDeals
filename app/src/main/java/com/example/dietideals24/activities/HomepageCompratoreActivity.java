@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.widget.SearchView;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dietideals24.connection.MyApiService;
@@ -36,6 +38,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
     private CustomBaseAdapterProducts customBaseAdapterProducts;
     private ImageView pallinoImg;
     private SearchView searchView;
+    private TextView notificheCompratoreCount;
     private Button tutteBtn, elettronicaBtn, motoriBtn, animaliBtn, modaBtn, intrattenimentoBtn, immobiliBtn, sportBtn, arredamentoBtn;
     private String nickname, tipo, checkActivity= "mine";
     private ArrayList<Asta> aste = new ArrayList<Asta>();
@@ -49,6 +52,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
 
         pallinoImg = findViewById(R.id.pallinoButton);
+        notificheCompratoreCount = findViewById(R.id.notificheCompratoreCount);
         tutteBtn = findViewById(R.id.buttonTutteLeCategorie);
         elettronicaBtn = findViewById(R.id.buttonElettronica);
         motoriBtn = findViewById(R.id.buttonMotori);
@@ -65,6 +69,7 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
         nickname = getIntent().getStringExtra("nickname");
         tipo = getIntent().getStringExtra("tipo");
         pallinoImg.setVisibility(View.INVISIBLE);
+        notificheCompratoreCount.setVisibility(View.INVISIBLE);
 
 
         riempiLista();
@@ -273,8 +278,11 @@ public class HomepageCompratoreActivity extends AppCompatActivity {
                     NumeroResponse num = response.body();
                     if (num.getNumero() == 0) {
                         pallinoImg.setVisibility(View.INVISIBLE);
+                        notificheCompratoreCount.setVisibility(View.INVISIBLE);
                     } else {
                         pallinoImg.setVisibility(View.VISIBLE);
+                        notificheCompratoreCount.setVisibility(View.VISIBLE);
+                        notificheCompratoreCount.setText(""+num.getNumero());
                     }
                 }
             }

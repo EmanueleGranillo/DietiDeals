@@ -208,17 +208,31 @@
         />
 
     <ImageView
-        android:layout_width="24dp"
-        android:layout_height="21dp"
-        android:layout_alignStart="@+id/notificheButtonHomeCompratore"
         android:id="@+id/pallinoButton"
-        android:layout_alignTop="@+id/notificheButtonHomeCompratore"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignEnd="@+id/notificheButtonHomeCompratore"
         android:layout_alignBottom="@+id/notificheButtonHomeCompratore"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="23dp"
-        android:src="@drawable/ic_pallino_foreground" />
+        android:layout_marginEnd="-11dp"
+        android:layout_marginBottom="-9dp"
+        android:src="@drawable/ic_pallino_foreground"/>
+
+
+    <TextView
+        android:id="@+id/notificheCompratoreCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/pallinoButton"
+        android:layout_alignTop="@+id/pallinoButton"
+        android:layout_alignEnd="@+id/pallinoButton"
+        android:layout_alignBottom="@+id/pallinoButton"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:text="1"
+        android:textColor="#FFFFFF"
+        android:textSize="14dp" />
+
 
 </RelativeLayout>
