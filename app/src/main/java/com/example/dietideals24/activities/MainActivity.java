@@ -18,6 +18,7 @@ import com.example.dietideals24.R;
 import com.example.dietideals24.connection.RetrofitClient;
 import com.example.dietideals24.connection.UserAccessRequest;
 import com.example.dietideals24.models.ProfiloCheck;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +27,7 @@ import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private FirebaseAnalytics mFirebaseAnalytics;
     private MyApiService apiService;
     android.widget.Button compraBtn;
     android.widget.Button vendiBtn;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         apiService = RetrofitClient.getInstance().create(MyApiService.class);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         TextView registratiTxt = findViewById(R.id.registratiTextButton);
         Button accediBtn = findViewById(R.id.accediButton);
